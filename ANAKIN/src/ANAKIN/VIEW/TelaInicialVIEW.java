@@ -11,11 +11,6 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 
-/**
- * 
- * @author Will Marques
- *
- */
 
 public class TelaInicialVIEW extends JFrame {
 
