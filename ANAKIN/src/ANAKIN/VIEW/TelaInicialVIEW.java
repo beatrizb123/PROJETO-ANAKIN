@@ -4,13 +4,14 @@ import java.awt.Color;
 import java.awt.Container;
 import java.awt.Font;
 import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
-
 
 public class TelaInicialVIEW extends JFrame {
 
@@ -33,12 +34,8 @@ public class TelaInicialVIEW extends JFrame {
 		return btnCadastrar;
 	}
 
-	public ImageIcon getImagem() {
-		return imagem;
-	}
-
 	public TelaInicialVIEW() {
-		//instanciação dos objetos
+		// instanciação dos objetos
 		this.setTitle("Projeto ANAKIN");
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 		this.setResizable(false);
@@ -75,6 +72,18 @@ public class TelaInicialVIEW extends JFrame {
 		this.btnLogin.setBounds(615, 288, 114, 31);
 		this.btnLogin.setBackground(new Color(90, 61, 171));
 		this.btnLogin.setForeground(Color.white);
+		this.btnLogin.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				setVisible(false);
+				TelaLoginVIEW telaLogin = new TelaLoginVIEW();
+				telaLogin.setVisible(true);
+				telaLogin.setResizable(false);
+
+			}
+		});
+
 		this.add(btnLogin);
 
 		this.btnCadastrar = new JButton("Cadastrar");
@@ -82,6 +91,17 @@ public class TelaInicialVIEW extends JFrame {
 		this.btnCadastrar.setBounds(480, 288, 120, 31);
 		this.btnCadastrar.setBackground(new Color(90, 61, 171));
 		this.btnCadastrar.setForeground(Color.white);
+		this.btnCadastrar.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				setVisible(false);
+				TelaCadastroVIEW telaCadastro = new TelaCadastroVIEW();
+				telaCadastro.setVisible(true);
+				telaCadastro.setResizable(false);
+
+			}
+		});
 		this.add(btnCadastrar);
 
 	}

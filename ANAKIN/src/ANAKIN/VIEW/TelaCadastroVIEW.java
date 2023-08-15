@@ -13,10 +13,12 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 
+import ANAKIN.MODEL.DAO.Dadosdosusuarios;
+import ANAKIN.MODEL.VO.Todososdados;
 
 public class TelaCadastroVIEW extends JFrame {
-	private Container cont1;
-
+	
+	private Container cont;
 	private JLabel lblNomeUser;
 	private JLabel lblSenha;
 	private JTextField txtfNomeUser;
@@ -24,10 +26,8 @@ public class TelaCadastroVIEW extends JFrame {
 	private JButton btnEntrar;
 	private JButton btnVoltar;
 	private JLabel lblOla;
-	private ImageIcon imgLogo;
+	private ImageIcon imgLogo, imgIcon;
 	private JLabel lblLogo;
-	private JLabel lblImagem;
-	private ImageIcon imgIcon;
 	private Font fonte;
 
 	public JButton getBtnEntrar() {
@@ -80,12 +80,42 @@ public class TelaCadastroVIEW extends JFrame {
 		this.btnEntrar.setBackground(new Color(90, 61, 171));
 		this.btnEntrar.setForeground(Color.WHITE);
 		this.btnEntrar.setBounds(620, 350, 110, 25);
+		this.btnEntrar.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				
+				String usuario,senha;
+				usuario = txtfNomeUser.getText();
+				senha =txtfSenha.getText();
+				Todososdados infor = new Todososdados();
+				infor.setNome_usuario(usuario);
+				infor.setSenha_usuario(senha);
+				Dadosdosusuarios TDDAO = new Dadosdosusuarios();
+				TDDAO.cadastrarUsuario(infor);	
+				MenuPrincipalVIEW telap = new MenuPrincipalVIEW();
+				telap.setVisible(true);
+				dispose();
+					
+					
+			}
+		});
 		this.add(btnEntrar);
 
 		this.btnVoltar = new JButton("VOLTAR");
 		this.btnVoltar.setBounds(495, 350, 110, 25);
 		this.btnVoltar.setBackground(new Color(90, 61, 171));
 		this.btnVoltar.setForeground(Color.white);
+		this.btnVoltar.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				setVisible(false);
+				TelaInicialVIEW telaInicial = new TelaInicialVIEW();
+				telaInicial.setVisible(true);
+				telaInicial.setResizable(false);
+			}
+		});
 		this.add(btnVoltar);
 
 		this.imgLogo = new ImageIcon(getClass().getResource("Logo1.png"));
@@ -94,8 +124,7 @@ public class TelaCadastroVIEW extends JFrame {
 		this.add(lblLogo);
 
 		this.imgIcon = new ImageIcon("jupiter.png");
-		this.setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\Beatriz\\Downloads\\jupiter.png"));
-
+		this.setIconImage(Toolkit.getDefaultToolkit().getImage("jupiter.png"));
 
 	}
 

@@ -6,13 +6,18 @@ import java.awt.Font;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
+
+import ANAKIN.MODEL.DAO.Dadosdosusuarios;
+import ANAKIN.MODEL.VO.Todososdados;
 
 public class TelaLoginVIEW extends JFrame {
 	private Container container;
@@ -72,12 +77,48 @@ public class TelaLoginVIEW extends JFrame {
 		this.btnVoltar.setBackground(new Color(90, 61, 171));
 		this.btnVoltar.setForeground(Color.WHITE);
 		this.btnVoltar.setBounds(495, 350, 110, 25);
+		this.btnVoltar.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				setVisible(false);
+				TelaInicialVIEW telaInicial = new TelaInicialVIEW();
+				telaInicial.setVisible(true);
+				telaInicial.setResizable(false);
+			}
+		});
 		this.add(btnVoltar);
 
 		this.btnEntrar = new JButton("ENTRAR");
 		this.btnEntrar.setBackground(new Color(90, 61, 171));
 		this.btnEntrar.setForeground(Color.WHITE);
 		this.btnEntrar.setBounds(620, 350, 110, 25);
+		this.btnEntrar.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				try {
+					String usuario, senha;
+					usuario = txtfUser.getText();
+					senha = txtfSenha.getText();
+					Todososdados autent = new Todososdados();
+					autent.setNome_usuario(usuario);
+					autent.setSenha_usuario(senha);
+					Dadosdosusuarios dados = new Dadosdosusuarios();
+
+					ResultSet testeAuntent = dados.autenticaUsuario(autent);
+					if (testeAuntent.next()) {
+						MenuPrincipalVIEW menuPrincipal = new MenuPrincipalVIEW();
+						menuPrincipal.setVisible(true);
+						dispose();
+					} else {
+						JOptionPane.showMessageDialog(null, "Senha ou usuario invalido!");
+					}
+				} catch (SQLException erro) {
+					JOptionPane.showMessageDialog(null, erro);
+				}
+			}
+		});
 		this.add(btnEntrar);
 
 		this.imgLogo = new ImageIcon(getClass().getResource("Logo2.png"));

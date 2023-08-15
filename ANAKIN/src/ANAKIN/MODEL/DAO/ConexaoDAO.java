@@ -6,20 +6,18 @@ import java.sql.SQLException;
 
 import javax.swing.JOptionPane;
 
-
-
 public class ConexaoDAO {
-	
+	private Connection conn;
 	public Connection conectabd (){
-		Connection conn = null;
+		this.conn = null;
 		try {
-			String URL = "jdbc:mysql://localhost:3306/bancoteste?user=root&password=anakin2023&";
+		String URL = "jdbc:mysql://localhost:3306/bancoteste?user=root&password=123456";
 			
-			conn = DriverManager.getConnection(URL);
+			this.conn = DriverManager.getConnection(URL);
 		}catch(SQLException erro) {
 			JOptionPane.showMessageDialog(null,"conexaoDAO"+erro.getMessage());
 		}
-		return conn;
+		return this.conn;
 		
 	}
 }
