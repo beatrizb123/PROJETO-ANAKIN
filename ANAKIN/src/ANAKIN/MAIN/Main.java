@@ -8,6 +8,5 @@ public class Main {
 		TelaInicialVIEW frame = new TelaInicialVIEW();
 		frame.setVisible(true);
 
+	}
 }
-}
-

@@ -2,6 +2,7 @@ package ANAKIN.VIEW;
 
 import java.awt.Color;
 import java.awt.Container;
+import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
@@ -41,7 +42,10 @@ public class MenuPrincipalVIEW extends JFrame {
 		this.setLayout(null);
 		this.setBackground(new Color(250, 247, 255));
 		this.container = getContentPane();
+		Dimension tela = Toolkit.getDefaultToolkit().getScreenSize();
+		this.setLocation((tela.width - getSize().width)/2,(tela.height - getSize().height)/2);
 
+		
 		this.imgIcon = new ImageIcon("jupiter.png");
 		this.setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\DoraliceMarques\\Downloads\\jupiter.png"));
 

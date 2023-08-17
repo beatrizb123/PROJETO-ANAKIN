@@ -2,18 +2,30 @@ package ANAKIN.VIEW;
 
 import java.awt.Color;
 import java.awt.Container;
+import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.awt.event.MouseMotionListener;
+import java.awt.font.TextAttribute;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JCheckBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
 import ANAKIN.MODEL.DAO.Dadosdosusuarios;
@@ -21,18 +33,16 @@ import ANAKIN.MODEL.VO.Todososdados;
 
 public class TelaLoginVIEW extends JFrame {
 	private Container container;
-	private JLabel lblUser, lblSenha, lblOla, lblLogo;
-	private JTextField txtfUser, txtfSenha;
+	private JLabel lblUser, lblSenha, lblOla, lblLogo, lblEsqueceuSenha;
+	private JTextField txtfUser;
+	private JPasswordField pfSenha;
 	private JButton btnVoltar, btnEntrar;
+	private JCheckBox ckbMostrarSenha;
 	private ImageIcon imgLogo, imgIcon;
 	private Font fonte;
 
 	public JTextField getTxtfUser() {
 		return txtfUser;
-	}
-
-	public JTextField getTxtfSenha() {
-		return txtfSenha;
 	}
 
 	public JButton getBtnVoltar() {
@@ -43,39 +53,60 @@ public class TelaLoginVIEW extends JFrame {
 		return btnEntrar;
 	}
 
+	public JPasswordField getPfSenha() {
+		return pfSenha;
+	}
+
 	public TelaLoginVIEW() {
 		this.setTitle("Login");
 		this.setBounds(300, 200, 940, 550);
 		this.setLayout(null);
 		this.setVisible(true);
 		this.fonte = new Font("Arial", Font.BOLD, 20);
+		Dimension tela = Toolkit.getDefaultToolkit().getScreenSize();
+		this.setLocation((tela.width - getSize().width)/2,(tela.height - getSize().height)/2);
 
+		this.lblOla = new JLabel("Olá, bem vindo de volta!");
+		this.lblOla.setFont(fonte);
+		this.lblOla.setBounds(460, 40, 380, 150);
+		this.add(lblOla);
+		
 		this.lblUser = new JLabel("Username:");
 		this.lblUser.setFont(fonte);
-		this.lblUser.setBounds(460, 120, 300, 150);
+		this.lblUser.setBounds(460, 100, 300, 150);
 		this.add(lblUser);
 
 		this.lblSenha = new JLabel("Senha:");
 		this.lblSenha.setFont(fonte);
-		this.lblSenha.setBounds(460, 270, 200, 25);
+		this.lblSenha.setBounds(460, 250, 200, 25);
 		this.add(lblSenha);
-
-		this.lblOla = new JLabel("Olá, bem vindo de volta!");
-		this.lblOla.setFont(fonte);
-		this.lblOla.setBounds(460, 60, 380, 150);
-		this.add(lblOla);
-
+		
+		this.lblEsqueceuSenha = new JLabel("Esqueceu a senha?");
+		this.lblEsqueceuSenha.setFont(new Font("Arial", Font.BOLD, 12));
+		Font under = lblEsqueceuSenha.getFont();
+		Map<TextAttribute, Object> at = new HashMap<>(under.getAttributes());
+		at.put(TextAttribute.UNDERLINE, TextAttribute.UNDERLINE_ON);
+		lblEsqueceuSenha.setFont(under.deriveFont(at));
+		this.lblEsqueceuSenha.setBounds(608, 312, 200, 15);
+		this.lblEsqueceuSenha.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				
+			}
+		});
+		this.add(lblEsqueceuSenha);
+		
 		this.txtfUser = new JTextField(14);
-		this.txtfUser.setBounds(460, 220, 260, 25);
+		this.txtfUser.setBounds(460, 200, 260, 25);
 		this.add(txtfUser);
 
-		this.txtfSenha = new JTextField(8);
-		this.txtfSenha.setBounds(460, 300, 260, 25);
-		this.add(txtfSenha);
+		this.pfSenha = new JPasswordField(8);
+		this.pfSenha.setBounds(460, 280, 260, 25);
+		this.add(pfSenha);
 
 		this.btnVoltar = new JButton("VOLTAR");
-		this.btnVoltar.setBackground(new Color(90, 61, 171));
-		this.btnVoltar.setForeground(Color.WHITE);
+		this.btnVoltar.setBackground(Color.white);
+		this.btnVoltar.setForeground(new Color(90, 61, 171));
 		this.btnVoltar.setBounds(495, 350, 110, 25);
 		this.btnVoltar.addActionListener(new ActionListener() {
 
@@ -100,7 +131,7 @@ public class TelaLoginVIEW extends JFrame {
 				try {
 					String usuario, senha;
 					usuario = txtfUser.getText();
-					senha = txtfSenha.getText();
+					senha = pfSenha.getText();
 					Todososdados autent = new Todososdados();
 					autent.setNome_usuario(usuario);
 					autent.setSenha_usuario(senha);
@@ -129,6 +160,21 @@ public class TelaLoginVIEW extends JFrame {
 		this.imgIcon = new ImageIcon("jupiter.png");
 		this.setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\Beatriz\\Downloads\\jupiter.png"));
 
+		this.ckbMostrarSenha = new JCheckBox("Mostrar senha");
+		this.ckbMostrarSenha.setBounds(460, 310, 130, 15);
+		this.ckbMostrarSenha.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if (ckbMostrarSenha.isSelected()) {
+					pfSenha.setEchoChar((char) 0);
+				} else {
+					pfSenha.setEchoChar('*');
+				}
+
+			}
+		});
+		this.add(ckbMostrarSenha);
 	}
 
 }
