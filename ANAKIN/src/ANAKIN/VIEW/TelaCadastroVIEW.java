@@ -25,7 +25,9 @@ public class TelaCadastroVIEW extends JFrame {
 	private Container cont;
 	private JLabel lblNomeUser;
 	private JLabel lblSenha;
+
 	private JTextField txtfNomeUser;
+
 	private JPasswordField pfSenha;
 	private JButton btnEntrar;
 	private JButton btnVoltar;
@@ -51,6 +53,8 @@ public class TelaCadastroVIEW extends JFrame {
 		return pfSenha;
 	}
 
+
+
 	public TelaCadastroVIEW() {
 		this.setTitle("Cadastro");
 		this.setBounds(300, 200, 940, 550);
@@ -59,7 +63,7 @@ public class TelaCadastroVIEW extends JFrame {
 		this.setLocation((tela.width - getSize().width) / 2, (tela.height - getSize().height) / 2);
 
 		this.fonte = new Font("Arial", Font.BOLD, 20);
-
+		
 		this.lblOla = new JLabel("Olá! Seja Bem Vindo ao ANAKIN!");
 		this.lblOla.setBounds(460, 40, 380, 150);
 		this.lblOla.setFont(fonte);
@@ -74,6 +78,7 @@ public class TelaCadastroVIEW extends JFrame {
 		this.lblSenha.setBounds(460, 250, 200, 25);
 		this.lblSenha.setFont(fonte);
 		this.add(lblSenha);
+
 
 		this.txtfNomeUser = new JTextField(14);
 		this.txtfNomeUser.setBounds(460, 200, 260, 25);
@@ -127,7 +132,7 @@ public class TelaCadastroVIEW extends JFrame {
 			}
 		});
 		this.add(btnVoltar);
-
+		
 		this.ckbMostrarSenha = new JCheckBox("Mostrar senha");
 		this.ckbMostrarSenha.setBounds(460, 310, 260, 15);
 		this.ckbMostrarSenha.addActionListener(new ActionListener() {
