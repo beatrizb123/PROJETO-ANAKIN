@@ -28,8 +28,9 @@ import javax.swing.JOptionPane;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
-import ANAKIN.MODEL.DAO.Dadosdosusuarios;
-import ANAKIN.MODEL.VO.Todososdados;
+import ANAKIN.MODEL.DAO.LoginDAO;
+import ANAKIN.MODEL.VO.UsuarioVO;
+
 
 public class TelaLoginVIEW extends JFrame {
 	private Container container;
@@ -64,13 +65,14 @@ public class TelaLoginVIEW extends JFrame {
 		this.setVisible(true);
 		this.fonte = new Font("Arial", Font.BOLD, 20);
 		Dimension tela = Toolkit.getDefaultToolkit().getScreenSize();
-		this.setLocation((tela.width - getSize().width)/2,(tela.height - getSize().height)/2);
+		this.setLocation((tela.width - getSize().width) / 2, (tela.height - getSize().height) / 2);
 
 		this.lblOla = new JLabel("Olá, bem vindo de volta!");
 		this.lblOla.setFont(fonte);
+		this.lblOla.setForeground(new Color(90, 61, 171));
 		this.lblOla.setBounds(460, 40, 380, 150);
 		this.add(lblOla);
-		
+
 		this.lblUser = new JLabel("Username:");
 		this.lblUser.setFont(fonte);
 		this.lblUser.setBounds(460, 100, 300, 150);
@@ -80,22 +82,36 @@ public class TelaLoginVIEW extends JFrame {
 		this.lblSenha.setFont(fonte);
 		this.lblSenha.setBounds(460, 250, 200, 25);
 		this.add(lblSenha);
-		
+
 		this.lblEsqueceuSenha = new JLabel("Esqueceu a senha?");
 		this.lblEsqueceuSenha.setFont(new Font("Arial", Font.BOLD, 12));
 		Font under = lblEsqueceuSenha.getFont();
 		Map<TextAttribute, Object> at = new HashMap<>(under.getAttributes());
 		at.put(TextAttribute.UNDERLINE, TextAttribute.UNDERLINE_ON);
 		lblEsqueceuSenha.setFont(under.deriveFont(at));
+		this.lblEsqueceuSenha.setForeground(Color.black);
 		this.lblEsqueceuSenha.setBounds(608, 312, 200, 15);
 		this.lblEsqueceuSenha.addMouseListener(new MouseAdapter() {
 			@Override
+			public void mouseEntered(MouseEvent e) {
+
+				lblEsqueceuSenha.setForeground(Color.gray);
+
+			}
+
+			@Override
+			public void mouseExited(MouseEvent e) {
+				lblEsqueceuSenha.setForeground(Color.black);
+			}
+
+			@Override
 			public void mouseClicked(MouseEvent e) {
-				
+				EsqueceuSenhaVIEW tela = new EsqueceuSenhaVIEW();
+				tela.setVisible(true);
 			}
 		});
 		this.add(lblEsqueceuSenha);
-		
+
 		this.txtfUser = new JTextField(14);
 		this.txtfUser.setBounds(460, 200, 260, 25);
 		this.add(txtfUser);
@@ -132,10 +148,10 @@ public class TelaLoginVIEW extends JFrame {
 					String usuario, senha;
 					usuario = txtfUser.getText();
 					senha = pfSenha.getText();
-					Todososdados autent = new Todososdados();
+					UsuarioVO autent = new UsuarioVO();
 					autent.setNome_usuario(usuario);
 					autent.setSenha_usuario(senha);
-					Dadosdosusuarios dados = new Dadosdosusuarios();
+					LoginDAO dados = new LoginDAO();
 
 					ResultSet testeAuntent = dados.autenticaUsuario(autent);
 					if (testeAuntent.next()) {

@@ -2,6 +2,8 @@ package ANAKIN.VIEW;
 
 import java.awt.Color;
 import java.awt.Container;
+import java.awt.Dimension;
+import java.awt.Toolkit;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -20,7 +22,9 @@ public class AlterarInfoVIEW extends JFrame{
 		this.setLayout(null);
 		this.setBounds(300, 200, 300, 250);
 		this.setBackground(new Color(250, 247, 255));
-
+		Dimension tela = Toolkit.getDefaultToolkit().getScreenSize();
+		this.setLocation((tela.width - getSize().width) / 2, (tela.height - getSize().height) / 2);
+		
 		
 		this.lblMsg = new JLabel("Insira seu novo user e senha para alterar!");
 		this.lblUser = new JLabel("Novo User:");

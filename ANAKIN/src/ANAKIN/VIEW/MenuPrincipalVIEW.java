@@ -15,7 +15,9 @@ import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
+
 
 public class MenuPrincipalVIEW extends JFrame {
 
@@ -27,7 +29,8 @@ public class MenuPrincipalVIEW extends JFrame {
 	private JButton btnControlSessao;
 	private JMenuBar mnbBarra;
 	private JMenu mnConfig;
-	private JMenuItem miAlterarConta, miLogout, miSair;
+	private JMenuItem miAlterarConta, miLogout, miID, miSair;
+	private JMenu mnSessoes;
 
 	// private ImageIcon botao;
 	// private JLabel lblBotao;
@@ -68,15 +71,20 @@ public class MenuPrincipalVIEW extends JFrame {
 		this.btnControlSessao.setBounds(360, 240, 200, 40);
 		this.btnControlSessao.setBackground(new Color(90, 61, 171));
 		this.btnControlSessao.setForeground(Color.white);
-		this.btnControlSessao.addActionListener(new ActionListener() {
+		btnControlSessao.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				setVisible(false);
-				ControleSessaoVIEW controleSessao = new ControleSessaoVIEW();
-				controleSessao.setVisible(true);
-				controleSessao.setResizable(false);
-			}
+			String JP = JOptionPane.showInputDialog(null, "Insira Nome");
+		        Object nomeSessao;
+				if (JP == null)
+		        System.out.println("Não colocou o nome");
+		        else
+		        System.out.println("Colocou o Nome");
+		        
+		}
+			;
+		
 		});
 		this.add(btnControlSessao);
 
@@ -111,6 +119,8 @@ public class MenuPrincipalVIEW extends JFrame {
 		});
 		this.mnConfig.add(miLogout);
 
+		this.mnConfig.add(miID);
+		
 		this.miSair = new JMenuItem("Sair");
 		this.miSair.addActionListener(new ActionListener() {
 
@@ -121,7 +131,12 @@ public class MenuPrincipalVIEW extends JFrame {
 			}
 		});
 		this.mnConfig.add(miSair);
-
+		
+		
+		this.mnSessoes = new JMenu("Minhas Sessões");
+		this.mnSessoes.setMnemonic('M');
+		this.mnbBarra.add(mnSessoes);
+		
 		/*
 		 * botao = new ImageIcon(getClass().getResource("botao.png")); lblBotao = new
 		 * JLabel(botao); lblBotao.setBounds(200,200,100,100); add(lblBotao);
