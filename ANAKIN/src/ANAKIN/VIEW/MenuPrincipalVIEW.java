@@ -29,7 +29,7 @@ public class MenuPrincipalVIEW extends JFrame {
 	private JButton btnControlSessao;
 	private JMenuBar mnbBarra;
 	private JMenu mnConfig;
-	private JMenuItem miAlterarConta, miLogout, miID, miSair;
+	private JMenuItem miAlterarConta, miLogout, miSair;
 	private JMenu mnSessoes;
 
 	// private ImageIcon botao;
