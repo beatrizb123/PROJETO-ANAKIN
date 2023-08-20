@@ -1,5 +1,8 @@
 package ANAKIN.VIEW;
 
+import java.awt.Dimension;
+import java.awt.Toolkit;
+
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -8,23 +11,26 @@ import javax.swing.JWindow;
 public class SlpashVIEW extends JWindow{
 	private JPanel Content = (JPanel)getContentPane();
 	private int Duracao;
-	private ImageIcon Logo;
+	private ImageIcon LogoSplash;
 	
 	public SlpashVIEW(int d) {
 		Duracao = d;
 	}
 	
 	public void mostarSplash() {
-		setBounds(300, 200, 940, 550);
-		setLayout(null);
+		this.setBounds(300, 200, 940, 550);
+		this.setLayout(null);
+		Dimension tela = Toolkit.getDefaultToolkit().getScreenSize();
+		this.setLocation((tela.width - getSize().width)/2,(tela.height - getSize().height)/2);
+
 		
-		Logo = new ImageIcon(getClass().getResource("LogoSplash.gif"));
-		JLabel label = new JLabel(Logo);
+		this.LogoSplash = new ImageIcon(getClass().getResource("teste.gif"));
+		JLabel label = new JLabel(LogoSplash);
 		
-		label.setBounds(290, 10, 350, 350);
+		label.setBounds(320, 100, 340, 370);
 		Content.add(label);
 		
-		setVisible(true);
+		this.setVisible(true);
 		
 		try {
 			Thread.sleep(Duracao);

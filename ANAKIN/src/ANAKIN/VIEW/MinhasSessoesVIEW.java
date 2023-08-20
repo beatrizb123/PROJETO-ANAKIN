@@ -32,6 +32,7 @@ public class MinhasSessoesVIEW extends JPanel{
 		this.lblMs.setFont(new Font("Arial", Font.BOLD, 22));
 		this.add(lblMs);
 	}
+
 	
 }
 	

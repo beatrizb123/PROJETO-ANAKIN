@@ -18,6 +18,7 @@ import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
 
+import ANAKIN.MODEL.VO.ControleSessaoVO;
 
 public class MenuPrincipalVIEW extends JFrame {
 
@@ -29,8 +30,13 @@ public class MenuPrincipalVIEW extends JFrame {
 	private JButton btnControlSessao;
 	private JMenuBar mnbBarra;
 	private JMenu mnConfig;
-	private JMenuItem miAlterarConta, miLogout, miSair;
+	private JMenuItem miLogout, miSair;
 	private JMenu mnSessoes;
+	private String JP;
+
+	public String getJP() {
+		return JP;
+	}
 
 	// private ImageIcon botao;
 	// private JLabel lblBotao;
@@ -46,9 +52,8 @@ public class MenuPrincipalVIEW extends JFrame {
 		this.setBackground(new Color(250, 247, 255));
 		this.container = getContentPane();
 		Dimension tela = Toolkit.getDefaultToolkit().getScreenSize();
-		this.setLocation((tela.width - getSize().width)/2,(tela.height - getSize().height)/2);
+		this.setLocation((tela.width - getSize().width) / 2, (tela.height - getSize().height) / 2);
 
-		
 		this.imgIcon = new ImageIcon("jupiter.png");
 		this.setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\DoraliceMarques\\Downloads\\jupiter.png"));
 
@@ -71,21 +76,31 @@ public class MenuPrincipalVIEW extends JFrame {
 		this.btnControlSessao.setBounds(360, 240, 200, 40);
 		this.btnControlSessao.setBackground(new Color(90, 61, 171));
 		this.btnControlSessao.setForeground(Color.white);
-		btnControlSessao.addActionListener(new ActionListener() {
+		this.btnControlSessao.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-			String JP = JOptionPane.showInputDialog(null, "Insira Nome");
-		        Object nomeSessao;
+				// recebe o nome da sessao
+				String JP = JOptionPane.showInputDialog(null, "Insira Nome");
+
+				ControleSessaoVO nomesessao = new ControleSessaoVO();
+				nomesessao.setNome_sessao(JP);
+				Object nomeSessao;
+				String listanome = nomesessao.getNome_sessao();
+				JMenuItem miNomesSessoes = new JMenuItem();
+				mnSessoes.add(miNomesSessoes);
+
 				if (JP == null)
-		        System.out.println("Não colocou o nome");
-		        else
-		        System.out.println("Colocou o Nome");
-		        
-		}
-			;
-		
+					System.out.println("Não colocou o nome");
+				else
+					System.out.println("Colocou o Nome: " + JP);
+				ControleSessaoVIEW abre = new ControleSessaoVIEW();
+				abre.setVisible(true);
+
+			}
+
 		});
+
 		this.add(btnControlSessao);
 
 		this.mnbBarra = new JMenuBar();
@@ -94,17 +109,6 @@ public class MenuPrincipalVIEW extends JFrame {
 		this.mnConfig = new JMenu("Configurações");
 		this.mnConfig.setMnemonic('C');
 		this.mnbBarra.add(mnConfig);
-
-		this.miAlterarConta = new JMenuItem("Alterar informações");
-		this.miAlterarConta.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				AlterarInfoVIEW info = new AlterarInfoVIEW();
-				info.setVisible(true);
-			}
-		});
-		this.mnConfig.add(miAlterarConta);
 
 		this.miLogout = new JMenuItem("Logout");
 		this.miLogout.addActionListener(new ActionListener() {
@@ -119,8 +123,6 @@ public class MenuPrincipalVIEW extends JFrame {
 		});
 		this.mnConfig.add(miLogout);
 
-		this.mnConfig.add(miID);
-		
 		this.miSair = new JMenuItem("Sair");
 		this.miSair.addActionListener(new ActionListener() {
 
@@ -131,12 +133,19 @@ public class MenuPrincipalVIEW extends JFrame {
 			}
 		});
 		this.mnConfig.add(miSair);
-		
-		
+
 		this.mnSessoes = new JMenu("Minhas Sessões");
 		this.mnSessoes.setMnemonic('M');
+		this.mnSessoes.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				MinhasSessoesVIEW tela = new MinhasSessoesVIEW();
+				tela.setVisible(true);
+			}
+		});
 		this.mnbBarra.add(mnSessoes);
-		
+
 		/*
 		 * botao = new ImageIcon(getClass().getResource("botao.png")); lblBotao = new
 		 * JLabel(botao); lblBotao.setBounds(200,200,100,100); add(lblBotao);

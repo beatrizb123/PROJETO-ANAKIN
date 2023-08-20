@@ -23,7 +23,7 @@ public class LoginDAO {
 			ResultSet rs = pstm.executeQuery();
 			return rs;
 		} catch (SQLException erro) {
-			JOptionPane.showMessageDialog(null, "todososdadosDAO" + erro);
+			JOptionPane.showMessageDialog(null, "LoginDAO: " + erro);
 			return null;
 		}
 
