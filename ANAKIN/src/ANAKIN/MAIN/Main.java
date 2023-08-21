@@ -1,6 +1,6 @@
 package ANAKIN.MAIN;
 
-import ANAKIN.VIEW.SlpashVIEW;
+import ANAKIN.VIEW.SlpashVIEW;	
 import ANAKIN.VIEW.TelaInicialVIEW;
 
 public class Main {

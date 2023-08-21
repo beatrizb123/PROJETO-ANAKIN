@@ -7,12 +7,13 @@ import java.sql.SQLException;
 
 import javax.swing.JOptionPane;
 
+import ANAKIN.MODEL.VO.ControleSessaoVO;
 import ANAKIN.MODEL.VO.UsuarioVO;
 
 public class LoginDAO {
 	Connection conn;
 	PreparedStatement PSTM;
-	
+
 	public ResultSet autenticaUsuario(UsuarioVO autent) {
 		conn = new ConexaoDAO().conectabd();
 		try {

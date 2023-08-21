@@ -22,6 +22,7 @@ import ANAKIN.MODEL.VO.ControleSessaoVO;
 
 public class MenuPrincipalVIEW extends JFrame {
 
+	// declaração das variaveis
 	private Container container;
 	private JLabel lblAnakin;
 	private JLabel sombraAnakin;
@@ -29,20 +30,12 @@ public class MenuPrincipalVIEW extends JFrame {
 	private ImageIcon imgIcon;
 	private JButton btnControlSessao;
 	private JMenuBar mnbBarra;
-	private JMenu mnConfig;
-	private JMenuItem miLogout, miSair;
-	private JMenu mnSessoes;
-	private String JP;
-
-	public String getJP() {
-		return JP;
-	}
-
-	// private ImageIcon botao;
-	// private JLabel lblBotao;
+	private JMenu mnConfig, mnSessoes;
+	private JMenuItem miAlterarConta, miLogout, miSair, miSessoes;
 
 	public MenuPrincipalVIEW() {
 
+		// instanciação dos objetos
 		this.setTitle("Projeto ANAKIN ★ ");
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setVisible(true);
@@ -51,8 +44,6 @@ public class MenuPrincipalVIEW extends JFrame {
 		this.setLayout(null);
 		this.setBackground(new Color(250, 247, 255));
 		this.container = getContentPane();
-		Dimension tela = Toolkit.getDefaultToolkit().getScreenSize();
-		this.setLocation((tela.width - getSize().width) / 2, (tela.height - getSize().height) / 2);
 
 		this.imgIcon = new ImageIcon("jupiter.png");
 		this.setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\DoraliceMarques\\Downloads\\jupiter.png"));
@@ -74,33 +65,21 @@ public class MenuPrincipalVIEW extends JFrame {
 		this.btnControlSessao = new JButton("Controle de Sessao");
 		this.btnControlSessao.setFont(new Font("Arial Black", Font.BOLD, 14));
 		this.btnControlSessao.setBounds(360, 240, 200, 40);
+		this.btnControlSessao.setToolTipText("Cria nova sessão");
 		this.btnControlSessao.setBackground(new Color(90, 61, 171));
 		this.btnControlSessao.setForeground(Color.white);
 		this.btnControlSessao.addActionListener(new ActionListener() {
 
+			// Botão que leva para o controle de sessão
+
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// recebe o nome da sessao
-				String JP = JOptionPane.showInputDialog(null, "Insira Nome");
-
-				ControleSessaoVO nomesessao = new ControleSessaoVO();
-				nomesessao.setNome_sessao(JP);
-				Object nomeSessao;
-				String listanome = nomesessao.getNome_sessao();
-				JMenuItem miNomesSessoes = new JMenuItem();
-				mnSessoes.add(miNomesSessoes);
-
-				if (JP == null)
-					System.out.println("Não colocou o nome");
-				else
-					System.out.println("Colocou o Nome: " + JP);
-				ControleSessaoVIEW abre = new ControleSessaoVIEW();
-				abre.setVisible(true);
-
+				setVisible(false);
+				ControleSessaoVIEW controleSessao = new ControleSessaoVIEW();
+				controleSessao.setVisible(true);
+				controleSessao.setResizable(false);
 			}
-
 		});
-
 		this.add(btnControlSessao);
 
 		this.mnbBarra = new JMenuBar();
@@ -109,6 +88,21 @@ public class MenuPrincipalVIEW extends JFrame {
 		this.mnConfig = new JMenu("Configurações");
 		this.mnConfig.setMnemonic('C');
 		this.mnbBarra.add(mnConfig);
+
+		this.mnSessoes = new JMenu("Minhas Sessões");
+		this.mnSessoes.setMnemonic('S');
+		this.mnbBarra.add(mnSessoes);
+
+		this.miSessoes = new JMenuItem("Sessões salvas");
+		this.miSessoes.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				MinhasSessoesVIEW tela = new MinhasSessoesVIEW();
+				tela.setVisible(true);
+			}
+		});
+		this.mnSessoes.add(miSessoes);
 
 		this.miLogout = new JMenuItem("Logout");
 		this.miLogout.addActionListener(new ActionListener() {
@@ -122,7 +116,7 @@ public class MenuPrincipalVIEW extends JFrame {
 			}
 		});
 		this.mnConfig.add(miLogout);
-
+		// sai da conta
 		this.miSair = new JMenuItem("Sair");
 		this.miSair.addActionListener(new ActionListener() {
 
@@ -134,23 +128,6 @@ public class MenuPrincipalVIEW extends JFrame {
 		});
 		this.mnConfig.add(miSair);
 
-		this.mnSessoes = new JMenu("Minhas Sessões");
-		this.mnSessoes.setMnemonic('M');
-		this.mnSessoes.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				MinhasSessoesVIEW tela = new MinhasSessoesVIEW();
-				tela.setVisible(true);
-			}
-		});
-		this.mnbBarra.add(mnSessoes);
-
-		/*
-		 * botao = new ImageIcon(getClass().getResource("botao.png")); lblBotao = new
-		 * JLabel(botao); lblBotao.setBounds(200,200,100,100); add(lblBotao);
-		 * 
-		 */
 	}
 
 }

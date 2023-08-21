@@ -33,6 +33,7 @@ import ANAKIN.MODEL.VO.UsuarioVO;
 
 
 public class TelaLoginVIEW extends JFrame {
+	//declaração das variaveis 
 	private Container container;
 	private JLabel lblUser, lblSenha, lblOla, lblLogo, lblEsqueceuSenha;
 	private JTextField txtfUser;
@@ -127,6 +128,7 @@ public class TelaLoginVIEW extends JFrame {
 		this.btnVoltar.addActionListener(new ActionListener() {
 
 			@Override
+			//retorna para tela inicial
 			public void actionPerformed(ActionEvent e) {
 				setVisible(false);
 				TelaInicialVIEW telaInicial = new TelaInicialVIEW();
@@ -143,6 +145,7 @@ public class TelaLoginVIEW extends JFrame {
 		this.btnEntrar.addActionListener(new ActionListener() {
 
 			@Override
+			//confirma o login e direciona para o menu principal
 			public void actionPerformed(ActionEvent e) {
 				try {
 					String usuario, senha;

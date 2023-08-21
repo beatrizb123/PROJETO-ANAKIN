@@ -11,6 +11,8 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.util.ArrayList;
+import java.util.Iterator;
 
 import javax.swing.DefaultListModel;
 import javax.swing.ImageIcon;
@@ -36,14 +38,13 @@ public class ControleSessaoVIEW extends JFrame {
 	private Container container;
 	private JTextArea areaPersonagem;
 	private JLabel lblInventario, lblAnotacoes;
-	private JButton btnAdd, btnLimpar, btnSalvar, btnRemove;
+	private JButton btnAdd, btnLimpar;
 	private ImageIcon imgIcon;
-	private DefaultListModel modelo;
+	private DefaultListModel modelo; //
 	private JList list;
-	private JScrollPane sp, spAnotacao;
-	private JTextField txt;
+	private JScrollPane spInventario, spAnotacao;
+	private JTextField txtInventario;
 	private JTextArea txtAnotacao;
-	private final static String novaLinha = "\n";
 
 	public ControleSessaoVIEW() {
 		// instanciação dos objetos
@@ -68,73 +69,46 @@ public class ControleSessaoVIEW extends JFrame {
 		this.lblInventario.setFont(new Font("Arial", Font.BOLD, 18));
 		this.add(lblInventario);
 
-		this.modelo = new DefaultListModel();
+		this.modelo = new DefaultListModel(); // eu ñ sei oq modelo é mas é importante
 		this.list = new JList(modelo);
 
 		this.btnAdd = new JButton("+");
-		this.btnAdd.setFont(new Font("Arial", Font.BOLD, 12));
-		this.btnAdd.setBounds(380, 240, 43, 25);
+
+		// EVENTO DO BOTÃO ADICIONAR (+) aqui pq ñ sei arrumar lá
+		// botão que adiciona itens a Jlist
+
+		this.btnAdd.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				String itens = txtInventario.getText();
+
+				// itens = coisas do inventario
+				// laço que pega a string itens
+
+				if (itens.length() != 0) {
+					((DefaultListModel) (list.getModel())).addElement(itens);
+
+					txtInventario.setText("");
+					txtInventario.requestFocus();
+				}
+			}
+		});
+
+		this.btnAdd.setBounds(420, 240, 45, 25);
+		this.btnAdd.setFont(new Font("Arial", Font.BOLD, 15));
 		this.btnAdd.setBackground(new Color(90, 61, 171));
 		this.btnAdd.setForeground(Color.white);
 		this.btnAdd.setToolTipText("Adiciona Item");
-		this.btnAdd.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				String item = txt.getText();
-				String [] armazena = {};
-				for (int i = 1; i<=20; i++) {
-					if (item.length() != 0) {
-						((DefaultListModel) (list.getModel())).addElement(item);
-						armazena[i] = item;
-						
-						System.out.println(armazena);
-						txt.setText("");
-						txt.requestFocus();
-					}
-					
-					if (i == 20) {
-						JOptionPane.showMessageDialog(null, "INVENTÁRIO LOTADO, REMOVA ALGUM ITEM!!");
-						
-					}
-				}
 
-			}
+		this.spInventario = new JScrollPane(list);
+		this.spInventario.setBounds(250, 35, 215, 200);
+		this.spInventario.setBorder(javax.swing.BorderFactory.createLineBorder(new Color(90, 61, 171), 5));
+		// sp.add(list);
+		this.container.add(spInventario);
 
-		});
+		this.txtInventario = new JTextField(10);
+		this.txtInventario.setBounds(250, 240, 170, 25);
+		this.add(txtInventario);
 		this.add(btnAdd);
-
-		this.btnRemove = new JButton("-");
-		this.btnRemove.setFont(new Font("Arial", Font.BOLD, 12));
-		this.btnRemove.setBounds(423, 240, 43, 25);
-		this.btnRemove.setBackground(new Color(90, 61, 171));
-		this.btnRemove.setForeground(Color.white);
-		this.btnRemove.setToolTipText("Remover Item");
-		this.btnRemove.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				modelo.remove(list.getSelectedIndex());
-				list.setModel(modelo);
-
-			}
-
-		});
-		this.add(btnRemove);
-
-		ListSelectionModel sm = list.getSelectionModel();
-		int index = sm.getMinSelectionIndex();
-		if (index >= 0)
-			modelo.remove(index);
-
-		this.sp = new JScrollPane(list);
-
-		this.sp.setBounds(250, 35, 216, 200);
-		this.sp.setBorder(javax.swing.BorderFactory.createLineBorder(new Color(90, 61, 171), 5));
-		this.container.add(sp);
-
-		this.txt = new JTextField(10);
-		this.txt.setBounds(250, 240, 130, 25);
-		this.add(txt);
 
 		this.lblAnotacoes = new JLabel("ANOTAÇÕES");
 		this.lblAnotacoes.setBounds(595, 3, 155, 40);
@@ -147,8 +121,10 @@ public class ControleSessaoVIEW extends JFrame {
 		this.spAnotacao = new JScrollPane(txtAnotacao);
 		this.spAnotacao.setBounds(500, 35, 360, 200);
 		this.spAnotacao.setBorder(javax.swing.BorderFactory.createLineBorder(new Color(90, 61, 171), 5));
-		// sp.add(list);
+
 		this.container.add(spAnotacao);
+
+		// BOTÃO DE LIMPAR APAGA TUDO DO TXTANOTACAO
 
 		this.btnLimpar = new JButton("Limpar");
 		btnLimpar.addActionListener(new ActionListener() {
@@ -166,29 +142,5 @@ public class ControleSessaoVIEW extends JFrame {
 		this.btnLimpar.setToolTipText("Apaga anotações");
 		this.add(btnLimpar);
 
-		this.btnSalvar = new JButton("Salva");
-		this.btnSalvar.setBounds(50, 35, 100, 25);
-		this.btnSalvar.setFont(new Font("Arial", Font.BOLD, 15));
-		this.btnSalvar.setBackground(new Color(90, 61, 171));
-		this.btnSalvar.setForeground(Color.white);
-		this.btnSalvar.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				ControleSessaoDAO cont = new ControleSessaoDAO();
-				ControleSessaoVO infor = new ControleSessaoVO();
-
-				String nome, inventario, anotacoes;
-				nome = new MenuPrincipalVIEW().getJP();
-				anotacoes = txtAnotacao.getText();
-
-				infor.setNome_sessao(nome);
-				infor.setAnotacoes_sessao(anotacoes);
-
-				cont.salvarInformacoes(infor);
-
-			}
-		});
-		this.add(btnSalvar);
 	}
 }
