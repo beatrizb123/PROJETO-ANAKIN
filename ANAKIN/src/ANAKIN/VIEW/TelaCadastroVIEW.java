@@ -167,7 +167,7 @@ public class TelaCadastroVIEW extends JFrame {
 		this.add(lblLogo);
 
 		this.imgIcon = new ImageIcon("jupiter.png");
-		this.setIconImage(Toolkit.getDefaultToolkit().getImage("jupiter.png"));
+		this.setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\Beatriz\\Downloads\\jupiter.png"));
 
 	}
 

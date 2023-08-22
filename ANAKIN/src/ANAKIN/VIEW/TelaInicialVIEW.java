@@ -76,9 +76,9 @@ public class TelaInicialVIEW extends JFrame {
 		this.btnLogin.setBackground(Color.white);
 		this.btnLogin.setForeground(new Color(90, 61, 171));
 		this.btnLogin.addActionListener(new ActionListener() {
-			
-			// direciona para a tela de Login 
-			
+
+			// direciona para a tela de Login
+
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				setVisible(false);
@@ -97,8 +97,8 @@ public class TelaInicialVIEW extends JFrame {
 		this.btnCadastrar.setBackground(new Color(90, 61, 171));
 		this.btnCadastrar.setForeground(Color.white);
 		this.btnCadastrar.addActionListener(new ActionListener() {
-			
-			//direciona para a tela de cadastro 
+
+			// direciona para a tela de cadastro
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -114,7 +114,3 @@ public class TelaInicialVIEW extends JFrame {
 	}
 
 }
-
-
-
-

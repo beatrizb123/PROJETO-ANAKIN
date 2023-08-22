@@ -28,7 +28,6 @@ public class LoginDAO {
 			JOptionPane.showMessageDialog(null, "LoginDAO: " + erro);
 			return null;
 		}
-	
 
 	}
 

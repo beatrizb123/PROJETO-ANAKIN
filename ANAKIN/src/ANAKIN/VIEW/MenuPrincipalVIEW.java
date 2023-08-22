@@ -32,7 +32,7 @@ public class MenuPrincipalVIEW extends JFrame {
 	private JButton btnControlSessao;
 	private JMenuBar mnbBarra;
 	private JMenu mnConfig, mnSessoes;
-	private JMenuItem miAlterarConta, miLogout, miSair, miSessoes;
+	private JMenuItem miAlterarConta, miLogout, miSair, miSessoes, miAlteraSenha;
 
 	public MenuPrincipalVIEW() {
 
@@ -77,11 +77,10 @@ public class MenuPrincipalVIEW extends JFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-					setVisible(false);
-					ControleSessaoVIEW tela = new ControleSessaoVIEW();
-					tela.setVisible(true);
-				
-		
+				setVisible(false);
+				ControleSessaoVIEW tela = new ControleSessaoVIEW();
+				tela.setVisible(true);
+
 			}
 		});
 		this.add(btnControlSessao);
@@ -95,18 +94,18 @@ public class MenuPrincipalVIEW extends JFrame {
 
 		this.mnSessoes = new JMenu("Minhas Sessões");
 		this.mnSessoes.setMnemonic('S');
-		this.mnbBarra.add(mnSessoes);
+		//this.mnbBarra.add(mnSessoes);
 
 		this.miSessoes = new JMenuItem("Sessões salvas");
 		this.miSessoes.addActionListener(new ActionListener() {
-			
+
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				MinhasSessoesVIEW tela = new MinhasSessoesVIEW();
 				tela.setVisible(true);
 			}
 		});
-		this.mnSessoes.add(miSessoes);
+		//this.mnSessoes.add(miSessoes);
 
 		this.miLogout = new JMenuItem("Logout");
 		this.miLogout.addActionListener(new ActionListener() {
@@ -120,6 +119,17 @@ public class MenuPrincipalVIEW extends JFrame {
 			}
 		});
 		this.mnConfig.add(miLogout);
+		
+		this.miAlterarConta = new JMenuItem("Alterar Senha");
+		this.miAlterarConta.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				EsqueceuSenhaVIEW tela = new EsqueceuSenhaVIEW();
+				tela.setVisible(true);				
+			}
+		});
+		this.mnConfig.add(miAlterarConta);
 		// sai da conta
 		this.miSair = new JMenuItem("Sair");
 		this.miSair.addActionListener(new ActionListener() {
@@ -132,7 +142,6 @@ public class MenuPrincipalVIEW extends JFrame {
 		});
 		this.mnConfig.add(miSair);
 		
-	
 
 	}
 

@@ -16,63 +16,62 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
 import ANAKIN.MODEL.DAO.CadastroDAO;
+import ANAKIN.MODEL.DAO.ControleSessaoDAO;
+import ANAKIN.MODEL.VO.UsuarioVO;
 
-public class MinhasSessoesVIEW extends JFrame{
-	
+public class MinhasSessoesVIEW extends JFrame {
+
 	private Container container;
 	private JLabel lblMs, lblMens;
 	private JTextField tfBusca;
+
 	private JButton btnBusca;
-	
+
 	public MinhasSessoesVIEW() {
-		
+
 		this.setTitle("Projeto ANAKIN ★ ");
-		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
+		this.setDefaultCloseOperation(HIDE_ON_CLOSE);
 		this.setBounds(0, 0, 300, 450);
 		this.setLayout(null);
 		this.setResizable(false);
-		this.setBackground(new Color(250,247,255));
+		this.setBackground(new Color(250, 247, 255));
 		this.setVisible(true);
 		Dimension tela = Toolkit.getDefaultToolkit().getScreenSize();
 		this.setLocation((tela.width - getSize().width) / 2, (tela.height - getSize().height) / 2);
-		
+
 		this.lblMs = new JLabel("Minhas Sessões");
-		this.lblMs.setBounds(30, 15, 200, 25);		
-		this.lblMs.setForeground(new Color(90,61,171));
+		this.lblMs.setBounds(30, 15, 200, 25);
+		this.lblMs.setForeground(new Color(90, 61, 171));
 		this.lblMs.setHorizontalAlignment(SwingConstants.CENTER);
 		this.lblMs.setFont(new Font("Arial", Font.BOLD, 22));
 		this.add(lblMs);
-		
+
 		this.lblMens = new JLabel("Insira o nome da sua sessão:");
 		this.lblMens.setBounds(10, 45, 200, 25);
-		this.lblMens.setForeground(new Color(90,61,171));
+		this.lblMens.setForeground(new Color(90, 61, 171));
 		this.lblMens.setHorizontalAlignment(SwingConstants.CENTER);
 		this.lblMens.setFont(new Font("Arial", Font.BOLD, 13));
 		this.add(lblMens);
-		
+
 		this.tfBusca = new JTextField(20);
-		this.tfBusca.setBounds(20, 75, 150, 25);
+		this.tfBusca.setBounds(20, 75, 130, 25);
 		this.add(tfBusca);
-		
+
 		this.btnBusca = new JButton("Buscar");
-		this.btnBusca.setBounds(20, 105, 100, 25);
+		this.btnBusca.setBounds(160, 75, 100, 25);
+		this.btnBusca.setBackground(new Color(90, 61, 171));
+		this.btnBusca.setForeground(Color.WHITE);
 		this.btnBusca.addActionListener(new ActionListener() {
-			
+
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				CadastroDAO info = new CadastroDAO();
-				int id = info.usaId();
-				
-				
-				
+				ControleSessaoDAO cs = new ControleSessaoDAO();
+				new inforcao();
+
 			}
 		});
+		this.add(btnBusca);
 
-		
-		
 	}
 
-	
 }
-	
-

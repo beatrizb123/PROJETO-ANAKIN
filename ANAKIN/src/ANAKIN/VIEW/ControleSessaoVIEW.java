@@ -143,19 +143,20 @@ public class ControleSessaoVIEW extends JFrame {
 				
 				ControleSessaoDAO salvar = new ControleSessaoDAO();
 				ControleSessaoVO controle = new ControleSessaoVO();
-				UsuarioVO id = new UsuarioVO();
-
+				UsuarioVO user = new UsuarioVO();
+				
 				String inventario, anotacoes, nome;
-				int fk;
+				int id;
 
 				nome = tfNome.getText();
 				inventario = txtInventario.getText();
 				anotacoes = txtAnotacao.getText();
+				id = user.getId_usuario();
 				
 				controle.setNome_sessao(nome);
 				controle.setInventario_sessao(inventario);
 				controle.setAnotacoes_sessao(anotacoes);
-
+				
 				salvar.salvarInformacoes(controle);
 				
 				JOptionPane.showMessageDialog(null, "INFORMAÇÕES FORAM SALVAS!");

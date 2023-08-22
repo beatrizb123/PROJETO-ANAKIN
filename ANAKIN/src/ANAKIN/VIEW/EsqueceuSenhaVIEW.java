@@ -24,13 +24,14 @@ public class EsqueceuSenhaVIEW extends JFrame{
 	private JButton btnConfirmar;
 	
 	public EsqueceuSenhaVIEW() {
+		this.setTitle("Alterar informacoes");
 		this.setTitle("Mudar a senha");
 		this.setResizable(false);
 		this.setLayout(null);
 		this.setBounds(300, 200, 300, 250);
-		this.setBackground(new Color(250, 247, 255));
 		Dimension tela = Toolkit.getDefaultToolkit().getScreenSize();
 		this.setLocation((tela.width - getSize().width) / 2, (tela.height - getSize().height) / 2);
+
 
 		this.lblId = new JLabel("INFORME O ID DA SUA CONTA:");
 		this.lblId.setBounds(10, 10, 300, 25);

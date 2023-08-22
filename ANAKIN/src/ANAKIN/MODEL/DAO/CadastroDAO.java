@@ -8,6 +8,9 @@ import java.sql.Statement;
 
 import javax.swing.JOptionPane;
 
+import com.mysql.cj.protocol.Resultset;
+import com.mysql.cj.xdevapi.Result;
+
 import ANAKIN.MODEL.VO.ControleSessaoVO;
 import ANAKIN.MODEL.VO.UsuarioVO;
 import ANAKIN.VIEW.TelaCadastroVIEW;
@@ -28,40 +31,18 @@ public class CadastroDAO {
 			PSTM.setString(1, infor.getNome_usuario());
 			PSTM.setString(2, infor.getSenha_usuario());
 			PSTM.execute();
-			
+
 			ResultSet rs = PSTM.getGeneratedKeys();
 			if (rs.next()) {
 				int id = rs.getInt(1);
-				JOptionPane.showMessageDialog(null, "ESSE É SEU ID: " +id+"\n\nGUARDE-O PARA ALTERAR SUAS INFORMAÇÕES");
+				JOptionPane.showMessageDialog(null,
+						"ESSE É SEU ID: " + id + "\n\nGUARDE-O PARA ALTERAR SUAS INFORMAÇÕES");
 
-				UsuarioVO user = new UsuarioVO();
-				user.setId_usuario(id);
-				System.out.println(id);
 			}
 		} catch (SQLException erro) {
 			JOptionPane.showMessageDialog(null, "CadastroDAO: " + erro);
 		}
 	}
 
-	public int usaId() {
-		int aux = 0;
-		int id;
-		String sql = "select id_usuario from usuario where nome_usuario = ? and senha_usuario = ?";
-		try {
-			PreparedStatement pstm = conn.prepareStatement(sql);
-			UsuarioVO user = new UsuarioVO();
-
-			pstm.setString(1, user.getNome_usuario());
-			pstm.setString(2, user.getSenha_usuario());
-			ResultSet rs = pstm.executeQuery();
-			if (rs.next()) {
-				aux = rs.getInt("id_usuario");
-			}
-		} catch (SQLException e) {
-			JOptionPane.showMessageDialog(null, "CadastroDAO: " + e);
-
-		}
-		return id = aux;
-	}
 
 }
