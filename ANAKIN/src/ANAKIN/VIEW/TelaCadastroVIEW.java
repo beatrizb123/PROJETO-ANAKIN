@@ -115,7 +115,7 @@ public class TelaCadastroVIEW extends JFrame {
 
 				infor.setNome_usuario(usuario);
 				infor.setSenha_usuario(senha);
-
+				infor.getId_usuario();
 				Cad.cadastrarUsuario(infor);
 				MenuPrincipalVIEW telap = new MenuPrincipalVIEW();
 				telap.setVisible(true);

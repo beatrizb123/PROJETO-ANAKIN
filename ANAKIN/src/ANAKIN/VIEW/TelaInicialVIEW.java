@@ -43,6 +43,8 @@ public class TelaInicialVIEW extends JFrame {
 		this.setBounds(300, 200, 940, 550);
 		this.setLayout(null);
 		this.setBackground(new Color(250, 247, 255));
+		Dimension tela = Toolkit.getDefaultToolkit().getScreenSize();
+		this.setLocation((tela.width - getSize().width) / 2, (tela.height - getSize().height) / 2);
 
 		this.container = getContentPane();
 
@@ -71,8 +73,8 @@ public class TelaInicialVIEW extends JFrame {
 		this.btnLogin = new JButton("Login");
 		this.btnLogin.setFont(new Font("Arial Black", Font.BOLD, 14));
 		this.btnLogin.setBounds(615, 288, 114, 31);
-		this.btnLogin.setBackground(new Color(90, 61, 171));
-		this.btnLogin.setForeground(Color.white);
+		this.btnLogin.setBackground(Color.white);
+		this.btnLogin.setForeground(new Color(90, 61, 171));
 		this.btnLogin.addActionListener(new ActionListener() {
 			
 			// direciona para a tela de Login 

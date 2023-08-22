@@ -30,20 +30,38 @@ public class CadastroDAO {
 			PSTM.execute();
 			
 			ResultSet rs = PSTM.getGeneratedKeys();
-			if(rs.next()) {
+			if (rs.next()) {
 				int id = rs.getInt(1);
-				ControleSessaoVO sessao = new ControleSessaoVO();
-				sessao.setFk_usuario(id);
+				JOptionPane.showMessageDialog(null, "ESSE É SEU ID: " +id+"\n\nGUARDE-O PARA ALTERAR SUAS INFORMAÇÕES");
+
+				UsuarioVO user = new UsuarioVO();
+				user.setId_usuario(id);
 				System.out.println(id);
 			}
-			PSTM.close();
 		} catch (SQLException erro) {
 			JOptionPane.showMessageDialog(null, "CadastroDAO: " + erro);
 		}
 	}
 
+	public int usaId() {
+		int aux = 0;
+		int id;
+		String sql = "select id_usuario from usuario where nome_usuario = ? and senha_usuario = ?";
+		try {
+			PreparedStatement pstm = conn.prepareStatement(sql);
+			UsuarioVO user = new UsuarioVO();
 
+			pstm.setString(1, user.getNome_usuario());
+			pstm.setString(2, user.getSenha_usuario());
+			ResultSet rs = pstm.executeQuery();
+			if (rs.next()) {
+				aux = rs.getInt("id_usuario");
+			}
+		} catch (SQLException e) {
+			JOptionPane.showMessageDialog(null, "CadastroDAO: " + e);
+
+		}
+		return id = aux;
 	}
 
-
-
+}

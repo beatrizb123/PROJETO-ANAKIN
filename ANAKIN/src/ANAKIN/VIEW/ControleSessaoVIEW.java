@@ -26,25 +26,24 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
+import javax.swing.ScrollPaneConstants;
 import javax.swing.SwingConstants;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
 import ANAKIN.MODEL.DAO.ControleSessaoDAO;
 import ANAKIN.MODEL.VO.ControleSessaoVO;
+import ANAKIN.MODEL.VO.UsuarioVO;
 
 public class ControleSessaoVIEW extends JFrame {
 
 	private Container container;
-	private JTextArea areaPersonagem;
-	private JLabel lblInventario, lblAnotacoes;
-	private JButton btnAdd, btnLimpar;
+	private JLabel lblNome, lblInventario, lblAnotacoes;
+	private JButton btnSalva, btnLimpar, btnRetorna;
 	private ImageIcon imgIcon;
-	private DefaultListModel modelo; //
-	private JList list;
 	private JScrollPane spInventario, spAnotacao;
-	private JTextField txtInventario;
-	private JTextArea txtAnotacao;
+	private JTextArea txtAnotacao, txtInventario;
+	private JTextField tfNome;
 
 	public ControleSessaoVIEW() {
 		// instanciação dos objetos
@@ -62,53 +61,14 @@ public class ControleSessaoVIEW extends JFrame {
 		this.imgIcon = new ImageIcon("jupiter.png");
 		this.setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\Beatriz\\Downloads\\jupiter.png"));
 
-		this.lblInventario = new JLabel("INVENTÁRIO");
-		this.lblInventario.setBounds(275, 3, 155, 40);
-		this.lblInventario.setForeground(new Color(90, 61, 171));
-		this.lblInventario.setHorizontalAlignment(SwingConstants.CENTER);
-		this.lblInventario.setFont(new Font("Arial", Font.BOLD, 18));
-		this.add(lblInventario);
-
-		this.modelo = new DefaultListModel(); // eu ñ sei oq modelo é mas é importante
-		this.list = new JList(modelo);
-
-		this.btnAdd = new JButton("+");
-
-		// EVENTO DO BOTÃO ADICIONAR (+) aqui pq ñ sei arrumar lá
-		// botão que adiciona itens a Jlist
-
-		this.btnAdd.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				String itens = txtInventario.getText();
-
-				// itens = coisas do inventario
-				// laço que pega a string itens
-
-				if (itens.length() != 0) {
-					((DefaultListModel) (list.getModel())).addElement(itens);
-
-					txtInventario.setText("");
-					txtInventario.requestFocus();
-				}
-			}
-		});
-
-		this.btnAdd.setBounds(420, 240, 45, 25);
-		this.btnAdd.setFont(new Font("Arial", Font.BOLD, 15));
-		this.btnAdd.setBackground(new Color(90, 61, 171));
-		this.btnAdd.setForeground(Color.white);
-		this.btnAdd.setToolTipText("Adiciona Item");
-
-		this.spInventario = new JScrollPane(list);
+		this.txtInventario = new JTextArea();
+		this.txtInventario.setFont(new Font("Helvetica", Font.BOLD, 14));
+		this.txtInventario.setLineWrap(true);
+		this.txtInventario.setWrapStyleWord(true);
+		this.spInventario = new JScrollPane(txtInventario);
 		this.spInventario.setBounds(250, 35, 215, 200);
 		this.spInventario.setBorder(javax.swing.BorderFactory.createLineBorder(new Color(90, 61, 171), 5));
-		// sp.add(list);
 		this.container.add(spInventario);
-
-		this.txtInventario = new JTextField(10);
-		this.txtInventario.setBounds(250, 240, 170, 25);
-		this.add(txtInventario);
-		this.add(btnAdd);
 
 		this.lblAnotacoes = new JLabel("ANOTAÇÕES");
 		this.lblAnotacoes.setBounds(595, 3, 155, 40);
@@ -117,9 +77,20 @@ public class ControleSessaoVIEW extends JFrame {
 		this.lblAnotacoes.setFont(new Font("Arial", Font.BOLD, 18));
 		this.add(lblAnotacoes);
 
+		this.lblInventario = new JLabel("INVENTARIO");
+		this.lblInventario.setBounds(280, 3, 155, 40);
+		this.lblInventario.setForeground(new Color(90, 61, 171));
+		this.lblInventario.setHorizontalAlignment(SwingConstants.CENTER);
+		this.lblInventario.setFont(new Font("Arial", Font.BOLD, 18));
+		this.add(lblInventario);
+
 		this.txtAnotacao = new JTextArea();
+		this.txtAnotacao.setFont(new Font("Helvetica", Font.PLAIN, 13));
+		this.txtAnotacao.setLineWrap(true);
+		this.txtAnotacao.setWrapStyleWord(true);
 		this.spAnotacao = new JScrollPane(txtAnotacao);
 		this.spAnotacao.setBounds(500, 35, 360, 200);
+
 		this.spAnotacao.setBorder(javax.swing.BorderFactory.createLineBorder(new Color(90, 61, 171), 5));
 
 		this.container.add(spAnotacao);
@@ -140,7 +111,76 @@ public class ControleSessaoVIEW extends JFrame {
 		this.btnLimpar.setBackground(new Color(90, 61, 171));
 		this.btnLimpar.setForeground(Color.white);
 		this.btnLimpar.setToolTipText("Apaga anotações");
+		this.btnLimpar.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+
+			}
+		});
 		this.add(btnLimpar);
+
+		this.lblNome = new JLabel("Nome da sessão:");
+		this.lblNome.setFont(new Font("Arial", Font.BOLD, 18));
+		this.lblNome.setBounds(30, 35, 150, 25);
+		this.lblNome.setForeground(new Color(90, 61, 171));
+		this.add(lblNome);
+
+		this.tfNome = new JTextField(20);
+		this.tfNome.setBounds(30, 60, 180, 25);
+		this.tfNome.setBorder(javax.swing.BorderFactory.createLineBorder(new Color(90, 61, 171), 4));
+		this.add(tfNome);
+
+		this.btnSalva = new JButton("Salvar");
+		this.btnSalva.setBounds(70, 95, 100, 30);
+		this.btnSalva.setFont(new Font("Arial", Font.BOLD, 15));
+		this.btnSalva.setBackground(new Color(90, 61, 171));
+		this.btnSalva.setForeground(Color.white);
+		this.btnSalva.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				
+				ControleSessaoDAO salvar = new ControleSessaoDAO();
+				ControleSessaoVO controle = new ControleSessaoVO();
+				UsuarioVO id = new UsuarioVO();
+
+				String inventario, anotacoes, nome;
+				int fk;
+
+				nome = tfNome.getText();
+				inventario = txtInventario.getText();
+				anotacoes = txtAnotacao.getText();
+				
+				controle.setNome_sessao(nome);
+				controle.setInventario_sessao(inventario);
+				controle.setAnotacoes_sessao(anotacoes);
+
+				salvar.salvarInformacoes(controle);
+				
+				JOptionPane.showMessageDialog(null, "INFORMAÇÕES FORAM SALVAS!");
+				
+
+			}
+		});
+		this.add(btnSalva);
+
+		this.btnRetorna = new JButton("Retornar");
+		this.btnRetorna.setBounds(70, 130, 100, 30);
+		this.btnRetorna.setFont(new Font("Arial", Font.BOLD, 15));
+		this.btnRetorna.setBackground(new Color(90, 61, 171));
+		this.btnRetorna.setForeground(Color.white);
+		this.btnRetorna.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				setVisible(false);
+				MenuPrincipalVIEW tela = new MenuPrincipalVIEW();
+				tela.setVisible(true);
+				
+			}
+		});
+		this.add(btnRetorna);
 
 	}
 }

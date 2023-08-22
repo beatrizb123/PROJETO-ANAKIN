@@ -19,6 +19,7 @@ import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
 
 import ANAKIN.MODEL.VO.ControleSessaoVO;
+import ANAKIN.MODEL.VO.UsuarioVO;
 
 public class MenuPrincipalVIEW extends JFrame {
 
@@ -44,9 +45,11 @@ public class MenuPrincipalVIEW extends JFrame {
 		this.setLayout(null);
 		this.setBackground(new Color(250, 247, 255));
 		this.container = getContentPane();
+		Dimension tela = Toolkit.getDefaultToolkit().getScreenSize();
+		this.setLocation((tela.width - getSize().width) / 2, (tela.height - getSize().height) / 2);
 
 		this.imgIcon = new ImageIcon("jupiter.png");
-		this.setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\DoraliceMarques\\Downloads\\jupiter.png"));
+		this.setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\Beatriz\\Downloads\\jupiter.png"));
 
 		this.lblAnakin = new JLabel("ANAKIN");
 		this.lblAnakin.setBounds(255, 100, 400, 165);
@@ -74,10 +77,11 @@ public class MenuPrincipalVIEW extends JFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				setVisible(false);
-				ControleSessaoVIEW controleSessao = new ControleSessaoVIEW();
-				controleSessao.setVisible(true);
-				controleSessao.setResizable(false);
+					setVisible(false);
+					ControleSessaoVIEW tela = new ControleSessaoVIEW();
+					tela.setVisible(true);
+				
+		
 			}
 		});
 		this.add(btnControlSessao);
@@ -127,6 +131,8 @@ public class MenuPrincipalVIEW extends JFrame {
 			}
 		});
 		this.mnConfig.add(miSair);
+		
+	
 
 	}
 

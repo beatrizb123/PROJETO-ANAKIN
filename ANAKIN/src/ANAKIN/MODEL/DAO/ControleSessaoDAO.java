@@ -15,16 +15,18 @@ public class ControleSessaoDAO {
 	
 	public void salvarInformacoes(ControleSessaoVO controle) {
 		conn = new ConexaoDAO().conectabd();
-		String sql = "insert into controle_sessao (nome_sessao, anotacoes_sessao) values (?, ?)";
+		String sql = "insert into controle_sessao (nome_sessao, inventario_sessao, anotacoes_sessao) values (?,?,?)";
 		try {
 			PSTM = conn.prepareStatement(sql);
 			PSTM.setString(1, controle.getNome_sessao());
-		//	PSTM.setString(2, controle.getInventario_sessao());
-			PSTM.setString(2, controle.getAnotacoes_sessao());
+			PSTM.setString(2, controle.getInventario_sessao());
+			PSTM.setString(3, controle.getAnotacoes_sessao());
+
 			PSTM.execute();
 			PSTM.close();
 		} catch (SQLException erro) {
 			JOptionPane.showMessageDialog(null, "ControleSessaoDAO: " + erro);
 		}	
 	}
+
 }
