@@ -10,6 +10,7 @@ import javax.swing.JOptionPane;
 import com.mysql.cj.protocol.Resultset;
 
 import ANAKIN.MODEL.VO.ControleSessaoVO;
+import ANAKIN.MODEL.VO.UsuarioVO;
 
 //precisa de modificação com fk do user
 public class ControleSessaoDAO {
@@ -18,12 +19,13 @@ public class ControleSessaoDAO {
 
 	public void salvarInformacoes(ControleSessaoVO controle) {
 		conn = new ConexaoDAO().conectabd();
-		String sql = "insert into controle_sessao (nome_sessao, inventario_sessao, anotacoes_sessao) values (?,?,?)";
+		String sql = "insert into controle_sessao (nome_sessao, inventario_sessao, anotacoes_sessao, id_usuario) values (?,?,?,?)";
 		try {
 			PSTM = conn.prepareStatement(sql);
 			PSTM.setString(1, controle.getNome_sessao());
 			PSTM.setString(2, controle.getInventario_sessao());
-			PSTM.setString(3, controle.getAnotacoes_sessao());			
+			PSTM.setString(3, controle.getAnotacoes_sessao());		
+			PSTM.setString(4, controle.getFk_usuario());
 			PSTM.execute();
 			PSTM.close();
 		} catch (SQLException erro) {

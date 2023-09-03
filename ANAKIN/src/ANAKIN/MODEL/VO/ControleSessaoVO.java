@@ -8,8 +8,8 @@ package ANAKIN.MODEL.VO;
 public class ControleSessaoVO {
 	
 	//Declaração das variáveis
-	private int id_sessao, fk_usuario;
-	private String nome_sessao, inventario_sessao, anotacoes_sessao;
+	private int id_sessao;
+	private String nome_sessao, inventario_sessao, anotacoes_sessao, fk_usuario;
 	
 	//get e set - ID da sessão
 	public int getId_sessao() {
@@ -44,10 +44,10 @@ public class ControleSessaoVO {
 	}
 	
 	//get e set - Chave estrangeira do usuário
-	public int getFk_usuario() {
+	public String getFk_usuario() {
 		return fk_usuario;
 	}
-	public void setFk_usuario(int fk_usuario) {
+	public void setFk_usuario(String fk_usuario) {
 		this.fk_usuario = fk_usuario;
 	}
 	

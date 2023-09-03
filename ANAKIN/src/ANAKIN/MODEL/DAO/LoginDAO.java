@@ -19,10 +19,10 @@ public class LoginDAO {
 		conn = new ConexaoDAO().conectabd();
 		try {
 			String SQL = "select * from usuario where nome_usuario = ? and senha_usuario = ?";
-			PSTM = conn.prepareStatement(SQL);
-			PSTM.setString(1, autent.getNome_usuario());
-			PSTM.setString(2, autent.getSenha_usuario());
-			ResultSet rs = PSTM.executeQuery();
+			PreparedStatement pstm = conn.prepareStatement(SQL);
+			pstm.setString(1, autent.getNome_usuario());
+			pstm.setString(2, autent.getSenha_usuario());
+			ResultSet rs = pstm.executeQuery();
 			return rs;
 		} catch (SQLException erro) {
 			JOptionPane.showMessageDialog(null, "LoginDAO: " + erro);

@@ -13,6 +13,7 @@ import com.mysql.cj.xdevapi.Result;
 
 import ANAKIN.MODEL.VO.ControleSessaoVO;
 import ANAKIN.MODEL.VO.UsuarioVO;
+import ANAKIN.VIEW.MenuPrincipalVIEW;
 import ANAKIN.VIEW.TelaCadastroVIEW;
 
 public class CadastroDAO {
@@ -24,25 +25,28 @@ public class CadastroDAO {
 
 	public void cadastrarUsuario(UsuarioVO infor) {
 
-		String sql = "insert into usuario (nome_usuario, senha_usuario) values(?, ?)";
+		String sql = "insert into usuario (nome_usuario, senha_usuario, filme_usuario) values(?, ?, ?)";
+
 		conn = new ConexaoDAO().conectabd();
 		try {
-			PSTM = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-			PSTM.setString(1, infor.getNome_usuario());
-			PSTM.setString(2, infor.getSenha_usuario());
-			PSTM.execute();
+			PSTM = conn.prepareStatement(sql);
 
-			ResultSet rs = PSTM.getGeneratedKeys();
+			ResultSet rs = PSTM
+					.executeQuery("select * from usuario where nome_usuario = '" + infor.getNome_usuario() + "'");
 			if (rs.next()) {
-				int id = rs.getInt(1);
-				JOptionPane.showMessageDialog(null,
-						"ESSE É SEU ID: " + id + "\n\nGUARDE-O PARA ALTERAR SUAS INFORMAÇÕES");
+				JOptionPane.showMessageDialog(null, "USUARIO JA EXISTE");
+			} else {
+				PSTM.setString(1, infor.getNome_usuario());
+				PSTM.setString(2, infor.getSenha_usuario());
+				PSTM.setString(3, infor.getFilme_Usuario());
 
 			}
+
+			PSTM.execute();
+			PSTM.close();
 		} catch (SQLException erro) {
-			JOptionPane.showMessageDialog(null, "CadastroDAO: " + erro);
+			System.err.println("CadastroDAO: " + erro);
 		}
 	}
-
 
 }

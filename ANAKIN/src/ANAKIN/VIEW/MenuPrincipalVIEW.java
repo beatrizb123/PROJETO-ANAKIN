@@ -16,8 +16,11 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
+import javax.swing.JTextArea;
+import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
+import ANAKIN.MODEL.DAO.ManterSessaoDAO;
 import ANAKIN.MODEL.VO.ControleSessaoVO;
 import ANAKIN.MODEL.VO.UsuarioVO;
 
@@ -28,6 +31,7 @@ public class MenuPrincipalVIEW extends JFrame {
 	private JLabel lblAnakin;
 	private JLabel sombraAnakin;
 	private JLabel lblimagem;
+	private JTextField txt;
 	private ImageIcon imgIcon;
 	private JButton btnControlSessao;
 	private JMenuBar mnbBarra;
@@ -94,7 +98,7 @@ public class MenuPrincipalVIEW extends JFrame {
 
 		this.mnSessoes = new JMenu("Minhas Sessões");
 		this.mnSessoes.setMnemonic('S');
-		//this.mnbBarra.add(mnSessoes);
+		// this.mnbBarra.add(mnSessoes);
 
 		this.miSessoes = new JMenuItem("Sessões salvas");
 		this.miSessoes.addActionListener(new ActionListener() {
@@ -105,28 +109,31 @@ public class MenuPrincipalVIEW extends JFrame {
 				tela.setVisible(true);
 			}
 		});
-		//this.mnSessoes.add(miSessoes);
+		// this.mnSessoes.add(miSessoes);
 
 		this.miLogout = new JMenuItem("Logout");
 		this.miLogout.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				
 				setVisible(false);
 				TelaInicialVIEW telaInicial = new TelaInicialVIEW();
 				telaInicial.setVisible(true);
+				ManterSessaoDAO MSD = new ManterSessaoDAO();
+				MSD.finalizaSessao();
 
 			}
 		});
 		this.mnConfig.add(miLogout);
-		
+
 		this.miAlterarConta = new JMenuItem("Alterar Senha");
 		this.miAlterarConta.addActionListener(new ActionListener() {
-			
+
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				EsqueceuSenhaVIEW tela = new EsqueceuSenhaVIEW();
-				tela.setVisible(true);				
+				tela.setVisible(true);
 			}
 		});
 		this.mnConfig.add(miAlterarConta);
@@ -141,7 +148,8 @@ public class MenuPrincipalVIEW extends JFrame {
 			}
 		});
 		this.mnConfig.add(miSair);
-		
+
+		UsuarioVO user = new UsuarioVO();
 
 	}
 

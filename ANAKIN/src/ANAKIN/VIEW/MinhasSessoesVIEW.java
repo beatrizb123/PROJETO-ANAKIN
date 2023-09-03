@@ -65,8 +65,7 @@ public class MinhasSessoesVIEW extends JFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				ControleSessaoDAO cs = new ControleSessaoDAO();
-				new inforcao();
+		
 
 			}
 		});

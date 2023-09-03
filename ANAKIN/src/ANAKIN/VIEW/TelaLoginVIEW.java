@@ -39,7 +39,7 @@ public class TelaLoginVIEW extends JFrame {
 	private JTextField txtfUser;
 	private JPasswordField pfSenha;
 	private JButton btnVoltar, btnEntrar;
-	private JCheckBox ckbMostrarSenha;
+	private JCheckBox ckbMostrarSenha, ckManterSessao;
 	private ImageIcon imgLogo, imgIcon;
 	private Font fonte;
 
@@ -152,21 +152,24 @@ public class TelaLoginVIEW extends JFrame {
 					usuario = txtfUser.getText();
 					senha = pfSenha.getText();
 					UsuarioVO autent = new UsuarioVO();
-					autent.setNome_usuario(usuario);
-					autent.setSenha_usuario(senha);
-					LoginDAO dados = new LoginDAO();
 
-					ResultSet testeAuntent = dados.autenticaUsuario(autent);
-					if (testeAuntent.next()) {
-						int id = testeAuntent.getInt("id_usuario");
-						autent.setId_usuario(id);
-						MenuPrincipalVIEW menuPrincipal = new MenuPrincipalVIEW();
-						menuPrincipal.setVisible(true);
-						System.out.println("ID: " + id);
-						dispose();
+					if (usuario == null || senha == null) {
+						JOptionPane.showMessageDialog(null, "TODOS OS CAMPOS PRECISAM SER PREENCHIDOS!");
 					} else {
-						JOptionPane.showMessageDialog(null, "Senha ou usuario invalido!");
+						autent.setNome_usuario(usuario);
+						autent.setSenha_usuario(senha);
+						LoginDAO dados = new LoginDAO();
+
+						ResultSet testeAuntent = dados.autenticaUsuario(autent);
+						if (testeAuntent.next()) {
+							MenuPrincipalVIEW menuPrincipal = new MenuPrincipalVIEW();
+							menuPrincipal.setVisible(true);
+							dispose();
+						} else {
+							JOptionPane.showMessageDialog(null, "Senha ou usuario invalido!");
+						}
 					}
+
 				} catch (SQLException erro) {
 					JOptionPane.showMessageDialog(null, erro);
 				}
@@ -197,6 +200,11 @@ public class TelaLoginVIEW extends JFrame {
 			}
 		});
 		this.add(ckbMostrarSenha);
+
+		this.ckManterSessao = new JCheckBox("Deseja manter sessao?");
+		this.ckManterSessao.setBounds(460, 325, 170, 30);
+		//this.add(ckManterSessao);
+
 	}
 
 }

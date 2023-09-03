@@ -38,8 +38,8 @@ import ANAKIN.MODEL.VO.UsuarioVO;
 public class ControleSessaoVIEW extends JFrame {
 
 	private Container container;
-	private JLabel lblNome, lblInventario, lblAnotacoes;
-	private JButton btnSalva, btnLimpar, btnRetorna;
+	private JLabel lblNome, lblInventario, lblAnotacoes, lblvolta;
+	private JButton btnSalva, btnLimpar, btnRetorna, btnDados;
 	private ImageIcon imgIcon;
 	private JScrollPane spInventario, spAnotacao;
 	private JTextArea txtAnotacao, txtInventario;
@@ -65,6 +65,7 @@ public class ControleSessaoVIEW extends JFrame {
 		this.txtInventario.setFont(new Font("Helvetica", Font.BOLD, 14));
 		this.txtInventario.setLineWrap(true);
 		this.txtInventario.setWrapStyleWord(true);
+		
 		this.spInventario = new JScrollPane(txtInventario);
 		this.spInventario.setBounds(250, 35, 215, 200);
 		this.spInventario.setBorder(javax.swing.BorderFactory.createLineBorder(new Color(90, 61, 171), 5));
@@ -145,17 +146,17 @@ public class ControleSessaoVIEW extends JFrame {
 				ControleSessaoVO controle = new ControleSessaoVO();
 				UsuarioVO user = new UsuarioVO();
 				
-				String inventario, anotacoes, nome;
-				int id;
+				String inventario, anotacoes, nome, usuario;
 
 				nome = tfNome.getText();
 				inventario = txtInventario.getText();
 				anotacoes = txtAnotacao.getText();
-				id = user.getId_usuario();
+				usuario = user.getNome_usuario();
 				
 				controle.setNome_sessao(nome);
 				controle.setInventario_sessao(inventario);
 				controle.setAnotacoes_sessao(anotacoes);
+				controle.setFk_usuario(usuario);
 				
 				salvar.salvarInformacoes(controle);
 				
@@ -166,22 +167,49 @@ public class ControleSessaoVIEW extends JFrame {
 		});
 		this.add(btnSalva);
 
-		this.btnRetorna = new JButton("Retornar");
-		this.btnRetorna.setBounds(70, 130, 100, 30);
-		this.btnRetorna.setFont(new Font("Arial", Font.BOLD, 15));
-		this.btnRetorna.setBackground(new Color(90, 61, 171));
-		this.btnRetorna.setForeground(Color.white);
-		this.btnRetorna.addActionListener(new ActionListener() {
+		this.btnDados = new JButton("DADOS");
+		this.btnDados.setBounds(70, 135, 100, 30);
+		this.btnDados.setFont(new Font("Arial", Font.BOLD, 15));
+		this.btnDados.setBackground(new Color(90, 61, 171));
+		this.btnDados.setForeground(Color.white);
+		this.btnDados.addActionListener(new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				setVisible(false);
-				MenuPrincipalVIEW tela = new MenuPrincipalVIEW();
-				tela.setVisible(true);
+				DadosdeJogoVIEW dados = new DadosdeJogoVIEW();
+				dados.setVisible(true);
 				
 			}
 		});
-		this.add(btnRetorna);
+		this.add(btnDados);
+
+		ImageIcon iconVoltar2 = new ImageIcon("voltar1.png");
+		ImageIcon iconVoltar = new ImageIcon("voltar2.png");
+		    lblvolta = new JLabel(iconVoltar);
+		    lblvolta.setBackground(Color.black);
+		    lblvolta.setBounds(20, 80, 70, 70);
+		    lblvolta.setVisible(true);
+		    lblvolta.addMouseListener( new MouseAdapter() {
+		        @Override
+					public void mouseEntered(MouseEvent e) {
+
+						lblvolta.setIcon(iconVoltar2);;
+
+					}
+
+					@Override
+					public void mouseExited(MouseEvent e) {
+						lblvolta.setIcon(iconVoltar);
+					}
+		        
+		        @Override
+					public void mouseClicked(MouseEvent e) {
+
+						MenuPrincipalVIEW tela = new MenuPrincipalVIEW();
+						tela.setVisible(true);
+					}
+		    });
+		    add(lblvolta);
 
 	}
 }

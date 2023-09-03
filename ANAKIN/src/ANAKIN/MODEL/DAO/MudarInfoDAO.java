@@ -2,6 +2,7 @@ package ANAKIN.MODEL.DAO;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import javax.swing.JOptionPane;
@@ -14,15 +15,13 @@ public class MudarInfoDAO {
 	PreparedStatement pstm;
 	
 	public void mudaSenha(UsuarioVO sen) {
-	String sql = "update usuario set senha_usuario = ? where nome_usuario = ? and id_usuario = ?";
+	String sql = "update usuario set senha_usuario = ? where nome_usuario = ? and filme_usuario = ?";
 	try {
 		conn = new ConexaoDAO().conectabd();
 		pstm = conn.prepareStatement(sql);
 		pstm.setString(1, sen.getSenha_usuario());
 		pstm.setString(2, sen.getNome_usuario());
-		pstm.setInt(3, sen.getId_usuario());
-		
-		pstm.execute();
+		pstm.setString(3, sen.getFilme_Usuario());
 		pstm.close();
 		
 	} catch (SQLException e) {
