@@ -14,6 +14,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 
+
 public class TelaInicialVIEW extends JFrame {
 
 	private Container container;
@@ -106,6 +107,7 @@ public class TelaInicialVIEW extends JFrame {
 				TelaCadastroVIEW telaCadastro = new TelaCadastroVIEW();
 				telaCadastro.setVisible(true);
 				telaCadastro.setResizable(false);
+				
 
 			}
 		});

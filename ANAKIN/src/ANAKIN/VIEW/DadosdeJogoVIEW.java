@@ -39,7 +39,8 @@ public class DadosdeJogoVIEW extends JFrame {
 	private JTextField txtD4, txtD6, txtD8, txtD12, txtD20;
 	private JLabel lblD4, lblD6, lblD8, lblD12, lblD20;
 	private ImageIcon imgD4, imgD6, imgD8, imgD12, imgD20;
-
+	private ImageIcon imgIcon;
+	
 	private JScrollPane spResultados;
 	private JTextArea txtaResultados;
 
@@ -50,10 +51,17 @@ public class DadosdeJogoVIEW extends JFrame {
 		this.setBounds(0, 0, 580, 500);
 		this.setBackground(new Color(250, 247, 255));
 		this.setVisible(true);
+		this.setResizable(false);
 		this.setLayout(null);
-
 		this.container = getContentPane();
+		Dimension tela = Toolkit.getDefaultToolkit().getScreenSize();
+		this.setLocation((tela.width - getSize().width) / 2, (tela.height - getSize().height) / 2);
+		
 
+		this.imgIcon = new ImageIcon("jupiter.png");
+		this.setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\Beatriz\\Downloads\\jupiter.png"));
+
+		
 		this.jp = new JPanel();
 		this.jp.setBounds(15, 15, 535, 300);
 		this.jp.setLayout(null);

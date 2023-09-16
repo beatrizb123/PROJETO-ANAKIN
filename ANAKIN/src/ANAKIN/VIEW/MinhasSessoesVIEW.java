@@ -4,18 +4,31 @@ import java.awt.Color;
 import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.ScrollPane;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
 
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
+import javax.swing.table.DefaultTableModel;
 
+import ANAKIN.MODEL.DAO.BuscarSessaoDAO;
 import ANAKIN.MODEL.DAO.CadastroDAO;
+import ANAKIN.MODEL.DAO.ConexaoDAO;
 import ANAKIN.MODEL.DAO.ControleSessaoDAO;
 import ANAKIN.MODEL.VO.UsuarioVO;
 
@@ -26,6 +39,14 @@ public class MinhasSessoesVIEW extends JFrame {
 	private JTextField tfBusca;
 
 	private JButton btnBusca;
+	private JLabel label1;
+	private JTextField tfSQL;
+	private JButton btExecutar;
+	private JComboBox cbSessoes;
+	private ScrollPane recebelista = new ScrollPane();
+
+	private PreparedStatement statement;
+	private ResultSet resultSet;
 
 	public MinhasSessoesVIEW() {
 
@@ -57,6 +78,9 @@ public class MinhasSessoesVIEW extends JFrame {
 		this.tfBusca.setBounds(20, 75, 130, 25);
 		this.add(tfBusca);
 
+		this.recebelista.setBounds(20, 120, 240, 90);
+		add(recebelista);
+
 		this.btnBusca = new JButton("Buscar");
 		this.btnBusca.setBounds(160, 75, 100, 25);
 		this.btnBusca.setBackground(new Color(90, 61, 171));
@@ -65,11 +89,43 @@ public class MinhasSessoesVIEW extends JFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-		
+				try {
+					ControleSessaoDAO nomessessao = new ControleSessaoDAO();
+					String recebenome = tfBusca.getText();
+					ArrayList<String> resgistro = nomessessao.chamarinformacoes(recebenome);
+					JList<String> listasessoes = new JList<>(resgistro.toArray(new String[0]));
+					listasessoes.setFont(new Font("Arial", Font.BOLD, 15));
+					recebelista.add(listasessoes);
+					
+					
+				} catch (Exception erro) {
+					JOptionPane.showMessageDialog(null, "algo deu errado");
+				}
 
 			}
 		});
 		this.add(btnBusca);
+
+		try {
+			UsuarioVO user = new UsuarioVO();
+			String sql = "select nome_sessao from controle_sessao where id_usuario = '" + user.getNome_Usuario() + "'";
+			statement = new ConexaoDAO().conectabd().prepareStatement(sql);
+			resultSet = statement.executeQuery();
+			int qtdeColunas = resultSet.getMetaData().getColumnCount();
+			ArrayList<String> list = new ArrayList<String>();
+			while (resultSet.next()) {
+				list.add(resultSet.getString(1));
+			}
+			String[] dados = list.toArray(new String[list.size()]);
+			this.cbSessoes = new JComboBox(dados);
+			this.cbSessoes.setBounds(20, 300, 150, 25);
+			this.add(cbSessoes);
+
+			resultSet.close();
+			statement.close();
+		} catch (Exception erro) {
+			JOptionPane.showMessageDialog(null, erro);
+		}
 
 	}
 

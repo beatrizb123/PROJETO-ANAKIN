@@ -20,7 +20,7 @@ public class LoginDAO {
 		try {
 			String SQL = "select * from usuario where nome_usuario = ? and senha_usuario = ?";
 			PreparedStatement pstm = conn.prepareStatement(SQL);
-			pstm.setString(1, autent.getNome_usuario());
+			pstm.setString(1, autent.getNome_Usuario());
 			pstm.setString(2, autent.getSenha_usuario());
 			ResultSet rs = pstm.executeQuery();
 			return rs;

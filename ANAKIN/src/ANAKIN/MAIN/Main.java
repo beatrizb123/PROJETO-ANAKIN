@@ -2,18 +2,35 @@ package ANAKIN.MAIN;
 
 import java.sql.ResultSet;
 
+import javax.swing.JFrame;
+
 import ANAKIN.MODEL.DAO.ManterSessaoDAO;
 import ANAKIN.VIEW.MenuPrincipalVIEW;
-import ANAKIN.VIEW.SlpashVIEW;
 import ANAKIN.VIEW.TelaInicialVIEW;
 
-public class Main {
+public class Main extends JFrame {
 
 	public static void main(String[] args) {
-		/*
-		 * SlpashVIEW sp = new SlpashVIEW(1500); sp.mostrarSair();
-		 */
-		TelaInicialVIEW frame = new TelaInicialVIEW();
-		frame.setVisible(true);
+		// SlpashVIEW sp = new SlpashVIEW(1000);
+		// sp.mostrarSair();
+		int valor;
+		ManterSessaoDAO MSD = new ManterSessaoDAO();
+		ResultSet result = MSD.VereficaManterSessao();
+		if (result != null) {
+			try {
+				if (result.next()) {
+					valor = result.getInt("numero");
+					if (valor == 1) {
+						MenuPrincipalVIEW TPV = new MenuPrincipalVIEW();
+						TPV.setVisible(true);
+					} else if (valor == 0) {
+						TelaInicialVIEW frame = new TelaInicialVIEW();
+						frame.setVisible(true);
+					}
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
 	}
 }

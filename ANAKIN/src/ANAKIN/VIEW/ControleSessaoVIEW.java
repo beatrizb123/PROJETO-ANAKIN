@@ -40,7 +40,7 @@ public class ControleSessaoVIEW extends JFrame {
 	private Container container;
 	private JLabel lblNome, lblInventario, lblAnotacoes, lblvolta;
 	private JButton btnSalva, btnLimpar, btnRetorna, btnDados;
-	private ImageIcon imgIcon;
+	private ImageIcon imgIcon, iconVoltar, iconVoltar2;
 	private JScrollPane spInventario, spAnotacao;
 	private JTextArea txtAnotacao, txtInventario;
 	private JTextField tfNome;
@@ -54,6 +54,7 @@ public class ControleSessaoVIEW extends JFrame {
 		this.setLayout(null);
 		this.setBackground(new Color(250, 247, 255));
 		this.setVisible(true);
+		this.setResizable(false);
 		this.container = getContentPane();
 		Dimension tela = Toolkit.getDefaultToolkit().getScreenSize();
 		this.setLocation((tela.width - getSize().width) / 2, (tela.height - getSize().height) / 2);
@@ -65,7 +66,7 @@ public class ControleSessaoVIEW extends JFrame {
 		this.txtInventario.setFont(new Font("Helvetica", Font.BOLD, 14));
 		this.txtInventario.setLineWrap(true);
 		this.txtInventario.setWrapStyleWord(true);
-		
+
 		this.spInventario = new JScrollPane(txtInventario);
 		this.spInventario.setBounds(250, 35, 215, 200);
 		this.spInventario.setBorder(javax.swing.BorderFactory.createLineBorder(new Color(90, 61, 171), 5));
@@ -141,27 +142,28 @@ public class ControleSessaoVIEW extends JFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				
+
 				ControleSessaoDAO salvar = new ControleSessaoDAO();
 				ControleSessaoVO controle = new ControleSessaoVO();
 				UsuarioVO user = new UsuarioVO();
-				
+
 				String inventario, anotacoes, nome, usuario;
 
 				nome = tfNome.getText();
 				inventario = txtInventario.getText();
 				anotacoes = txtAnotacao.getText();
-				usuario = user.getNome_usuario();
-				
+				usuario = user.getNome_Usuario();
+
 				controle.setNome_sessao(nome);
 				controle.setInventario_sessao(inventario);
 				controle.setAnotacoes_sessao(anotacoes);
 				controle.setFk_usuario(usuario);
-				
+
+				System.out.println(user.getNome_Usuario());
+
 				salvar.salvarInformacoes(controle);
-				
+
 				JOptionPane.showMessageDialog(null, "INFORMAÇÕES FORAM SALVAS!");
-				
 
 			}
 		});
@@ -173,43 +175,42 @@ public class ControleSessaoVIEW extends JFrame {
 		this.btnDados.setBackground(new Color(90, 61, 171));
 		this.btnDados.setForeground(Color.white);
 		this.btnDados.addActionListener(new ActionListener() {
-			
+
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				DadosdeJogoVIEW dados = new DadosdeJogoVIEW();
 				dados.setVisible(true);
-				
+
 			}
 		});
 		this.add(btnDados);
 
-		ImageIcon iconVoltar2 = new ImageIcon("voltar1.png");
-		ImageIcon iconVoltar = new ImageIcon("voltar2.png");
-		    lblvolta = new JLabel(iconVoltar);
-		    lblvolta.setBackground(Color.black);
-		    lblvolta.setBounds(20, 80, 70, 70);
-		    lblvolta.setVisible(true);
-		    lblvolta.addMouseListener( new MouseAdapter() {
-		        @Override
-					public void mouseEntered(MouseEvent e) {
+		iconVoltar = new ImageIcon(getClass().getResource("voltar1.png"));
+		iconVoltar2 = new ImageIcon(getClass().getResource("voltar2.png"));
+		this.lblvolta = new JLabel(iconVoltar);
+		this.lblvolta.setBackground(Color.black);
+		this.lblvolta.setBounds(10, 3, 30, 30);
+		this.lblvolta.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseEntered(MouseEvent e) {
 
-						lblvolta.setIcon(iconVoltar2);;
+				lblvolta.setIcon(iconVoltar2);
 
-					}
+			}
 
-					@Override
-					public void mouseExited(MouseEvent e) {
-						lblvolta.setIcon(iconVoltar);
-					}
-		        
-		        @Override
-					public void mouseClicked(MouseEvent e) {
+			@Override
+			public void mouseExited(MouseEvent e) {
+				lblvolta.setIcon(iconVoltar);
+			}
 
-						MenuPrincipalVIEW tela = new MenuPrincipalVIEW();
-						tela.setVisible(true);
-					}
-		    });
-		    add(lblvolta);
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				setVisible(false);
+				MenuPrincipalVIEW tela = new MenuPrincipalVIEW();
+				tela.setVisible(true);
+			}
+		});
+		this.add(lblvolta);
 
 	}
 }

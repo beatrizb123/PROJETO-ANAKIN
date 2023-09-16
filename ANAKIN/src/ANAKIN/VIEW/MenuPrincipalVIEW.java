@@ -28,7 +28,7 @@ public class MenuPrincipalVIEW extends JFrame {
 
 	// declaração das variaveis
 	private Container container;
-	private JLabel lblAnakin;
+	private JLabel lblAnakin, lblNome;
 	private JLabel sombraAnakin;
 	private JLabel lblimagem;
 	private JTextField txt;
@@ -36,7 +36,7 @@ public class MenuPrincipalVIEW extends JFrame {
 	private JButton btnControlSessao;
 	private JMenuBar mnbBarra;
 	private JMenu mnConfig, mnSessoes;
-	private JMenuItem miAlterarConta, miLogout, miSair, miSessoes, miAlteraSenha;
+	private JMenuItem miAlterarConta, miLogout, miSair, miSessoes, miBuscar;
 
 	public MenuPrincipalVIEW() {
 
@@ -54,6 +54,16 @@ public class MenuPrincipalVIEW extends JFrame {
 
 		this.imgIcon = new ImageIcon("jupiter.png");
 		this.setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\Beatriz\\Downloads\\jupiter.png"));
+
+		UsuarioVO teste = new UsuarioVO();
+		String nome = teste.getNome_Usuario();
+
+		this.lblNome = new JLabel(nome);
+		this.lblNome.setBounds(15, 15, 100, 100);
+		this.lblNome.setForeground(new Color(90, 61, 171));
+		this.lblNome.setHorizontalAlignment(SwingConstants.CENTER);
+		this.lblNome.setFont(new Font("Arial", Font.BOLD, 12));
+		this.add(lblNome);
 
 		this.lblAnakin = new JLabel("ANAKIN");
 		this.lblAnakin.setBounds(255, 100, 400, 165);
@@ -98,7 +108,7 @@ public class MenuPrincipalVIEW extends JFrame {
 
 		this.mnSessoes = new JMenu("Minhas Sessões");
 		this.mnSessoes.setMnemonic('S');
-		// this.mnbBarra.add(mnSessoes);
+		this.mnbBarra.add(mnSessoes);
 
 		this.miSessoes = new JMenuItem("Sessões salvas");
 		this.miSessoes.addActionListener(new ActionListener() {
@@ -109,14 +119,14 @@ public class MenuPrincipalVIEW extends JFrame {
 				tela.setVisible(true);
 			}
 		});
-		// this.mnSessoes.add(miSessoes);
+		this.mnSessoes.add(miSessoes);
 
 		this.miLogout = new JMenuItem("Logout");
 		this.miLogout.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				
+
 				setVisible(false);
 				TelaInicialVIEW telaInicial = new TelaInicialVIEW();
 				telaInicial.setVisible(true);
@@ -148,8 +158,6 @@ public class MenuPrincipalVIEW extends JFrame {
 			}
 		});
 		this.mnConfig.add(miSair);
-
-		UsuarioVO user = new UsuarioVO();
 
 	}
 

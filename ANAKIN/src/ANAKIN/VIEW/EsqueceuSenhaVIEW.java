@@ -80,7 +80,7 @@ public class EsqueceuSenhaVIEW extends JFrame {
 				senha = txtfSenha.getText();
 
 				UsuarioVO user = new UsuarioVO();
-				if (nome == user.getNome_usuario() && filme == user.getFilme_Usuario()) {
+				if (nome == user.getNome_Usuario() && filme == user.getFilme_Usuario()) {
 					user.setNome_usuario(nome);
 					user.setFilme_usuario(filme);
 					user.setSenha_usuario(senha);

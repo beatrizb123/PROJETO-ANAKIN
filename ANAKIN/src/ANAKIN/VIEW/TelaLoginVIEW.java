@@ -29,6 +29,7 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
 import ANAKIN.MODEL.DAO.LoginDAO;
+import ANAKIN.MODEL.DAO.ManterSessaoDAO;
 import ANAKIN.MODEL.VO.ControleSessaoVO;
 import ANAKIN.MODEL.VO.UsuarioVO;
 
@@ -148,28 +149,33 @@ public class TelaLoginVIEW extends JFrame {
 			// confirma o login e direciona para o menu principal
 			public void actionPerformed(ActionEvent e) {
 				try {
+					if (ckManterSessao.isSelected()) {
+						int valor1 = 1;
+						ManterSessaoDAO MSD1 = new ManterSessaoDAO();
+						MSD1.Sessaomanter(valor1);
+					} else {
+						int valor = 0;
+						ManterSessaoDAO MSD = new ManterSessaoDAO();
+						MSD.Sessaomanter(valor);
+
+					}
+
 					String usuario, senha;
 					usuario = txtfUser.getText();
 					senha = pfSenha.getText();
 					UsuarioVO autent = new UsuarioVO();
+					autent.setNome_usuario(usuario);
+					autent.setSenha_usuario(senha);
+					LoginDAO dados = new LoginDAO();
 
-					if (usuario == null || senha == null) {
-						JOptionPane.showMessageDialog(null, "TODOS OS CAMPOS PRECISAM SER PREENCHIDOS!");
+					ResultSet testeAuntent = dados.autenticaUsuario(autent);
+					if (testeAuntent.next()) {
+						MenuPrincipalVIEW menuPrincipal = new MenuPrincipalVIEW();
+						menuPrincipal.setVisible(true);
+						dispose();
 					} else {
-						autent.setNome_usuario(usuario);
-						autent.setSenha_usuario(senha);
-						LoginDAO dados = new LoginDAO();
-
-						ResultSet testeAuntent = dados.autenticaUsuario(autent);
-						if (testeAuntent.next()) {
-							MenuPrincipalVIEW menuPrincipal = new MenuPrincipalVIEW();
-							menuPrincipal.setVisible(true);
-							dispose();
-						} else {
-							JOptionPane.showMessageDialog(null, "Senha ou usuario invalido!");
-						}
+						JOptionPane.showMessageDialog(null, "Senha ou usuario invalido!");
 					}
-
 				} catch (SQLException erro) {
 					JOptionPane.showMessageDialog(null, erro);
 				}
@@ -203,7 +209,7 @@ public class TelaLoginVIEW extends JFrame {
 
 		this.ckManterSessao = new JCheckBox("Deseja manter sessao?");
 		this.ckManterSessao.setBounds(460, 325, 170, 30);
-		//this.add(ckManterSessao);
+		this.add(ckManterSessao);
 
 	}
 

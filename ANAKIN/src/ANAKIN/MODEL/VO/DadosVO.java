@@ -3,6 +3,7 @@ package ANAKIN.MODEL.VO;
 public class DadosVO {
 	private int id_dados;
 	private String registro;
+	
 	public int getId_dados() {
 		return id_dados;
 	}

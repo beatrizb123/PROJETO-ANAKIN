@@ -32,11 +32,11 @@ public class CadastroDAO {
 			PSTM = conn.prepareStatement(sql);
 
 			ResultSet rs = PSTM
-					.executeQuery("select * from usuario where nome_usuario = '" + infor.getNome_usuario() + "'");
+					.executeQuery("select * from usuario where nome_usuario = '" + infor.getNome_Usuario() + "'");
 			if (rs.next()) {
 				JOptionPane.showMessageDialog(null, "USUARIO JA EXISTE");
 			} else {
-				PSTM.setString(1, infor.getNome_usuario());
+				PSTM.setString(1, infor.getNome_Usuario());
 				PSTM.setString(2, infor.getSenha_usuario());
 				PSTM.setString(3, infor.getFilme_Usuario());
 

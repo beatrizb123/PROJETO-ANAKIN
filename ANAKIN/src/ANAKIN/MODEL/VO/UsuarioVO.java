@@ -1,5 +1,7 @@
 package ANAKIN.MODEL.VO;
 
+import ANAKIN.VIEW.ControleSessaoVIEW;
+
 /**
  * @author Josue
  * @see Métodos de acesso às informações do usuário
@@ -9,16 +11,18 @@ package ANAKIN.MODEL.VO;
 public class UsuarioVO {
 	
 	//Declaração das variáveis
-	private String nome_usuario, senha_usuario, filme_usuario;
+	static String nome_Usuario;
+	private String senha_usuario, filme_usuario;
 	
 	//get e set - Nome do usuário
-	public String getNome_usuario() {
-		return nome_usuario;
+	public static String getNome_Usuario() {
+		return nome_Usuario;
 	}
 
-	public void setNome_usuario(String nome_usuario) {
-		this.nome_usuario = nome_usuario;
+	public static void setNome_usuario(String nomeUsuario) {
+		UsuarioVO.nome_Usuario = nomeUsuario;
 	}
+
 	
 	//get e set - Senha do usuário
 	public String getSenha_usuario() {

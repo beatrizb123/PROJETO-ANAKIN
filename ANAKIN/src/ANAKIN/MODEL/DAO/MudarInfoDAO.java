@@ -20,7 +20,7 @@ public class MudarInfoDAO {
 		conn = new ConexaoDAO().conectabd();
 		pstm = conn.prepareStatement(sql);
 		pstm.setString(1, sen.getSenha_usuario());
-		pstm.setString(2, sen.getNome_usuario());
+		pstm.setString(2, sen.getNome_Usuario());
 		pstm.setString(3, sen.getFilme_Usuario());
 		pstm.close();
 		

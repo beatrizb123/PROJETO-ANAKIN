@@ -141,8 +141,9 @@ public class TelaCadastroVIEW extends JFrame {
 
 				if (usuario == null || senha == null || filme == null) {
 					JOptionPane.showMessageDialog(null, "TODOS OS CAMPOS PRECISAM SER PREENCHIDOS!");
+					
 				} else {
-					try {
+			
 						infor.setNome_usuario(usuario);
 						infor.setSenha_usuario(senha);
 						infor.setFilme_usuario(filme);
@@ -152,9 +153,6 @@ public class TelaCadastroVIEW extends JFrame {
 						MenuPrincipalVIEW telap = new MenuPrincipalVIEW();
 						telap.setVisible(true);
 
-					} catch (Exception erro) {
-						JOptionPane.showMessageDialog(null, "CadastroVIEW: " + erro);
-					}
 				}
 
 			}
