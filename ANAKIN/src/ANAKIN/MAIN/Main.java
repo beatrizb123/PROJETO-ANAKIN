@@ -5,6 +5,7 @@ import java.sql.ResultSet;
 import javax.swing.JFrame;
 
 import ANAKIN.MODEL.DAO.ManterSessaoDAO;
+import ANAKIN.MODEL.VO.UsuarioVO;
 import ANAKIN.VIEW.MenuPrincipalVIEW;
 import ANAKIN.VIEW.TelaInicialVIEW;
 
@@ -23,6 +24,7 @@ public class Main extends JFrame {
 					if (valor == 1) {
 						MenuPrincipalVIEW TPV = new MenuPrincipalVIEW();
 						TPV.setVisible(true);
+						UsuarioVO user = new UsuarioVO();
 					} else if (valor == 0) {
 						TelaInicialVIEW frame = new TelaInicialVIEW();
 						frame.setVisible(true);

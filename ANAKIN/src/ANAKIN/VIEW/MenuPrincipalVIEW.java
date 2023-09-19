@@ -7,6 +7,7 @@ import java.awt.Font;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.ResultSet;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -55,10 +56,14 @@ public class MenuPrincipalVIEW extends JFrame {
 		this.imgIcon = new ImageIcon("jupiter.png");
 		this.setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\Beatriz\\Downloads\\jupiter.png"));
 
-		UsuarioVO teste = new UsuarioVO();
-		String nome = teste.getNome_Usuario();
+		ManterSessaoDAO teste = new ManterSessaoDAO();
+		UsuarioVO user = new UsuarioVO();
+		String nome = teste.chamar();
+		if (teste.chamar() == null) {
+			nome = user.getNome_Usuario();
+		}
 
-		this.lblNome = new JLabel(nome);
+		this.lblNome = new JLabel("OLÁ, " + nome + "!");
 		this.lblNome.setBounds(15, 15, 100, 100);
 		this.lblNome.setForeground(new Color(90, 61, 171));
 		this.lblNome.setHorizontalAlignment(SwingConstants.CENTER);
@@ -93,6 +98,7 @@ public class MenuPrincipalVIEW extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				setVisible(false);
 				ControleSessaoVIEW tela = new ControleSessaoVIEW();
+
 				tela.setVisible(true);
 
 			}

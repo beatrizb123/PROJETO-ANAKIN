@@ -32,6 +32,8 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
 import ANAKIN.MODEL.DAO.ControleSessaoDAO;
+import ANAKIN.MODEL.DAO.DadosDAO;
+import ANAKIN.MODEL.DAO.ManterSessaoDAO;
 import ANAKIN.MODEL.VO.ControleSessaoVO;
 import ANAKIN.MODEL.VO.UsuarioVO;
 
@@ -44,6 +46,44 @@ public class ControleSessaoVIEW extends JFrame {
 	private JScrollPane spInventario, spAnotacao;
 	private JTextArea txtAnotacao, txtInventario;
 	private JTextField tfNome;
+	
+	
+	
+	public JTextArea getTxtAnotacao() {
+		return txtAnotacao;
+	}
+
+
+
+	public void setTxtAnotacao(JTextArea txtAnotacao) {
+		this.txtAnotacao = txtAnotacao;
+	}
+
+
+
+	public JTextArea getTxtInventario() {
+		return txtInventario;
+	}
+
+
+
+	public void setTxtInventario(JTextArea txtInventario) {
+		this.txtInventario = txtInventario;
+	}
+
+
+
+	public JTextField getTfNome() {
+		return tfNome;
+	}
+
+
+
+	public void setTfNome(String nome) {
+		this.tfNome.setText("aa");
+	}
+
+
 
 	public ControleSessaoVIEW() {
 		// instanciação dos objetos
@@ -112,7 +152,7 @@ public class ControleSessaoVIEW extends JFrame {
 		this.btnLimpar.setFont(new Font("Arial", Font.BOLD, 15));
 		this.btnLimpar.setBackground(new Color(90, 61, 171));
 		this.btnLimpar.setForeground(Color.white);
-		this.btnLimpar.setToolTipText("Apaga anotações");
+		this.btnLimpar.setToolTipText("Apaga anotações"); 	
 		this.btnLimpar.addActionListener(new ActionListener() {
 
 			@Override
@@ -146,20 +186,26 @@ public class ControleSessaoVIEW extends JFrame {
 				ControleSessaoDAO salvar = new ControleSessaoDAO();
 				ControleSessaoVO controle = new ControleSessaoVO();
 				UsuarioVO user = new UsuarioVO();
+				ManterSessaoDAO teste = new ManterSessaoDAO();
 
 				String inventario, anotacoes, nome, usuario;
 
 				nome = tfNome.getText();
 				inventario = txtInventario.getText();
 				anotacoes = txtAnotacao.getText();
-				usuario = user.getNome_Usuario();
+				usuario = teste.chamar();
+				
+				if (teste.chamar() == null) {
+					usuario = user.getNome_Usuario();
+					System.out.println(usuario);
+
+				}
 
 				controle.setNome_sessao(nome);
 				controle.setInventario_sessao(inventario);
 				controle.setAnotacoes_sessao(anotacoes);
 				controle.setFk_usuario(usuario);
 
-				System.out.println(user.getNome_Usuario());
 
 				salvar.salvarInformacoes(controle);
 
@@ -178,8 +224,9 @@ public class ControleSessaoVIEW extends JFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				DadosdeJogoVIEW dados = new DadosdeJogoVIEW();
-				dados.setVisible(true);
+				DadosdeJogoVIEW dadosV = new DadosdeJogoVIEW();
+				dadosV.setVisible(true);
+				
 
 			}
 		});

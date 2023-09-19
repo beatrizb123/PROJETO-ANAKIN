@@ -70,29 +70,29 @@ public class DadosdeJogoVIEW extends JFrame {
 		this.add(jp);
 
 		// Imagens dos DADOS
-		this.imgD4 = new ImageIcon(getClass().getResource("D4.png"));
+		this.imgD4 = new ImageIcon(getClass().getResource("D4.png.png"));
 		this.lblD4 = new JLabel(imgD4);
 		this.lblD4.setBounds(45, 5, 100, 100);
 		this.jp.add(lblD4);
 
-		this.imgD6 = new ImageIcon(getClass().getResource("D6.png"));
+		this.imgD6 = new ImageIcon(getClass().getResource("D6.png.png"));
 		this.lblD6 = new JLabel(imgD6);
-		this.lblD6.setBounds(215, 5, 100, 100);
+		this.lblD6.setBounds(215, 5,100, 100);
 		this.jp.add(lblD6);
 
-		this.imgD8 = new ImageIcon(getClass().getResource("D8.png"));
+		this.imgD8 = new ImageIcon(getClass().getResource("D8.png.png"));
 		this.lblD8 = new JLabel(imgD8);
-		this.lblD8.setBounds(380, 2, 100, 113);
+		this.lblD8.setBounds(380, 2, 100, 100);
 		this.jp.add(lblD8);
 
-		this.imgD12 = new ImageIcon(getClass().getResource("D12.png"));
+		this.imgD12 = new ImageIcon(getClass().getResource("D12.png.png"));
 		this.lblD12 = new JLabel(imgD12);
-		this.lblD12.setBounds(120, 120, 150, 150);
+		this.lblD12.setBounds(140, 140, 100, 100);
 		this.jp.add(lblD12);
 
-		this.imgD20 = new ImageIcon(getClass().getResource("D20.png"));
+		this.imgD20 = new ImageIcon(getClass().getResource("D20.png.png"));
 		this.lblD20 = new JLabel(imgD20);
-		this.lblD20.setBounds(280, 120, 150, 150);
+		this.lblD20.setBounds(310, 140, 100, 100);
 		this.jp.add(lblD20);
 		// Fim de imagens de Dado
 
@@ -305,7 +305,6 @@ public class DadosdeJogoVIEW extends JFrame {
 		this.txtaResultados.setLineWrap(true);
 		this.txtaResultados.setWrapStyleWord(true);
 		this.txtaResultados.setEditable(false);
-		this.txtaResultados.setFont(new Font("Arial", Font.PLAIN, 8));
 
 		this.spResultados = new JScrollPane(txtaResultados);
 		this.spResultados.setBounds(280, 335, 270, 115);
@@ -345,8 +344,10 @@ public class DadosdeJogoVIEW extends JFrame {
 					resultados += calcula.geraD20(d20);
 				}
 
-				txtaResultados.setText(resultados + "" + total);
-
+				
+				txtaResultados.setText(resultados + "" );
+				
+				
 				DadosVO registro = new DadosVO();
 				DadosDAO salvar = new DadosDAO();
 

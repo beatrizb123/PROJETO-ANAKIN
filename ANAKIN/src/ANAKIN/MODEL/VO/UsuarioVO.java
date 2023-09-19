@@ -1,4 +1,4 @@
-package ANAKIN.MODEL.VO;
+	package ANAKIN.MODEL.VO;
 
 import ANAKIN.VIEW.ControleSessaoVIEW;
 

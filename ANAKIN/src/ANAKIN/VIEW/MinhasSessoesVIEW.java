@@ -8,11 +8,16 @@ import java.awt.ScrollPane;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
@@ -30,15 +35,17 @@ import ANAKIN.MODEL.DAO.BuscarSessaoDAO;
 import ANAKIN.MODEL.DAO.CadastroDAO;
 import ANAKIN.MODEL.DAO.ConexaoDAO;
 import ANAKIN.MODEL.DAO.ControleSessaoDAO;
+import ANAKIN.MODEL.VO.ControleSessaoVO;
 import ANAKIN.MODEL.VO.UsuarioVO;
 
 public class MinhasSessoesVIEW extends JFrame {
 
 	private Container container;
+	private ImageIcon imgIcon;
 	private JLabel lblMs, lblMens;
 	private JTextField tfBusca;
 
-	private JButton btnBusca;
+	private JButton btnBusca, btnAbrir, btnDeletar;
 	private JLabel label1;
 	private JTextField tfSQL;
 	private JButton btExecutar;
@@ -52,13 +59,16 @@ public class MinhasSessoesVIEW extends JFrame {
 
 		this.setTitle("Projeto ANAKIN ★ ");
 		this.setDefaultCloseOperation(HIDE_ON_CLOSE);
-		this.setBounds(0, 0, 300, 450);
+		this.setBounds(0, 0, 300, 300);
 		this.setLayout(null);
 		this.setResizable(false);
 		this.setBackground(new Color(250, 247, 255));
 		this.setVisible(true);
 		Dimension tela = Toolkit.getDefaultToolkit().getScreenSize();
 		this.setLocation((tela.width - getSize().width) / 2, (tela.height - getSize().height) / 2);
+
+		this.imgIcon = new ImageIcon("jupiter.png");
+		this.setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\Beatriz\\Downloads\\jupiter.png"));
 
 		this.lblMs = new JLabel("Minhas Sessões");
 		this.lblMs.setBounds(30, 15, 200, 25);
@@ -78,7 +88,7 @@ public class MinhasSessoesVIEW extends JFrame {
 		this.tfBusca.setBounds(20, 75, 130, 25);
 		this.add(tfBusca);
 
-		this.recebelista.setBounds(20, 120, 240, 90);
+		this.recebelista.setBounds(20, 120, 240, 110);
 		add(recebelista);
 
 		this.btnBusca = new JButton("Buscar");
@@ -96,8 +106,7 @@ public class MinhasSessoesVIEW extends JFrame {
 					JList<String> listasessoes = new JList<>(resgistro.toArray(new String[0]));
 					listasessoes.setFont(new Font("Arial", Font.BOLD, 15));
 					recebelista.add(listasessoes);
-					
-					
+
 				} catch (Exception erro) {
 					JOptionPane.showMessageDialog(null, "algo deu errado");
 				}
@@ -106,27 +115,67 @@ public class MinhasSessoesVIEW extends JFrame {
 		});
 		this.add(btnBusca);
 
-		try {
-			UsuarioVO user = new UsuarioVO();
-			String sql = "select nome_sessao from controle_sessao where id_usuario = '" + user.getNome_Usuario() + "'";
-			statement = new ConexaoDAO().conectabd().prepareStatement(sql);
-			resultSet = statement.executeQuery();
-			int qtdeColunas = resultSet.getMetaData().getColumnCount();
-			ArrayList<String> list = new ArrayList<String>();
-			while (resultSet.next()) {
-				list.add(resultSet.getString(1));
+		
+		String [] dados = null;
+		BuscarSessaoDAO bs = new BuscarSessaoDAO();
+/*		
+		this.cbSessoes = new JComboBox<Object>(bs.retornaNomes(dados));
+		this.cbSessoes.setBounds(20, 250, 240, 30);
+		this.cbSessoes.setBackground(Color.white);
+		this.cbSessoes.setForeground(Color.black);
+		//this.add(cbSessoes);
+
+		this.btnAbrir = new JButton("Abrir");
+		this.btnAbrir.setBounds(35, 320, 100, 25);
+		this.btnAbrir.setBackground(new Color(90, 61, 171));
+		this.btnAbrir.setForeground(Color.WHITE);
+		//this.btnAbrir.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				ControleSessaoVO controle = new ControleSessaoVO();
+				BuscarSessaoDAO bs = new BuscarSessaoDAO();
+				int qtd = bs.qtdColunas();
+				String [] ids = new String [qtd];
+				int id = 0;
+				String [] dados = new String[2];
+				bs.retornaIds(ids);
+				
+				int nome = cbSessoes.getSelectedIndex();
+				if (nome > 0) {
+					id = Integer.parseInt(ids[nome]);
+				}
+				controle.setId_sessao(id);
+				
+				System.out.println(nome);
+				System.out.println(ids);
+				System.out.println(id);
+				
+				
+				 * setVisible(false);
+				 * 
+				 * MenuPrincipalVIEW mn = new MenuPrincipalVIEW(); mn.setVisible(false);
+				 
 			}
-			String[] dados = list.toArray(new String[list.size()]);
-			this.cbSessoes = new JComboBox(dados);
-			this.cbSessoes.setBounds(20, 300, 150, 25);
-			this.add(cbSessoes);
-
-			resultSet.close();
-			statement.close();
-		} catch (Exception erro) {
-			JOptionPane.showMessageDialog(null, erro);
-		}
-
+		});
+		this.add(btnAbrir);
+		
+		this.btnDeletar = new JButton("Deletar");
+		this.btnDeletar.setBounds(145, 320, 100, 25);
+		this.btnDeletar.setBackground(new Color(90, 61, 171));
+		this.btnDeletar.setForeground(Color.WHITE);
+		this.btnDeletar.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				
+				
+				
+			}
+		});
+		//this.add(btnDeletar);
+		
+	}*/
 	}
-
 }

@@ -153,10 +153,15 @@ public class TelaLoginVIEW extends JFrame {
 						int valor1 = 1;
 						ManterSessaoDAO MSD1 = new ManterSessaoDAO();
 						MSD1.Sessaomanter(valor1);
+						UsuarioVO nome = new UsuarioVO();
+						nome.setNome_usuario(txtfUser.getText());
+						MSD1.guardar(valor1, nome);
 					} else {
 						int valor = 0;
 						ManterSessaoDAO MSD = new ManterSessaoDAO();
 						MSD.Sessaomanter(valor);
+						UsuarioVO nome = new UsuarioVO();
+						MSD.guardar(valor, nome);
 
 					}
 

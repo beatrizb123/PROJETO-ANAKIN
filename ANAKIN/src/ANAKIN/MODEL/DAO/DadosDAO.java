@@ -6,6 +6,7 @@ import java.sql.SQLException;
 
 import javax.swing.JOptionPane;
 
+import ANAKIN.MODEL.VO.ControleSessaoVO;
 import ANAKIN.MODEL.VO.DadosVO;
 
 public class DadosDAO {
@@ -20,20 +21,23 @@ public class DadosDAO {
 			PSTM.execute();
 			PSTM.close();
 		} catch (SQLException erro) {
-			JOptionPane.showMessageDialog(null, "DadosVO: " + erro);
+			JOptionPane.showMessageDialog(null, "criar DadosDAO: " + erro);
 		}
 	}
 	
+	
 	public void salvarRegistro(DadosVO dados) {
 		conn = new ConexaoDAO().conectabd();
-		String sql = "update dados set resgistro = ? where id_sessao = ?";
+		ControleSessaoDAO cont = new ControleSessaoDAO();
+		String sql = "update dados set registro = ? ";
 		try {
 			PSTM = conn.prepareStatement(sql);
 			PSTM.setString(1, dados.getRegistro());
+
 			PSTM.execute();
 			PSTM.close();
 		} catch (SQLException erro) {
-			JOptionPane.showMessageDialog(null, "DadosVO: " + erro);
+			JOptionPane.showMessageDialog(null, "salvar DadosDAO: " + erro);
 		}
 	}
 	
