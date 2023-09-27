@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -38,6 +39,9 @@ public class MenuPrincipalVIEW extends JFrame {
 	private JMenuBar mnbBarra;
 	private JMenu mnConfig, mnSessoes;
 	private JMenuItem miAlterarConta, miLogout, miSair, miSessoes, miBuscar;
+	private ImageIcon menuWall; 
+	private JLabel bckgMenu; 
+
 
 	public MenuPrincipalVIEW() {
 
@@ -164,6 +168,17 @@ public class MenuPrincipalVIEW extends JFrame {
 			}
 		});
 		this.mnConfig.add(miSair);
+		
+		this.menuWall = new ImageIcon(getClass().getResource("Background.png"));
+		this.menuWall = new ImageIcon(menuWall.getImage().getScaledInstance(940, 550, Image.SCALE_DEFAULT));
+		this.bckgMenu = new JLabel(menuWall);
+		this.bckgMenu.setBounds(-230,-110, 1366, 768);
+		this.add(bckgMenu);
+		
+		this.mnbBarra.setBackground(new Color(90,61,171)); 
+		this.mnConfig.setForeground(new Color(250,247,255));
+		this.mnSessoes.setForeground(new Color(250,247,255)); 
+
 
 	}
 

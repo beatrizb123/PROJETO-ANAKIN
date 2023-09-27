@@ -4,7 +4,7 @@ import java.awt.Color;
 import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.Font;
-
+import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -46,7 +46,9 @@ public class ControleSessaoVIEW extends JFrame {
 	private JScrollPane spInventario, spAnotacao;
 	private JTextArea txtAnotacao, txtInventario;
 	private JTextField tfNome;
-	
+	private ImageIcon menuWall; 
+	private JLabel bckgMenu; 
+
 	
 	
 	public JTextArea getTxtAnotacao() {
@@ -258,6 +260,12 @@ public class ControleSessaoVIEW extends JFrame {
 			}
 		});
 		this.add(lblvolta);
+		
+		this.menuWall = new ImageIcon(getClass().getResource("Background.png"));
+		this.menuWall = new ImageIcon(menuWall.getImage().getScaledInstance(940, 550, Image.SCALE_DEFAULT));
+		this.bckgMenu = new JLabel(menuWall);
+		this.bckgMenu.setBounds(-230,-110, 1366, 768);
+		this.add(bckgMenu);
 
 	}
 }

@@ -59,7 +59,7 @@ public class MinhasSessoesVIEW extends JFrame {
 
 		this.setTitle("Projeto ANAKIN ★ ");
 		this.setDefaultCloseOperation(HIDE_ON_CLOSE);
-		this.setBounds(0, 0, 300, 300);
+		this.setBounds(0, 0, 300, 450);
 		this.setLayout(null);
 		this.setResizable(false);
 		this.setBackground(new Color(250, 247, 255));
@@ -118,18 +118,18 @@ public class MinhasSessoesVIEW extends JFrame {
 		
 		String [] dados = null;
 		BuscarSessaoDAO bs = new BuscarSessaoDAO();
-/*		
+
 		this.cbSessoes = new JComboBox<Object>(bs.retornaNomes(dados));
 		this.cbSessoes.setBounds(20, 250, 240, 30);
 		this.cbSessoes.setBackground(Color.white);
 		this.cbSessoes.setForeground(Color.black);
-		//this.add(cbSessoes);
+		this.add(cbSessoes);
 
 		this.btnAbrir = new JButton("Abrir");
 		this.btnAbrir.setBounds(35, 320, 100, 25);
 		this.btnAbrir.setBackground(new Color(90, 61, 171));
 		this.btnAbrir.setForeground(Color.WHITE);
-		//this.btnAbrir.addActionListener(new ActionListener() {
+		this.btnAbrir.addActionListener(new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -152,9 +152,9 @@ public class MinhasSessoesVIEW extends JFrame {
 				System.out.println(id);
 				
 				
-				 * setVisible(false);
-				 * 
-				 * MenuPrincipalVIEW mn = new MenuPrincipalVIEW(); mn.setVisible(false);
+				  setVisible(false);
+				  
+				 MenuPrincipalVIEW mn = new MenuPrincipalVIEW(); mn.setVisible(false);
 				 
 			}
 		});
@@ -174,8 +174,8 @@ public class MinhasSessoesVIEW extends JFrame {
 				
 			}
 		});
-		//this.add(btnDeletar);
+		this.add(btnDeletar);
 		
-	}*/
 	}
-}
+	}
+

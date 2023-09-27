@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -13,7 +14,6 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
-
 
 public class TelaInicialVIEW extends JFrame {
 
@@ -25,6 +25,8 @@ public class TelaInicialVIEW extends JFrame {
 	private ImageIcon imagem;
 	private JLabel lblImagem;
 	private ImageIcon imgIcon;
+	private ImageIcon menuWall;
+	private JLabel bckgMenu;
 
 	// Get e Set
 
@@ -105,6 +107,7 @@ public class TelaInicialVIEW extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				setVisible(false);
 				TelaCadastroVIEW telaCadastro = new TelaCadastroVIEW();
+				
 				telaCadastro.setVisible(true);
 				telaCadastro.setResizable(false);
 				
@@ -112,6 +115,13 @@ public class TelaInicialVIEW extends JFrame {
 			}
 		});
 		this.add(btnCadastrar);
+		
+		this.menuWall = new ImageIcon(getClass().getResource("Background.png"));
+		this.menuWall = new ImageIcon(menuWall.getImage().getScaledInstance(940, 550, Image.SCALE_DEFAULT));
+		this.bckgMenu = new JLabel(menuWall);
+		this.bckgMenu.setBounds(-230,-110, 1366, 768);
+		this.add(bckgMenu);
+
 
 	}
 

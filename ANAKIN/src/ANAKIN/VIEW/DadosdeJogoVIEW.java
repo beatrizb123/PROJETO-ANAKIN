@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -43,6 +44,10 @@ public class DadosdeJogoVIEW extends JFrame {
 	
 	private JScrollPane spResultados;
 	private JTextArea txtaResultados;
+	
+	private ImageIcon dadosWall;
+	private JLabel bckgDados; 
+
 
 	public DadosdeJogoVIEW() {
 
@@ -363,6 +368,12 @@ public class DadosdeJogoVIEW extends JFrame {
 		});
 
 		this.add(btnRolar);
+		
+		this.dadosWall = new ImageIcon(getClass().getResource("Dados.png"));
+		this.dadosWall = new ImageIcon(dadosWall.getImage().getScaledInstance(580,500, Image.SCALE_DEFAULT));
+		this.bckgDados = new JLabel(dadosWall);
+		this.bckgDados.setBounds(-10,-10, 580,500);
+		this.add(bckgDados);
 	}
 
 	public JTextField getTxtD4() {

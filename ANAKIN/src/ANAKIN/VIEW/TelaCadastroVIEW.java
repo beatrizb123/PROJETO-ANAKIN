@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -39,6 +40,9 @@ public class TelaCadastroVIEW extends JFrame {
 	private ImageIcon imgLogo, imgIcon;
 	private JLabel lblLogo;
 	private Font fonte;
+	private ImageIcon menuWall; 
+	private JLabel bckgMenu; 
+
 
 	// get e set
 	public JButton getBtnEntrar() {
@@ -139,19 +143,23 @@ public class TelaCadastroVIEW extends JFrame {
 				senha = pfSenha.getText();
 				filme = txtfFilme.getText();
 
-				if (usuario == null || senha == null || filme == null) {
+				if (usuario == null || senha == null || filme == null || usuario == "" || senha == "" || filme == "") {
 					JOptionPane.showMessageDialog(null, "TODOS OS CAMPOS PRECISAM SER PREENCHIDOS!");
 					
-				} else {
-			
+				} else if (usuario != null || senha != null || filme != null){
+						
 						infor.setNome_usuario(usuario);
 						infor.setSenha_usuario(senha);
 						infor.setFilme_usuario(filme);
-
-						Cad.cadastrarUsuario(infor);
-						setVisible(false);
-						MenuPrincipalVIEW telap = new MenuPrincipalVIEW();
-						telap.setVisible(true);
+						
+						if (Cad.cadastrarUsuario(infor) == true) {
+							
+							setVisible(false);
+							MenuPrincipalVIEW telap = new MenuPrincipalVIEW();
+							telap.setVisible(true);
+							
+						}
+						
 
 				}
 
@@ -185,6 +193,12 @@ public class TelaCadastroVIEW extends JFrame {
 		this.imgIcon = new ImageIcon("jupiter.png");
 		this.setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\Beatriz\\Downloads\\jupiter.png"));
 
+		
+		this.menuWall = new ImageIcon(getClass().getResource("Background.png"));
+		this.menuWall = new ImageIcon(menuWall.getImage().getScaledInstance(940, 550, Image.SCALE_DEFAULT));
+		this.bckgMenu = new JLabel(menuWall);
+		this.bckgMenu.setBounds(-230,-110, 1366, 768);
+		this.add(bckgMenu);
 	}
 
 }
