@@ -202,6 +202,7 @@ public class TelaLoginVIEW extends JFrame {
 
 		this.ckbMostrarSenha = new JCheckBox("Mostrar senha");
 		this.ckbMostrarSenha.setBounds(460, 310, 130, 15);
+		this.ckbMostrarSenha.setOpaque(false);
 		this.ckbMostrarSenha.addActionListener(new ActionListener() {
 
 			@Override
@@ -218,6 +219,7 @@ public class TelaLoginVIEW extends JFrame {
 
 		this.ckManterSessao = new JCheckBox("Deseja manter sessao?");
 		this.ckManterSessao.setBounds(460, 325, 170, 30);
+		this.ckManterSessao.setOpaque(false);
 		this.add(ckManterSessao);
 		
 		this.menuWall = new ImageIcon(getClass().getResource("Background.png"));
