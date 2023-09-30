@@ -31,6 +31,7 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableModel;
 
+import ANAKIN.MODEL.DAO.AbrirSessaoDAO;
 import ANAKIN.MODEL.DAO.BuscarSessaoDAO;
 import ANAKIN.MODEL.DAO.CadastroDAO;
 import ANAKIN.MODEL.DAO.ConexaoDAO;
@@ -133,7 +134,7 @@ public class MinhasSessoesVIEW extends JFrame {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				ControleSessaoVO controle = new ControleSessaoVO();
+				/*ControleSessaoVO controle = new ControleSessaoVO();
 				BuscarSessaoDAO bs = new BuscarSessaoDAO();
 				int qtd = bs.qtdColunas();
 				String [] ids = new String [qtd];
@@ -154,8 +155,17 @@ public class MinhasSessoesVIEW extends JFrame {
 				
 				  setVisible(false);
 				  
-				 MenuPrincipalVIEW mn = new MenuPrincipalVIEW(); mn.setVisible(false);
-				 
+				 MenuPrincipalVIEW mn = new MenuPrincipalVIEW(); mn.setVisible(false);*/
+				
+				AbrirSessaoDAO ab = new AbrirSessaoDAO();
+				ab.abrirControleSessao();
+				
+				ControleSessaoVIEW cont = new ControleSessaoVIEW();
+				//cont.verifica = true;
+				
+				//System.out.println(cont.verifica);
+				
+				cont.setVisible(true);
 			}
 		});
 		this.add(btnAbrir);

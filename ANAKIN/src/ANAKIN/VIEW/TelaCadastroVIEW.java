@@ -100,7 +100,9 @@ public class TelaCadastroVIEW extends JFrame {
 		this.add(pfSenha);
 
 		this.ckbMostrarSenha = new JCheckBox("Mostrar senha");
-		this.ckbMostrarSenha.setBounds(460, 260, 260, 15);
+		this.ckbMostrarSenha.setBounds(460, 260, 107, 15);
+		this.ckbMostrarSenha.setBackground(new Color(250, 247, 255));
+		this.ckbMostrarSenha.setFont(new Font("Arial", Font.PLAIN, 13));
 		this.ckbMostrarSenha.addActionListener(new ActionListener() {
 
 			@Override

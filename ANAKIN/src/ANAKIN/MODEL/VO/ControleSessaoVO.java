@@ -9,7 +9,7 @@ public class ControleSessaoVO {
 	
 	//Declaração das variáveis
 	private int id_sessao;
-	private String nome_sessao, inventario_sessao, anotacoes_sessao, fk_usuario;
+	static private String nome_sessao, inventario_sessao, anotacoes_sessao, fk_usuario;
 	
 	//get e set - ID da sessão
 	public int getId_sessao() {

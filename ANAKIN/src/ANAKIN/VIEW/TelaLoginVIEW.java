@@ -81,22 +81,23 @@ public class TelaLoginVIEW extends JFrame {
 
 		this.lblUser = new JLabel("Username:");
 		this.lblUser.setFont(fonte);
-		this.lblUser.setBounds(460, 100, 300, 150);
+		this.lblUser.setBounds(460, 90, 300, 150);
 		this.add(lblUser);
 
 		this.lblSenha = new JLabel("Senha:");
 		this.lblSenha.setFont(fonte);
-		this.lblSenha.setBounds(460, 250, 200, 25);
+		this.lblSenha.setBounds(460, 220, 200, 25);
 		this.add(lblSenha);
 
 		this.lblEsqueceuSenha = new JLabel("Esqueceu a senha?");
-		this.lblEsqueceuSenha.setFont(new Font("Arial", Font.BOLD, 12));
+		this.lblEsqueceuSenha.setFont(new Font("Arial", Font.BOLD, 13));
 		Font under = lblEsqueceuSenha.getFont();
 		Map<TextAttribute, Object> at = new HashMap<>(under.getAttributes());
 		at.put(TextAttribute.UNDERLINE, TextAttribute.UNDERLINE_ON);
 		lblEsqueceuSenha.setFont(under.deriveFont(at));
+		this.lblEsqueceuSenha.setBackground(new Color(250, 247, 255));
 		this.lblEsqueceuSenha.setForeground(Color.black);
-		this.lblEsqueceuSenha.setBounds(608, 312, 200, 15);
+		this.lblEsqueceuSenha.setBounds(600, 275, 200, 15);
 		this.lblEsqueceuSenha.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseEntered(MouseEvent e) {
@@ -119,17 +120,17 @@ public class TelaLoginVIEW extends JFrame {
 		this.add(lblEsqueceuSenha);
 
 		this.txtfUser = new JTextField(14);
-		this.txtfUser.setBounds(460, 200, 260, 25);
+		this.txtfUser.setBounds(460, 180, 260, 25);
 		this.add(txtfUser);
 
 		this.pfSenha = new JPasswordField(8);
-		this.pfSenha.setBounds(460, 280, 260, 25);
+		this.pfSenha.setBounds(460, 245, 260, 25);
 		this.add(pfSenha);
 
 		this.btnVoltar = new JButton("VOLTAR");
 		this.btnVoltar.setBackground(Color.white);
 		this.btnVoltar.setForeground(new Color(90, 61, 171));
-		this.btnVoltar.setBounds(495, 350, 110, 25);
+		this.btnVoltar.setBounds(475, 332, 110, 28);
 		this.btnVoltar.addActionListener(new ActionListener() {
 
 			@Override
@@ -146,7 +147,7 @@ public class TelaLoginVIEW extends JFrame {
 		this.btnEntrar = new JButton("ENTRAR");
 		this.btnEntrar.setBackground(new Color(90, 61, 171));
 		this.btnEntrar.setForeground(Color.WHITE);
-		this.btnEntrar.setBounds(620, 350, 110, 25);
+		this.btnEntrar.setBounds(600, 332, 110, 28);
 		this.btnEntrar.addActionListener(new ActionListener() {
 
 			@Override
@@ -201,7 +202,9 @@ public class TelaLoginVIEW extends JFrame {
 		this.setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\Beatriz\\Downloads\\jupiter.png"));
 
 		this.ckbMostrarSenha = new JCheckBox("Mostrar senha");
-		this.ckbMostrarSenha.setBounds(460, 310, 130, 15);
+		this.ckbMostrarSenha.setBounds(460, 278, 107, 15);
+		this.ckbMostrarSenha.setBackground(new Color(250, 247, 255));
+		this.ckbMostrarSenha.setFont(new Font("Arial", Font.PLAIN, 13));
 		this.ckbMostrarSenha.addActionListener(new ActionListener() {
 
 			@Override
@@ -217,7 +220,9 @@ public class TelaLoginVIEW extends JFrame {
 		this.add(ckbMostrarSenha);
 
 		this.ckManterSessao = new JCheckBox("Deseja manter sessao?");
-		this.ckManterSessao.setBounds(460, 325, 170, 30);
+		this.ckManterSessao.setBounds(460, 302, 160, 15);
+		this.ckManterSessao.setBackground(new Color(250, 247, 255));
+		this.ckManterSessao.setFont(new Font("Arial", Font.PLAIN, 13));
 		this.add(ckManterSessao);
 		
 		this.menuWall = new ImageIcon(getClass().getResource("Background.png"));

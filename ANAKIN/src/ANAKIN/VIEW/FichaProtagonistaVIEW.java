@@ -8,6 +8,8 @@ import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -31,13 +33,17 @@ public class FichaProtagonistaVIEW extends JFrame {
 	private Container container;
 	private JPanel areaFicha;
 	private ImageIcon imgIcon;
+	private JLabel iconUsuario;
 	private JLabel lblImagem, lblAtributos;
 	private JLabel lblNome, lblOcupacao, lblIdade, lblAltura;
 	private JTextField txtfNome, txtfOcupacao, txtfIdade, txtfAltura;
 	private JComboBox ComboClasses;
 
+	private ImageIcon fichaWall, iconbtnSalvar;
+	private JLabel bckgFicha, lblbtnSalvar, lblSalvar;
+
 	String Classes[] = { "Classes", "Combatente", "Feiticeiro", "Healer", "Suporte" };
-	String Atributo[] = { "", "Luta + Esforço", "Magia + Estudo", "Cura + Estudo", "Auxiliar + Esforço" };
+	String Atributo[] = { "", "Luta + Esforço", "Magia + Estudo", "Cura + Estudo", "Auxílio + Esforço" };
 
 	private JSlider sldVida, sldDefesa, sldMagia;
 
@@ -49,10 +55,6 @@ public class FichaProtagonistaVIEW extends JFrame {
 	private JPanel jpHabilidades;
 
 	private JButton btSalvar;
-	
-	private ImageIcon fichaWall; 
-	private JLabel bckgFicha; 
-
 
 	// get e set
 
@@ -80,64 +82,77 @@ public class FichaProtagonistaVIEW extends JFrame {
 	public FichaProtagonistaVIEW() {
 		// instanciação dos objetos
 
+		// DADOS PESSOAIS
 		this.setTitle("Ficha de Protagonistas");
-		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
+		this.setDefaultCloseOperation(HIDE_ON_CLOSE);
 		this.setResizable(false);
-		this.setBounds(0, 0, 490, 550);
+		this.setBounds(0, 0, 495, 510);
 		this.setLayout(null);
 		this.setBackground(new Color(250, 247, 255));
+		
+		Dimension tela = Toolkit.getDefaultToolkit().getScreenSize();
+		this.setLocation((tela.width - getSize().width) / 2, (tela.height - getSize().height) / 2);
 
-		// this.container = getContentPane();
+		this.container = getContentPane();
+
+		this.iconUsuario = new JLabel("Icon :D");
+		this.iconUsuario.setFont(new Font("Arial", Font.BOLD, 13));
+		this.iconUsuario.setBorder(javax.swing.BorderFactory.createLineBorder(new Color(90, 61, 171), 2));
+		this.iconUsuario.setBounds(40, 35, 125, 140);
+		this.add(iconUsuario);
 
 		this.lblNome = new JLabel("Nome:");
 		this.lblNome.setForeground(new Color(90, 61, 171));
 		this.lblNome.setFont(new Font("Arial", Font.BOLD, 15));
-		this.lblNome.setBounds(40, 20, 70, 70);
+		this.lblNome.setBounds(185, 10, 70, 70);
 		this.add(lblNome);
 
 		this.txtfNome = new JTextField(100);
-		this.txtfNome.setBounds(90, 45, 200, 20);
+		this.txtfNome.setBounds(235, 35, 199, 20);
 		this.add(txtfNome);
 
-		this.lblOcupacao = new JLabel("Ocupacao:");
+		this.lblOcupacao = new JLabel("Ocupação:");
 		this.lblOcupacao.setForeground(new Color(90, 61, 171));
 		this.lblOcupacao.setFont(new Font("Arial", Font.BOLD, 15));
-		this.lblOcupacao.setBounds(40, 50, 85, 70);
+		this.lblOcupacao.setBounds(185, 45, 85, 70);
 		this.add(lblOcupacao);
 
 		this.txtfOcupacao = new JTextField(100);
-		this.txtfOcupacao.setBounds(120, 75, 170, 20);
+		this.txtfOcupacao.setBounds(265, 70, 170, 20);
 		this.add(txtfOcupacao);
 
 		this.lblIdade = new JLabel("Idade:");
 		this.lblIdade.setForeground(new Color(90, 61, 171));
 		this.lblIdade.setFont(new Font("Arial", Font.BOLD, 15));
-		this.lblIdade.setBounds(305, 20, 70, 70);
+		this.lblIdade.setBounds(185, 78, 70, 70);
 		this.add(lblIdade);
 
 		this.txtfIdade = new JTextField(100);
-		this.txtfIdade.setBounds(355, 45, 70, 20);
+		this.txtfIdade.setBounds(235, 108, 70, 20);
 		this.add(txtfIdade);
 
 		this.lblAltura = new JLabel("Altura:");
 		this.lblAltura.setForeground(new Color(90, 61, 171));
 		this.lblAltura.setFont(new Font("Arial", Font.BOLD, 15));
-		this.lblAltura.setBounds(305, 50, 85, 70);
+		this.lblAltura.setBounds(315, 78, 85, 70);
 		this.add(lblAltura);
 
 		this.txtfAltura = new JTextField(100);
-		this.txtfAltura.setBounds(355, 75, 70, 20);
+		this.txtfAltura.setBounds(365, 103, 70, 20);
 		this.add(txtfAltura);
+
+		// CLASSES
 
 		this.ComboClasses = new JComboBox(Classes);
 		this.ComboClasses.setForeground(new Color(90, 61, 171));
-		this.ComboClasses.setFont(new Font("Arial", Font.BOLD, 16));
-		this.ComboClasses.setBounds(295, 140, 140, 24);
+		this.ComboClasses.setFont(new Font("Arial", Font.BOLD, 15));
+		this.ComboClasses.setBounds(185, 145, 115, 20);
 		this.add(ComboClasses);
 
 		this.lblAtributos = new JLabel(Atributo[0]);
-		this.lblAtributos.setFont(new Font("Arial", Font.BOLD, 15));
-		this.lblAtributos.setBounds(305, 180, 140, 20);
+		this.lblAtributos.setFont(new Font("Arial", Font.BOLD, 14));
+		this.lblAtributos.setForeground(new Color(82, 75, 91));
+		this.lblAtributos.setBounds(315, 145, 140, 20);
 		this.add(lblAtributos);
 
 		this.ComboClasses.addActionListener(new ActionListener() {
@@ -150,31 +165,33 @@ public class FichaProtagonistaVIEW extends JFrame {
 			}
 		});
 
+		// NIVEIS
+
 		this.Niveis = new JLabel("Niveis!");
 		this.Niveis.setForeground(new Color(90, 61, 171));
-		this.Niveis.setFont(new Font("Arial", Font.BOLD, 18));
-		this.Niveis.setBounds(120, 118, 65, 20);
+		this.Niveis.setFont(new Font("Arial", Font.BOLD, 16));
+		this.Niveis.setBounds(110, 200, 65, 20);
 		this.add(Niveis);
 
 		this.nivelVida = new JLabel("Vida:");
 		this.nivelVida.setForeground(new Color(90, 61, 171));
-		this.nivelVida.setFont(new Font("Arial", Font.BOLD, 16));
-		this.nivelVida.setBounds(40, 140, 50, 20);
+		this.nivelVida.setFont(new Font("Arial", Font.BOLD, 14));
+		this.nivelVida.setBounds(35, 225, 50, 20);
 		this.add(nivelVida);
 
 		this.pcVida = new JLabel("100" + "%");
 		this.pcVida.setFont(new Font("Arial", Font.BOLD, 14));
-		this.pcVida.setBounds(235, 140, 40, 18);
+		this.pcVida.setBounds(198, 225, 40, 18);
 		this.add(pcVida);
 
 		this.sldVida = new JSlider();
-		this.sldVida.setBackground(new Color(225, 206, 255));
+		this.sldVida.setBackground(new Color(235, 223, 255));
 		this.sldVida.setForeground(new Color(90, 61, 171));
 		this.sldVida.setMajorTickSpacing(20);
 		this.sldVida.setMinorTickSpacing(5);
 		this.sldVida.setPaintTicks(true);
 		this.sldVida.setValue(100);
-		this.sldVida.setBounds(97, 140, 130, 30);
+		this.sldVida.setBounds(87, 225, 105, 30);
 
 		this.sldVida.addChangeListener(new ChangeListener() {
 
@@ -188,23 +205,23 @@ public class FichaProtagonistaVIEW extends JFrame {
 
 		this.nivelDefesa = new JLabel("Defesa:");
 		this.nivelDefesa.setForeground(new Color(90, 61, 171));
-		this.nivelDefesa.setFont(new Font("Arial", Font.BOLD, 16));
-		this.nivelDefesa.setBounds(40, 170, 75, 20);
+		this.nivelDefesa.setFont(new Font("Arial", Font.BOLD, 14));
+		this.nivelDefesa.setBounds(35, 260, 75, 20);
 		this.add(nivelDefesa);
 
 		this.pcDefesa = new JLabel("100" + "%");
 		this.pcDefesa.setFont(new Font("Arial", Font.BOLD, 14));
-		this.pcDefesa.setBounds(235, 170, 40, 18);
+		this.pcDefesa.setBounds(198, 260, 40, 18);
 		this.add(pcDefesa);
 
 		this.sldDefesa = new JSlider();
-		this.sldDefesa.setBackground(new Color(225, 206, 255));
+		this.sldDefesa.setBackground(new Color(235, 223, 255));
 		this.sldDefesa.setForeground(new Color(90, 61, 171));
 		this.sldDefesa.setMajorTickSpacing(20);
 		this.sldDefesa.setMinorTickSpacing(5);
 		this.sldDefesa.setPaintTicks(true);
 		this.sldDefesa.setValue(100);
-		this.sldDefesa.setBounds(97, 170, 130, 30);
+		this.sldDefesa.setBounds(87, 260, 105, 30);
 
 		this.sldDefesa.addChangeListener(new ChangeListener() {
 
@@ -219,23 +236,23 @@ public class FichaProtagonistaVIEW extends JFrame {
 		this.nivelMagia = new JLabel("Magia:");
 
 		this.nivelMagia.setForeground(new Color(90, 61, 171));
-		this.nivelMagia.setFont(new Font("Arial", Font.BOLD, 16));
-		this.nivelMagia.setBounds(40, 200, 55, 20);
+		this.nivelMagia.setFont(new Font("Arial", Font.BOLD, 14));
+		this.nivelMagia.setBounds(35, 290, 55, 20);
 		this.add(nivelMagia);
 
 		this.pcMagia = new JLabel("100" + "%");
 		this.pcMagia.setFont(new Font("Arial", Font.BOLD, 14));
-		this.pcMagia.setBounds(235, 200, 40, 18);
+		this.pcMagia.setBounds(198, 290, 40, 18);
 		this.add(pcMagia);
 
 		this.sldMagia = new JSlider();
-		this.sldMagia.setBackground(new Color(225, 206, 255));
+		this.sldMagia.setBackground(new Color(235, 223, 255));
 		this.sldMagia.setForeground(new Color(90, 61, 171));
 		this.sldMagia.setMajorTickSpacing(20);
 		this.sldMagia.setMinorTickSpacing(5);
 		this.sldMagia.setPaintTicks(true);
 		this.sldMagia.setValue(100);
-		this.sldMagia.setBounds(97, 200, 130, 30);
+		this.sldMagia.setBounds(87, 290, 105, 30);
 
 		this.sldMagia.addChangeListener(new ChangeListener() {
 
@@ -247,108 +264,115 @@ public class FichaProtagonistaVIEW extends JFrame {
 		});
 		this.add(sldMagia);
 
+		// HABILIDADES
+
 		this.lblHabilidades = new JLabel("Habilidades!");
 		this.lblHabilidades.setForeground(new Color(90, 61, 171));
-		this.lblHabilidades.setFont(new Font("Arial", Font.BOLD, 18));
-		this.lblHabilidades.setBounds(100, 250, 110, 20);
+		this.lblHabilidades.setFont(new Font("Arial", Font.BOLD, 16));
+		this.lblHabilidades.setBounds(306, 200, 110, 20);
 		this.add(lblHabilidades);
 
 		this.lblPoder = new JLabel("Poder:");
 		this.lblPoder.setForeground(new Color(90, 61, 171));
-		this.lblPoder.setFont(new Font("Arial", Font.BOLD, 16));
-		this.lblPoder.setBounds(70, 280, 60, 20);
+		this.lblPoder.setFont(new Font("Arial", Font.BOLD, 15));
+		this.lblPoder.setBounds(258, 225, 65, 20);
 		this.add(lblPoder);
 
 		SpinnerModel valuePoder = new SpinnerNumberModel(1, 0, 5, 1);
 		this.spnPoder = new JSpinner(valuePoder);
 		this.spnPoder.setEditor(new JSpinner.DefaultEditor(spnPoder));
-		this.spnPoder.setBounds(70, 305, 55, 20);
+		this.spnPoder.setBounds(258, 245, 50, 20);
 		this.add(spnPoder);
 
 		this.lblForca = new JLabel("Forca:");
 		this.lblForca.setForeground(new Color(90, 61, 171));
-		this.lblForca.setFont(new Font("Arial", Font.BOLD, 16));
-		this.lblForca.setBounds(180, 280, 60, 20);
+		this.lblForca.setFont(new Font("Arial", Font.BOLD, 15));
+		this.lblForca.setBounds(328, 225, 60, 20);
 		this.add(lblForca);
 
 		SpinnerModel valueForca = new SpinnerNumberModel(1, 0, 5, 1);
 		this.spnForca = new JSpinner(valueForca);
 		this.spnForca.setEditor(new JSpinner.DefaultEditor(spnForca));
-		this.spnForca.setBounds(180, 305, 55, 20);
+		this.spnForca.setBounds(328, 245, 50, 20);
 		this.add(spnForca);
 
 		this.lblCarisma = new JLabel("Carisma:");
 		this.lblCarisma.setForeground(new Color(90, 61, 171));
-		this.lblCarisma.setFont(new Font("Arial", Font.BOLD, 16));
-		this.lblCarisma.setBounds(70, 340, 70, 20);
+		this.lblCarisma.setFont(new Font("Arial", Font.BOLD, 14));
+		this.lblCarisma.setBounds(388, 225, 70, 20);
 		this.add(lblCarisma);
 
 		SpinnerModel valueCarisma = new SpinnerNumberModel(1, 0, 5, 1);
 		this.spnCarisma = new JSpinner(valueCarisma);
 		this.spnCarisma.setEditor(new JSpinner.DefaultEditor(spnCarisma));
-		this.spnCarisma.setBounds(75, 365, 55, 20);
+		this.spnCarisma.setBounds(394, 245, 50, 20);
 		this.add(spnCarisma);
 
 		this.lblAgilidade = new JLabel("Agilidade:");
 		this.lblAgilidade.setForeground(new Color(90, 61, 171));
-		this.lblAgilidade.setFont(new Font("Arial", Font.BOLD, 16));
-		this.lblAgilidade.setBounds(180, 340, 80, 20);
+		this.lblAgilidade.setFont(new Font("Arial", Font.BOLD, 14));
+		this.lblAgilidade.setBounds(280, 275, 80, 20);
 		this.add(lblAgilidade);
 
 		SpinnerModel valueAgilidade = new SpinnerNumberModel(1, 0, 5, 1);
 		this.spnAgilidade = new JSpinner(valueAgilidade);
 		this.spnAgilidade.setEditor(new JSpinner.DefaultEditor(spnAgilidade));
-		this.spnAgilidade.setBounds(185, 365, 55, 20);
+		this.spnAgilidade.setBounds(285, 295, 55, 20);
 		this.add(spnAgilidade);
 
 		this.lblIntelecto = new JLabel("Intelecto:");
 		this.lblIntelecto.setForeground(new Color(90, 61, 171));
-		this.lblIntelecto.setFont(new Font("Arial", Font.BOLD, 16));
-		this.lblIntelecto.setBounds(70, 395, 80, 20);
+		this.lblIntelecto.setFont(new Font("Arial", Font.BOLD, 14));
+		this.lblIntelecto.setBounds(360, 275, 80, 20);
 		this.add(lblIntelecto);
 
 		SpinnerModel valueIntelecto = new SpinnerNumberModel(1, 0, 5, 1);
 		this.spnIntelecto = new JSpinner(valueIntelecto);
 		this.spnIntelecto.setEditor(new JSpinner.DefaultEditor(spnIntelecto));
-		this.spnIntelecto.setBounds(75, 420, 55, 20);
+		this.spnIntelecto.setBounds(365, 295, 50, 20);
 		this.add(spnIntelecto);
 
-		this.btSalvar = new JButton("SALVAR");
-		this.btSalvar.setBounds(300, 260, 135, 30);
-		this.btSalvar.setBackground(new Color(90, 61, 171));
-		this.btSalvar.setForeground(Color.white);
-		this.add(btSalvar);
+		this.iconbtnSalvar = new ImageIcon(getClass().getResource("Salvar.png"));
+		this.lblbtnSalvar = new JLabel(iconbtnSalvar);
+		this.lblbtnSalvar.setToolTipText("Salvar");
+		this.lblbtnSalvar.setBounds(190, 310, 120, 120);
+		this.lblbtnSalvar.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseEntered(MouseEvent e) {
+
+				lblbtnSalvar.setIcon(iconbtnSalvar);
+
+			}
+
+			@Override
+			public void mouseExited(MouseEvent e) {
+				lblbtnSalvar.setIcon(iconbtnSalvar);
+			}
+		});
+		this.add(lblbtnSalvar);
+
+		this.lblSalvar = new JLabel("Salvar");
+		this.lblSalvar.setForeground(new Color(90, 61, 171));
+		this.lblSalvar.setFont(new Font("Arial", Font.BOLD, 16));
+		this.lblSalvar.setBounds(220, 410, 100, 20);
+		this.add(lblSalvar);
 
 		this.jpHabilidades = new JPanel();
 		this.jpHabilidades.setLayout(null);
-		this.jpHabilidades.setBackground(new Color(225, 206, 255));
-		this.jpHabilidades.setBounds(15, 15, 445, 480);
+		this.jpHabilidades.setBackground(new Color(235, 223, 255));
+		this.jpHabilidades.setBounds(15, 15, 450, 440);
 		this.jpHabilidades.setBorder(javax.swing.BorderFactory.createLineBorder(new Color(90, 61, 171), 3));
 		this.add(jpHabilidades);
 
-		this.imgIcon = new ImageIcon("jupiter.png");
-		this.setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\Beatriz\\Downloads\\jupiter.png"));
-		
 		this.fichaWall = new ImageIcon(getClass().getResource("Fichas.png"));
-		this.fichaWall = new ImageIcon(fichaWall.getImage().getScaledInstance(580,500, Image.SCALE_DEFAULT));
+		this.fichaWall = new ImageIcon(fichaWall.getImage().getScaledInstance(580, 500, Image.SCALE_DEFAULT));
 		this.bckgFicha = new JLabel(fichaWall);
-		this.bckgFicha.setBounds(-10,-10, 580,500);
+		this.bckgFicha.setBounds(-10, -10, 580, 500);
 		this.add(bckgFicha);
 
-	}
-
-	public static void abre() {
-		FichaProtagonistaVIEW frame = new FichaProtagonistaVIEW();
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.setResizable(false);
-		frame.setVisible(true);
-		Dimension tela = Toolkit.getDefaultToolkit().getScreenSize();
-		frame.setLocation((tela.width - frame.getSize().width) / 2, (tela.height - frame.getSize().height) / 2);
+		this.imgIcon = new ImageIcon("jupiter.png");
+		this.setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\Beatriz\\Downloads\\jupiter.png"));
 
 	}
 
-	public static void main(String[] args) {
-		FichaProtagonistaVIEW v = new FichaProtagonistaVIEW();
-		v.abre();
-	}
 }
