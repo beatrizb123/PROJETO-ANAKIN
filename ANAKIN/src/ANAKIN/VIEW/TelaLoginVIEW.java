@@ -205,8 +205,6 @@ public class TelaLoginVIEW extends JFrame {
 		this.ckbMostrarSenha.setBounds(460, 278, 107, 15);
 		this.ckbMostrarSenha.setBackground(new Color(250, 247, 255));
 		this.ckbMostrarSenha.setFont(new Font("Arial", Font.PLAIN, 13));
-		this.ckbMostrarSenha.setBounds(460, 310, 130, 15);
-		this.ckbMostrarSenha.setOpaque(false);
 		this.ckbMostrarSenha.addActionListener(new ActionListener() {
 
 			@Override
@@ -225,8 +223,6 @@ public class TelaLoginVIEW extends JFrame {
 		this.ckManterSessao.setBounds(460, 302, 160, 15);
 		this.ckManterSessao.setBackground(new Color(250, 247, 255));
 		this.ckManterSessao.setFont(new Font("Arial", Font.PLAIN, 13));
-		this.ckManterSessao.setBounds(460, 325, 170, 30);
-		this.ckManterSessao.setOpaque(false);
 		this.add(ckManterSessao);
 		
 		this.menuWall = new ImageIcon(getClass().getResource("Background.png"));

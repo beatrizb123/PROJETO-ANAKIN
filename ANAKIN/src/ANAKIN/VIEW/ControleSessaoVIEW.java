@@ -10,23 +10,32 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.util.ArrayList;
+import java.util.Iterator;
 
+import javax.swing.DefaultListModel;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
+import javax.swing.ListSelectionModel;
+import javax.swing.ScrollPaneConstants;
 import javax.swing.SwingConstants;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 
 import ANAKIN.MODEL.DAO.ControleSessaoDAO;
+import ANAKIN.MODEL.DAO.DadosDAO;
 import ANAKIN.MODEL.DAO.ManterSessaoDAO;
 import ANAKIN.MODEL.VO.ControleSessaoVO;
 import ANAKIN.MODEL.VO.UsuarioVO;
-
 
 public class ControleSessaoVIEW extends JFrame {
 
@@ -46,10 +55,8 @@ public class ControleSessaoVIEW extends JFrame {
 	private JLabel lblbtnProtagonista;
 	private ImageIcon iconNPC;
 	private JLabel lblbtnNPC;
-
 	private JLabel lblNPC;
 
-	
 	public JTextArea getTxtAnotacao() {
 		return txtAnotacao;
 	}
@@ -85,7 +92,6 @@ public class ControleSessaoVIEW extends JFrame {
 		this.setVisible(true);
 		this.setResizable(false);
 
-		
 		this.container = getContentPane();
 		Dimension tela = Toolkit.getDefaultToolkit().getScreenSize();
 		this.setLocation((tela.width - getSize().width) / 2, (tela.height - getSize().height) / 2);
@@ -109,7 +115,6 @@ public class ControleSessaoVIEW extends JFrame {
 		this.spInventario.setBounds(300, 275, 200, 180);
 		this.spInventario.setBorder(javax.swing.BorderFactory.createLineBorder(new Color(90, 61, 171), 2));
 		this.container.add(spInventario);
-
 
 		this.lblAnotacoes = new JLabel("Anotações");
 		this.lblAnotacoes.setBounds(635, 240, 155, 40);
@@ -146,9 +151,6 @@ public class ControleSessaoVIEW extends JFrame {
 		this.btnLimpar.setForeground(Color.white);
 		this.btnLimpar.setToolTipText("Apaga anotações");
 		this.btnLimpar.setToolTipText("Apaga anotações");
-
-		this.btnLimpar.setToolTipText("Apaga anotações"); 	
-
 		this.btnLimpar.addActionListener(new ActionListener() {
 
 			@Override
@@ -240,7 +242,6 @@ public class ControleSessaoVIEW extends JFrame {
 		});
 		this.add(btnSalva);
 
-
 		this.lblProtagonistas = new JLabel("Protagonistas");
 		this.lblProtagonistas.setBounds(318, 3, 155, 40);
 		this.lblProtagonistas.setForeground(new Color(90, 61, 171));
@@ -255,17 +256,9 @@ public class ControleSessaoVIEW extends JFrame {
 		this.lblNPCs.setFont(new Font("Arial", Font.BOLD, 18));
 		this.add(lblNPCs);
 
-
 		this.jpProtagonistas = new JPanel();
 		this.jpProtagonistas.setLayout(null);
 		this.jpProtagonistas.setBackground(new Color(235, 223, 255));
-
-		
-		
-		this.jpProtagonistas = new JPanel(); 
-		this.jpProtagonistas.setLayout(null);
-		this.jpProtagonistas.setBackground(new Color(235,223,255));
-
 		this.jpProtagonistas.setBounds(250, 40, 300, 180);
 		this.jpProtagonistas.setBorder(javax.swing.BorderFactory.createLineBorder(new Color(90, 61, 171), 2));
 		this.add(jpProtagonistas);
@@ -279,17 +272,6 @@ public class ControleSessaoVIEW extends JFrame {
 
 		this.iconProtagonista = new ImageIcon(getClass().getResource("Ficha_Protagonista.png"));
 		this.lblbtnProtagonista = new JLabel(iconProtagonista);
-		this.jpNPCs = new JPanel(); 
-		this.jpNPCs.setLayout(null);
-		this.jpNPCs.setBackground(new Color(235,223,255));
-		this.jpNPCs.setBounds(590, 40, 300, 180);
-		this.jpNPCs.setBorder(javax.swing.BorderFactory.createLineBorder(new Color(90, 61, 171), 2));
-		this.add(jpNPCs);
-		
-				
-		this.iconProtagonista = new ImageIcon(getClass().getResource("Icone Ficha Protagonista.png"));
-		this.lblbtnProtagonista= new JLabel(iconProtagonista);
-
 		this.lblbtnProtagonista.setToolTipText("Adicionar Protagonista");
 		this.lblbtnProtagonista.setBounds(-15, 90, 180, 180);
 		this.lblbtnProtagonista.addMouseListener(new MouseAdapter() {
@@ -307,18 +289,12 @@ public class ControleSessaoVIEW extends JFrame {
 
 			@Override
 			public void mouseClicked(MouseEvent e) {
-
 				FichaProtagonistaVIEW ficha = new FichaProtagonistaVIEW();
 				ficha.setVisible(true);
-
-
-				// A telinha da Ficha de Protagonistas lala
-				
 
 			}
 		});
 		this.add(lblbtnProtagonista);
-
 
 		this.lblProtagonista = new JLabel("Protagonistas");
 		this.lblProtagonista.setForeground(new Color(90, 61, 171));
@@ -346,15 +322,6 @@ public class ControleSessaoVIEW extends JFrame {
 
 		this.iconNPC = new ImageIcon(getClass().getResource("Ficha_NPC.png"));
 		this.lblbtnNPC = new JLabel(iconNPC);
-
-		this.lblProtagonista =  new JLabel("Protagonistas");
-		this.lblProtagonista.setForeground(new Color(90,61,171));
-		this.lblProtagonista.setFont(new Font("Arial", Font.BOLD, 16));
-		this.lblProtagonista.setBounds(125,130,190,100);
-		this.add(lblProtagonista);
-			
-		this.iconNPC = new ImageIcon(getClass().getResource("Icone Ficha NPC.png"));
-		this.lblbtnNPC= new JLabel(iconNPC);
 		this.lblbtnNPC.setToolTipText("Adicionar Protagonista");
 		this.lblbtnNPC.setBounds(-15, 195, 180, 180);
 		this.lblbtnNPC.addMouseListener(new MouseAdapter() {
@@ -373,10 +340,10 @@ public class ControleSessaoVIEW extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				// A telinha da Ficha de NPCs lala
+
 			}
 		});
 		this.add(lblbtnNPC);
-
 
 		this.lblNPC = new JLabel("NPCs");
 		this.lblNPC.setForeground(new Color(90, 61, 171));
@@ -385,15 +352,6 @@ public class ControleSessaoVIEW extends JFrame {
 		this.add(lblNPC);
 
 		this.iconbtnDados = new ImageIcon(getClass().getResource("Botao_Dados.png"));
-
-		this.lblNPC =  new JLabel("NPCs");
-		this.lblNPC.setForeground(new Color(90,61,171));
-		this.lblNPC.setFont(new Font("Arial", Font.BOLD, 16));
-		this.lblNPC.setBounds(150,225,190,100);
-		this.add(lblNPC);
-			
-
-		this.iconbtnDados = new ImageIcon(getClass().getResource("Botão Dados.png"));
 		this.lblbtnDados = new JLabel(iconbtnDados);
 		this.lblbtnDados.setToolTipText("Dados de Jogo");
 		this.lblbtnDados.setBounds(-15, 320, 180, 180);
@@ -414,19 +372,12 @@ public class ControleSessaoVIEW extends JFrame {
 			public void mouseClicked(MouseEvent e) {
 				DadosdeJogoVIEW dados = new DadosdeJogoVIEW();
 				dados.setVisible(true);
-
 				// DadosdeJogoVIEW dadosV = new DadosdeJogoVIEW();
 				// dadosV.setVisible(true);
-
-
-				//DadosdeJogoVIEW dadosV = new DadosdeJogoVIEW();
-				//dadosV.setVisible(true);
-				
 
 			}
 		});
 		this.add(lblbtnDados);
-
 
 		this.lblDados = new JLabel("Dados");
 		this.lblDados.setForeground(new Color(90, 61, 171));
@@ -458,46 +409,11 @@ public class ControleSessaoVIEW extends JFrame {
 		this.add(lblDados);
 
 		this.menuWall = new ImageIcon(getClass().getResource("Background.png"));
-		this.lblDados =  new JLabel("Dados");
-		this.lblDados.setForeground(new Color(90,61,171));
-		this.lblDados.setFont(new Font("Arial", Font.BOLD, 18));
-		this.lblDados.setBounds(145,340,100,100);
-		this.lblDados =  new JLabel("Dados");
-		this.lblDados.setForeground(new Color(90,61,171));
-		this.lblDados.setFont(new Font("Arial", Font.BOLD, 18));
-		this.lblDados.setBounds(145,340,100,100);
-		this.lblDados.addMouseListener(new MouseAdapter() {
-		@Override
-		public void mouseEntered(MouseEvent e) {
-
-			lblDados.setForeground(Color.gray);
-
-		}
-
-		@Override
-		public void mouseExited(MouseEvent e) {
-			lblDados.setForeground(new Color(90,61,171));
-		}
-
-		@Override
-		public void mouseClicked(MouseEvent e) {
-			DadosdeJogoVIEW tela = new DadosdeJogoVIEW();
-			tela.setVisible(true);
-			}
-		});
-		this.add(lblDados);
-		
-
-		
-		this.menuWall = new ImageIcon(getClass().getResource("Background Principal.png"));
 		this.menuWall = new ImageIcon(menuWall.getImage().getScaledInstance(940, 550, Image.SCALE_DEFAULT));
 		this.bckgMenu = new JLabel(menuWall);
 		this.bckgMenu.setBounds(-230, -110, 1366, 768);
 		this.add(bckgMenu);
-		
+
 	}
 
 }
-
-
-
