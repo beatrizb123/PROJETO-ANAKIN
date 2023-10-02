@@ -36,6 +36,7 @@ import ANAKIN.MODEL.DAO.BuscarSessaoDAO;
 import ANAKIN.MODEL.DAO.CadastroDAO;
 import ANAKIN.MODEL.DAO.ConexaoDAO;
 import ANAKIN.MODEL.DAO.ControleSessaoDAO;
+import ANAKIN.MODEL.DAO.ManterSessaoDAO;
 import ANAKIN.MODEL.VO.ControleSessaoVO;
 import ANAKIN.MODEL.VO.UsuarioVO;
 
@@ -101,9 +102,17 @@ public class MinhasSessoesVIEW extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				try {
+					String usuarionome = null;
+					UsuarioVO user = new UsuarioVO();
+					ManterSessaoDAO Msd = new ManterSessaoDAO();
 					ControleSessaoDAO nomessessao = new ControleSessaoDAO();
 					String recebenome = tfBusca.getText();
-					ArrayList<String> resgistro = nomessessao.chamarinformacoes(recebenome);
+					if (Msd.chamar() != null) {
+						usuarionome = Msd.chamar();
+					} else {
+						recebenome = user.getNome_Usuario();
+					}
+					ArrayList<String> resgistro = nomessessao.chamarinformacoes(recebenome, usuarionome);
 					JList<String> listasessoes = new JList<>(resgistro.toArray(new String[0]));
 					listasessoes.setFont(new Font("Arial", Font.BOLD, 15));
 					recebelista.add(listasessoes);
@@ -116,8 +125,7 @@ public class MinhasSessoesVIEW extends JFrame {
 		});
 		this.add(btnBusca);
 
-		
-		String [] dados = null;
+		String[] dados = null;
 		BuscarSessaoDAO bs = new BuscarSessaoDAO();
 
 		this.cbSessoes = new JComboBox<Object>(bs.retornaNomes(dados));
@@ -131,61 +139,49 @@ public class MinhasSessoesVIEW extends JFrame {
 		this.btnAbrir.setBackground(new Color(90, 61, 171));
 		this.btnAbrir.setForeground(Color.WHITE);
 		this.btnAbrir.addActionListener(new ActionListener() {
-			
+
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				/*ControleSessaoVO controle = new ControleSessaoVO();
+				ControleSessaoVO controle = new ControleSessaoVO();
 				BuscarSessaoDAO bs = new BuscarSessaoDAO();
 				int qtd = bs.qtdColunas();
-				String [] ids = new String [qtd];
+				String[] ids = new String[qtd];
 				int id = 0;
-				String [] dados = new String[2];
+				String[] dados = new String[2];
 				bs.retornaIds(ids);
-				
+
 				int nome = cbSessoes.getSelectedIndex();
 				if (nome > 0) {
 					id = Integer.parseInt(ids[nome]);
 				}
 				controle.setId_sessao(id);
-				
+
 				System.out.println(nome);
 				System.out.println(ids);
 				System.out.println(id);
-				
-				
-				  setVisible(false);
-				  
-				 MenuPrincipalVIEW mn = new MenuPrincipalVIEW(); mn.setVisible(false);*/
-				
-				AbrirSessaoDAO ab = new AbrirSessaoDAO();
-				ab.abrirControleSessao();
-				
-				ControleSessaoVIEW cont = new ControleSessaoVIEW();
-				//cont.verifica = true;
-				
-				//System.out.println(cont.verifica);
-				
-				cont.setVisible(true);
+
+				setVisible(false);
+
+				MenuPrincipalVIEW mn = new MenuPrincipalVIEW();
+				mn.setVisible(false);
+
 			}
 		});
 		this.add(btnAbrir);
-		
+
 		this.btnDeletar = new JButton("Deletar");
 		this.btnDeletar.setBounds(145, 320, 100, 25);
 		this.btnDeletar.setBackground(new Color(90, 61, 171));
 		this.btnDeletar.setForeground(Color.WHITE);
 		this.btnDeletar.addActionListener(new ActionListener() {
-			
+
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-				
-				
-				
+
 			}
 		});
 		this.add(btnDeletar);
-		
-	}
-	}
 
+	}
+}

@@ -10,12 +10,19 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 
+import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
+import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JSlider;
 import javax.swing.JSpinner;
@@ -26,13 +33,19 @@ import javax.swing.SpinnerNumberModel;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
+import ANAKIN.MODEL.BO.ImagemBO;
+import ANAKIN.MODEL.DAO.FichaProtagonistaDAO;
+import ANAKIN.MODEL.DAO.NovoControleDAO;
+import ANAKIN.MODEL.VO.AuxiliarVO;
+import ANAKIN.MODEL.VO.FichaProtagonistaVO;
+
 public class FichaProtagonistaVIEW extends JFrame {
 
 	// Declaração das Variaveis
 
 	private Container container;
 	private JPanel areaFicha;
-	private ImageIcon imgIcon;
+	private ImageIcon imgIcon, icon;
 	private JLabel iconUsuario;
 	private JLabel lblImagem, lblAtributos;
 	private JLabel lblNome, lblOcupacao, lblIdade, lblAltura;
@@ -44,6 +57,7 @@ public class FichaProtagonistaVIEW extends JFrame {
 
 	String Classes[] = { "Classes", "Combatente", "Feiticeiro", "Healer", "Suporte" };
 	String Atributo[] = { "", "Luta + Esforço", "Magia + Estudo", "Cura + Estudo", "Auxílio + Esforço" };
+	String Imagens[] = { "", "Combatente.png", "Feiticeiro.png", "Healer.png", "Suporte.png" };
 
 	private JSlider sldVida, sldDefesa, sldMagia;
 
@@ -55,6 +69,10 @@ public class FichaProtagonistaVIEW extends JFrame {
 	private JPanel jpHabilidades;
 
 	private JButton btSalvar;
+
+	JFileChooser jfArquivo;
+	BufferedImage bfimg;
+	File file;
 
 	// get e set
 
@@ -89,16 +107,45 @@ public class FichaProtagonistaVIEW extends JFrame {
 		this.setBounds(0, 0, 495, 510);
 		this.setLayout(null);
 		this.setBackground(new Color(250, 247, 255));
-		
+
 		Dimension tela = Toolkit.getDefaultToolkit().getScreenSize();
 		this.setLocation((tela.width - getSize().width) / 2, (tela.height - getSize().height) / 2);
 
 		this.container = getContentPane();
 
-		this.iconUsuario = new JLabel("Icon :D");
-		this.iconUsuario.setFont(new Font("Arial", Font.BOLD, 13));
+		this.iconUsuario = new JLabel("Adicione um icon :D");
+		this.iconUsuario.setHorizontalAlignment((int) CENTER_ALIGNMENT);
+		this.iconUsuario.setLayout(null);
+		this.iconUsuario.setFont(new Font("Arial", Font.BOLD, 11));
 		this.iconUsuario.setBorder(javax.swing.BorderFactory.createLineBorder(new Color(90, 61, 171), 2));
 		this.iconUsuario.setBounds(40, 35, 125, 140);
+		this.iconUsuario.addMouseListener(new MouseAdapter() {
+
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				// image = new ImageIcon("bandeiras/" + fotos[0] + ".jpeg");
+
+				jfArquivo = new JFileChooser();
+				jfArquivo.setCurrentDirectory(new File(System.getProperty("user.home")));
+				jfArquivo.showOpenDialog(null);
+				file = jfArquivo.getSelectedFile();
+				//	ImageIcon icon = new ImageIcon(getClass().getResource(Imagens[i]));		iconUsuario.setIcon(icon);;
+				try {
+
+					bfimg = ImageIO.read(file);
+					icon = new ImageIcon(bfimg);
+					
+					Image img = icon.getImage();
+					Image tamanhoImg = img.getScaledInstance(iconUsuario.getWidth(), iconUsuario.getHeight(), Image.SCALE_SMOOTH);
+					ImageIcon iconRed = new ImageIcon(tamanhoImg);
+					iconUsuario.setIcon(iconRed);
+
+				} catch (IOException e1) {
+					e1.printStackTrace();
+				}
+			}
+		});
+
 		this.add(iconUsuario);
 
 		this.lblNome = new JLabel("Nome:");
@@ -159,9 +206,16 @@ public class FichaProtagonistaVIEW extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				int i = ComboClasses.getSelectedIndex();
 				String mostrarAtributos = Atributo[i];
-
 				lblAtributos.setText(mostrarAtributos);
-
+				
+				if (file == null) {
+					
+					ImageIcon icon = new ImageIcon(getClass().getResource(Imagens[i]));
+					iconUsuario.setText("");
+					iconUsuario.setHorizontalAlignment((int) CENTER_ALIGNMENT);
+					iconUsuario.setIcon(icon);
+					
+				}
 			}
 		});
 
@@ -311,7 +365,7 @@ public class FichaProtagonistaVIEW extends JFrame {
 		this.lblAgilidade = new JLabel("Agilidade:");
 		this.lblAgilidade.setForeground(new Color(90, 61, 171));
 		this.lblAgilidade.setFont(new Font("Arial", Font.BOLD, 14));
-		this.lblAgilidade.setBounds(280, 275, 80, 20);
+		this.lblAgilidade.setBounds(280, 275, 80, 20);  		 	
 		this.add(lblAgilidade);
 
 		SpinnerModel valueAgilidade = new SpinnerNumberModel(1, 0, 5, 1);
@@ -347,6 +401,66 @@ public class FichaProtagonistaVIEW extends JFrame {
 			@Override
 			public void mouseExited(MouseEvent e) {
 				lblbtnSalvar.setIcon(iconbtnSalvar);
+			}
+
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				try {
+					FichaProtagonistaDAO FPD = new FichaProtagonistaDAO();
+					FichaProtagonistaVO FPV = new FichaProtagonistaVO();
+					String nome = txtfNome.getText();
+					String ocupacao = txtfOcupacao.getText();
+					int idade = Integer.parseInt(txtfIdade.getText());
+					float altura = Float.parseFloat(txtfAltura.getText());
+					int vida = sldVida.getValue();
+					int defesa = sldDefesa.getValue();
+					int magia = sldMagia.getValue();
+					int poder = (int) spnPoder.getValue();
+					int forca = (int) spnForca.getValue();
+					int Carisma = (int) spnCarisma.getValue();
+					int agilidade = (int) spnAgilidade.getValue();
+					int intelecto = (int) spnIntelecto.getValue();
+					int classe = 0;
+					switch ((String) ComboClasses.getSelectedItem()) {
+					case "Combatente":
+						classe = 1;
+						break;
+					case "Feiticeiro":
+						classe = 2;
+						break;
+					case "Healer":
+						classe = 3;
+						break;
+					case "Suporte":
+						classe = 4;
+						break;
+					}
+
+					AuxiliarVO AV = new AuxiliarVO();
+					
+					NovoControleDAO NCS = new NovoControleDAO();
+					int sessao = NCS.retornaIdSessao();
+					
+					FPV.setNome_Protagonista(nome);
+					FPV.setOcupaçao_Protagonista(ocupacao);
+					FPV.setIdade_Protagonista(idade);
+					FPV.setAltura_Protagonista(altura);
+					FPV.setVida_Protagonista(vida);
+					FPV.setDefesa_Protagonista(defesa);
+					FPV.setMagia_Protagonista(magia);
+					FPV.setPoder_Protagonista(poder);
+					FPV.setForca_Protagonista(forca);
+					FPV.setCarisma_Protagonista(Carisma);
+					FPV.setAgilidade_Protagonista(agilidade);
+					FPV.setIntelecto_Protagonista(intelecto);
+					FPV.setFkIdClasse_Protagonista(classe);
+					FPV.setFKIdSessao_Protagonista(sessao);
+
+					FPD.SalvarInformaçoes(FPV);
+					JOptionPane.showMessageDialog(null, "salvo com sucesso");
+				} catch (Exception erro) {
+					JOptionPane.showMessageDialog(null, erro + "erro ao salvar");
+				}
 			}
 		});
 		this.add(lblbtnSalvar);

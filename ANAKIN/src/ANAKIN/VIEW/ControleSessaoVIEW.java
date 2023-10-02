@@ -1,10 +1,14 @@
 package ANAKIN.VIEW;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.ComponentOrientation;
 import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.GridLayout;
 import java.awt.Image;
+import java.awt.SystemColor;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -56,6 +60,8 @@ public class ControleSessaoVIEW extends JFrame {
 	private ImageIcon iconNPC;
 	private JLabel lblbtnNPC;
 	private JLabel lblNPC;
+	
+	private JPanel jp1, jp2, jp3, jp4, jp5, jp6, jp7, jp8, jp9;
 
 	public JTextArea getTxtAnotacao() {
 		return txtAnotacao;
@@ -77,8 +83,8 @@ public class ControleSessaoVIEW extends JFrame {
 		return tfNome;
 	}
 
-	public void setTfNome(String nome) {
-		this.tfNome.setText("aa");
+	public void setTfNome(JTextField tfNome) {
+		this.tfNome = tfNome;
 	}
 
 	public ControleSessaoVIEW() {
@@ -215,7 +221,6 @@ public class ControleSessaoVIEW extends JFrame {
 
 				String inventario, anotacoes, nome, usuario;
 
-				nome = tfNome.getText();
 				inventario = txtInventario.getText();
 				anotacoes = txtAnotacao.getText();
 				usuario = user.getNome_Usuario();
@@ -227,10 +232,9 @@ public class ControleSessaoVIEW extends JFrame {
 
 				}
 
-				controle.setNome_sessao(nome);
 				controle.setInventario_sessao(inventario);
 				controle.setAnotacoes_sessao(anotacoes);
-				controle.setFk_usuario(usuario);
+				
 
 				System.out.println(user.getNome_Usuario());
 
@@ -256,12 +260,97 @@ public class ControleSessaoVIEW extends JFrame {
 		this.lblNPCs.setFont(new Font("Arial", Font.BOLD, 18));
 		this.add(lblNPCs);
 
+	    JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBorder(javax.swing.BorderFactory.createLineBorder(new Color(90, 61, 171), 2));
+		scrollPane.setBackground(new Color(235, 223, 255));
+        scrollPane.setBounds(250, 40, 300, 180);
+        add(scrollPane);
+        
+        JPanel borderlaoutpanel = new JPanel();
+        scrollPane.setViewportView(borderlaoutpanel);
+        borderlaoutpanel.setLayout(new BorderLayout(0, 0));
+        
+        JPanel columnpanel = new JPanel();
+        borderlaoutpanel.add(columnpanel, BorderLayout.NORTH);
+        columnpanel.setLayout(new GridLayout(0, 3, 0, 3));
+        columnpanel.setBackground(new Color(235, 223, 255));
+        
+        for(int i=0;i<2;i++) {
+            JPanel rowPanel = new JPanel();
+            rowPanel.setPreferredSize(new Dimension(70,120));
+            columnpanel.add(rowPanel);
+            rowPanel.setBorder(javax.swing.BorderFactory.createLineBorder(new Color(235, 223, 255),4));
+
+            rowPanel.setBackground(new  Color(250, 247, 255));
+            rowPanel.setLayout(new GridLayout(5,1));
+            
+            JLabel nome = new JLabel("NOME");
+            nome.setHorizontalAlignment((int) CENTER_ALIGNMENT);
+            rowPanel.add(nome);
+            
+            JLabel vida = new JLabel("100/100");
+            vida.setHorizontalAlignment((int) CENTER_ALIGNMENT);
+            rowPanel.add(vida);
+            
+            JLabel def = new JLabel("100/100");
+            def.setHorizontalAlignment((int) CENTER_ALIGNMENT);
+            rowPanel.add(def);
+            
+            JLabel mag = new JLabel("100/100");
+            mag.setHorizontalAlignment((int) CENTER_ALIGNMENT);
+            rowPanel.add(mag);
+            
+            JButton btn = new JButton("...");
+            btn.setBackground(new Color(250, 247, 255));
+    
+            rowPanel.add(btn);
+            
+        }
+		
 		this.jpProtagonistas = new JPanel();
 		this.jpProtagonistas.setLayout(null);
 		this.jpProtagonistas.setBackground(new Color(235, 223, 255));
 		this.jpProtagonistas.setBounds(250, 40, 300, 180);
 		this.jpProtagonistas.setBorder(javax.swing.BorderFactory.createLineBorder(new Color(90, 61, 171), 2));
-		this.add(jpProtagonistas);
+		this.jpProtagonistas.setLayout(new GridLayout(5,2));
+		/*this.add(jpProtagonistas);
+		
+		this.jp1 = new JPanel();
+		this.jp1.setBackground(Color.black);
+		this.jpProtagonistas.add(jp1);
+		
+		this.jp2 = new JPanel();
+		this.jp2.setBackground(Color.white);
+		this.jpProtagonistas.add(jp2);
+		
+		this.jp3 = new JPanel();
+		this.jp3.setBackground(Color.green);
+		this.jpProtagonistas.add(jp3);
+		
+		this.jp4 = new JPanel();
+		this.jp4.setBackground(Color.blue);
+		this.jpProtagonistas.add(jp4);
+		
+		this.jp5 = new JPanel();
+		this.jp5.setBackground(Color.pink);
+		this.jpProtagonistas.add(jp5);
+		
+		this.jp6 = new JPanel();
+		this.jp6.setBackground(Color.cyan);
+		this.jpProtagonistas.add(jp6);
+		
+		this.jp7 = new JPanel();
+		this.jp7.setBackground(Color.gray);
+		this.jpProtagonistas.add(jp7);
+		
+		this.jp8 = new JPanel();
+		this.jp8.setBackground(Color.magenta);
+		this.jpProtagonistas.add(jp8);
+		
+		this.jp9 = new JPanel();
+		this.jp9.setBackground(Color.red);
+		this.jpProtagonistas.add(jp9);*/
+		
 
 		this.jpNPCs = new JPanel();
 		this.jpNPCs.setLayout(null);

@@ -29,8 +29,10 @@ import javax.swing.JOptionPane;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
+import ANAKIN.MODEL.DAO.FichaProtagonistaDAO;
 import ANAKIN.MODEL.DAO.LoginDAO;
 import ANAKIN.MODEL.DAO.ManterSessaoDAO;
+import ANAKIN.MODEL.VO.AuxiliarVO;
 import ANAKIN.MODEL.VO.ControleSessaoVO;
 import ANAKIN.MODEL.VO.UsuarioVO;
 
@@ -174,9 +176,13 @@ public class TelaLoginVIEW extends JFrame {
 					usuario = txtfUser.getText();
 					senha = pfSenha.getText();
 					UsuarioVO autent = new UsuarioVO();
+					FichaProtagonistaDAO FPD = new FichaProtagonistaDAO();
+					AuxiliarVO AV = new AuxiliarVO();
 					autent.setNome_usuario(usuario);
 					autent.setSenha_usuario(senha);
 					LoginDAO dados = new LoginDAO();
+					int id = FPD.retornaidUsuario(usuario);
+					AV.setIdusuario(id);
 
 					ResultSet testeAuntent = dados.autenticaUsuario(autent);
 					if (testeAuntent.next()) {

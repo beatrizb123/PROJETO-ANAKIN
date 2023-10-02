@@ -26,8 +26,8 @@ public class ManterSessaoDAO {
 	}
 
 	public ResultSet VereficaManterSessao() {
-		conn = new ConexaoDAO().conectabd();
 		try {
+			conn = new ConexaoDAO().conectabd();
 			String SQL = "Select numero from numerovereficador where id = 1";
 			PSTM = conn.prepareStatement(SQL);
 			ResultSet numero = PSTM.executeQuery();

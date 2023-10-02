@@ -100,10 +100,10 @@ public class MenuPrincipalVIEW extends JFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				setVisible(false);
-				ControleSessaoVIEW tela = new ControleSessaoVIEW();
-
+				//ControleSessaoVIEW tela = new ControleSessaoVIEW();
+				NovoControleSessaoVIEW tela = new NovoControleSessaoVIEW();
 				tela.setVisible(true);
+				
 
 			}
 		});
@@ -117,7 +117,7 @@ public class MenuPrincipalVIEW extends JFrame {
 		this.mnbBarra.add(mnConfig);
 
 		this.mnSessoes = new JMenu("Minhas Sessões");
-		this.mnSessoes.setMnemonic('S');
+		this.mnSessoes.setMnemonic('M');
 		this.mnbBarra.add(mnSessoes);
 
 		this.miSessoes = new JMenuItem("Sessões salvas");
@@ -143,7 +143,7 @@ public class MenuPrincipalVIEW extends JFrame {
 				ManterSessaoDAO MSD = new ManterSessaoDAO();
 				MSD.finalizaSessao();
 
-			}
+			}	
 		});
 		this.mnConfig.add(miLogout);
 

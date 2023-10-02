@@ -19,32 +19,32 @@ public class ControleSessaoDAO {
 	Connection conn;
 	PreparedStatement PSTM;
 
-	
-	
 	public void salvarInformacoes(ControleSessaoVO controle) {
 		conn = new ConexaoDAO().conectabd();
-		String sql = "insert into controle_sessao(nome_sessao, inventario_sessao, anotacoes_sessao, id_usuario) values (?,?,?,?)";
+		NovoControleDAO novo = new NovoControleDAO();
+		String sql = "update controle_sessao set anotacoes_sessao = ?, inventario_sessao = ? where id_sessao = ?;";
 		try {
+			int id = novo.retornaIdSessao();
 			PSTM = conn.prepareStatement(sql);
-			PSTM.setString(1, controle.getNome_sessao());
-			PSTM.setString(2, controle.getInventario_sessao());
-			PSTM.setString(3, controle.getAnotacoes_sessao());
-			PSTM.setString(4, controle.getFk_usuario());
-			PSTM.execute();
+			PSTM.setString(1, controle.getInventario_sessao());
+			PSTM.setString(2, controle.getAnotacoes_sessao());
+			PSTM.setInt(3, id);
+			PSTM.executeUpdate();
 			PSTM.close();
 		} catch (SQLException erro) {
 			JOptionPane.showMessageDialog(null, "ControleSessaoDAO: " + erro);
 		}
 	}
 
-	public ArrayList<String> chamarinformacoes(String nome_Sessao) {
+	public ArrayList<String> chamarinformacoes(String nome_Sessao, String user) {
 		conn = new ConexaoDAO().conectabd();
-		UsuarioVO user = new UsuarioVO();
+
 		ArrayList<String> registrosnome = new ArrayList<>();
-		String sql = "select nome_sessao From controle_sessao where nome_sessao like ?;";
+		String sql = "select nome_sessao From controle_sessao where nome_sessao like ? and id_usuario like ?;";
 		try {
 			PSTM = conn.prepareStatement(sql);
 			PSTM.setString(1, "%" + nome_Sessao + "%");
+			PSTM.setString(2, user);
 			ResultSet resultado = PSTM.executeQuery();
 			while (resultado.next()) {
 				String nomes = resultado.getString(1);
@@ -59,9 +59,5 @@ public class ControleSessaoDAO {
 		}
 		return registrosnome;
 	}
-
-
-	
-
 
 }
