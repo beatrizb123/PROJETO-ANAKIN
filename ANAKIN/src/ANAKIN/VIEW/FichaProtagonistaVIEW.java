@@ -37,6 +37,7 @@ import ANAKIN.MODEL.BO.ImagemBO;
 import ANAKIN.MODEL.DAO.FichaProtagonistaDAO;
 import ANAKIN.MODEL.DAO.NovoControleDAO;
 import ANAKIN.MODEL.VO.AuxiliarVO;
+import ANAKIN.MODEL.VO.ControleSessaoVO;
 import ANAKIN.MODEL.VO.FichaProtagonistaVO;
 
 public class FichaProtagonistaVIEW extends JFrame {
@@ -438,8 +439,8 @@ public class FichaProtagonistaVIEW extends JFrame {
 
 					AuxiliarVO AV = new AuxiliarVO();
 					
-					NovoControleDAO NCS = new NovoControleDAO();
-					int sessao = NCS.retornaIdSessao();
+					ControleSessaoVO CSV = new ControleSessaoVO();
+					int sessao = CSV.getId_sessao();
 					
 					FPV.setNome_Protagonista(nome);
 					FPV.setOcupaçao_Protagonista(ocupacao);

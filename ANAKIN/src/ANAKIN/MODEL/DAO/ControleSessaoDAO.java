@@ -11,6 +11,7 @@ import javax.swing.JOptionPane;
 
 import com.mysql.cj.protocol.Resultset;
 
+import ANAKIN.MODEL.VO.AuxiliarVO;
 import ANAKIN.MODEL.VO.ControleSessaoVO;
 import ANAKIN.MODEL.VO.UsuarioVO;
 
@@ -21,14 +22,14 @@ public class ControleSessaoDAO {
 
 	public void salvarInformacoes(ControleSessaoVO controle) {
 		conn = new ConexaoDAO().conectabd();
-		NovoControleDAO novo = new NovoControleDAO();
+		AuxiliarVO AV = new AuxiliarVO();
 		String sql = "update controle_sessao set anotacoes_sessao = ?, inventario_sessao = ? where id_sessao = ?;";
 		try {
-			int id = novo.retornaIdSessao();
+			//int id = novo.retornaIdSessao();
 			PSTM = conn.prepareStatement(sql);
 			PSTM.setString(1, controle.getInventario_sessao());
 			PSTM.setString(2, controle.getAnotacoes_sessao());
-			PSTM.setInt(3, id);
+			PSTM.setInt(3, AV.getIdsessao());
 			PSTM.executeUpdate();
 			PSTM.close();
 		} catch (SQLException erro) {

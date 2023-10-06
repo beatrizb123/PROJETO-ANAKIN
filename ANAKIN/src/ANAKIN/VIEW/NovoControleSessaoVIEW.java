@@ -13,6 +13,7 @@ import javax.swing.JLabel;
 import javax.swing.JTextField;
 
 import ANAKIN.MODEL.DAO.NovoControleDAO;
+import ANAKIN.MODEL.VO.AuxiliarVO;
 import ANAKIN.MODEL.VO.ControleSessaoVO;
 
 public class NovoControleSessaoVIEW extends JFrame{
@@ -71,12 +72,13 @@ public class NovoControleSessaoVIEW extends JFrame{
 				nomeSessao = txtNome.getText();
 				
 				NovoControleDAO novo = new NovoControleDAO();
-				novo.criarNovaSessao(nomeSessao);
-				int id = novo.retornaIdSessao();
+				int id = novo.criarNovaSessao(nomeSessao);
+				
+				AuxiliarVO AV = new AuxiliarVO();
+				AV.setIdsessao(id);
 				
 				ControleSessaoVO dados = new ControleSessaoVO();
 				dados.setNome_sessao(nomeSessao);
-				dados.setId_sessao(id);
 				
 				ControleSessaoVIEW sessao = new ControleSessaoVIEW();
 				sessao.setVisible(true);
