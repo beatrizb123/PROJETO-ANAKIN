@@ -1,4 +1,4 @@
-package ANAKIN.VIEW;
+package TelasProjeto;
 
 import java.awt.Color;
 import java.awt.Container;
@@ -15,7 +15,6 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
@@ -28,8 +27,10 @@ import ANAKIN.MODEL.VO.ControleSessaoVO;
 import ANAKIN.MODEL.VO.DadosVO;
 import ANAKIN.MODEL.VO.UsuarioVO;
 
-public class DadosdeJogoVIEW extends JFrame {
 
+
+public class DadosdeJogoVIEW extends JFrame {
+	
 	// declaração das variaveis
 
 	private Container container;
@@ -46,14 +47,16 @@ public class DadosdeJogoVIEW extends JFrame {
 	private JTextArea txtaResultados;
 	
 	private ImageIcon dadosWall;
-	private JLabel bckgDados; 
+	private JLabel bckgDados;
+	private ImageIcon iconCartas;
+	private JLabel lbliconCartas, lblCartas; 
 
 
 	public DadosdeJogoVIEW() {
 
 		this.setTitle("Dados de Jogo");
 		this.setDefaultCloseOperation(HIDE_ON_CLOSE);
-		this.setBounds(0, 0, 580, 500);
+		this.setBounds(0, 0, 580, 510);
 		this.setBackground(new Color(250, 247, 255));
 		this.setVisible(true);
 		this.setResizable(false);
@@ -75,27 +78,27 @@ public class DadosdeJogoVIEW extends JFrame {
 		this.add(jp);
 
 		// Imagens dos DADOS
-		this.imgD4 = new ImageIcon(getClass().getResource("D4.png.png"));
+		this.imgD4 = new ImageIcon(getClass().getResource("D4.png"));
 		this.lblD4 = new JLabel(imgD4);
 		this.lblD4.setBounds(45, 5, 100, 100);
 		this.jp.add(lblD4);
 
-		this.imgD6 = new ImageIcon(getClass().getResource("D6.png.png"));
+		this.imgD6 = new ImageIcon(getClass().getResource("D6.png"));
 		this.lblD6 = new JLabel(imgD6);
 		this.lblD6.setBounds(215, 5,100, 100);
 		this.jp.add(lblD6);
 
-		this.imgD8 = new ImageIcon(getClass().getResource("D8.png.png"));
+		this.imgD8 = new ImageIcon(getClass().getResource("D8.png"));
 		this.lblD8 = new JLabel(imgD8);
 		this.lblD8.setBounds(380, 2, 100, 100);
 		this.jp.add(lblD8);
 
-		this.imgD12 = new ImageIcon(getClass().getResource("D12.png.png"));
+		this.imgD12 = new ImageIcon(getClass().getResource("D12.png"));
 		this.lblD12 = new JLabel(imgD12);
 		this.lblD12.setBounds(140, 140, 100, 100);
 		this.jp.add(lblD12);
 
-		this.imgD20 = new ImageIcon(getClass().getResource("D20.png.png"));
+		this.imgD20 = new ImageIcon(getClass().getResource("D20.png"));
 		this.lblD20 = new JLabel(imgD20);
 		this.lblD20.setBounds(310, 140, 100, 100);
 		this.jp.add(lblD20);
@@ -312,14 +315,14 @@ public class DadosdeJogoVIEW extends JFrame {
 		this.txtaResultados.setEditable(false);
 
 		this.spResultados = new JScrollPane(txtaResultados);
-		this.spResultados.setBounds(280, 335, 270, 115);
+		this.spResultados.setBounds(280, 330, 270, 115);
 		this.container.add(spResultados);
 
 		this.btnRolar = new JButton("ROLAR DADOS");
-		this.btnRolar.setBounds(70, 340, 145, 30);
+		this.btnRolar.setBounds(70, 330, 140, 25);
 		this.btnRolar.setBackground(new Color(90, 61, 171));
 		this.btnRolar.setForeground(Color.white);
-		this.btnRolar.addActionListener(new ActionListener() {
+		/this.btnRolar.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -366,10 +369,35 @@ public class DadosdeJogoVIEW extends JFrame {
 
 			}
 		});
-
+		
 		this.add(btnRolar);
 		
-		this.dadosWall = new ImageIcon(getClass().getResource("Dados.png"));
+		this.iconCartas = new ImageIcon(getClass().getResource("Cartas de Vantagem.png"));
+		this.lbliconCartas = new JLabel(iconCartas);
+		this.lbliconCartas.setToolTipText("Cartas de Vantagem");
+		this.lbliconCartas.setBounds(90, 350, 100, 100);
+		this.lbliconCartas.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseEntered(MouseEvent e) {
+
+				lbliconCartas.setIcon(iconCartas);
+
+			}
+
+			@Override
+			public void mouseExited(MouseEvent e) {
+				lbliconCartas.setIcon(iconCartas);
+			}
+
+			/*@Override
+			public void mouseClicked(MouseEvent e) {
+				ABRE TELA DAS CARTAS
+				
+			}*/
+		});
+		this.add(lbliconCartas);
+		
+		this.dadosWall = new ImageIcon(getClass().getResource("Dados e Combate.png"));
 		this.dadosWall = new ImageIcon(dadosWall.getImage().getScaledInstance(580,500, Image.SCALE_DEFAULT));
 		this.bckgDados = new JLabel(dadosWall);
 		this.bckgDados.setBounds(-10,-10, 580,500);
@@ -432,9 +460,9 @@ public class DadosdeJogoVIEW extends JFrame {
 		Dimension tela = Toolkit.getDefaultToolkit().getScreenSize();
 		frame.setLocation((tela.width - frame.getSize().width) / 2, (tela.height - frame.getSize().height) / 2);
 
-		//teste código
 	
 	}
-
 	
 }
+
+
