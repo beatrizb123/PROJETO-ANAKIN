@@ -7,6 +7,7 @@ import java.sql.SQLException;
 
 import javax.swing.JOptionPane;
 
+import com.mysql.cj.protocol.Resultset;
 import com.mysql.cj.xdevapi.Result;
 
 import ANAKIN.MODEL.VO.UsuarioVO;
@@ -15,12 +16,14 @@ public class NovoControleDAO {
 	Connection conn;
 	PreparedStatement PSTM;
 
-	public void criarNovaSessao(String nomeSessao) {
+	public int criarNovaSessao(String nomeSessao) {
 		conn = new ConexaoDAO().conectabd();
 		String nome;
 		ManterSessaoDAO manter = new ManterSessaoDAO();
 		UsuarioVO user = new UsuarioVO();
-
+		ResultSet resultado = null;
+		String sql2 = "select last_insert_id() from controle_sessao;";
+		int id = 0;
 		try {
 			if (manter.chamar() != null) {
 				nome = manter.chamar();
@@ -32,18 +35,32 @@ public class NovoControleDAO {
 			PSTM = conn.prepareStatement(sql);
 			PSTM.setString(1, nomeSessao);
 			PSTM.setString(2, nome);
-			
-			PSTM.execute();
-			PSTM.close();
-			
+			int i = PSTM.executeUpdate();
+			if(i > 0) {
+				PSTM = conn.prepareStatement(sql2);
+				resultado = PSTM.executeQuery();
+				if(resultado.next()) {
+				id = resultado.getInt(1);
+				System.out.println("registro salvo com sucesso  id:"+ id);
+				return id;
+				}else {
+				System.out.println("nao ouve retorno do id");
+				return 0;
+				}
+			}else {
+				System.out.println("nenhum registro salvo");
+				return 0;
+			}
 		} catch (SQLException e) {
 			JOptionPane.showMessageDialog(null,"NovoControleDAO: " + e);
+			return (Integer)null;
+		}
 		}
 	}
 	
-	public int retornaIdSessao () {
+	/*public int retornaIdSessao () {
 		conn = new ConexaoDAO().conectabd();
-		String sql= "select distinct last_insert_id() from controle_sessao;";
+		String sql= "select last_insert_id() from controle_sessao;";
 		int id;
 		try {
 			PSTM = conn.prepareStatement(sql);
@@ -60,11 +77,5 @@ public class NovoControleDAO {
 			JOptionPane.showMessageDialog(null,"NovoControleDAO: " + er);
 			return (Integer)null;
 		}
-	}
-	
-	public static void main(String[] args) {
-		NovoControleDAO novo = new NovoControleDAO();
-		int i = novo.retornaIdSessao();
-		System.out.println(i);
-	}
-}
+	}*/
+
