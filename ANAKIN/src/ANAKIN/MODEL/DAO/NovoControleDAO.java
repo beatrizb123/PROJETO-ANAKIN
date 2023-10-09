@@ -7,9 +7,6 @@ import java.sql.SQLException;
 
 import javax.swing.JOptionPane;
 
-import com.mysql.cj.protocol.Resultset;
-import com.mysql.cj.xdevapi.Result;
-
 import ANAKIN.MODEL.VO.UsuarioVO;
 
 public class NovoControleDAO {

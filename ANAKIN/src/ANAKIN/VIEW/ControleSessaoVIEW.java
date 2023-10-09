@@ -1,4 +1,6 @@
-package TelasProjeto;
+package ANAKIN.VIEW;
+
+
 import java.awt.Color;
 import java.awt.Container;
 import java.awt.Dimension;
@@ -485,9 +487,3 @@ public class ControleSessaoVIEW extends JFrame {
 	
 	
 }
-
-
-
-
-
-

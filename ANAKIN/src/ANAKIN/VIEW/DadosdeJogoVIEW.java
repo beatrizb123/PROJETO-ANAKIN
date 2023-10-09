@@ -1,4 +1,4 @@
-package TelasProjeto;
+package ANAKIN.VIEW;
 
 import java.awt.Color;
 import java.awt.Container;
@@ -15,6 +15,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
@@ -322,7 +323,7 @@ public class DadosdeJogoVIEW extends JFrame {
 		this.btnRolar.setBounds(70, 330, 140, 25);
 		this.btnRolar.setBackground(new Color(90, 61, 171));
 		this.btnRolar.setForeground(Color.white);
-		/this.btnRolar.addActionListener(new ActionListener() {
+		this.btnRolar.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {

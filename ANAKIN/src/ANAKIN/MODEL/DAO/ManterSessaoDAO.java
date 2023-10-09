@@ -10,13 +10,13 @@ import javax.swing.JOptionPane;
 import ANAKIN.MODEL.VO.UsuarioVO;
 
 public class ManterSessaoDAO {
-	Connection conn;
+	Connection conn = new ConexaoDAO().conectabd();
 	PreparedStatement PSTM;
 
 	public void finalizaSessao() {
 		conn = new ConexaoDAO().conectabd();
 		try {
-			String SQL = "update NumeroVereficador set numero = 0 where id = 1;";
+			String SQL = "update Numero	Vereficador set numero = 0 where id = 1;";
 			PSTM = conn.prepareStatement(SQL);
 			PSTM.executeUpdate();
 			PSTM.close();
@@ -37,7 +37,7 @@ public class ManterSessaoDAO {
 			JOptionPane.showMessageDialog(null, erro);
 			return null;
 		}
-
+		
 	}
 
 	public void Sessaomanter(int numerador) {

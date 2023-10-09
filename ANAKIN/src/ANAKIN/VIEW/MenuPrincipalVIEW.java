@@ -8,6 +8,8 @@ import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.sql.ResultSet;
 
 import javax.swing.ImageIcon;
@@ -35,12 +37,14 @@ public class MenuPrincipalVIEW extends JFrame {
 	private JLabel lblimagem;
 	private JTextField txt;
 	private ImageIcon imgIcon;
-	private JButton btnControlSessao;
 	private JMenuBar mnbBarra;
 	private JMenu mnConfig, mnSessoes;
 	private JMenuItem miAlterarConta, miLogout, miSair, miSessoes, miBuscar;
 	private ImageIcon menuWall; 
 	private JLabel bckgMenu; 
+	
+	private JLabel lblIconControle, lblCriar;
+	private ImageIcon iconControleSessao;
 
 
 	public MenuPrincipalVIEW() {
@@ -68,27 +72,27 @@ public class MenuPrincipalVIEW extends JFrame {
 		}
 
 		this.lblNome = new JLabel("OLÁ, " + nome + "!");
-		this.lblNome.setBounds(15, 15, 100, 100);
+		this.lblNome.setBounds(15, 30, 150, 25);
 		this.lblNome.setForeground(new Color(90, 61, 171));
 		this.lblNome.setHorizontalAlignment(SwingConstants.CENTER);
-		this.lblNome.setFont(new Font("Arial", Font.BOLD, 12));
+		this.lblNome.setFont(new Font("Arial", Font.BOLD, 14));
 		this.add(lblNome);
 
 		this.lblAnakin = new JLabel("ANAKIN");
-		this.lblAnakin.setBounds(255, 100, 400, 165);
+		this.lblAnakin.setBounds(255, 65, 400, 165);
 		this.lblAnakin.setForeground(new Color(90, 61, 171));
 		this.lblAnakin.setHorizontalAlignment(SwingConstants.CENTER);
 		this.lblAnakin.setFont(new Font("Arial", Font.BOLD, 85));
 		this.add(lblAnakin);
 
 		this.sombraAnakin = new JLabel("ANAKIN");
-		this.sombraAnakin.setBounds(260, 100, 400, 165);
+		this.sombraAnakin.setBounds(260, 65, 400, 165);
 		this.sombraAnakin.setForeground(new Color(204, 192, 228));
 		this.sombraAnakin.setHorizontalAlignment(SwingConstants.CENTER);
 		this.sombraAnakin.setFont(new Font("Arial", Font.BOLD, 85));
 		this.add(sombraAnakin);
 
-		this.btnControlSessao = new JButton("Controle de Sessao");
+		/*this.btnControlSessao = new JButton("Controle de Sessao");
 		this.btnControlSessao.setFont(new Font("Arial Black", Font.BOLD, 14));
 		this.btnControlSessao.setBounds(360, 240, 200, 40);
 		this.btnControlSessao.setToolTipText("Cria nova sessão");
@@ -107,7 +111,47 @@ public class MenuPrincipalVIEW extends JFrame {
 
 			}
 		});
-		this.add(btnControlSessao);
+		this.add(btnControlSessao);*/
+		
+		this.iconControleSessao = new ImageIcon(getClass().getResource("Controle_Sessao.png"));
+		this.lblIconControle = new JLabel(iconControleSessao);
+		this.lblIconControle.setToolTipText("Controle de Sessão");
+		this.lblIconControle.setBounds(370, 215, 180, 180);
+		this.lblIconControle.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseEntered(MouseEvent e) {
+
+				lblIconControle.setIcon(iconControleSessao);
+
+			}
+
+			@Override
+			public void mouseExited(MouseEvent e) {
+				lblIconControle.setIcon(iconControleSessao);
+			}
+
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				setVisible(false);
+				ControleSessaoVIEW tela = new ControleSessaoVIEW();
+				tela.setVisible(true);
+			}
+		});
+		this.add(lblIconControle);
+		
+		this.lblCriar =  new JLabel("Criar sua Sessão");
+		this.lblCriar.setForeground(new Color(90,61,171));
+		this.lblCriar.setFont(new Font("Arial", Font.BOLD, 15));
+		this.lblCriar.setBounds(400,320,170,170);
+		this.add(lblCriar);
+
+
+		this.lblCriar =  new JLabel("Criar sua Sessão");
+		this.lblCriar.setForeground(new Color(90,61,171));
+		this.lblCriar.setFont(new Font("Arial", Font.BOLD, 15));
+		this.lblCriar.setBounds(400,320,170,170);
+		this.add(lblCriar);
+
 
 		this.mnbBarra = new JMenuBar();
 		this.setJMenuBar(mnbBarra);

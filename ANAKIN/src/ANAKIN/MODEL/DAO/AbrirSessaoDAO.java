@@ -6,6 +6,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import javax.swing.JOptionPane;
 
@@ -17,27 +18,33 @@ public class AbrirSessaoDAO {
 	PreparedStatement PSTM;
 	ResultSet rs;
 	
-	public void abrirControleSessao() {
+	public ArrayList<String> abrirControleSessao(int id) {
+		ArrayList<String> registrosControle = new ArrayList<>();
+		UsuarioVO user = new UsuarioVO();
+		ControleSessaoVO cont = new ControleSessaoVO();
+		//select nome_sessao, inventario_sessao, anotacoes_sessao from controle_sessao where id_sessao = 1;
+		//String sql = "SELECT nome_sessao, inventario_sessao, anotacoes_sessao from controle_sessao where nome_sessao = ? and id_usuario = 'beabna'";
+		String sql = "select nome_sessao from controle_sessao where id_sessao = ?";
+		conn = new ConexaoDAO().conectabd();
+		
 		try {
-			
-			UsuarioVO user = new UsuarioVO();
-			ControleSessaoVO cont = new ControleSessaoVO();
-			//String sql = "SELECT nome_sessao, inventario_sessao, anotacoes_sessao from controle_sessao where nome_sessao = ? and id_usuario = 'beabna'";
-			String sql = "SELECT nome_sessao from controle_sessao where nome_sessao = 'teste' and id_sessao = 3 and id_usuario = '"+ user.getNome_Usuario() +"'";
-			conn = new ConexaoDAO().conectabd();
 			PSTM = conn.prepareStatement(sql);
+			PSTM.setInt(1, id);
 			
 			rs = PSTM.executeQuery();
 			
 			while (rs.next()) {
-				 //System.out.println(rs.getString("nome_sessao"));
-				 cont.setNome_sessao(rs.getString("nome_sessao"));
-				 System.out.println(cont.getNome_sessao());
+				 String nome = rs.getString(1);
+				 registrosControle.add(nome);
+				 System.out.println(registrosControle);
 			}
+			PSTM.close();
 			
 		} catch (SQLException e) {
 			JOptionPane.showMessageDialog(null, "AbrirSessaoDAO: " + e);
+			return null;
 		}
+		return registrosControle;
 	}
 
 }

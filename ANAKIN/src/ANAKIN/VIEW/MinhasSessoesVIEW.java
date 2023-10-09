@@ -144,6 +144,9 @@ public class MinhasSessoesVIEW extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				ControleSessaoVO controle = new ControleSessaoVO();
 				BuscarSessaoDAO bs = new BuscarSessaoDAO();
+				AbrirSessaoDAO ab = new AbrirSessaoDAO();
+				ArrayList<String> registros = new ArrayList<>();
+				
 				int qtd = bs.qtdColunas();
 				String[] ids = new String[qtd];
 				int id = 0;
@@ -153,9 +156,10 @@ public class MinhasSessoesVIEW extends JFrame {
 				int nome = cbSessoes.getSelectedIndex();
 				if (nome > 0) {
 					id = Integer.parseInt(ids[nome]);
+					registros = ab.abrirControleSessao(id);
+					
 				}
-				controle.setId_sessao(id);
-
+				System.out.println(registros);
 				System.out.println(nome);
 				System.out.println(ids);
 				System.out.println(id);
