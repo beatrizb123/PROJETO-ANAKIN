@@ -52,13 +52,13 @@ public class TelaInicialVIEW extends JFrame {
 
 		this.container = getContentPane();
 
-		this.imagem = new ImageIcon(getClass().getResource("Logo1.png"));
+		this.imagem = new ImageIcon(getClass().getResource("/Imagens/Logo1.png"));
 		this.lblImagem = new JLabel(imagem);
 		this.lblImagem.setBounds(30, 50, 400, 400);
 		add(lblImagem);
 
 		this.imgIcon = new ImageIcon("jupiter.png");
-		this.setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\Beatriz\\Downloads\\jupiter.png"));
+		this.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/Imagens/jupiter.png")));
 
 		this.lblAnakin = new JLabel("ANAKIN");
 		this.lblAnakin.setBounds(400, 150, 400, 165);
@@ -117,7 +117,7 @@ public class TelaInicialVIEW extends JFrame {
 		});
 		this.add(btnCadastrar);
 		
-		this.menuWall = new ImageIcon(getClass().getResource("Background.png"));
+		this.menuWall = new ImageIcon(getClass().getResource("/Imagens/Background.png"));
 		this.menuWall = new ImageIcon(menuWall.getImage().getScaledInstance(940, 550, Image.SCALE_DEFAULT));
 		this.bckgMenu = new JLabel(menuWall);
 		this.bckgMenu.setBounds(-230,-110, 1366, 768);

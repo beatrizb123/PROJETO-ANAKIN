@@ -62,7 +62,7 @@ public class MenuPrincipalVIEW extends JFrame {
 		this.setLocation((tela.width - getSize().width) / 2, (tela.height - getSize().height) / 2);
 
 		this.imgIcon = new ImageIcon("jupiter.png");
-		this.setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\Beatriz\\Downloads\\jupiter.png"));
+		this.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/Imagens/jupiter.png")));
 
 		ManterSessaoDAO teste = new ManterSessaoDAO();
 		UsuarioVO user = new UsuarioVO();
@@ -91,29 +91,8 @@ public class MenuPrincipalVIEW extends JFrame {
 		this.sombraAnakin.setHorizontalAlignment(SwingConstants.CENTER);
 		this.sombraAnakin.setFont(new Font("Arial", Font.BOLD, 85));
 		this.add(sombraAnakin);
-
-		/*this.btnControlSessao = new JButton("Controle de Sessao");
-		this.btnControlSessao.setFont(new Font("Arial Black", Font.BOLD, 14));
-		this.btnControlSessao.setBounds(360, 240, 200, 40);
-		this.btnControlSessao.setToolTipText("Cria nova sessão");
-		this.btnControlSessao.setBackground(new Color(90, 61, 171));
-		this.btnControlSessao.setForeground(Color.white);
-		this.btnControlSessao.addActionListener(new ActionListener() {
-
-			// Botão que leva para o controle de sessão
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				//ControleSessaoVIEW tela = new ControleSessaoVIEW();
-				NovoControleSessaoVIEW tela = new NovoControleSessaoVIEW();
-				tela.setVisible(true);
-				
-
-			}
-		});
-		this.add(btnControlSessao);*/
 		
-		this.iconControleSessao = new ImageIcon(getClass().getResource("Controle_Sessao.png"));
+		this.iconControleSessao = new ImageIcon(getClass().getResource("/Imagens/Controle_Sessao.png"));
 		this.lblIconControle = new JLabel(iconControleSessao);
 		this.lblIconControle.setToolTipText("Controle de Sessão");
 		this.lblIconControle.setBounds(370, 215, 180, 180);
@@ -133,7 +112,8 @@ public class MenuPrincipalVIEW extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				setVisible(false);
-				ControleSessaoVIEW tela = new ControleSessaoVIEW();
+				
+				NovoControleSessaoVIEW tela = new NovoControleSessaoVIEW();
 				tela.setVisible(true);
 			}
 		});
@@ -213,7 +193,7 @@ public class MenuPrincipalVIEW extends JFrame {
 		});
 		this.mnConfig.add(miSair);
 		
-		this.menuWall = new ImageIcon(getClass().getResource("Background.png"));
+		this.menuWall = new ImageIcon(getClass().getResource("/Imagens/Background.png"));
 		this.menuWall = new ImageIcon(menuWall.getImage().getScaledInstance(940, 550, Image.SCALE_DEFAULT));
 		this.bckgMenu = new JLabel(menuWall);
 		this.bckgMenu.setBounds(-230,-110, 1366, 768);

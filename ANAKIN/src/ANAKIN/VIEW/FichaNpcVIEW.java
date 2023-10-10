@@ -1,4 +1,5 @@
-package TelasProjeto;
+package ANAKIN.VIEW;
+
 
 import java.awt.Color;
 import java.awt.Container;
@@ -385,8 +386,8 @@ public class FichaNpcVIEW extends JFrame {
 
 		
 		this.imgIcon = new ImageIcon("jupiter.png");
-		this.setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\Beatriz\\Downloads\\jupiter.png"));
-		
+		this.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/Imagens/jupiter.png")));
+
 	    }
 
 		

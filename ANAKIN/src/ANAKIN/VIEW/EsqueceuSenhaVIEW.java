@@ -9,6 +9,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.ResultSet;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -23,7 +24,8 @@ public class EsqueceuSenhaVIEW extends JFrame {
 	private JLabel lblUser, lblFilme, lblSenha;
 	private JTextField txtfUser, txtfFilme, txtfSenha;
 	private JButton btnConfirmar;
-
+	private ImageIcon imgIcon;
+	
 	public EsqueceuSenhaVIEW() {
 		this.setTitle("Alterar informacoes");
 		this.setTitle("Mudar a senha");
@@ -32,7 +34,11 @@ public class EsqueceuSenhaVIEW extends JFrame {
 		this.setBounds(300, 200, 300, 250);
 		Dimension tela = Toolkit.getDefaultToolkit().getScreenSize();
 		this.setLocation((tela.width - getSize().width) / 2, (tela.height - getSize().height) / 2);
+		
+		this.imgIcon = new ImageIcon("jupiter.png");
+		this.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/Imagens/jupiter.png")));
 
+		
 		this.lblUser = new JLabel("INFORME SEU NOME DE USUÁRIO:");
 		this.lblUser.setBounds(10, 10, 300, 25);
 		this.lblUser.setForeground(new Color(90, 61, 171));

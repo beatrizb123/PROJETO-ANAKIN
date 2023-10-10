@@ -187,16 +187,16 @@ public class TelaCadastroVIEW extends JFrame {
 		});
 		this.add(btnVoltar);
 
-		this.imgLogo = new ImageIcon(getClass().getResource("Logo1.png"));
+		this.imgLogo = new ImageIcon(getClass().getResource("/Imagens/Logo1.png"));
 		this.lblLogo = new JLabel(imgLogo);
 		this.lblLogo.setBounds(30, 50, 380, 400);
 		this.add(lblLogo);
 
 		this.imgIcon = new ImageIcon("jupiter.png");
-		this.setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\Beatriz\\Downloads\\jupiter.png"));
+		this.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/Imagens/jupiter.png")));
 
 		
-		this.menuWall = new ImageIcon(getClass().getResource("Background.png"));
+		this.menuWall = new ImageIcon(getClass().getResource("/Imagens/Background.png"));
 		this.menuWall = new ImageIcon(menuWall.getImage().getScaledInstance(940, 550, Image.SCALE_DEFAULT));
 		this.bckgMenu = new JLabel(menuWall);
 		this.bckgMenu.setBounds(-230,-110, 1366, 768);

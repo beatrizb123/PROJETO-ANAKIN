@@ -68,7 +68,7 @@ public class DadosdeJogoVIEW extends JFrame {
 		
 
 		this.imgIcon = new ImageIcon("jupiter.png");
-		this.setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\Beatriz\\Downloads\\jupiter.png"));
+		this.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/Imagens/jupiter.png")));
 
 		
 		this.jp = new JPanel();
@@ -79,27 +79,27 @@ public class DadosdeJogoVIEW extends JFrame {
 		this.add(jp);
 
 		// Imagens dos DADOS
-		this.imgD4 = new ImageIcon(getClass().getResource("D4.png"));
+		this.imgD4 = new ImageIcon(getClass().getResource("/Imagens/D4.png.png"));
 		this.lblD4 = new JLabel(imgD4);
 		this.lblD4.setBounds(45, 5, 100, 100);
 		this.jp.add(lblD4);
 
-		this.imgD6 = new ImageIcon(getClass().getResource("D6.png"));
+		this.imgD6 = new ImageIcon(getClass().getResource("/Imagens/D6.png.png"));
 		this.lblD6 = new JLabel(imgD6);
 		this.lblD6.setBounds(215, 5,100, 100);
 		this.jp.add(lblD6);
 
-		this.imgD8 = new ImageIcon(getClass().getResource("D8.png"));
+		this.imgD8 = new ImageIcon(getClass().getResource("/Imagens/D8.png.png"));
 		this.lblD8 = new JLabel(imgD8);
 		this.lblD8.setBounds(380, 2, 100, 100);
 		this.jp.add(lblD8);
 
-		this.imgD12 = new ImageIcon(getClass().getResource("D12.png"));
+		this.imgD12 = new ImageIcon(getClass().getResource("/Imagens/D12.png.png"));
 		this.lblD12 = new JLabel(imgD12);
 		this.lblD12.setBounds(140, 140, 100, 100);
 		this.jp.add(lblD12);
 
-		this.imgD20 = new ImageIcon(getClass().getResource("D20.png"));
+		this.imgD20 = new ImageIcon(getClass().getResource("/Imagens/D20.png.png"));
 		this.lblD20 = new JLabel(imgD20);
 		this.lblD20.setBounds(310, 140, 100, 100);
 		this.jp.add(lblD20);
@@ -373,7 +373,7 @@ public class DadosdeJogoVIEW extends JFrame {
 		
 		this.add(btnRolar);
 		
-		this.iconCartas = new ImageIcon(getClass().getResource("Cartas de Vantagem.png"));
+		this.iconCartas = new ImageIcon(getClass().getResource("/Imagens/Cartas de Vantagem.png"));
 		this.lbliconCartas = new JLabel(iconCartas);
 		this.lbliconCartas.setToolTipText("Cartas de Vantagem");
 		this.lbliconCartas.setBounds(90, 350, 100, 100);
@@ -398,7 +398,7 @@ public class DadosdeJogoVIEW extends JFrame {
 		});
 		this.add(lbliconCartas);
 		
-		this.dadosWall = new ImageIcon(getClass().getResource("Dados e Combate.png"));
+		this.dadosWall = new ImageIcon(getClass().getResource("/Imagens/Dados.png"));
 		this.dadosWall = new ImageIcon(dadosWall.getImage().getScaledInstance(580,500, Image.SCALE_DEFAULT));
 		this.bckgDados = new JLabel(dadosWall);
 		this.bckgDados.setBounds(-10,-10, 580,500);

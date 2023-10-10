@@ -58,7 +58,7 @@ public class FichaProtagonistaVIEW extends JFrame {
 
 	String Classes[] = { "Classes", "Combatente", "Feiticeiro", "Healer", "Suporte" };
 	String Atributo[] = { "", "Luta + Esforço", "Magia + Estudo", "Cura + Estudo", "Auxílio + Esforço" };
-	String Imagens[] = { "", "Combatente.png", "Feiticeiro.png", "Healer.png", "Suporte.png" };
+	String Imagens[] = { "", "/Imagens/Combatente.png", "/Imagens/Feiticeiro.png", "/Imagens/Healer.png", "/Imagens/Suporte.png" };
 
 	private JSlider sldVida, sldDefesa, sldMagia;
 
@@ -387,7 +387,7 @@ public class FichaProtagonistaVIEW extends JFrame {
 		this.spnIntelecto.setBounds(365, 295, 50, 20);
 		this.add(spnIntelecto);
 
-		this.iconbtnSalvar = new ImageIcon(getClass().getResource("Salvar.png"));
+		this.iconbtnSalvar = new ImageIcon(getClass().getResource("/Imagens/Salvar.png"));
 		this.lblbtnSalvar = new JLabel(iconbtnSalvar);
 		this.lblbtnSalvar.setToolTipText("Salvar");
 		this.lblbtnSalvar.setBounds(190, 310, 120, 120);
@@ -479,14 +479,14 @@ public class FichaProtagonistaVIEW extends JFrame {
 		this.jpHabilidades.setBorder(javax.swing.BorderFactory.createLineBorder(new Color(90, 61, 171), 3));
 		this.add(jpHabilidades);
 
-		this.fichaWall = new ImageIcon(getClass().getResource("Fichas.png"));
+		this.fichaWall = new ImageIcon(getClass().getResource("/Imagens/Fichas.png"));
 		this.fichaWall = new ImageIcon(fichaWall.getImage().getScaledInstance(580, 500, Image.SCALE_DEFAULT));
 		this.bckgFicha = new JLabel(fichaWall);
 		this.bckgFicha.setBounds(-10, -10, 580, 500);
 		this.add(bckgFicha);
 
 		this.imgIcon = new ImageIcon("jupiter.png");
-		this.setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\Beatriz\\Downloads\\jupiter.png"));
+		this.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/Imagens/jupiter.png")));
 
 	}
 

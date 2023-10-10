@@ -36,8 +36,8 @@ public class NovoControleSessaoVIEW extends JFrame{
 		this.setLocation((tela.width - getSize().width) / 2, (tela.height - getSize().height) / 2);
 
 		this.imgIcon = new ImageIcon("jupiter.png");
-		this.setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\Beatriz\\Downloads\\jupiter.png"));
-		
+		this.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/Imagens/jupiter.png")));
+
 		this.lblMsg = new JLabel("Nome do novo controle de sessão:");
 		this.lblMsg.setBounds(20, 10, 200, 20);
 		this.add(lblMsg);
@@ -52,7 +52,10 @@ public class NovoControleSessaoVIEW extends JFrame{
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				setVisible(false);
 				
+				MenuPrincipalVIEW tela = new MenuPrincipalVIEW();
+				tela.setVisible(true);
 				
 			}
 		});
@@ -66,8 +69,6 @@ public class NovoControleSessaoVIEW extends JFrame{
 			public void actionPerformed(ActionEvent e) {
 				setVisible(false);
 				
-				MenuPrincipalVIEW tela = new MenuPrincipalVIEW();
-				tela.setVisible(false);
 				
 				nomeSessao = txtNome.getText();
 				
@@ -83,9 +84,8 @@ public class NovoControleSessaoVIEW extends JFrame{
 				ControleSessaoVIEW sessao = new ControleSessaoVIEW();
 				sessao.setVisible(true);
 				
-				System.out.println(dados.getNome_sessao());
-				System.out.println(dados.getId_sessao());
-				
+				MenuPrincipalVIEW tela = new MenuPrincipalVIEW();
+				tela.setVisible(false);
 			}
 		});
 		this.add(btnContinuar);

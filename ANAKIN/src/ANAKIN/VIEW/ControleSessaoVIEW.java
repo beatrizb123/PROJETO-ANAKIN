@@ -116,7 +116,7 @@ public class ControleSessaoVIEW extends JFrame {
 		this.setLocation((tela.width - getSize().width) / 2, (tela.height - getSize().height) / 2);
 
 		this.imgIcon = new ImageIcon("jupiter.png");
-		this.setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\Beatriz\\Downloads\\jupiter.png"));
+		this.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/Imagens/jupiter.png")));
 
 
 		this.lblInventario = new JLabel("Inventário");
@@ -182,8 +182,8 @@ public class ControleSessaoVIEW extends JFrame {
 		});
 		this.add(btnLimpar);
 		
-		/*iconVoltar = new ImageIcon(getClass().getResource("voltar1.png"));
-		iconVoltar2 = new ImageIcon(getClass().getResource("voltar2.png"));
+		iconVoltar = new ImageIcon(getClass().getResource("/Imagens/voltar1.png"));
+		iconVoltar2 = new ImageIcon(getClass().getResource("/Imagens/voltar2.png"));
 		this.lblvolta = new JLabel(iconVoltar);
 		this.lblvolta.setBackground(Color.black);
 		this.lblvolta.setBounds(10, 3, 30, 30);
@@ -209,22 +209,20 @@ public class ControleSessaoVIEW extends JFrame {
 		});
 		this.add(lblvolta);
 
-	}
-}*/
 
 		this.lblNome = new JLabel("Nome da sessão:");
 		this.lblNome.setFont(new Font("Arial", Font.BOLD, 16));
-		this.lblNome.setBounds(30, 18, 150, 25);
+		this.lblNome.setBounds(50, 15, 150, 20);
 		this.lblNome.setForeground(new Color(90, 61, 171));
 		this.add(lblNome);
 
 		this.tfNome = new JTextField(20);
-		this.tfNome.setBounds(30, 40, 180, 25);
+		this.tfNome.setBounds(50, 40, 160, 25);
 		this.tfNome.setBorder(javax.swing.BorderFactory.createLineBorder(new Color(90, 61, 171), 2));
 		this.add(tfNome);
 		
 		this.btnSalva = new JButton("Salvar");
-		this.btnSalva.setBounds(70, 72, 100, 25);
+		this.btnSalva.setBounds(80, 72, 100, 25);
 		this.btnSalva.setFont(new Font("Arial", Font.BOLD, 15));
 		this.btnSalva.setBackground(new Color(90, 61, 171));
 		this.btnSalva.setForeground(Color.white);
@@ -298,7 +296,7 @@ public class ControleSessaoVIEW extends JFrame {
 		this.add(jpNPCs);
 		
 				
-		this.iconProtagonista = new ImageIcon(getClass().getResource("Icone Ficha Protagonista.png"));
+		this.iconProtagonista = new ImageIcon(getClass().getResource("/Imagens/Ficha_Protagonista.png"));
 		this.lblbtnProtagonista= new JLabel(iconProtagonista);
 		this.lblbtnProtagonista.setToolTipText("Adicionar Protagonista");
 		this.lblbtnProtagonista.setBounds(-15, 60, 180, 180);
@@ -329,7 +327,7 @@ public class ControleSessaoVIEW extends JFrame {
 		this.lblProtagonista.setBounds(125,100,190,100);
 		this.add(lblProtagonista);
 			
-		this.iconNPC = new ImageIcon(getClass().getResource("Icone Ficha NPC.png"));
+		this.iconNPC = new ImageIcon(getClass().getResource("/Imagens/Ficha_NPC.png"));
 		this.lblbtnNPC= new JLabel(iconNPC);
 		this.lblbtnNPC.setToolTipText("Adicionar Protagonista");
 		this.lblbtnNPC.setBounds(-15, 160, 180, 180);
@@ -361,7 +359,7 @@ public class ControleSessaoVIEW extends JFrame {
 		this.add(lblNPC);
 			
 
-		this.iconbtnDados = new ImageIcon(getClass().getResource("Icone Dados.png"));
+		this.iconbtnDados = new ImageIcon(getClass().getResource("/Imagens/Botao_Dados.png"));
 		this.lblbtnDados = new JLabel(iconbtnDados);
 		this.lblbtnDados.setToolTipText("Dados de Jogo");
 		this.lblbtnDados.setBounds(-10, 300, 180, 180);
@@ -416,7 +414,7 @@ public class ControleSessaoVIEW extends JFrame {
 		this.add(lblDados);
 		
 		
-		this.iconbtnCombate = new ImageIcon(getClass().getResource("Icone Combate.png"));
+		this.iconbtnCombate = new ImageIcon(getClass().getResource("/Imagens/Combate.png"));
 		this.lblbtnCombate = new JLabel(iconbtnCombate);
 		this.lblbtnCombate.setToolTipText("Area de Combate");
 		this.lblbtnCombate.setBounds(140, 310, 140, 140);
@@ -467,7 +465,7 @@ public class ControleSessaoVIEW extends JFrame {
 		
 
 		
-		this.menuWall = new ImageIcon(getClass().getResource("Background Principal.png"));
+		this.menuWall = new ImageIcon(getClass().getResource("/Imagens/Background.png"));
 		this.menuWall = new ImageIcon(menuWall.getImage().getScaledInstance(940, 550, Image.SCALE_DEFAULT));
 		this.bckgMenu = new JLabel(menuWall);
 		this.bckgMenu.setBounds(-230,-110, 1366, 768);
