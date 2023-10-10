@@ -23,6 +23,7 @@ public class NovoControleDAO {
 		UsuarioVO user = new UsuarioVO();
 		ResultSet resultado = null;
 		String sql2 = "select last_insert_id() from controle_sessao;";
+		String sql = "insert into controle_sessao(nome_sessao, id_usuario) values (?, ?)";
 		int id = 0;
 		try {
 			if (manter.chamar() != null) {
@@ -30,8 +31,6 @@ public class NovoControleDAO {
 			} else {
 				nome = user.getNome_Usuario();
 			}
-			String sql = "insert into controle_sessao(nome_sessao, id_usuario) values (?, ?)";
-			
 			PSTM = conn.prepareStatement(sql);
 			PSTM.setString(1, nomeSessao);
 			PSTM.setString(2, nome);

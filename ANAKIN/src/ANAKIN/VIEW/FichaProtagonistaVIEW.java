@@ -439,8 +439,7 @@ public class FichaProtagonistaVIEW extends JFrame {
 
 					AuxiliarVO AV = new AuxiliarVO();
 					
-					ControleSessaoVO CSV = new ControleSessaoVO();
-					int sessao = CSV.getId_sessao();
+					int sessao = AV.getIdsessao();
 					
 					FPV.setNome_Protagonista(nome);
 					FPV.setOcupaçao_Protagonista(ocupacao);

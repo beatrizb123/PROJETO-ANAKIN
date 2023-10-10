@@ -17,6 +17,8 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import javax.swing.DefaultListModel;
 import javax.swing.ImageIcon;
@@ -32,11 +34,13 @@ import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
 import javax.swing.ScrollPaneConstants;
 import javax.swing.SwingConstants;
+import javax.swing.SwingUtilities;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
 import ANAKIN.MODEL.DAO.ControleSessaoDAO;
 import ANAKIN.MODEL.DAO.DadosDAO;
+import ANAKIN.MODEL.DAO.FichaProtagonistaDAO;
 import ANAKIN.MODEL.DAO.ManterSessaoDAO;
 import ANAKIN.MODEL.VO.ControleSessaoVO;
 import ANAKIN.MODEL.VO.UsuarioVO;
@@ -60,9 +64,9 @@ public class ControleSessaoVIEW extends JFrame {
 	private ImageIcon iconNPC;
 	private JLabel lblbtnNPC;
 	private JLabel lblNPC;
-	
-	private JPanel jp1, jp2, jp3, jp4, jp5, jp6, jp7, jp8, jp9;
 
+	private JPanel jp1, jp2, jp3, jp4, jp5, jp6, jp7, jp8, jp9;
+	int i = 0;
 	public JTextArea getTxtAnotacao() {
 		return txtAnotacao;
 	}
@@ -120,6 +124,8 @@ public class ControleSessaoVIEW extends JFrame {
 		this.spInventario = new JScrollPane(txtInventario);
 		this.spInventario.setBounds(300, 275, 200, 180);
 		this.spInventario.setBorder(javax.swing.BorderFactory.createLineBorder(new Color(90, 61, 171), 2));
+
+		
 		this.container.add(spInventario);
 
 		this.lblAnotacoes = new JLabel("Anotações");
@@ -234,7 +240,6 @@ public class ControleSessaoVIEW extends JFrame {
 
 				controle.setInventario_sessao(inventario);
 				controle.setAnotacoes_sessao(anotacoes);
-				
 
 				System.out.println(user.getNome_Usuario());
 
@@ -260,97 +265,107 @@ public class ControleSessaoVIEW extends JFrame {
 		this.lblNPCs.setFont(new Font("Arial", Font.BOLD, 18));
 		this.add(lblNPCs);
 
-	    JScrollPane scrollPane = new JScrollPane();
+		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBorder(javax.swing.BorderFactory.createLineBorder(new Color(90, 61, 171), 2));
 		scrollPane.setBackground(new Color(235, 223, 255));
-        scrollPane.setBounds(250, 40, 300, 180);
-        add(scrollPane);
-        
-        JPanel borderlaoutpanel = new JPanel();
-        scrollPane.setViewportView(borderlaoutpanel);
-        borderlaoutpanel.setLayout(new BorderLayout(0, 0));
-        
-        JPanel columnpanel = new JPanel();
-        borderlaoutpanel.add(columnpanel, BorderLayout.NORTH);
-        columnpanel.setLayout(new GridLayout(0, 3, 0, 3));
-        columnpanel.setBackground(new Color(235, 223, 255));
-        
-        for(int i=0;i<2;i++) {
-            JPanel rowPanel = new JPanel();
-            rowPanel.setPreferredSize(new Dimension(70,120));
-            columnpanel.add(rowPanel);
-            rowPanel.setBorder(javax.swing.BorderFactory.createLineBorder(new Color(235, 223, 255),4));
+		scrollPane.setBounds(250, 40, 300, 180);
+		add(scrollPane);
 
-            rowPanel.setBackground(new  Color(250, 247, 255));
-            rowPanel.setLayout(new GridLayout(5,1));
-            
-            JLabel nome = new JLabel("NOME");
-            nome.setHorizontalAlignment((int) CENTER_ALIGNMENT);
-            rowPanel.add(nome);
-            
-            JLabel vida = new JLabel("100/100");
-            vida.setHorizontalAlignment((int) CENTER_ALIGNMENT);
-            rowPanel.add(vida);
-            
-            JLabel def = new JLabel("100/100");
-            def.setHorizontalAlignment((int) CENTER_ALIGNMENT);
-            rowPanel.add(def);
-            
-            JLabel mag = new JLabel("100/100");
-            mag.setHorizontalAlignment((int) CENTER_ALIGNMENT);
-            rowPanel.add(mag);
-            
-            JButton btn = new JButton("...");
-            btn.setBackground(new Color(250, 247, 255));
-    
-            rowPanel.add(btn);
-            
-        }
-		
+		JPanel borderlaoutpanel = new JPanel();
+		scrollPane.setViewportView(borderlaoutpanel);
+		borderlaoutpanel.setLayout(new BorderLayout(0, 0));
+
+		JPanel columnpanel = new JPanel();
+		borderlaoutpanel.add(columnpanel, BorderLayout.NORTH);
+		columnpanel.setLayout(new GridLayout(0, 3, 0, 3));
+		columnpanel.setBackground(new Color(235, 223, 255));
+
+		FichaProtagonistaDAO FPD = new FichaProtagonistaDAO();
+		Timer tempo = new Timer();
+		TimerTask atualizador = new TimerTask() {
+
+			@Override
+			public void run() {
+				int total = FPD.RetornaTantoDeFichas();
+				
+				if (total > i) {
+					i = i + 1;
+					SwingUtilities.invokeLater(new Runnable() {
+			            @Override
+			            public void run() {
+					JPanel rowPanel = new JPanel();
+					rowPanel.setPreferredSize(new Dimension(70, 120));
+					columnpanel.add(rowPanel);
+					rowPanel.setBorder(javax.swing.BorderFactory.createLineBorder(new Color(235, 223, 255), 4));
+
+					rowPanel.setBackground(new Color(250, 247, 255));
+					rowPanel.setLayout(new GridLayout(5, 1));
+
+					JLabel nome = new JLabel("NOME");
+					nome.setHorizontalAlignment((int) CENTER_ALIGNMENT);
+					rowPanel.add(nome);
+
+					JLabel vida = new JLabel("100/100");
+					vida.setHorizontalAlignment((int) CENTER_ALIGNMENT);
+					rowPanel.add(vida);
+
+					JLabel def = new JLabel("100/100");
+					def.setHorizontalAlignment((int) CENTER_ALIGNMENT);
+					rowPanel.add(def);
+
+					JLabel mag = new JLabel("100/100");
+					mag.setHorizontalAlignment((int) CENTER_ALIGNMENT);
+					rowPanel.add(mag);
+
+					JButton btn = new JButton("...");
+					btn.setBackground(new Color(250, 247, 255));
+
+					rowPanel.add(btn);
+			            } 
+			            });
+
+				}
+
+			}
+
+		};tempo.scheduleAtFixedRate(atualizador, 0, 2000);
+
 		this.jpProtagonistas = new JPanel();
 		this.jpProtagonistas.setLayout(null);
 		this.jpProtagonistas.setBackground(new Color(235, 223, 255));
 		this.jpProtagonistas.setBounds(250, 40, 300, 180);
 		this.jpProtagonistas.setBorder(javax.swing.BorderFactory.createLineBorder(new Color(90, 61, 171), 2));
-		this.jpProtagonistas.setLayout(new GridLayout(5,2));
-		/*this.add(jpProtagonistas);
-		
-		this.jp1 = new JPanel();
-		this.jp1.setBackground(Color.black);
-		this.jpProtagonistas.add(jp1);
-		
-		this.jp2 = new JPanel();
-		this.jp2.setBackground(Color.white);
-		this.jpProtagonistas.add(jp2);
-		
-		this.jp3 = new JPanel();
-		this.jp3.setBackground(Color.green);
-		this.jpProtagonistas.add(jp3);
-		
-		this.jp4 = new JPanel();
-		this.jp4.setBackground(Color.blue);
-		this.jpProtagonistas.add(jp4);
-		
-		this.jp5 = new JPanel();
-		this.jp5.setBackground(Color.pink);
-		this.jpProtagonistas.add(jp5);
-		
-		this.jp6 = new JPanel();
-		this.jp6.setBackground(Color.cyan);
-		this.jpProtagonistas.add(jp6);
-		
-		this.jp7 = new JPanel();
-		this.jp7.setBackground(Color.gray);
-		this.jpProtagonistas.add(jp7);
-		
-		this.jp8 = new JPanel();
-		this.jp8.setBackground(Color.magenta);
-		this.jpProtagonistas.add(jp8);
-		
-		this.jp9 = new JPanel();
-		this.jp9.setBackground(Color.red);
-		this.jpProtagonistas.add(jp9);*/
-		
+		this.jpProtagonistas.setLayout(new GridLayout(5, 2));
+		/*
+		 * this.add(jpProtagonistas);
+		 * 
+		 * this.jp1 = new JPanel(); this.jp1.setBackground(Color.black);
+		 * this.jpProtagonistas.add(jp1);
+		 * 
+		 * this.jp2 = new JPanel(); this.jp2.setBackground(Color.white);
+		 * this.jpProtagonistas.add(jp2);
+		 * 
+		 * this.jp3 = new JPanel(); this.jp3.setBackground(Color.green);
+		 * this.jpProtagonistas.add(jp3);
+		 * 
+		 * this.jp4 = new JPanel(); this.jp4.setBackground(Color.blue);
+		 * this.jpProtagonistas.add(jp4);
+		 * 
+		 * this.jp5 = new JPanel(); this.jp5.setBackground(Color.pink);
+		 * this.jpProtagonistas.add(jp5);
+		 * 
+		 * this.jp6 = new JPanel(); this.jp6.setBackground(Color.cyan);
+		 * this.jpProtagonistas.add(jp6);
+		 * 
+		 * this.jp7 = new JPanel(); this.jp7.setBackground(Color.gray);
+		 * this.jpProtagonistas.add(jp7);
+		 * 
+		 * this.jp8 = new JPanel(); this.jp8.setBackground(Color.magenta);
+		 * this.jpProtagonistas.add(jp8);
+		 * 
+		 * this.jp9 = new JPanel(); this.jp9.setBackground(Color.red);
+		 * this.jpProtagonistas.add(jp9);
+		 */
 
 		this.jpNPCs = new JPanel();
 		this.jpNPCs.setLayout(null);
