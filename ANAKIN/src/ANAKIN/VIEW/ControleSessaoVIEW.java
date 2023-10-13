@@ -15,6 +15,8 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.sql.Array;
+import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Timer;
@@ -38,10 +40,12 @@ import javax.swing.SwingUtilities;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
+import ANAKIN.MODEL.DAO.AcessarControleSessaoDAO;
 import ANAKIN.MODEL.DAO.ControleSessaoDAO;
 import ANAKIN.MODEL.DAO.DadosDAO;
 import ANAKIN.MODEL.DAO.FichaProtagonistaDAO;
 import ANAKIN.MODEL.DAO.ManterSessaoDAO;
+import ANAKIN.MODEL.VO.AuxiliarVO;
 import ANAKIN.MODEL.VO.ControleSessaoVO;
 import ANAKIN.MODEL.VO.UsuarioVO;
 
@@ -67,6 +71,17 @@ public class ControleSessaoVIEW extends JFrame {
 
 	private JPanel jp1, jp2, jp3, jp4, jp5, jp6, jp7, jp8, jp9;
 	int i = 0;
+	 static int id;
+	public int retornaid(){
+		AcessarControleSessaoDAO ACSD = new AcessarControleSessaoDAO();
+		int id = ACSD.retornaIDSessaoDAO();
+		return id;
+	}
+	public ResultSet retornainforSessao(int id) {
+		AcessarControleSessaoDAO ACSD = new AcessarControleSessaoDAO();
+		ResultSet infor = ACSD.AcessarSessaoDAO(id);
+		return infor;
+	}
 	public JTextArea getTxtAnotacao() {
 		return txtAnotacao;
 	}
@@ -93,7 +108,7 @@ public class ControleSessaoVIEW extends JFrame {
 
 	public ControleSessaoVIEW() {
 		// instanciação dos objetos
-
+		
 		this.setTitle("Controle de Sessao ★ ");
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 		this.setBounds(0, 0, 940, 550);
@@ -114,13 +129,13 @@ public class ControleSessaoVIEW extends JFrame {
 		this.lblInventario.setForeground(new Color(90, 61, 171));
 		this.lblInventario.setHorizontalAlignment(SwingConstants.CENTER);
 		this.lblInventario.setFont(new Font("Arial", Font.BOLD, 18));
+		
 		this.add(lblInventario);
 
 		this.txtInventario = new JTextArea();
 		this.txtInventario.setFont(new Font("Helvetica", Font.BOLD, 14));
 		this.txtInventario.setLineWrap(true);
 		this.txtInventario.setWrapStyleWord(true);
-
 		this.spInventario = new JScrollPane(txtInventario);
 		this.spInventario.setBounds(300, 275, 200, 180);
 		this.spInventario.setBorder(javax.swing.BorderFactory.createLineBorder(new Color(90, 61, 171), 2));
@@ -393,7 +408,11 @@ public class ControleSessaoVIEW extends JFrame {
 
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				FichaProtagonistaDAO FPD = new FichaProtagonistaDAO();
 				FichaProtagonistaVIEW ficha = new FichaProtagonistaVIEW();
+				AuxiliarVO AV = new AuxiliarVO();
+				id = AV.getIdsessao();
+				FPD.criandoficha(id);
 				ficha.setVisible(true);
 
 			}

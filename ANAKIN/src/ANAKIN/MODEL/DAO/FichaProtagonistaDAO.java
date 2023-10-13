@@ -16,13 +16,52 @@ import ANAKIN.MODEL.VO.UsuarioVO;
 public class FichaProtagonistaDAO {
 	Connection conn = null;
 	PreparedStatement PSTM;
-
-	public void SalvarInformaçoes(FichaProtagonistaVO prota) {
+	public void criandoficha(int idsessao) {
 		conn = new ConexaoDAO().conectabd();
-		String sql1 = "insert into protagonista(" + "nome_protagonista," + "ocupacao_protagonista,"
-				+ "idade_Protagonista," + "altura_Protagonista," + "vida_Protagonista," + "defesa_Protagonista,"
-				+ "magia_Protagonista," + "Poder," + "Forca," + "Carisma," + "Agilidade," + "Intelecto,"
-				+ "id_SESSAO,id_CLASSE) " + "value (?,?,?,?,?,?,?,?,?,?,?,?,?,?);";
+		String sql = " insert into protagonista(id_sessao) value (?);";
+		AuxiliarVO AV = new AuxiliarVO();
+		try {
+			PSTM = conn.prepareStatement(sql);
+			PSTM.setInt(1, idsessao);
+			int i = PSTM.executeUpdate();
+			if(i>0) {
+				PSTM = conn.prepareStatement("SELECT LAST_INSERT_ID()controle_sessao;");
+				ResultSet value = PSTM.executeQuery();
+				if(value.next()) {
+					int id = value.getInt(1);
+					AV.setIdprotagonista(id);
+					System.out.println("id do protagonista: "+ id);
+					PSTM.close();
+				}else {
+					System.out.println(" erro ao retornar id protagonista");
+					PSTM.close();
+				}
+			}
+			PSTM.close();
+			
+		} catch (SQLException e) {
+			System.err.println("erro no criandoficha "+ e);
+		}
+	}
+	public void SalvarInformaçoes(FichaProtagonistaVO prota) {
+		AuxiliarVO AV = new AuxiliarVO();
+		
+		conn = new ConexaoDAO().conectabd();
+		String sql1 = "update protagonista "
+				+ "set nome_protagonista = ?,"
+				+ "	ocupacao_Protagonista = ?,"
+				+ "	idade_Protagonista = ?,"
+				+ "    altura_Protagonista = ?,"
+				+ "    vida_Protagonista = ?,"
+				+ "    defesa_Protagonista = ?,"
+				+ "    magia_Protagonista = ?,"
+				+ "    Poder = ?,"
+				+ "    Forca = ?,"
+				+ "    Carisma = ?,"
+				+ "	Agilidade = ?,"
+				+ "	Intelecto = ?,"
+				+ "	id_Classe = ?"
+				+ "    where id_protagonista = ?;";
 		try {
 			PSTM = conn.prepareStatement(sql1);
 			PSTM.setString(1, prota.getNome_Protagonista());
@@ -37,8 +76,8 @@ public class FichaProtagonistaDAO {
 			PSTM.setInt(10, prota.getCarisma_Protagonista());
 			PSTM.setInt(11, prota.getAgilidade_Protagonista());
 			PSTM.setInt(12, prota.getIntelecto_Protagonista());
-			PSTM.setInt(13, prota.getFKIdSessao_Protagonista());
-			PSTM.setInt(14, prota.getFkIdClasse_Protagonista());
+			PSTM.setInt(13, prota.getFkIdClasse_Protagonista());
+			PSTM.setInt(14, AV.getIdprotagonista());
 			PSTM.executeUpdate();
 			PSTM.close();
 		} catch (SQLException erro) {

@@ -454,7 +454,6 @@ public class FichaProtagonistaVIEW extends JFrame {
 					FPV.setAgilidade_Protagonista(agilidade);
 					FPV.setIntelecto_Protagonista(intelecto);
 					FPV.setFkIdClasse_Protagonista(classe);
-					FPV.setFKIdSessao_Protagonista(sessao);
 
 					FPD.SalvarInformaçoes(FPV);
 					JOptionPane.showMessageDialog(null, "salvo com sucesso");
