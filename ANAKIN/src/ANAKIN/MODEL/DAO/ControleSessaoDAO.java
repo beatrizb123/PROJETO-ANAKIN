@@ -27,8 +27,8 @@ public class ControleSessaoDAO {
 		try {
 			//int id = novo.retornaIdSessao();
 			PSTM = conn.prepareStatement(sql);
-			PSTM.setString(1, controle.getInventario_sessao());
-			PSTM.setString(2, controle.getAnotacoes_sessao());
+			PSTM.setString(1, controle.getAnotacoes_sessao());
+			PSTM.setString(2, controle.getInventario_sessao());
 			PSTM.setInt(3, AV.getIdsessao());
 			PSTM.executeUpdate();
 			PSTM.close();
