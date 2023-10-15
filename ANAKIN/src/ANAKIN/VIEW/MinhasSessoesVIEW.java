@@ -37,7 +37,6 @@ import ANAKIN.MODEL.DAO.CadastroDAO;
 import ANAKIN.MODEL.DAO.ConexaoDAO;
 import ANAKIN.MODEL.DAO.ControleSessaoDAO;
 import ANAKIN.MODEL.DAO.ManterSessaoDAO;
-import ANAKIN.MODEL.VO.AuxiliarVO;
 import ANAKIN.MODEL.VO.ControleSessaoVO;
 import ANAKIN.MODEL.VO.UsuarioVO;
 
@@ -54,7 +53,7 @@ public class MinhasSessoesVIEW extends JFrame {
 	private JButton btExecutar;
 	private JComboBox cbSessoes;
 	private ScrollPane recebelista = new ScrollPane();
-	private JList<String> listasessoes;
+
 	private PreparedStatement statement;
 	private ResultSet resultSet;
 
@@ -114,7 +113,7 @@ public class MinhasSessoesVIEW extends JFrame {
 						recebenome = user.getNome_Usuario();
 					}
 					ArrayList<String> resgistro = nomessessao.chamarinformacoes(recebenome, usuarionome);
-					listasessoes = new JList<>(resgistro.toArray(new String[0]));
+					JList<String> listasessoes = new JList<>(resgistro.toArray(new String[0]));
 					listasessoes.setFont(new Font("Arial", Font.BOLD, 15));
 					recebelista.add(listasessoes);
 
@@ -143,14 +142,32 @@ public class MinhasSessoesVIEW extends JFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				dispose();
-				String nome = listasessoes.getSelectedValue();
-				AuxiliarVO AV = new AuxiliarVO();
-				System.out.println(nome);
-				AV.setNomesessaoAUX(nome);
-				ControleSessaoVIEW CSV = new ControleSessaoVIEW();
-				CSV.setVisible(true);
+				ControleSessaoVO controle = new ControleSessaoVO();
+				BuscarSessaoDAO bs = new BuscarSessaoDAO();
+				AbrirSessaoDAO ab = new AbrirSessaoDAO();
+				ArrayList<String> registros = new ArrayList<>();
 				
+				int qtd = bs.qtdColunas();
+				String[] ids = new String[qtd];
+				int id = 0;
+				String[] dados = new String[2];
+				bs.retornaIds(ids);
+
+				int nome = cbSessoes.getSelectedIndex();
+				if (nome > 0) {
+					id = Integer.parseInt(ids[nome]);
+					registros = ab.abrirControleSessao(id);
+					
+				}
+				System.out.println(registros);
+				System.out.println(nome);
+				System.out.println(ids);
+				System.out.println(id);
+
+				setVisible(false);
+
+				MenuPrincipalVIEW mn = new MenuPrincipalVIEW();
+				mn.setVisible(false);
 
 			}
 		});
