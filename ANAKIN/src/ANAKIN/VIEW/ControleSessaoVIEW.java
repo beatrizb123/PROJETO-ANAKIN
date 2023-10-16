@@ -12,6 +12,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.Iterator;
 
@@ -32,7 +33,9 @@ import javax.swing.SwingConstants;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
+import ANAKIN.MODEL.DAO.AbrirSessaoDAO;
 import ANAKIN.MODEL.DAO.FichaProtagonistaDAO;
+import ANAKIN.MODEL.VO.ControleSessaoVO;
 
 /*import ANAKIN.MODEL.DAO.ControleSessaoDAO;
 import ANAKIN.MODEL.DAO.DadosDAO;
@@ -104,6 +107,22 @@ public class ControleSessaoVIEW extends JFrame {
 
 	public ControleSessaoVIEW() {
 		// instanciação dos objetos
+		AbrirSessaoDAO ASD = new AbrirSessaoDAO();
+		ControleSessaoVO CSV = new ControleSessaoVO();
+		int i = ASD.VereficaSessaoAcessada();
+		if(i > 0) {
+			try {
+				ResultSet informaçoes = ASD.retornaInforSessao();
+				while (informaçoes.next()) {
+					String Anotaçoes = informaçoes.getString("anotacoes_sessao");
+					String Inventario = informaçoes.getString("inventario_sessao");
+					CSV.setAnotacoes_sessao(Anotaçoes);
+					CSV.setInventario_sessao(Inventario);
+				}
+			} catch (Exception e) {
+				System.out.println(e);
+			}
+		}
 
 		this.setTitle("Controle de Sessão ★ ");
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -128,8 +147,11 @@ public class ControleSessaoVIEW extends JFrame {
 		this.lblInventario.setFont(new Font("Arial", Font.BOLD, 18));
 		this.add(lblInventario);
 		
-		
-		this.txtInventario = new JTextArea();
+		if(CSV.getAnotacoes_sessao() != null) {
+			this.txtInventario = new JTextArea(CSV.getAnotacoes_sessao());
+		}else {
+			this.txtInventario = new JTextArea();
+		}
 		this.txtInventario.setFont(new Font("Helvetica", Font.BOLD, 14));
 		this.txtInventario.setLineWrap(true);
 		this.txtInventario.setWrapStyleWord(true);
@@ -146,8 +168,11 @@ public class ControleSessaoVIEW extends JFrame {
 		this.lblAnotacoes.setHorizontalAlignment(SwingConstants.CENTER);
 		this.lblAnotacoes.setFont(new Font("Arial", Font.BOLD, 18));
 		this.add(lblAnotacoes);
-
-		this.txtAnotacao = new JTextArea();
+		if(CSV.getAnotacoes_sessao() != null) {
+			this.txtAnotacao = new JTextArea(CSV.getAnotacoes_sessao());
+		}else {
+			this.txtAnotacao = new JTextArea();
+		}
 		this.txtAnotacao.setFont(new Font("Helvetica", Font.PLAIN, 13));
 		this.txtAnotacao.setLineWrap(true);
 		this.txtAnotacao.setWrapStyleWord(true);
@@ -204,6 +229,7 @@ public class ControleSessaoVIEW extends JFrame {
 
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				ASD.EncerraAcessoSessao();
 				setVisible(false);
 				MenuPrincipalVIEW tela = new MenuPrincipalVIEW();
 				tela.setVisible(true);
@@ -479,14 +505,14 @@ public class ControleSessaoVIEW extends JFrame {
 	}
 
 	
-	public static void abre() {
+	/*public static void abre() {
 		ControleSessaoVIEW frame = new ControleSessaoVIEW();
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setResizable(false);
 		frame.setVisible(true);
 		Dimension tela = Toolkit.getDefaultToolkit().getScreenSize();
 		frame.setLocation((tela.width - frame.getSize().width)/2,(tela.height - frame.getSize().height)/2);
-	}
+	}*/
 	
 	
 }

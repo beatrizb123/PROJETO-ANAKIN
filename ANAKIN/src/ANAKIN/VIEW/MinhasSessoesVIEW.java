@@ -37,6 +37,7 @@ import ANAKIN.MODEL.DAO.CadastroDAO;
 import ANAKIN.MODEL.DAO.ConexaoDAO;
 import ANAKIN.MODEL.DAO.ControleSessaoDAO;
 import ANAKIN.MODEL.DAO.ManterSessaoDAO;
+import ANAKIN.MODEL.VO.AuxiliarVO;
 import ANAKIN.MODEL.VO.ControleSessaoVO;
 import ANAKIN.MODEL.VO.UsuarioVO;
 
@@ -56,6 +57,7 @@ public class MinhasSessoesVIEW extends JFrame {
 
 	private PreparedStatement statement;
 	private ResultSet resultSet;
+	JList<String> listasessoes;
 
 	public MinhasSessoesVIEW() {
 
@@ -113,7 +115,7 @@ public class MinhasSessoesVIEW extends JFrame {
 						recebenome = user.getNome_Usuario();
 					}
 					ArrayList<String> resgistro = nomessessao.chamarinformacoes(recebenome, usuarionome);
-					JList<String> listasessoes = new JList<>(resgistro.toArray(new String[0]));
+					listasessoes = new JList<>(resgistro.toArray(new String[0]));
 					listasessoes.setFont(new Font("Arial", Font.BOLD, 15));
 					recebelista.add(listasessoes);
 
@@ -142,33 +144,26 @@ public class MinhasSessoesVIEW extends JFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				ControleSessaoVO controle = new ControleSessaoVO();
-				BuscarSessaoDAO bs = new BuscarSessaoDAO();
-				AbrirSessaoDAO ab = new AbrirSessaoDAO();
-				ArrayList<String> registros = new ArrayList<>();
-				
-				int qtd = bs.qtdColunas();
-				String[] ids = new String[qtd];
-				int id = 0;
-				String[] dados = new String[2];
-				bs.retornaIds(ids);
-
-				int nome = cbSessoes.getSelectedIndex();
-				if (nome > 0) {
-					id = Integer.parseInt(ids[nome]);
-					registros = ab.abrirControleSessao(id);
-					
-				}
-				System.out.println(registros);
-				System.out.println(nome);
-				System.out.println(ids);
-				System.out.println(id);
-
-				setVisible(false);
-
+			UsuarioVO UV = new UsuarioVO();
+			ManterSessaoDAO MSD = new ManterSessaoDAO();
+			AbrirSessaoDAO ASD = new AbrirSessaoDAO();
+			String nomeusuario;
+			String nome =listasessoes.getSelectedValue();
+			System.out.println("sessao selecionada :" + nome);
+			
+			if(MSD.chamar() != null) {
+				nomeusuario = MSD.chamar(); 
+			}else {
+				nomeusuario = UV.getNome_Usuario();
+			}
+			AuxiliarVO AV = new AuxiliarVO();
+			int id = ASD.RetornaIdSessao(nome, nomeusuario);
+			AV.setIdsessao(id);
+			ASD.SessaoAcessada(id, nome);
+			ControleSessaoVIEW CSV = new ControleSessaoVIEW();
 				MenuPrincipalVIEW mn = new MenuPrincipalVIEW();
 				mn.setVisible(false);
-
+				CSV.setVisible(true);
 			}
 		});
 		this.add(btnAbrir);

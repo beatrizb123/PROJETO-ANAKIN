@@ -12,6 +12,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 
+import ANAKIN.MODEL.DAO.AbrirSessaoDAO;
 import ANAKIN.MODEL.DAO.NovoControleDAO;
 import ANAKIN.MODEL.VO.AuxiliarVO;
 import ANAKIN.MODEL.VO.ControleSessaoVO;
@@ -69,7 +70,8 @@ public class NovoControleSessaoVIEW extends JFrame{
 			public void actionPerformed(ActionEvent e) {
 				setVisible(false);
 				
-				
+				AbrirSessaoDAO ASD = new AbrirSessaoDAO();
+				ASD.EncerraAcessoSessao();
 				nomeSessao = txtNome.getText();
 				
 				NovoControleDAO novo = new NovoControleDAO();
