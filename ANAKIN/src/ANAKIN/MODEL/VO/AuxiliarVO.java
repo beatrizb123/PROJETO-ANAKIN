@@ -1,6 +1,15 @@
 package ANAKIN.MODEL.VO;
 
 public class AuxiliarVO {
+	private static int idprotagonista;
+	public static int getIdprotagonista() {
+		return idprotagonista;
+	}
+
+	public static void setIdprotagonista(int idprotagonista) {
+		AuxiliarVO.idprotagonista = idprotagonista;
+	}
+
 	private static int idusuario;
 	private static int idsessao;
 	public static int getIdsessao() {

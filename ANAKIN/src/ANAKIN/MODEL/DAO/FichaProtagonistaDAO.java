@@ -14,23 +14,32 @@ import ANAKIN.MODEL.VO.UsuarioVO;
 public class FichaProtagonistaDAO {
 Connection conn = null;
 PreparedStatement PSTM;
+public void criarRegistroProta() {
+	conn = new ConexaoDAO().conectabd();
+	String sql = ("insert into protagonista(id_SESSAO) value (?);");
+	AuxiliarVO AV = new AuxiliarVO(); 
+	try {
+		PSTM = conn.prepareStatement(sql);
+		PSTM.setInt(1, AV.getIdsessao());
+		int i = PSTM.executeUpdate();
+		if(i>0) {
+			PSTM = conn.prepareStatement("SELECT LAST_INSERT_ID();");
+			ResultSet result = PSTM.executeQuery();
+			if(result.next()) {
+			int id =result.getInt(1);
+			AV.setIdprotagonista(id);
+			}
+		}
+		PSTM.close();
+	} catch (SQLException e) {
+		System.err.println("erro em criar registro protagonista: " + e);
+	}
+}
 public void SalvarInformaçoes(FichaProtagonistaVO prota) {
 	 conn = new ConexaoDAO().conectabd();
-	String sql1 = "insert into protagonista("
-			+ "nome_protagonista,"
-			+ "ocupacao_protagonista,"
-			+ "idade_Protagonista,"
-			+ "altura_Protagonista,"
-			+ "vida_Protagonista,"
-			+ "defesa_Protagonista,"
-			+ "magia_Protagonista,"
-			+ "Poder,"
-			+ "Forca,"
-			+ "Carisma,"
-			+ "Agilidade,"
-			+ "Intelecto,"
-			+ "id_SESSAO,id_CLASSE) "
-			+ "value (?,?,?,?,?,?,?,?,?,?,?,?,?,?);";
+	 AuxiliarVO AV = new AuxiliarVO();
+	 
+	String sql1 = "update protagonista set nome_protagonista = ?, ocupacao_Protagonista = ?, idade_Protagonista = ?, altura_Protagonista = ?, vida_Protagonista = ?, defesa_Protagonista = ?, magia_Protagonista = ?, Poder = ?, Forca = ?, Carisma = ?, Agilidade = ?, Intelecto = ?, id_CLASSE = ? where id_protagonista = ?;";
 	try {
 		PSTM = conn.prepareStatement(sql1);
 		PSTM.setString(1, prota.getNome_Protagonista());
@@ -45,8 +54,8 @@ public void SalvarInformaçoes(FichaProtagonistaVO prota) {
 		PSTM.setInt(10, prota.getCarisma_Protagonista());
 		PSTM.setInt(11, prota.getAgilidade_Protagonista());
 		PSTM.setInt(12, prota.getIntelecto_Protagonista());
-		PSTM.setInt(13, prota.getFKIdSessao_Protagonista());
-		PSTM.setInt(14, prota.getFkIdClasse_Protagonista());
+		PSTM.setInt(13, prota.getFkIdClasse_Protagonista());
+		PSTM.setInt(14, AV.getIdprotagonista());
 		PSTM.executeUpdate();
 		PSTM.close();
 	}catch(SQLException erro) {

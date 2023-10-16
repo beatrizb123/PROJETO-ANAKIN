@@ -32,6 +32,8 @@ import javax.swing.SwingConstants;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
+import ANAKIN.MODEL.DAO.FichaProtagonistaDAO;
+
 /*import ANAKIN.MODEL.DAO.ControleSessaoDAO;
 import ANAKIN.MODEL.DAO.DadosDAO;
 import ANAKIN.MODEL.DAO.ManterSessaoDAO;
@@ -315,7 +317,10 @@ public class ControleSessaoVIEW extends JFrame {
 
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				// A telinha da Ficha de Protagonistas lala
+			FichaProtagonistaDAO FPD = new FichaProtagonistaDAO();
+			FPD.criarRegistroProta();
+			FichaProtagonistaVIEW FPV = new FichaProtagonistaVIEW();
+			FPV.setVisible(true);
 				
 			}
 		});
