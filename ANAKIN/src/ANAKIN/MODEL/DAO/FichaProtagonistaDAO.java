@@ -14,23 +14,155 @@ import ANAKIN.MODEL.VO.UsuarioVO;
 public class FichaProtagonistaDAO {
 Connection conn = null;
 PreparedStatement PSTM;
+public int VereficaprotaAcessado() {
+	conn = new ConexaoDAO().conectabd();
+	String SQL = "SELECT id_protagonista,nomw_protagonista from fprotaacessada;";
+	try {
+		PSTM = conn.prepareStatement(SQL);
+		ResultSet resultado = PSTM.executeQuery();
+		if(resultado != null) {
+			return 1;
+		}else {
+			return 0;
+		}
+	} catch (SQLException e) {
+		e.printStackTrace();
+		return 0;
+	}
+}
+public void AcessaprotaAcessado(String nome) {
+	conn = new ConexaoDAO().conectabd();
+	AuxiliarVO AV = new AuxiliarVO();
+	String SQL = "update fprotaacessada set id_protagonista = ? ,nomw_protagonista = ? where id_porta = 1;";
+	try {
+		PSTM = conn.prepareStatement(SQL);
+		PSTM.setInt(1, AV.getIdprotagonista());
+		PSTM.setString(2, nome);
+		PSTM.executeUpdate();
+		PSTM.close();
+	} catch (SQLException e) {
+		e.printStackTrace();
+	}
+}
+public ResultSet retornainfotprota(int id,String nome) {
+	conn = new ConexaoDAO().conectabd();
+	AuxiliarVO AV = new AuxiliarVO();
+	String SQL = "SELECT nome_protagonista,"
+			+ "ocupacao_Protagonista,"
+			+ "idade_protagonista,"
+			+ "altura_protagonista, "
+			+ "vida_protagonista, "
+			+ "defesa_protagonista, "
+			+ "magia_protagonista,"
+			+ "poder,"
+			+ "forca,"
+			+ "carisma,"
+			+ "agilidade,"
+			+ "intelecto,"
+			+ "id_classe FROM protagonista where id_protagonista = ? and nome_protagonista = ?;";
+	try {
+		PSTM = conn.prepareStatement(SQL);
+		//PSTM.setInt(1, id);
+		//PSTM.setString(2, nome);
+		ResultSet infor = PSTM.executeQuery();
+		
+		if(infor.next()) {
+			return infor;
+		}PSTM.close();
+		return null;
+		
+	} catch (Exception e) {
+	 e.printStackTrace();
+	 return null;
+	}
+
+}
+public int retornaidprotagonista(String nome) {
+	conn = new ConexaoDAO().conectabd();
+	AuxiliarVO AV = new AuxiliarVO();
+	String SQL = "select distinct id_protagonista from protagonista where nome_protagonista = ? and id_sessao = ?;";
+	try {
+		PSTM = conn.prepareStatement(SQL);
+		PSTM.setString(1, nome);
+		PSTM.setInt(2, AV.getIdsessao());
+		ResultSet resultado = PSTM.executeQuery();
+		while(resultado.next()) {
+			int idprota = resultado.getInt(1);
+			return idprota;
+		}
+		PSTM.close();
+		
+	} catch (SQLException e) {
+		e.printStackTrace();
+		return 0 ;
+	}
+	return 0;
+}
+public int retornaTantoFicha() {
+	conn = new ConexaoDAO().conectabd();
+	AuxiliarVO AV = new AuxiliarVO();
+	String sql = "SELECT COUNT(*) AS total FROM protagonista where id_sessao = ?;";
+	int INTtotal = 0;
+	try {
+		PSTM = conn.prepareStatement(sql);
+		PSTM.setInt(1,AV.getIdsessao() );
+		ResultSet total = PSTM.executeQuery();
+		while(total.next()) {
+			INTtotal = total.getInt(1);
+		}
+		PSTM.close();
+		return INTtotal;
+	} catch (SQLException e) {
+		e.printStackTrace();
+		return 0;
+	}
+}
+public ResultSet informaçoesbaseFP() {
+	conn = new ConexaoDAO().conectabd();
+	AuxiliarVO AV = new AuxiliarVO();
+    String query = "SELECT nome_protagonista, vida_protagonista, defesa_protagonista, magia_protagonista FROM protagonista where id_sessao = ?";
+    try {
+	PreparedStatement PSTM = conn.prepareStatement(query);
+    PSTM.setInt(1,AV.getIdsessao());
+    ResultSet resultSet = PSTM.executeQuery();
+    while (resultSet.next()) {
+    	
+    	return resultSet;
+    }PSTM.close();
+	} catch (SQLException e) {
+		e.printStackTrace();
+		return null;
+	}
+    return null;
+}
+public void criarRegistroProta() {
+	conn = new ConexaoDAO().conectabd();
+	String sql = ("insert into protagonista(id_SESSAO) value (?);");
+	AuxiliarVO AV = new AuxiliarVO(); 
+	try {
+		PSTM = conn.prepareStatement(sql);
+		PSTM.setInt(1, AV.getIdsessao());
+		int i = PSTM.executeUpdate();
+		PSTM.close();
+		if(i>0) {
+			PSTM = conn.prepareStatement("SELECT LAST_INSERT_ID();");
+			ResultSet result = PSTM.executeQuery();
+			if(result.next()) {
+			int id =result.getInt(1);
+			AV.setIdprotagonista(id);
+			PSTM.close();
+			}
+		}
+		PSTM.close();
+	} catch (SQLException e) {
+		System.err.println("erro em criar registro protagonista: " + e);
+	}
+}
 public void SalvarInformaçoes(FichaProtagonistaVO prota) {
 	 conn = new ConexaoDAO().conectabd();
-	String sql1 = "insert into protagonista("
-			+ "nome_protagonista,"
-			+ "ocupacao_protagonista,"
-			+ "idade_Protagonista,"
-			+ "altura_Protagonista,"
-			+ "vida_Protagonista,"
-			+ "defesa_Protagonista,"
-			+ "magia_Protagonista,"
-			+ "Poder,"
-			+ "Forca,"
-			+ "Carisma,"
-			+ "Agilidade,"
-			+ "Intelecto,"
-			+ "id_SESSAO,id_CLASSE) "
-			+ "value (?,?,?,?,?,?,?,?,?,?,?,?,?,?);";
+	 AuxiliarVO AV = new AuxiliarVO();
+	 
+	String sql1 = "update protagonista set nome_protagonista = ?, ocupacao_Protagonista = ?, idade_Protagonista = ?, altura_Protagonista = ?, vida_Protagonista = ?, defesa_Protagonista = ?, magia_Protagonista = ?, Poder = ?, Forca = ?, Carisma = ?, Agilidade = ?, Intelecto = ?, id_CLASSE = ? where id_protagonista = ?;";
 	try {
 		PSTM = conn.prepareStatement(sql1);
 		PSTM.setString(1, prota.getNome_Protagonista());
@@ -45,8 +177,8 @@ public void SalvarInformaçoes(FichaProtagonistaVO prota) {
 		PSTM.setInt(10, prota.getCarisma_Protagonista());
 		PSTM.setInt(11, prota.getAgilidade_Protagonista());
 		PSTM.setInt(12, prota.getIntelecto_Protagonista());
-		PSTM.setInt(13, prota.getFKIdSessao_Protagonista());
-		PSTM.setInt(14, prota.getFkIdClasse_Protagonista());
+		PSTM.setInt(13, prota.getFkIdClasse_Protagonista());
+		PSTM.setInt(14, AV.getIdprotagonista());
 		PSTM.executeUpdate();
 		PSTM.close();
 	}catch(SQLException erro) {

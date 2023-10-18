@@ -1,13 +1,16 @@
 package ANAKIN.MODEL.BO;
 
+import ANAKIN.VIEW.CartasVantagemVIEW;
 import ANAKIN.VIEW.DadosdeJogoVIEW;
 
 public class DadosBO {
-	private int totalD4 = 0;
-	private int totalD6 = 0;
-	private int totalD8 = 0;
-	private int totalD12 = 0;
-	private int totalD20 = 0;
+	int totalD4 = 0;
+	int totalD6 = 0;
+	int totalD8 = 0;
+	int totalD12 = 0;
+	int totalD20 = 0;
+
+	String valorBonus;
 
 	public int getTotalD4() {
 		return totalD4;
@@ -48,6 +51,7 @@ public class DadosBO {
 	public void setTotalD20(int totalD20) {
 		this.totalD20 = totalD20;
 	}
+
 
 	// GERADOR DE D4
 	public String geraD4(int d4) {
@@ -135,33 +139,46 @@ public class DadosBO {
 	}
 
 	public String geraD20(int d20) {
-		int[] vtD20 = new int[d20];
+		CartasVantagemVIEW carta = new CartasVantagemVIEW();
+		CartasBO valores = new CartasBO();
 
+		int[] vtD20 = new int[d20];
+		int segD20;
+		int[] segvtD20 = new int [d20];
 		String stD20 = "";
-		String qtdD20 =  "\n" + d20 + "D20 SELECIONADOS";
+		String segstD20 = "";
+		String qtdD20 = "\n" + d20 + "D20 SELECIONADOS";
 
 		for (int i = 0; i < d20; i++) {
-			int D20 = (int) (Math.random() * 20) + 1;
+	
+
+			int D20 = (int) ((Math.random() * 20) + 1) ;
 			if (D20 == 0) {
 				D20 = 1;
 			}
 			vtD20[i] = D20;
-
+			
+			segD20 = D20 + (int) (Math.random() * 3) + 1;
+			if (segD20 == 0) {
+				segD20 = 1;
+			}
+			segvtD20[i] = segD20;
+			
 			this.totalD20 = totalD20 + D20;
 			stD20 += vtD20[i] + "   ";
+			segstD20 += segvtD20[i] + "   ";
 		}
 
-		String res = "\n" + qtdD20 + "\nVALORES GERADOS = " + stD20;
+		String res = "\n" + qtdD20 + "\nVALORES GERADOS = " + stD20 + "\nBONUS APLICADO = " +  segstD20;
 		return res;
 	}
 
 	public int total(DadosBO total) {
-		int somaFinal = (total.getTotalD4()) + (total.getTotalD6()) 
-						+ (total.getTotalD8()) + (total.getTotalD12()) 
-						+ (total.getTotalD20());
-		
+		int somaFinal = (total.getTotalD4()) + (total.getTotalD6()) + (total.getTotalD8()) + (total.getTotalD12())
+				+ (total.getTotalD20());
+
 		return somaFinal;
-				
+
 	}
 
 }
