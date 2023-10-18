@@ -37,7 +37,6 @@ import ANAKIN.MODEL.DAO.CadastroDAO;
 import ANAKIN.MODEL.DAO.ConexaoDAO;
 import ANAKIN.MODEL.DAO.ControleSessaoDAO;
 import ANAKIN.MODEL.DAO.ManterSessaoDAO;
-import ANAKIN.MODEL.VO.AuxiliarVO;
 import ANAKIN.MODEL.VO.ControleSessaoVO;
 import ANAKIN.MODEL.VO.UsuarioVO;
 
@@ -48,7 +47,7 @@ public class MinhasSessoesVIEW extends JFrame {
 	private JLabel lblMs, lblMens;
 	private JTextField tfBusca;
 
-	private JButton btnBusca, btnAbrir, btnCancelar;
+	private JButton btnBusca, btnAbrir, btnDeletar;
 	private JLabel label1;
 	private JTextField tfSQL;
 	private JButton btExecutar;
@@ -57,13 +56,12 @@ public class MinhasSessoesVIEW extends JFrame {
 
 	private PreparedStatement statement;
 	private ResultSet resultSet;
-	JList<String> listasessoes;
 
 	public MinhasSessoesVIEW() {
 
 		this.setTitle("Projeto ANAKIN ★ ");
 		this.setDefaultCloseOperation(HIDE_ON_CLOSE);
-		this.setBounds(0, 0, 300, 350);
+		this.setBounds(0, 0, 300, 450);
 		this.setLayout(null);
 		this.setResizable(false);
 		this.setBackground(new Color(250, 247, 255));
@@ -115,7 +113,7 @@ public class MinhasSessoesVIEW extends JFrame {
 						recebenome = user.getNome_Usuario();
 					}
 					ArrayList<String> resgistro = nomessessao.chamarinformacoes(recebenome, usuarionome);
-					listasessoes = new JList<>(resgistro.toArray(new String[0]));
+					JList<String> listasessoes = new JList<>(resgistro.toArray(new String[0]));
 					listasessoes.setFont(new Font("Arial", Font.BOLD, 15));
 					recebelista.add(listasessoes);
 
@@ -134,56 +132,60 @@ public class MinhasSessoesVIEW extends JFrame {
 		this.cbSessoes.setBounds(20, 250, 240, 30);
 		this.cbSessoes.setBackground(Color.white);
 		this.cbSessoes.setForeground(Color.black);
-		//this.add(cbSessoes);
+		this.add(cbSessoes);
 
 		this.btnAbrir = new JButton("Abrir");
-		this.btnAbrir.setBounds(35, 250, 100, 25);
+		this.btnAbrir.setBounds(35, 320, 100, 25);
 		this.btnAbrir.setBackground(new Color(90, 61, 171));
 		this.btnAbrir.setForeground(Color.WHITE);
 		this.btnAbrir.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-			UsuarioVO UV = new UsuarioVO();
-			ManterSessaoDAO MSD = new ManterSessaoDAO();
-			AbrirSessaoDAO ASD = new AbrirSessaoDAO();
-			String nomeusuario;
-			String nome =listasessoes.getSelectedValue();
-			System.out.println("sessao selecionada :" + nome);
-			
-			if(MSD.chamar() != null) {
-				nomeusuario = MSD.chamar(); 
-			}else {	
-				nomeusuario = UV.getNome_Usuario();
-			}
-			AuxiliarVO AV = new AuxiliarVO();
-			int id = ASD.RetornaIdSessao(nome, nomeusuario);
-			AV.setIdsessao(id);
-			ASD.SessaoAcessada(id, nome);
-			ControleSessaoVIEW CSV = new ControleSessaoVIEW();
+				ControleSessaoVO controle = new ControleSessaoVO();
+				BuscarSessaoDAO bs = new BuscarSessaoDAO();
+				AbrirSessaoDAO ab = new AbrirSessaoDAO();
+				ArrayList<String> registros = new ArrayList<>();
 				
-				CSV.setVisible(true);
+				int qtd = bs.qtdColunas();
+				String[] ids = new String[qtd];
+				int id = 0;
+				String[] dados = new String[2];
+				bs.retornaIds(ids);
+
+				int nome = cbSessoes.getSelectedIndex();
+				if (nome > 0) {
+					id = Integer.parseInt(ids[nome]);
+					registros = ab.abrirControleSessao(id);
+					
+				}
+				System.out.println(registros);
+				System.out.println(nome);
+				System.out.println(ids);
+				System.out.println(id);
+
 				setVisible(false);
+
+				MenuPrincipalVIEW mn = new MenuPrincipalVIEW();
+				mn.setVisible(false);
+
 			}
 		});
 		this.add(btnAbrir);
 
-		this.btnCancelar = new JButton("Cancelar");
-		this.btnCancelar.setBounds(145, 250, 100, 25);
-		this.btnCancelar.setBackground(new Color(90, 61, 171));
-		this.btnCancelar.setForeground(Color.WHITE);
-		this.btnCancelar.addActionListener(new ActionListener() {
+		this.btnDeletar = new JButton("Deletar");
+		this.btnDeletar.setBounds(145, 320, 100, 25);
+		this.btnDeletar.setBackground(new Color(90, 61, 171));
+		this.btnDeletar.setForeground(Color.WHITE);
+		this.btnDeletar.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				setVisible(false);
-				MenuPrincipalVIEW tela = new MenuPrincipalVIEW();
-				tela.setVisible(true);
+				// TODO Auto-generated method stub
 
 			}
 		});
-		this.add(btnCancelar);
+		this.add(btnDeletar);
 
 	}
 }
-	

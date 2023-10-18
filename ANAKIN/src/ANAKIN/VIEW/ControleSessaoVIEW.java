@@ -1,13 +1,10 @@
- package ANAKIN.VIEW;
+package ANAKIN.VIEW;
 
 
-import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Component;
 import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.Font;
-import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
@@ -15,13 +12,9 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.Timer;
-import java.util.TimerTask;
 
-import javax.swing.BorderFactory;
 import javax.swing.DefaultListModel;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -38,15 +31,6 @@ import javax.swing.ScrollPaneConstants;
 import javax.swing.SwingConstants;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
-
-import ANAKIN.MODEL.DAO.AbrirSessaoDAO;
-import ANAKIN.MODEL.DAO.ControleSessaoDAO;
-import ANAKIN.MODEL.DAO.FichaNPCDAO;
-import ANAKIN.MODEL.DAO.FichaProtagonistaDAO;
-import ANAKIN.MODEL.DAO.ManterSessaoDAO;
-import ANAKIN.MODEL.VO.AuxiliarVO;
-import ANAKIN.MODEL.VO.ControleSessaoVO;
-import ANAKIN.MODEL.VO.UsuarioVO;
 
 /*import ANAKIN.MODEL.DAO.ControleSessaoDAO;
 import ANAKIN.MODEL.DAO.DadosDAO;
@@ -78,8 +62,7 @@ public class ControleSessaoVIEW extends JFrame {
 	private ImageIcon iconbtnCombate;
 	private JLabel lblbtnCombate;
 	private JLabel lblCombate; 
-	int tanto, freio = 0;
-	ResultSet tantoficha;
+
 	
 	public JTextArea getTxtAnotacao() {
 		return txtAnotacao;
@@ -119,26 +102,6 @@ public class ControleSessaoVIEW extends JFrame {
 
 	public ControleSessaoVIEW() {
 		// instanciação dos objetos
-		AbrirSessaoDAO ASD = new AbrirSessaoDAO();
-		ControleSessaoVO CSV = new ControleSessaoVO();
-		int i = ASD.VereficaSessaoAcessada();
-		if(i > 0) {
-			try {
-				ResultSet informaçoes = ASD.retornaInforSessao();
-				while (informaçoes.next()) {
-					String Nome = informaçoes.getString("nome_sessao");
-					String Anotaçoes = informaçoes.getString("anotacoes_sessao");
-					String Inventario = informaçoes.getString("inventario_sessao");
-					CSV.setNome_sessao(Nome);
-					CSV.setAnotacoes_sessao(Anotaçoes);
-					CSV.setInventario_sessao(Inventario);
-				}
-			} catch (Exception e) {
-				System.out.println(e);
-			}
-		}
-		
-		
 
 		this.setTitle("Controle de Sessão ★ ");
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -163,11 +126,8 @@ public class ControleSessaoVIEW extends JFrame {
 		this.lblInventario.setFont(new Font("Arial", Font.BOLD, 18));
 		this.add(lblInventario);
 		
-		if(CSV.getAnotacoes_sessao() != null) {
-			this.txtInventario = new JTextArea(CSV.getInventario_sessao());
-		}else {
-			this.txtInventario = new JTextArea();
-		}
+		
+		this.txtInventario = new JTextArea();
 		this.txtInventario.setFont(new Font("Helvetica", Font.BOLD, 14));
 		this.txtInventario.setLineWrap(true);
 		this.txtInventario.setWrapStyleWord(true);
@@ -184,11 +144,8 @@ public class ControleSessaoVIEW extends JFrame {
 		this.lblAnotacoes.setHorizontalAlignment(SwingConstants.CENTER);
 		this.lblAnotacoes.setFont(new Font("Arial", Font.BOLD, 18));
 		this.add(lblAnotacoes);
-		if(CSV.getAnotacoes_sessao() != null) {
-			this.txtAnotacao = new JTextArea(CSV.getAnotacoes_sessao());
-		}else {
-			this.txtAnotacao = new JTextArea();
-		}
+
+		this.txtAnotacao = new JTextArea();
 		this.txtAnotacao.setFont(new Font("Helvetica", Font.PLAIN, 13));
 		this.txtAnotacao.setLineWrap(true);
 		this.txtAnotacao.setWrapStyleWord(true);
@@ -245,7 +202,6 @@ public class ControleSessaoVIEW extends JFrame {
 
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				ASD.EncerraAcessoSessao();
 				setVisible(false);
 				MenuPrincipalVIEW tela = new MenuPrincipalVIEW();
 				tela.setVisible(true);
@@ -260,12 +216,7 @@ public class ControleSessaoVIEW extends JFrame {
 		this.lblNome.setForeground(new Color(90, 61, 171));
 		this.add(lblNome);
 
-		
-		if(CSV.getNome_sessao() != null) {
-			this.tfNome = new JTextField(CSV.getNome_sessao());
-		}else {
-			this.tfNome = new JTextField();
-		}
+		this.tfNome = new JTextField(20);
 		this.tfNome.setBounds(50, 40, 160, 25);
 		this.tfNome.setBorder(javax.swing.BorderFactory.createLineBorder(new Color(90, 61, 171), 2));
 		this.add(tfNome);
@@ -275,9 +226,9 @@ public class ControleSessaoVIEW extends JFrame {
 		this.btnSalva.setFont(new Font("Arial", Font.BOLD, 15));
 		this.btnSalva.setBackground(new Color(90, 61, 171));
 		this.btnSalva.setForeground(Color.white);
-		this.btnSalva.addActionListener(new ActionListener() {
+		//this.btnSalva.addActionListener(new ActionListener() {
 
-			@Override
+			/*@Override
 			public void actionPerformed(ActionEvent e) {
 
 				ControleSessaoDAO salvar = new ControleSessaoDAO();
@@ -311,7 +262,7 @@ public class ControleSessaoVIEW extends JFrame {
 				JOptionPane.showMessageDialog(null, "INFORMAÇÕES FORAM SALVAS!");
 
 			}
-		});
+		});*/
 		this.add(btnSalva);
 
 
@@ -329,127 +280,13 @@ public class ControleSessaoVIEW extends JFrame {
 		this.lblNPCs.setFont(new Font("Arial", Font.BOLD, 18));
 		this.add(lblNPCs);
 		
-		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBorder(javax.swing.BorderFactory.createLineBorder(new Color(90, 61, 171), 2));
-		scrollPane.setBackground(new Color(235, 223, 255));
-		scrollPane.setBounds(250, 40, 300, 180);
-		add(scrollPane);
-
-		JPanel borderlaoutpanel = new JPanel();
-		scrollPane.setViewportView(borderlaoutpanel);
-		borderlaoutpanel.setLayout(new BorderLayout(0, 0));
-
-		JPanel columnpanel = new JPanel();
-		borderlaoutpanel.add(columnpanel, BorderLayout.NORTH);
-		columnpanel.setLayout(new GridLayout(0, 3, 0, 3));
-		columnpanel.setBackground(new Color(235, 223, 255));
-
-		FichaProtagonistaDAO FPD = new FichaProtagonistaDAO();
-		Timer time = new Timer();
-		TimerTask atualiza = new TimerTask() {
-
-			@Override
-			public void run() {
-				try {
-					tanto = FPD.retornaTantoFicha();
-					tantoficha = FPD.informaçoesbaseFP();
-					while (tanto > freio) {
-						freio = freio + 1;
-
-						if (tantoficha.next()) {
-
-							String nomeperso = tantoficha.getString(1);
-
-							boolean painelExistente = false;
-							Component[] components = columnpanel.getComponents();
-							for (Component component : components) {
-								if (component instanceof JPanel) {
-									JPanel existingPanel = (JPanel) component;
-									if (existingPanel.getComponentCount() >= 1) {
-										JLabel label = (JLabel) existingPanel.getComponent(0);
-										if (label.getText().equals("Nome: " + nomeperso)
-												|| label.getText().equals("Nome: " + "")) {
-											painelExistente = true;
-											break;
-										}
-									}
-								}
-							}
-
-							if (!painelExistente) {
-								// Adicione o painel somente se não existir
-								JPanel rowPanel = new JPanel();
-								rowPanel.setPreferredSize(new Dimension(70, 120));
-								rowPanel.setBorder(BorderFactory.createLineBorder(new Color(235, 223, 255), 4));
-								rowPanel.setBackground(new Color(250, 247, 255));
-								rowPanel.setLayout(new GridLayout(5, 1));
-
-								JLabel nome = new JLabel("Nome: " + nomeperso);
-								nome.setHorizontalAlignment(SwingConstants.CENTER);
-								rowPanel.add(nome);
-								JLabel vida = new JLabel("Vida: " + tantoficha.getString(2));
-								vida.setHorizontalAlignment(SwingConstants.CENTER);
-								rowPanel.add(vida);
-								JLabel def = new JLabel("Defesa: " + tantoficha.getString(3));
-								def.setHorizontalAlignment(SwingConstants.CENTER);
-								rowPanel.add(def);
-								JLabel mag = new JLabel("Magia: " + tantoficha.getString(4));
-								mag.setHorizontalAlignment(SwingConstants.CENTER);
-								rowPanel.add(mag);
-
-								JButton btn = new JButton("Selecionar");
-								btn.setBackground(new Color(250, 247, 255));
-								btn.addActionListener(new ActionListener() {
-
-									@Override
-									public void actionPerformed(ActionEvent e) {
-										FichaProtagonistaVIEW FPV = new FichaProtagonistaVIEW();
-										FichaProtagonistaDAO FPD = new FichaProtagonistaDAO();
-										
-										int i = FPD.VereficaprotaAcessado();
-										if (i > 0) {
-											
-											try {
-												System.out.println(nomeperso);
-												int idprota = FPD.retornaidprotagonista(nomeperso);
-												AuxiliarVO.setIdprotagonista(idprota);
-												AuxiliarVO.setNomeprotagonista(nomeperso);
-												FPD.AcessaprotaAcessado(nomeperso);
-												
-												FPV.setVisible(true);
-												
-											} catch (Exception erro) {
-												erro.printStackTrace();
-											}
-
-										}
-
-									}
-								});
-								rowPanel.add(btn);
-
-								columnpanel.add(rowPanel);
-							}
-
-						}
-					}
-				} catch (Exception e) {
-					System.err.println(e);
-				}
-
-			}
-
-		};
-		time.schedule(atualiza, 1000, 2000);
-		this.jpProtagonistas = new JPanel();
+		
+		this.jpProtagonistas = new JPanel(); 
 		this.jpProtagonistas.setLayout(null);
-		this.jpProtagonistas.setBackground(new Color(235, 223, 255));
+		this.jpProtagonistas.setBackground(new Color(235,223,255));
 		this.jpProtagonistas.setBounds(250, 40, 300, 180);
 		this.jpProtagonistas.setBorder(javax.swing.BorderFactory.createLineBorder(new Color(90, 61, 171), 2));
 		this.add(jpProtagonistas);
-
-		
-	
 
 		this.jpNPCs = new JPanel(); 
 		this.jpNPCs.setLayout(null);
@@ -478,10 +315,7 @@ public class ControleSessaoVIEW extends JFrame {
 
 			@Override
 			public void mouseClicked(MouseEvent e) {
-			FichaProtagonistaDAO FPD = new FichaProtagonistaDAO();
-			FPD.criarRegistroProta();
-			FichaProtagonistaVIEW FPV = new FichaProtagonistaVIEW();
-			FPV.setVisible(true);
+				// A telinha da Ficha de Protagonistas lala
 				
 			}
 		});
@@ -512,10 +346,7 @@ public class ControleSessaoVIEW extends JFrame {
 
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				FichaNPCDAO FND = new FichaNPCDAO();
-				FND.criandoRegistroNPC();
-				FichaNpcVIEW tela = new FichaNpcVIEW();
-				tela.setVisible(true);
+				// A telinha da Ficha de NPCs lala
 				
 			}
 		});
@@ -643,14 +474,14 @@ public class ControleSessaoVIEW extends JFrame {
 	}
 
 	
-	/*public static void abre() {
+	public static void abre() {
 		ControleSessaoVIEW frame = new ControleSessaoVIEW();
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setResizable(false);
 		frame.setVisible(true);
 		Dimension tela = Toolkit.getDefaultToolkit().getScreenSize();
 		frame.setLocation((tela.width - frame.getSize().width)/2,(tela.height - frame.getSize().height)/2);
-	}*/
+	}
 	
 	
 }
