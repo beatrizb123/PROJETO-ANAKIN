@@ -1,5 +1,6 @@
 package ANAKIN.VIEW;
 
+import java.awt.Color;
 import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.Toolkit;
@@ -12,6 +13,8 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 
+import ANAKIN.MODEL.DAO.AbrirSessaoDAO;
+import ANAKIN.MODEL.DAO.DadosDAO;
 import ANAKIN.MODEL.DAO.NovoControleDAO;
 import ANAKIN.MODEL.VO.AuxiliarVO;
 import ANAKIN.MODEL.VO.ControleSessaoVO;
@@ -28,7 +31,7 @@ public class NovoControleSessaoVIEW extends JFrame{
 	public NovoControleSessaoVIEW(){
 		this.setTitle("Nova Sessão");
 		this.setDefaultCloseOperation(HIDE_ON_CLOSE);
-		this.setBounds(0, 0, 250, 200);
+		this.setBounds(0, 0, 280, 150);
 		this.setLayout(null);
 		this.setResizable(false);
 		
@@ -39,15 +42,17 @@ public class NovoControleSessaoVIEW extends JFrame{
 		this.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/Imagens/jupiter.png")));
 
 		this.lblMsg = new JLabel("Nome do novo controle de sessão:");
-		this.lblMsg.setBounds(20, 10, 200, 20);
+		this.lblMsg.setBounds(35, 10, 200, 20);
 		this.add(lblMsg);
 		
 		this.txtNome = new JTextField();
-		this.txtNome.setBounds(25, 40, 180, 20);
+		this.txtNome.setBounds(35, 35, 200, 25);
 		this.add(txtNome);
 		
 		this.btnCancelar = new JButton("Cancelar");
-		this.btnCancelar.setBounds(25, 65, 80, 25);
+		this.btnCancelar.setBounds(35, 75, 90, 25);
+		this.btnCancelar.setBackground(new Color(90, 61, 171));
+		this.btnCancelar.setForeground(Color.WHITE);
 		this.btnCancelar.addActionListener(new ActionListener() {
 			
 			@Override
@@ -62,14 +67,17 @@ public class NovoControleSessaoVIEW extends JFrame{
 		this.add(btnCancelar);
 		
 		this.btnContinuar = new JButton("Continuar");
-		this.btnContinuar.setBounds(125, 65, 80, 25);
+		this.btnContinuar.setBounds(145, 75, 90, 25);
+		this.btnContinuar.setBackground(new Color(90, 61, 171));
+		this.btnContinuar.setForeground(Color.WHITE);
 		this.btnContinuar.addActionListener(new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				setVisible(false);
 				
-				
+				AbrirSessaoDAO ASD = new AbrirSessaoDAO();
+				ASD.EncerraAcessoSessao();
 				nomeSessao = txtNome.getText();
 				
 				NovoControleDAO novo = new NovoControleDAO();
@@ -80,6 +88,9 @@ public class NovoControleSessaoVIEW extends JFrame{
 				
 				ControleSessaoVO dados = new ControleSessaoVO();
 				dados.setNome_sessao(nomeSessao);
+				
+				DadosDAO criarDados = new DadosDAO();
+				criarDados.criarRegistro();
 				
 				ControleSessaoVIEW sessao = new ControleSessaoVIEW();
 				sessao.setVisible(true);
