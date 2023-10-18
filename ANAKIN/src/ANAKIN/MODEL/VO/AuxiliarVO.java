@@ -2,6 +2,16 @@ package ANAKIN.MODEL.VO;
 
 public class AuxiliarVO {
 	private static int idprotagonista;
+	private static String nomeprotagonista;
+	
+	public static String getNomeprotagonista() {
+		return nomeprotagonista;
+	}
+
+	public static void setNomeprotagonista(String nomeprotagonista) {
+		AuxiliarVO.nomeprotagonista = nomeprotagonista;
+	}
+
 	public static int getIdprotagonista() {
 		return idprotagonista;
 	}

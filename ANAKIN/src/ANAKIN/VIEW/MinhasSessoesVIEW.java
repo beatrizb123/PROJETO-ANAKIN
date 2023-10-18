@@ -150,20 +150,22 @@ public class MinhasSessoesVIEW extends JFrame {
 			String nomeusuario;
 			String nome =listasessoes.getSelectedValue();
 			System.out.println("sessao selecionada :" + nome);
-			
+			AuxiliarVO AV = new AuxiliarVO();
 			if(MSD.chamar() != null) {
 				nomeusuario = MSD.chamar(); 
 			}else {
 				nomeusuario = UV.getNome_Usuario();
 			}
-			AuxiliarVO AV = new AuxiliarVO();
+			
 			int id = ASD.RetornaIdSessao(nome, nomeusuario);
 			AV.setIdsessao(id);
 			ASD.SessaoAcessada(id, nome);
+			
 			ControleSessaoVIEW CSV = new ControleSessaoVIEW();
+				CSV.setVisible(true);
 				MenuPrincipalVIEW mn = new MenuPrincipalVIEW();
 				mn.setVisible(false);
-				CSV.setVisible(true);
+				
 			}
 		});
 		this.add(btnAbrir);
