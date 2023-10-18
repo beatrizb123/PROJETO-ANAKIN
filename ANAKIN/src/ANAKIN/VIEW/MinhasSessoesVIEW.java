@@ -48,7 +48,7 @@ public class MinhasSessoesVIEW extends JFrame {
 	private JLabel lblMs, lblMens;
 	private JTextField tfBusca;
 
-	private JButton btnBusca, btnAbrir, btnDeletar;
+	private JButton btnBusca, btnAbrir, btnCancelar;
 	private JLabel label1;
 	private JTextField tfSQL;
 	private JButton btExecutar;
@@ -63,7 +63,7 @@ public class MinhasSessoesVIEW extends JFrame {
 
 		this.setTitle("Projeto ANAKIN ★ ");
 		this.setDefaultCloseOperation(HIDE_ON_CLOSE);
-		this.setBounds(0, 0, 300, 450);
+		this.setBounds(0, 0, 300, 350);
 		this.setLayout(null);
 		this.setResizable(false);
 		this.setBackground(new Color(250, 247, 255));
@@ -134,10 +134,10 @@ public class MinhasSessoesVIEW extends JFrame {
 		this.cbSessoes.setBounds(20, 250, 240, 30);
 		this.cbSessoes.setBackground(Color.white);
 		this.cbSessoes.setForeground(Color.black);
-		this.add(cbSessoes);
+		//this.add(cbSessoes);
 
 		this.btnAbrir = new JButton("Abrir");
-		this.btnAbrir.setBounds(35, 320, 100, 25);
+		this.btnAbrir.setBounds(35, 250, 100, 25);
 		this.btnAbrir.setBackground(new Color(90, 61, 171));
 		this.btnAbrir.setForeground(Color.WHITE);
 		this.btnAbrir.addActionListener(new ActionListener() {
@@ -150,39 +150,40 @@ public class MinhasSessoesVIEW extends JFrame {
 			String nomeusuario;
 			String nome =listasessoes.getSelectedValue();
 			System.out.println("sessao selecionada :" + nome);
-			AuxiliarVO AV = new AuxiliarVO();
+			
 			if(MSD.chamar() != null) {
 				nomeusuario = MSD.chamar(); 
-			}else {
+			}else {	
 				nomeusuario = UV.getNome_Usuario();
 			}
-			
+			AuxiliarVO AV = new AuxiliarVO();
 			int id = ASD.RetornaIdSessao(nome, nomeusuario);
 			AV.setIdsessao(id);
 			ASD.SessaoAcessada(id, nome);
-			
 			ControleSessaoVIEW CSV = new ControleSessaoVIEW();
-				CSV.setVisible(true);
-				MenuPrincipalVIEW mn = new MenuPrincipalVIEW();
-				mn.setVisible(false);
 				
+				CSV.setVisible(true);
+				setVisible(false);
 			}
 		});
 		this.add(btnAbrir);
 
-		this.btnDeletar = new JButton("Deletar");
-		this.btnDeletar.setBounds(145, 320, 100, 25);
-		this.btnDeletar.setBackground(new Color(90, 61, 171));
-		this.btnDeletar.setForeground(Color.WHITE);
-		this.btnDeletar.addActionListener(new ActionListener() {
+		this.btnCancelar = new JButton("Cancelar");
+		this.btnCancelar.setBounds(145, 250, 100, 25);
+		this.btnCancelar.setBackground(new Color(90, 61, 171));
+		this.btnCancelar.setForeground(Color.WHITE);
+		this.btnCancelar.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
+				setVisible(false);
+				MenuPrincipalVIEW tela = new MenuPrincipalVIEW();
+				tela.setVisible(true);
 
 			}
 		});
-		this.add(btnDeletar);
+		this.add(btnCancelar);
 
 	}
 }
+	

@@ -72,10 +72,10 @@ public class MenuPrincipalVIEW extends JFrame {
 		}
 
 		this.lblNome = new JLabel("OLÁ, " + nome + "!");
-		this.lblNome.setBounds(15, 30, 150, 25);
+		this.lblNome.setBounds(10, 35, 200, 25);
 		this.lblNome.setForeground(new Color(90, 61, 171));
 		this.lblNome.setHorizontalAlignment(SwingConstants.CENTER);
-		this.lblNome.setFont(new Font("Arial", Font.BOLD, 14));
+		this.lblNome.setFont(new Font("Arial", Font.BOLD, 16));
 		this.add(lblNome);
 
 		this.lblAnakin = new JLabel("ANAKIN");
@@ -149,6 +149,7 @@ public class MenuPrincipalVIEW extends JFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				setVisible(false);
 				MinhasSessoesVIEW tela = new MinhasSessoesVIEW();
 				tela.setVisible(true);
 			}

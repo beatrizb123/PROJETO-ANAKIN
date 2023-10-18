@@ -45,14 +45,16 @@ public class DadosdeJogoVIEW extends JFrame {
 	private ImageIcon imgIcon;
 	
 	private JScrollPane spResultados;
-	private JTextArea txtaResultados;
+	JTextArea txtaResultados;
 	
 	private ImageIcon dadosWall;
 	private JLabel bckgDados;
 	private ImageIcon iconCartas;
 	private JLabel lbliconCartas, lblCartas; 
-
-
+	
+	JLabel a;
+	
+	
 	public DadosdeJogoVIEW() {
 
 		this.setTitle("Dados de Jogo");
@@ -333,7 +335,8 @@ public class DadosdeJogoVIEW extends JFrame {
 				int d8 = Integer.parseInt(txtD8.getText());
 				int d12 = Integer.parseInt(txtD12.getText());
 				int d20 = Integer.parseInt(txtD20.getText());
-
+				
+				
 				String resultados = "";
 				String total = "\nTOTAL = " + Integer.toString(calcula.total(calcula));
 
@@ -354,29 +357,39 @@ public class DadosdeJogoVIEW extends JFrame {
 				}
 
 				
-				txtaResultados.setText(resultados + "" );
+				txtaResultados.setText(resultados + "");
 				
 				
-				DadosVO registro = new DadosVO();
+				DadosVO DV = new DadosVO();
 				DadosDAO salvar = new DadosDAO();
 
 				String resgistrar = resultados;
 
-				registro.setRegistro(resgistrar);
+				DV.setRegistro(resgistrar);
 
-				salvar.salvarRegistro(registro);
-
-				JOptionPane.showMessageDialog(null, "INFORMAÇÕES FORAM SALVAS!");
+				salvar.salvarRegistro(DV);
 
 			}
 		});
 		
 		this.add(btnRolar);
 		
+		this.a = new JLabel(".");
+		this.a.setBounds(90, 380, 30, 30);
+		this.a.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				CartasVantagemVIEW tela = new CartasVantagemVIEW();
+				tela.setVisible(true);
+				
+			}
+		});
+		this.add(a);
+		
 		this.iconCartas = new ImageIcon(getClass().getResource("/Imagens/Cartas de Vantagem.png"));
 		this.lbliconCartas = new JLabel(iconCartas);
 		this.lbliconCartas.setToolTipText("Cartas de Vantagem");
-		this.lbliconCartas.setBounds(90, 350, 100, 100);
+		this.lbliconCartas.setBounds(90, 360, 100, 100);
 		this.lbliconCartas.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseEntered(MouseEvent e) {
@@ -390,11 +403,12 @@ public class DadosdeJogoVIEW extends JFrame {
 				lbliconCartas.setIcon(iconCartas);
 			}
 
-			/*@Override
+			@Override
 			public void mouseClicked(MouseEvent e) {
-				ABRE TELA DAS CARTAS
+				CartasVantagemVIEW tela = new CartasVantagemVIEW();
+				//tela.setVisible(true);
 				
-			}*/
+			}
 		});
 		this.add(lbliconCartas);
 		
