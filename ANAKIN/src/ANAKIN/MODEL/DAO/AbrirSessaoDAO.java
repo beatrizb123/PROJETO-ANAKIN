@@ -37,10 +37,18 @@ public class AbrirSessaoDAO {
 			PSTM = conn.prepareStatement(SQL);
 			PSTM.setInt(1, AV.getIdsessao());
 			ResultSet informaçoes = PSTM.executeQuery();
+
 			System.out.println(informaçoes);
 			return informaçoes;
 		} catch (SQLException e) {
 			System.err.println("erro ao retornar informaçoes :" + e);
+			return null;
+		}
+	}
+
+			return informaçoes;
+		} catch (SQLException e) {
+			System.err.println("erro ao retornar informaçoes :"+e);
 			return null;
 		}
 	}
@@ -52,9 +60,15 @@ public class AbrirSessaoDAO {
 		try {
 			PSTM = conn.prepareStatement(SQL);
 			ResultSet teste = PSTM.executeQuery();
+
 			if (teste.next()) {
 				i = 1;
 			} else {
+
+			if(teste.next()) {
+				i = 1;
+			}else {
+
 				i = 0;
 			}
 			return i;
@@ -63,6 +77,11 @@ public class AbrirSessaoDAO {
 			return 0;
 		}
 
+
+	}
+
+
+		
 	}
 
 	public void SessaoAcessada(int id, String nome) {
@@ -80,7 +99,11 @@ public class AbrirSessaoDAO {
 		}
 	}
 
+
 	public int RetornaIdSessao(String nome, String nomeuser) {
+
+	public int RetornaIdSessao(String nome,String nomeuser) {
+
 		conn = new ConexaoDAO().conectabd();
 		String SQL = "select id_sessao from controle_sessao where nome_sessao = ? and id_usuario = ?;";
 		int id = 0;
@@ -89,13 +112,22 @@ public class AbrirSessaoDAO {
 			PSTM.setString(1, nome);
 			PSTM.setString(2, nomeuser);
 			ResultSet resultado = PSTM.executeQuery();
+
 			while (resultado.next()) {
+
+			while(resultado.next()) {
+
 				id = resultado.getInt(1);
 			}
 			return id;
 		} catch (SQLException e) {
 			System.err.println("erro ao chamar id da sessao :" + e);
 			return (Integer) null;
+		}
+	}
+
+
+			return (Integer)null;
 		}
 	}
 

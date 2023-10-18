@@ -14,6 +14,7 @@ import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.sql.ResultSet;
 
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
@@ -32,6 +33,7 @@ import javax.swing.SpinnerModel;
 import javax.swing.SpinnerNumberModel;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
+import javax.swing.tree.FixedHeightLayoutCache;
 
 import ANAKIN.MODEL.BO.ImagemBO;
 import ANAKIN.MODEL.DAO.FichaProtagonistaDAO;
@@ -58,7 +60,8 @@ public class FichaProtagonistaVIEW extends JFrame {
 
 	String Classes[] = { "Classes", "Combatente", "Feiticeiro", "Healer", "Suporte" };
 	String Atributo[] = { "", "Luta + Esforço", "Magia + Estudo", "Cura + Estudo", "Auxílio + Esforço" };
-	String Imagens[] = { "", "/Imagens/Combatente.png", "/Imagens/Feiticeiro.png", "/Imagens/Healer.png", "/Imagens/Suporte.png" };
+	String Imagens[] = { "", "/Imagens/Combatente.png", "/Imagens/Feiticeiro.png", "/Imagens/Healer.png",
+			"/Imagens/Suporte.png" };
 
 	private JSlider sldVida, sldDefesa, sldMagia;
 
@@ -97,23 +100,32 @@ public class FichaProtagonistaVIEW extends JFrame {
 	public JTextField getTxtAltura() {
 		return txtfAltura;
 	}
-
+ResultSet inforprota;
 	public FichaProtagonistaVIEW() {
 		// instanciação dos objetos
-
+		FichaProtagonistaVO FPV = new FichaProtagonistaVO();
+		FichaProtagonistaDAO FPD = new FichaProtagonistaDAO();
+		AuxiliarVO AV = new AuxiliarVO();
+		int idprota = AV.getIdprotagonista();
+		String nomeperso = AV.getNomeprotagonista(); 
+		inforprota = FPD.retornainfotprota(idprota,nomeperso);
 		// DADOS PESSOAIS
+		try {
+			while(inforprota.next()) {
 		this.setTitle("Ficha de Protagonistas");
 		this.setDefaultCloseOperation(HIDE_ON_CLOSE);
 		this.setResizable(false);
 		this.setBounds(0, 0, 495, 510);
 		this.setLayout(null);
 		this.setBackground(new Color(250, 247, 255));
-
+		
 		Dimension tela = Toolkit.getDefaultToolkit().getScreenSize();
 		this.setLocation((tela.width - getSize().width) / 2, (tela.height - getSize().height) / 2);
-
+		
 		this.container = getContentPane();
-
+		
+				
+			
 		this.iconUsuario = new JLabel("Adicione um icon :D");
 		this.iconUsuario.setHorizontalAlignment((int) CENTER_ALIGNMENT);
 		this.iconUsuario.setLayout(null);
@@ -130,14 +142,16 @@ public class FichaProtagonistaVIEW extends JFrame {
 				jfArquivo.setCurrentDirectory(new File(System.getProperty("user.home")));
 				jfArquivo.showOpenDialog(null);
 				file = jfArquivo.getSelectedFile();
-				//	ImageIcon icon = new ImageIcon(getClass().getResource(Imagens[i]));		iconUsuario.setIcon(icon);;
+				// ImageIcon icon = new ImageIcon(getClass().getResource(Imagens[i]));
+				// iconUsuario.setIcon(icon);;
 				try {
 
 					bfimg = ImageIO.read(file);
 					icon = new ImageIcon(bfimg);
-					
+
 					Image img = icon.getImage();
-					Image tamanhoImg = img.getScaledInstance(iconUsuario.getWidth(), iconUsuario.getHeight(), Image.SCALE_SMOOTH);
+					Image tamanhoImg = img.getScaledInstance(iconUsuario.getWidth(), iconUsuario.getHeight(),
+							Image.SCALE_SMOOTH);
 					ImageIcon iconRed = new ImageIcon(tamanhoImg);
 					iconUsuario.setIcon(iconRed);
 
@@ -155,7 +169,11 @@ public class FichaProtagonistaVIEW extends JFrame {
 		this.lblNome.setBounds(185, 10, 70, 70);
 		this.add(lblNome);
 
+		
 		this.txtfNome = new JTextField(100);
+		if (inforprota != null) {
+			this.txtfNome.setText(inforprota.getString("Nome_protagonista"));
+		}
 		this.txtfNome.setBounds(235, 35, 199, 20);
 		this.add(txtfNome);
 
@@ -165,7 +183,10 @@ public class FichaProtagonistaVIEW extends JFrame {
 		this.lblOcupacao.setBounds(185, 45, 85, 70);
 		this.add(lblOcupacao);
 
+		
 		this.txtfOcupacao = new JTextField(100);
+		if (inforprota != null) {
+			this.txtfOcupacao.setText(inforprota.getString("Ocupacao_Protagonista"));}
 		this.txtfOcupacao.setBounds(265, 70, 170, 20);
 		this.add(txtfOcupacao);
 
@@ -176,6 +197,10 @@ public class FichaProtagonistaVIEW extends JFrame {
 		this.add(lblIdade);
 
 		this.txtfIdade = new JTextField(100);
+		if (inforprota != null) {
+			String idade = String.valueOf(inforprota.getInt("idade_Protagonista"));
+			txtfIdade.setText(idade);
+		}
 		this.txtfIdade.setBounds(235, 108, 70, 20);
 		this.add(txtfIdade);
 
@@ -184,7 +209,13 @@ public class FichaProtagonistaVIEW extends JFrame {
 		this.lblAltura.setFont(new Font("Arial", Font.BOLD, 15));
 		this.lblAltura.setBounds(315, 78, 85, 70);
 		this.add(lblAltura);
-
+		
+		this.txtfAltura = new JTextField();
+		if (inforprota != null) {
+			Float altura = inforprota.getFloat("altura_Protagonista");
+			String alturatxt = String.valueOf(altura);
+			txtfAltura.setText(alturatxt);
+		}
 		this.txtfAltura = new JTextField(100);
 		this.txtfAltura.setBounds(365, 103, 70, 20);
 		this.add(txtfAltura);
@@ -195,6 +226,23 @@ public class FichaProtagonistaVIEW extends JFrame {
 		this.ComboClasses.setForeground(new Color(90, 61, 171));
 		this.ComboClasses.setFont(new Font("Arial", Font.BOLD, 15));
 		this.ComboClasses.setBounds(185, 145, 115, 20);
+		if(inforprota != null) {
+		
+			switch(inforprota.getInt("id_CLASSE")){
+			case 1 :
+				this.ComboClasses.setSelectedItem("Combatente");
+				break;
+			case 2 :
+				this.ComboClasses.setSelectedItem("Feiticeiro");
+				break;
+			case 3 :
+				this.ComboClasses.setSelectedItem("Healer");
+				break;
+			case 4 :
+				this.ComboClasses.setSelectedItem("Suporte");
+				break;
+			}
+		}
 		this.add(ComboClasses);
 
 		this.lblAtributos = new JLabel(Atributo[0]);
@@ -208,14 +256,14 @@ public class FichaProtagonistaVIEW extends JFrame {
 				int i = ComboClasses.getSelectedIndex();
 				String mostrarAtributos = Atributo[i];
 				lblAtributos.setText(mostrarAtributos);
-				
+
 				if (file == null) {
-					
+
 					ImageIcon icon = new ImageIcon(getClass().getResource(Imagens[i]));
 					iconUsuario.setText("");
 					iconUsuario.setHorizontalAlignment((int) CENTER_ALIGNMENT);
 					iconUsuario.setIcon(icon);
-					
+
 				}
 			}
 		});
@@ -235,6 +283,7 @@ public class FichaProtagonistaVIEW extends JFrame {
 		this.add(nivelVida);
 
 		this.pcVida = new JLabel("100" + "%");
+
 		this.pcVida.setFont(new Font("Arial", Font.BOLD, 14));
 		this.pcVida.setBounds(198, 225, 40, 18);
 		this.add(pcVida);
@@ -245,7 +294,12 @@ public class FichaProtagonistaVIEW extends JFrame {
 		this.sldVida.setMajorTickSpacing(20);
 		this.sldVida.setMinorTickSpacing(5);
 		this.sldVida.setPaintTicks(true);
-		this.sldVida.setValue(100);
+		if (inforprota != null) {
+			this.sldVida.setValue(inforprota.getInt("Vida_Protagonista"));
+			;
+		} else {
+			this.sldVida.setValue(100);
+		}
 		this.sldVida.setBounds(87, 225, 105, 30);
 
 		this.sldVida.addChangeListener(new ChangeListener() {
@@ -270,12 +324,17 @@ public class FichaProtagonistaVIEW extends JFrame {
 		this.add(pcDefesa);
 
 		this.sldDefesa = new JSlider();
+
 		this.sldDefesa.setBackground(new Color(235, 223, 255));
 		this.sldDefesa.setForeground(new Color(90, 61, 171));
 		this.sldDefesa.setMajorTickSpacing(20);
 		this.sldDefesa.setMinorTickSpacing(5);
 		this.sldDefesa.setPaintTicks(true);
-		this.sldDefesa.setValue(100);
+		if (inforprota != null) {
+			this.sldDefesa.setValue(inforprota.getInt("defesa_Protagonista"));
+		} else {
+			this.sldDefesa.setValue(100);
+		}
 		this.sldDefesa.setBounds(87, 260, 105, 30);
 
 		this.sldDefesa.addChangeListener(new ChangeListener() {
@@ -306,7 +365,11 @@ public class FichaProtagonistaVIEW extends JFrame {
 		this.sldMagia.setMajorTickSpacing(20);
 		this.sldMagia.setMinorTickSpacing(5);
 		this.sldMagia.setPaintTicks(true);
-		this.sldMagia.setValue(100);
+		if(inforprota != null) {
+			this.sldMagia.setValue(inforprota.getInt("magia_Protagonista"));
+		}else {
+			this.sldMagia.setValue(100);
+		}
 		this.sldMagia.setBounds(87, 290, 105, 30);
 
 		this.sldMagia.addChangeListener(new ChangeListener() {
@@ -335,6 +398,9 @@ public class FichaProtagonistaVIEW extends JFrame {
 
 		SpinnerModel valuePoder = new SpinnerNumberModel(1, 0, 5, 1);
 		this.spnPoder = new JSpinner(valuePoder);
+		if(inforprota != null) {
+			this.spnPoder.setValue(inforprota.getInt("Poder"));
+		}
 		this.spnPoder.setEditor(new JSpinner.DefaultEditor(spnPoder));
 		this.spnPoder.setBounds(258, 245, 50, 20);
 		this.add(spnPoder);
@@ -347,6 +413,9 @@ public class FichaProtagonistaVIEW extends JFrame {
 
 		SpinnerModel valueForca = new SpinnerNumberModel(1, 0, 5, 1);
 		this.spnForca = new JSpinner(valueForca);
+		if(inforprota != null) {
+			this.spnForca.setValue(inforprota.getInt("Forca"));
+		}
 		this.spnForca.setEditor(new JSpinner.DefaultEditor(spnForca));
 		this.spnForca.setBounds(328, 245, 50, 20);
 		this.add(spnForca);
@@ -359,6 +428,9 @@ public class FichaProtagonistaVIEW extends JFrame {
 
 		SpinnerModel valueCarisma = new SpinnerNumberModel(1, 0, 5, 1);
 		this.spnCarisma = new JSpinner(valueCarisma);
+		if(inforprota != null) {
+			this.spnCarisma.setValue(inforprota.getInt("Carisma"));
+		}
 		this.spnCarisma.setEditor(new JSpinner.DefaultEditor(spnCarisma));
 		this.spnCarisma.setBounds(394, 245, 50, 20);
 		this.add(spnCarisma);
@@ -366,11 +438,14 @@ public class FichaProtagonistaVIEW extends JFrame {
 		this.lblAgilidade = new JLabel("Agilidade:");
 		this.lblAgilidade.setForeground(new Color(90, 61, 171));
 		this.lblAgilidade.setFont(new Font("Arial", Font.BOLD, 14));
-		this.lblAgilidade.setBounds(280, 275, 80, 20);  		 	
+		this.lblAgilidade.setBounds(280, 275, 80, 20);
 		this.add(lblAgilidade);
 
 		SpinnerModel valueAgilidade = new SpinnerNumberModel(1, 0, 5, 1);
 		this.spnAgilidade = new JSpinner(valueAgilidade);
+		if(inforprota != null) {
+			spnAgilidade.setValue(inforprota.getInt("Agilidade"));
+		}
 		this.spnAgilidade.setEditor(new JSpinner.DefaultEditor(spnAgilidade));
 		this.spnAgilidade.setBounds(285, 295, 55, 20);
 		this.add(spnAgilidade);
@@ -383,6 +458,9 @@ public class FichaProtagonistaVIEW extends JFrame {
 
 		SpinnerModel valueIntelecto = new SpinnerNumberModel(1, 0, 5, 1);
 		this.spnIntelecto = new JSpinner(valueIntelecto);
+		if(inforprota != null) {
+			this.spnIntelecto.setValue(inforprota.getInt("Intelecto"));
+		}
 		this.spnIntelecto.setEditor(new JSpinner.DefaultEditor(spnIntelecto));
 		this.spnIntelecto.setBounds(365, 295, 50, 20);
 		this.add(spnIntelecto);
@@ -438,10 +516,10 @@ public class FichaProtagonistaVIEW extends JFrame {
 					}
 
 					AuxiliarVO AV = new AuxiliarVO();
-					
+
 					ControleSessaoVO CSV = new ControleSessaoVO();
-					int sessao = CSV.getId_sessao();
 					
+
 					FPV.setNome_Protagonista(nome);
 					FPV.setOcupaçao_Protagonista(ocupacao);
 					FPV.setIdade_Protagonista(idade);
@@ -455,7 +533,6 @@ public class FichaProtagonistaVIEW extends JFrame {
 					FPV.setAgilidade_Protagonista(agilidade);
 					FPV.setIntelecto_Protagonista(intelecto);
 					FPV.setFkIdClasse_Protagonista(classe);
-					FPV.setFKIdSessao_Protagonista(sessao);
 
 					FPD.SalvarInformaçoes(FPV);
 					JOptionPane.showMessageDialog(null, "salvo com sucesso");
@@ -487,7 +564,10 @@ public class FichaProtagonistaVIEW extends JFrame {
 
 		this.imgIcon = new ImageIcon("jupiter.png");
 		this.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/Imagens/jupiter.png")));
-
+}
+			}catch(Exception erro){
+				erro.printStackTrace();
+			}
 	}
 
 }

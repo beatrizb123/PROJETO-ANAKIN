@@ -1,7 +1,27 @@
 package ANAKIN.MODEL.VO;
 
 public class AuxiliarVO {
+
 	// variaveis auxiliares
+	private static int idprotagonista;
+	private static String nomeprotagonista;
+	
+	public static String getNomeprotagonista() {
+		return nomeprotagonista;
+	}
+
+	public static void setNomeprotagonista(String nomeprotagonista) {
+		AuxiliarVO.nomeprotagonista = nomeprotagonista;
+	}
+
+	public static int getIdprotagonista() {
+		return idprotagonista;
+	}
+
+	public static void setIdprotagonista(int idprotagonista) {
+		AuxiliarVO.idprotagonista = idprotagonista;
+	}
+
 	private static int idusuario;
 	private static int idsessao;
 	private static int idprotagonista;

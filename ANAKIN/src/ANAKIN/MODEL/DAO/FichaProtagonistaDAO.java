@@ -60,6 +60,8 @@ public ResultSet retornainfotprota(int id,String nome) {
 			+ "agilidade,"
 			+ "intelecto,"
 			+ "id_classe FROM protagonista where id_protagonista = ? and nome_protagonista = ?;";
+			+ "id_classe FROM protagonista where id_protagonista = 10 and nome_protagonista = 'tatakae';";
+
 	try {
 		PSTM = conn.prepareStatement(SQL);
 		//PSTM.setInt(1, id);
