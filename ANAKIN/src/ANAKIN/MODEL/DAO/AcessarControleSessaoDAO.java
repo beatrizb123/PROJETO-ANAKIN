@@ -49,7 +49,7 @@ public class AcessarControleSessaoDAO {
 	 * 
 	 */
 	
-	public int retornaIDSessaoDAO() {
+	/*public int retornaIDSessaoDAO() {
 		conn = new ConexaoDAO().conectabd();
 		ManterSessaoDAO MSD = new ManterSessaoDAO();
 		UsuarioVO UV = new UsuarioVO();
@@ -81,7 +81,7 @@ public class AcessarControleSessaoDAO {
 			System.err.println("erro na conexa:" + erro);
 			return (Integer)null;
 		}
-}
+}*/
 
 	
 }

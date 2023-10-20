@@ -46,13 +46,6 @@ public class AbrirSessaoDAO {
 		}
 	}
 
-			return informaçoes;
-		} catch (SQLException e) {
-			System.err.println("erro ao retornar informaçoes :"+e);
-			return null;
-		}
-	}
-
 	public int VereficaSessaoAcessada() {
 		conn = new ConexaoDAO().conectabd();
 		String SQL = "select id_sessao from SessaoAcessada where idPorta = 1;";
@@ -65,10 +58,6 @@ public class AbrirSessaoDAO {
 				i = 1;
 			} else {
 
-			if(teste.next()) {
-				i = 1;
-			}else {
-
 				i = 0;
 			}
 			return i;
@@ -76,12 +65,6 @@ public class AbrirSessaoDAO {
 			System.out.println("erro ao vereficar SessaoAcessada: " + e);
 			return 0;
 		}
-
-
-	}
-
-
-		
 	}
 
 	public void SessaoAcessada(int id, String nome) {
@@ -99,10 +82,7 @@ public class AbrirSessaoDAO {
 		}
 	}
 
-
 	public int RetornaIdSessao(String nome, String nomeuser) {
-
-	public int RetornaIdSessao(String nome,String nomeuser) {
 
 		conn = new ConexaoDAO().conectabd();
 		String SQL = "select id_sessao from controle_sessao where nome_sessao = ? and id_usuario = ?;";
@@ -115,19 +95,12 @@ public class AbrirSessaoDAO {
 
 			while (resultado.next()) {
 
-			while(resultado.next()) {
-
 				id = resultado.getInt(1);
 			}
 			return id;
 		} catch (SQLException e) {
 			System.err.println("erro ao chamar id da sessao :" + e);
 			return (Integer) null;
-		}
-	}
-
-
-			return (Integer)null;
 		}
 	}
 

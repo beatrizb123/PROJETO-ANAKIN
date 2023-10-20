@@ -19,7 +19,7 @@ import javax.swing.border.Border;
 import javax.swing.border.TitledBorder;
 
 
-public class ConfirmaCombateVIEW extends JFrame{
+public class ConfirmacaoCombateVIEW extends JFrame{
 	private JPanel panel;
 	private JCheckBox check;
 	private JCheckBox selecionaTudo;
@@ -28,7 +28,7 @@ public class ConfirmaCombateVIEW extends JFrame{
 	private JButton btConfirmar;
 	
 	
-	public ConfirmaCombateVIEW() {
+	public ConfirmacaoCombateVIEW() {
 		//Instanciação de Objetos
 		this.setTitle("Combate");
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -82,13 +82,11 @@ public class ConfirmaCombateVIEW extends JFrame{
 		
 	}
 	
-	public static void abre() {
-		ConfirmaCombateVIEW frame = new ConfirmaCombateVIEW();
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.setResizable(false);
-		frame.setVisible(true);
-		Dimension tela = Toolkit.getDefaultToolkit().getScreenSize();
-		frame.setLocation((tela.width - frame.getSize().width)/2,(tela.height - frame.getSize().height)/2);
+	
+	
+	public static void main(String[] args) {
+		ConfirmacaoCombateVIEW tela = new ConfirmacaoCombateVIEW();
+		tela.setVisible(true);
 	}
 	
 }
