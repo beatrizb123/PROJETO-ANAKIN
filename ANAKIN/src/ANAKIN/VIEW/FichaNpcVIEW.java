@@ -75,6 +75,11 @@ public class FichaNpcVIEW extends JFrame {
 	private JLabel lblbtnSalvar;
 	private JLabel lblSalvar;
 
+	private ImageIcon iconbtnCancela,iconbtnAnterior,iconbtnProximo;
+	private JLabel  lblbtnCancela,lblbtnAnterior,lblbtnProximo;
+	private JLabel  lblCancela;
+	private JButton btnApagar;
+
 	JFileChooser jfArquivo;
 	BufferedImage bfimg;
 	File file;
@@ -102,7 +107,7 @@ public class FichaNpcVIEW extends JFrame {
 		this.setTitle("Ficha de Npc's");
 		this.setDefaultCloseOperation(HIDE_ON_CLOSE);
 		this.setResizable(false);
-		this.setBounds(0, 0, 495, 550);
+		this.setBounds(0, 0, 495,590);
 		this.setLayout(null);
 		this.setBackground(new Color(250, 247, 255));
 		this.container = getContentPane();
@@ -392,14 +397,14 @@ public class FichaNpcVIEW extends JFrame {
 		this.txtPersonalidade.setWrapStyleWord(true);
 
 		this.spPersonalidade = new JScrollPane(txtPersonalidade);
-		this.spPersonalidade.setBounds(35, 340, 210, 140);
+		this.spPersonalidade.setBounds(35, 340, 220, 125);
 		this.spPersonalidade.setBorder(javax.swing.BorderFactory.createLineBorder(new Color(90, 61, 171), 2));
 		this.add(spPersonalidade);
 
 		this.iconbtnSalvar = new ImageIcon(getClass().getResource("/Imagens/Salvar.png"));
 		this.lblbtnSalvar = new JLabel(iconbtnSalvar);
 		this.lblbtnSalvar.setToolTipText("Salvar");
-		this.lblbtnSalvar.setBounds(300, 330, 120, 120);
+		this.lblbtnSalvar.setBounds(250, 330, 120, 120);
 		this.lblbtnSalvar.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseEntered(MouseEvent e) {
@@ -481,9 +486,79 @@ public class FichaNpcVIEW extends JFrame {
 
 		this.lblSalvar = new JLabel("Salvar");
 		this.lblSalvar.setForeground(new Color(90, 61, 171));
-		this.lblSalvar.setFont(new Font("Arial", Font.BOLD, 16));
-		this.lblSalvar.setBounds(330, 425, 100, 20);
+		this.lblSalvar.setFont(new Font("Arial", Font.BOLD, 15));
+		this.lblSalvar.setBounds(285,415,100, 20);
 		this.add(lblSalvar);
+
+		this.iconbtnCancela = new ImageIcon(getClass().getResource("/Imagens/Salvar.png"));
+		this.lblbtnCancela = new JLabel(iconbtnCancela);
+		this.lblbtnCancela.setToolTipText("Cancelar");
+		this.lblbtnCancela.setBounds(340, 330, 120, 120);
+		this.lblbtnCancela.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseEntered(MouseEvent e) {
+
+				lblbtnCancela.setIcon(iconbtnCancela);
+
+			}
+
+			@Override
+			public void mouseExited(MouseEvent e) {
+				lblbtnCancela.setIcon(iconbtnCancela);
+			}
+		});
+		this.add(lblbtnCancela);
+		
+		this.lblCancela = new JLabel("Cancelar");
+		this.lblCancela.setForeground(new Color(90,61,171));
+		this.lblCancela.setFont(new Font("Arial", Font.BOLD, 15));
+		this.lblCancela.setBounds(370,415,100, 20);
+		this.add(lblCancela);
+		
+		this.btnApagar = new JButton("Apagar");
+		this.btnApagar.setBounds(195, 480, 100, 25);
+		this.btnApagar.setFont(new Font("Arial", Font.BOLD, 15));
+		this.btnApagar.setBackground(new Color(90, 61, 171));
+		this.btnApagar.setForeground(Color.white);
+        	this.add(btnApagar);
+		
+		this.iconbtnAnterior = new ImageIcon(getClass().getResource("/Imagens/Salvar.png"));
+		this.lblbtnAnterior = new JLabel(iconbtnAnterior);
+		this.lblbtnAnterior.setToolTipText("Anterior");
+		this.lblbtnAnterior.setBounds(10, 435, 120, 120);
+		this.lblbtnAnterior.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseEntered(MouseEvent e) {
+
+				lblbtnAnterior.setIcon(iconbtnAnterior);
+
+			}
+
+			@Override
+			public void mouseExited(MouseEvent e) {
+				lblbtnAnterior.setIcon(iconbtnAnterior);
+			}
+		});
+		this.add(lblbtnAnterior);
+		
+		this.iconbtnProximo = new ImageIcon(getClass().getResource("/Imagens/Salvar.png\""));
+		this.lblbtnProximo = new JLabel(iconbtnProximo);
+		this.lblbtnProximo.setToolTipText("Proximo");
+		this.lblbtnProximo.setBounds(355, 435, 120, 120);
+		this.lblbtnProximo.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseEntered(MouseEvent e) {
+
+				lblbtnProximo.setIcon(iconbtnProximo);
+
+			}
+
+			@Override
+			public void mouseExited(MouseEvent e) {
+				lblbtnProximo.setIcon(iconbtnProximo);
+			}
+		});
+		this.add(lblbtnProximo);
 
 		this.jpFicha = new JPanel();
 		this.jpFicha.setLayout(null);

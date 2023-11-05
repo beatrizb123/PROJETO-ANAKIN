@@ -74,7 +74,11 @@ public class FichaProtagonistaVIEW extends JFrame {
 	private JPanel jpHabilidades;
 
 	private JButton btSalvar;
-
+	private JButton btnApagar;
+	private ImageIcon iconbtnCancela, iconbtnAnterior,iconbtnProximo;
+	private JLabel lblbtnCancela,lblbtnAnterior, lblbtnProximo ;
+	private JLabel lblCancela;
+	
 	JFileChooser jfArquivo;
 	BufferedImage bfimg;
 	File file;
@@ -473,7 +477,7 @@ ResultSet inforprota;
 		this.iconbtnSalvar = new ImageIcon(getClass().getResource("/Imagens/Salvar.png"));
 		this.lblbtnSalvar = new JLabel(iconbtnSalvar);
 		this.lblbtnSalvar.setToolTipText("Salvar");
-		this.lblbtnSalvar.setBounds(190, 310, 120, 120);
+		this.lblbtnSalvar.setBounds(120, 295, 120, 120);
 		this.lblbtnSalvar.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseEntered(MouseEvent e) {
@@ -550,9 +554,79 @@ ResultSet inforprota;
 
 		this.lblSalvar = new JLabel("Salvar");
 		this.lblSalvar.setForeground(new Color(90, 61, 171));
-		this.lblSalvar.setFont(new Font("Arial", Font.BOLD, 16));
-		this.lblSalvar.setBounds(220, 410, 100, 20);
-		this.add(lblSalvar);
+		this.lblSalvar.setFont(new Font("Arial", Font.BOLD, 14));
+		this.lblSalvar.setBounds(155,380,100, 20);
+		this.add(lblSalvar); 
+
+		this.iconbtnCancela = new ImageIcon(getClass().getResource("/Imagens/Salvar.png"));
+		this.lblbtnCancela = new JLabel(iconbtnCancela);
+		this.lblbtnCancela.setToolTipText("Cancelar");
+		this.lblbtnCancela.setBounds(250, 295, 120, 120);
+		this.lblbtnCancela.addMouseListener(new MouseAdapter() {
+				@Override
+				public void mouseEntered(MouseEvent e) {
+
+					lblbtnCancela.setIcon(iconbtnCancela);
+
+				}
+
+				@Override
+				public void mouseExited(MouseEvent e) {
+					lblbtnCancela.setIcon(iconbtnCancela);
+				}
+			});
+			this.add(lblbtnCancela);
+			
+		this.lblCancela = new JLabel("Cancelar");
+		this.lblCancela.setForeground(new Color(90,61,171));
+		this.lblCancela.setFont(new Font("Arial", Font.BOLD, 14));
+		this.lblCancela.setBounds(280,380,100, 20);
+		this.add(lblCancela);
+		
+		this.btnApagar = new JButton("Apagar");
+		this.btnApagar.setBounds(200, 415, 90, 25);
+		this.btnApagar.setFont(new Font("Arial", Font.BOLD, 14));
+		this.btnApagar.setBackground(new Color(90, 61, 171));
+		this.btnApagar.setForeground(Color.white);
+            	this.add(btnApagar);
+		
+		this.iconbtnAnterior = new ImageIcon(getClass().getResource("/Imagens/Salvar.png"));
+		this.lblbtnAnterior = new JLabel(iconbtnAnterior);
+		this.lblbtnAnterior.setToolTipText("Anterior");
+		this.lblbtnAnterior.setBounds(10, 370, 120, 120);
+		this.lblbtnAnterior.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseEntered(MouseEvent e) {
+
+				lblbtnAnterior.setIcon(iconbtnAnterior);
+
+			}
+
+			@Override
+			public void mouseExited(MouseEvent e) {
+				lblbtnAnterior.setIcon(iconbtnAnterior);
+			}
+		});
+		this.add(lblbtnAnterior);
+		
+		this.iconbtnProximo = new ImageIcon(getClass().getResource("/Imagens/Salvar.png"));
+		this.lblbtnProximo = new JLabel(iconbtnProximo);
+		this.lblbtnProximo.setToolTipText("Proximo");
+		this.lblbtnProximo.setBounds(355, 370, 120, 120);
+		this.lblbtnProximo.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseEntered(MouseEvent e) {
+
+				lblbtnProximo.setIcon(iconbtnProximo);
+
+			}
+
+			@Override
+			public void mouseExited(MouseEvent e) {
+				lblbtnProximo.setIcon(iconbtnProximo);
+			}
+		});
+		this.add(lblbtnProximo);
 
 		this.jpHabilidades = new JPanel();
 		this.jpHabilidades.setLayout(null);
