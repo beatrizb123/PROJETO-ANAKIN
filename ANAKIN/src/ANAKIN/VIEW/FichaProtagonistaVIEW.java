@@ -35,6 +35,7 @@ import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 import javax.swing.tree.FixedHeightLayoutCache;
 
+import ANAKIN.MODEL.BO.FichaProtagonistaSelecionada;
 import ANAKIN.MODEL.BO.ImagemBO;
 import ANAKIN.MODEL.DAO.FichaProtagonistaDAO;
 import ANAKIN.MODEL.DAO.NovoControleDAO;
@@ -108,10 +109,8 @@ ResultSet inforprota;
 		AuxiliarVO AV = new AuxiliarVO();
 		int idprota = AV.getIdprotagonista();
 		String nomeperso = AV.getNomeprotagonista(); 
-		inforprota = FPD.retornainfotprota(idprota,nomeperso);
 		// DADOS PESSOAIS
-		try {
-			while(inforprota.next()) {
+
 		this.setTitle("Ficha de Protagonistas");
 		this.setDefaultCloseOperation(HIDE_ON_CLOSE);
 		this.setResizable(false);
@@ -171,8 +170,10 @@ ResultSet inforprota;
 
 		
 		this.txtfNome = new JTextField(100);
-		if (inforprota != null) {
-			this.txtfNome.setText(inforprota.getString("Nome_protagonista"));
+		if (FichaProtagonistaSelecionada.getNome() != null) {
+			this.txtfNome.setText(FichaProtagonistaSelecionada.getNome());
+			int idprotagonista = FPD.retornaidprotagonista(FichaProtagonistaSelecionada.getNome());
+			AV.setIdprotagonista(idprotagonista);
 		}
 		this.txtfNome.setBounds(235, 35, 199, 20);
 		this.add(txtfNome);
@@ -185,8 +186,8 @@ ResultSet inforprota;
 
 		
 		this.txtfOcupacao = new JTextField(100);
-		if (inforprota != null) {
-			this.txtfOcupacao.setText(inforprota.getString("Ocupacao_Protagonista"));}
+		if (FichaProtagonistaSelecionada.getOcupacao() !=  null) {
+			this.txtfOcupacao.setText(FichaProtagonistaSelecionada.getOcupacao());}
 		this.txtfOcupacao.setBounds(265, 70, 170, 20);
 		this.add(txtfOcupacao);
 
@@ -197,8 +198,8 @@ ResultSet inforprota;
 		this.add(lblIdade);
 
 		this.txtfIdade = new JTextField(100);
-		if (inforprota != null) {
-			String idade = String.valueOf(inforprota.getInt("idade_Protagonista"));
+		if (FichaProtagonistaSelecionada.getIdade() != 0) {
+			String idade = String.valueOf(FichaProtagonistaSelecionada.getIdade());
 			txtfIdade.setText(idade);
 		}
 		this.txtfIdade.setBounds(235, 108, 70, 20);
@@ -210,13 +211,12 @@ ResultSet inforprota;
 		this.lblAltura.setBounds(315, 78, 85, 70);
 		this.add(lblAltura);
 		
-		this.txtfAltura = new JTextField();
-		if (inforprota != null) {
-			Float altura = inforprota.getFloat("altura_Protagonista");
+		this.txtfAltura = new JTextField(100);		
+		if (FichaProtagonistaSelecionada.getAltura() != 0 ) {
+			Float altura = FichaProtagonistaSelecionada.getAltura();
 			String alturatxt = String.valueOf(altura);
 			txtfAltura.setText(alturatxt);
 		}
-		this.txtfAltura = new JTextField(100);
 		this.txtfAltura.setBounds(365, 103, 70, 20);
 		this.add(txtfAltura);
 
@@ -226,9 +226,9 @@ ResultSet inforprota;
 		this.ComboClasses.setForeground(new Color(90, 61, 171));
 		this.ComboClasses.setFont(new Font("Arial", Font.BOLD, 15));
 		this.ComboClasses.setBounds(185, 145, 115, 20);
-		if(inforprota != null) {
+		if(FichaProtagonistaSelecionada.getClasse() != 0) {
 		
-			switch(inforprota.getInt("id_CLASSE")){
+			switch(FichaProtagonistaSelecionada.getClasse()){
 			case 1 :
 				this.ComboClasses.setSelectedItem("Combatente");
 				break;
@@ -294,9 +294,10 @@ ResultSet inforprota;
 		this.sldVida.setMajorTickSpacing(20);
 		this.sldVida.setMinorTickSpacing(5);
 		this.sldVida.setPaintTicks(true);
-		if (inforprota != null) {
-			this.sldVida.setValue(inforprota.getInt("Vida_Protagonista"));
-			;
+		if (FichaProtagonistaSelecionada.getVida() != 0) {
+			this.sldVida.setValue(FichaProtagonistaSelecionada.getVida());
+			String vida = String.valueOf(FichaProtagonistaSelecionada.getVida());
+			pcVida.setText(vida + "%");
 		} else {
 			this.sldVida.setValue(100);
 		}
@@ -330,8 +331,10 @@ ResultSet inforprota;
 		this.sldDefesa.setMajorTickSpacing(20);
 		this.sldDefesa.setMinorTickSpacing(5);
 		this.sldDefesa.setPaintTicks(true);
-		if (inforprota != null) {
-			this.sldDefesa.setValue(inforprota.getInt("defesa_Protagonista"));
+		if (FichaProtagonistaSelecionada.getDefesa() != 0) {
+			this.sldDefesa.setValue(FichaProtagonistaSelecionada.getDefesa());
+			String defesa = String.valueOf(FichaProtagonistaSelecionada.getDefesa());
+			pcDefesa.setText(defesa + "%");
 		} else {
 			this.sldDefesa.setValue(100);
 		}
@@ -365,8 +368,10 @@ ResultSet inforprota;
 		this.sldMagia.setMajorTickSpacing(20);
 		this.sldMagia.setMinorTickSpacing(5);
 		this.sldMagia.setPaintTicks(true);
-		if(inforprota != null) {
-			this.sldMagia.setValue(inforprota.getInt("magia_Protagonista"));
+		if(FichaProtagonistaSelecionada.getMagia()!= 0) {
+			this.sldMagia.setValue(FichaProtagonistaSelecionada.getMagia());
+			String magia = String.valueOf(FichaProtagonistaSelecionada.getMagia());
+			pcMagia.setText(magia+ "%");
 		}else {
 			this.sldMagia.setValue(100);
 		}
@@ -398,8 +403,8 @@ ResultSet inforprota;
 
 		SpinnerModel valuePoder = new SpinnerNumberModel(1, 0, 5, 1);
 		this.spnPoder = new JSpinner(valuePoder);
-		if(inforprota != null) {
-			this.spnPoder.setValue(inforprota.getInt("Poder"));
+		if(FichaProtagonistaSelecionada.getPoder() != 0) {
+			this.spnPoder.setValue(FichaProtagonistaSelecionada.getPoder());
 		}
 		this.spnPoder.setEditor(new JSpinner.DefaultEditor(spnPoder));
 		this.spnPoder.setBounds(258, 245, 50, 20);
@@ -413,8 +418,8 @@ ResultSet inforprota;
 
 		SpinnerModel valueForca = new SpinnerNumberModel(1, 0, 5, 1);
 		this.spnForca = new JSpinner(valueForca);
-		if(inforprota != null) {
-			this.spnForca.setValue(inforprota.getInt("Forca"));
+		if(FichaProtagonistaSelecionada.getForca() != 0) {
+			this.spnForca.setValue(FichaProtagonistaSelecionada.getForca());
 		}
 		this.spnForca.setEditor(new JSpinner.DefaultEditor(spnForca));
 		this.spnForca.setBounds(328, 245, 50, 20);
@@ -428,8 +433,8 @@ ResultSet inforprota;
 
 		SpinnerModel valueCarisma = new SpinnerNumberModel(1, 0, 5, 1);
 		this.spnCarisma = new JSpinner(valueCarisma);
-		if(inforprota != null) {
-			this.spnCarisma.setValue(inforprota.getInt("Carisma"));
+		if(FichaProtagonistaSelecionada.getCarisma() != 0) {
+			this.spnCarisma.setValue(FichaProtagonistaSelecionada.getCarisma());
 		}
 		this.spnCarisma.setEditor(new JSpinner.DefaultEditor(spnCarisma));
 		this.spnCarisma.setBounds(394, 245, 50, 20);
@@ -443,8 +448,8 @@ ResultSet inforprota;
 
 		SpinnerModel valueAgilidade = new SpinnerNumberModel(1, 0, 5, 1);
 		this.spnAgilidade = new JSpinner(valueAgilidade);
-		if(inforprota != null) {
-			spnAgilidade.setValue(inforprota.getInt("Agilidade"));
+		if(FichaProtagonistaSelecionada.getAgilidade()!= 0) {
+			spnAgilidade.setValue(FichaProtagonistaSelecionada.getAgilidade());
 		}
 		this.spnAgilidade.setEditor(new JSpinner.DefaultEditor(spnAgilidade));
 		this.spnAgilidade.setBounds(285, 295, 55, 20);
@@ -458,8 +463,8 @@ ResultSet inforprota;
 
 		SpinnerModel valueIntelecto = new SpinnerNumberModel(1, 0, 5, 1);
 		this.spnIntelecto = new JSpinner(valueIntelecto);
-		if(inforprota != null) {
-			this.spnIntelecto.setValue(inforprota.getInt("Intelecto"));
+		if(FichaProtagonistaSelecionada.getIntelecto() != 0) {
+			this.spnIntelecto.setValue(FichaProtagonistaSelecionada.getIntelecto());
 		}
 		this.spnIntelecto.setEditor(new JSpinner.DefaultEditor(spnIntelecto));
 		this.spnIntelecto.setBounds(365, 295, 50, 20);
@@ -564,10 +569,7 @@ ResultSet inforprota;
 
 		this.imgIcon = new ImageIcon("jupiter.png");
 		this.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/Imagens/jupiter.png")));
-}
-			}catch(Exception erro){
-				erro.printStackTrace();
-			}
+
 	}
 
 }

@@ -4,9 +4,13 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.JOptionPane;
 
+import ANAKIN.MODEL.BO.FichaProtagonistaSelecionada;
+import ANAKIN.MODEL.BO.MiniFichasProtaBO;
 import ANAKIN.MODEL.VO.AuxiliarVO;
 import ANAKIN.MODEL.VO.FichaProtagonistaVO;
 import ANAKIN.MODEL.VO.UsuarioVO;
@@ -47,37 +51,29 @@ public class FichaProtagonistaDAO {
 		}
 	}
 
-public ResultSet retornainfotprota(int id,String nome) {
+public void retornainfotprota(String nome, int vida, int def, int mag) {
 	conn = new ConexaoDAO().conectabd();
 	AuxiliarVO AV = new AuxiliarVO();
-	String SQL = "SELECT nome_protagonista,"
-			+ "ocupacao_Protagonista,"
-			+ "idade_protagonista,"
-			+ "altura_protagonista, "
-			+ "vida_protagonista, "
-			+ "defesa_protagonista, "
-			+ "magia_protagonista,"
-			+ "poder,"
-			+ "forca,"
-			+ "carisma,"
-			+ "agilidade,"
-			+ "intelecto,"
-			+ "id_classe FROM protagonista where id_protagonista = ? and nome_protagonista = ?;";
-			
+	String SQL = "SELECT nome_protagonista, ocupacao_Protagonista, idade_protagonista, altura_protagonista, vida_protagonista, defesa_protagonista, magia_protagonista, poder, forca, carisma, agilidade, intelecto, id_classe FROM protagonista where nome_Protagonista = ? and vida_Protagonista = ? and defesa_Protagonista = ? and magia_Protagonista = ?;";
+			FichaProtagonistaSelecionada FPS ;
 	try {
 		PSTM = conn.prepareStatement(SQL);
-		//PSTM.setInt(1, id);
-		//PSTM.setString(2, nome);
+		PSTM.setString(1, nome);
+		PSTM.setInt(2, vida);
+		PSTM.setInt(3, def);
+		PSTM.setInt(4, mag);
 		ResultSet infor = PSTM.executeQuery();
 		
 		if(infor.next()) {
-			return infor;
-		}PSTM.close();
-		return null;
+			
+			FPS = new FichaProtagonistaSelecionada(infor.getString(1), infor.getString(2), infor.getInt(3), infor.getFloat(4), infor.getInt(5), infor.getInt(6) , infor.getInt(7), infor.getInt(8), infor.getInt(9), infor.getInt(10), infor.getInt(11), infor.getInt(12), infor.getInt(13));
+			PSTM.close();
+		}else {
+		PSTM.close();
+		}
 		
 	} catch (Exception e) {
 	 e.printStackTrace();
-	 return null;
 	}
 
 }
@@ -124,25 +120,37 @@ public ResultSet retornainfotprota(int id,String nome) {
 		}
 	}
 
-	public ResultSet informaçoesbaseFP() {
-		conn = new ConexaoDAO().conectabd();
-		AuxiliarVO AV = new AuxiliarVO();
-		String query = "SELECT nome_protagonista, vida_protagonista, defesa_protagonista, magia_protagonista FROM protagonista where id_sessao = ?";
-		try {
-			PreparedStatement PSTM = conn.prepareStatement(query);
-			PSTM.setInt(1, AV.getIdsessao());
-			ResultSet resultSet = PSTM.executeQuery();
-			while (resultSet.next()) {
+	public MiniFichasProtaBO informaçoesbaseFP( int posicao) {
+	    this.conn = new ConexaoDAO().conectabd();
+	    AuxiliarVO AV = new AuxiliarVO();
+	    FichaProtagonistaDAO tanto = new FichaProtagonistaDAO();
+	    String query = "select nome_Protagonista,vida_Protagonista,defesa_Protagonista,magia_Protagonista from protagonista where id_SESSAO = ? limit 1 OFFSET ? ;";
+	    MiniFichasProtaBO registro = null;
+	    try {
+	        PreparedStatement PSTM = conn.prepareStatement(query);
+	        PSTM.setInt(1, AV.getIdsessao());
+	        PSTM.setInt(2, posicao);
+	        ResultSet resultSet = PSTM.executeQuery();
+	        
+	        while (resultSet.next()) {
+	            String nome = resultSet.getString(1);
+	            int vida = resultSet.getInt(2);
+	            int defesa = resultSet.getInt(3);
+	            int magia = resultSet.getInt(4);
+	            
+	            registro = new MiniFichasProtaBO(nome, vida, defesa, magia);
+	        }
+	        
+	        PSTM.close();
+	        
 
-				return resultSet;
-			}
-			PSTM.close();
-		} catch (SQLException e) {
-			e.printStackTrace();
-			return null;
-		}
-		return null;
+	        return registro;
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	        return null;
+	    }
 	}
+
 
 	public void criarRegistroProta() {
 		conn = new ConexaoDAO().conectabd();

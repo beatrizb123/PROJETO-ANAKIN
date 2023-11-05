@@ -39,6 +39,7 @@ import javax.swing.SwingConstants;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
+import ANAKIN.MODEL.BO.MiniFichasProtaBO;
 import ANAKIN.MODEL.DAO.AbrirSessaoDAO;
 import ANAKIN.MODEL.DAO.ControleSessaoDAO;
 import ANAKIN.MODEL.DAO.FichaNPCDAO;
@@ -78,8 +79,11 @@ public class ControleSessaoVIEW extends JFrame {
 	private ImageIcon iconbtnCombate;
 	private JLabel lblbtnCombate;
 	private JLabel lblCombate; 
-	int tanto, freio = 0;
-	ResultSet tantoficha;
+	int IndiceAtual = 0, tanto ;
+	private MiniFichasProtaBO miniFProtagonista ;
+	FichaProtagonistaDAO FPD = new FichaProtagonistaDAO();
+
+	
 	
 	public JTextArea getTxtAnotacao() {
 		return txtAnotacao;
@@ -139,6 +143,7 @@ public class ControleSessaoVIEW extends JFrame {
 		}
 		
 		
+		IndiceAtual = 0;
 
 		this.setTitle("Controle de Sessão ★ ");
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -329,12 +334,25 @@ public class ControleSessaoVIEW extends JFrame {
 		this.lblNPCs.setFont(new Font("Arial", Font.BOLD, 18));
 		this.add(lblNPCs);
 		
+		JButton BTNproximo = new JButton(">");
+		BTNproximo.setVisible(true);
+		BTNproximo.setBounds(371,219,49,27);
+		add(BTNproximo);
+		JButton BTNAbrir = new JButton("abrir");
+		BTNAbrir.setVisible(true);
+		BTNAbrir.setBounds(300,219,70,27);
+		add(BTNAbrir);
+		JButton BTNanterior = new JButton("<");
+		BTNanterior.setVisible(true);
+		BTNanterior.setBounds(250,219,49,27);
+		add(BTNanterior);
+		
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBorder(javax.swing.BorderFactory.createLineBorder(new Color(90, 61, 171), 2));
 		scrollPane.setBackground(new Color(235, 223, 255));
 		scrollPane.setBounds(250, 40, 300, 180);
 		add(scrollPane);
-
+		
 		JPanel borderlaoutpanel = new JPanel();
 		scrollPane.setViewportView(borderlaoutpanel);
 		borderlaoutpanel.setLayout(new BorderLayout(0, 0));
@@ -343,8 +361,81 @@ public class ControleSessaoVIEW extends JFrame {
 		borderlaoutpanel.add(columnpanel, BorderLayout.NORTH);
 		columnpanel.setLayout(new GridLayout(0, 3, 0, 3));
 		columnpanel.setBackground(new Color(235, 223, 255));
+		
+		JPanel rowPanel = new JPanel();
+		rowPanel.setPreferredSize(new Dimension(70, 120));
+		rowPanel.setBorder(BorderFactory.createLineBorder(new Color(235, 223, 255), 4));
+		rowPanel.setBackground(new Color(250, 247, 255));
+		rowPanel.setLayout(new GridLayout(5, 1));
+		//descriçao da miniFicha - josue
+		miniFProtagonista = FPD.informaçoesbaseFP(IndiceAtual);
+		
+		JLabel nome = new JLabel("Nome: " + miniFProtagonista.getNome() );
+		nome.setHorizontalAlignment(SwingConstants.CENTER);
+		rowPanel.add(nome);
+		JLabel vida = new JLabel("Vida: " + miniFProtagonista.getVida());
+		vida.setHorizontalAlignment(SwingConstants.CENTER);
+		rowPanel.add(vida);
+		JLabel def = new JLabel("Defesa: " + miniFProtagonista.getDefesa());
+		def.setHorizontalAlignment(SwingConstants.CENTER);
+		rowPanel.add(def);
+		JLabel mag = new JLabel("Magia: " + miniFProtagonista.getMagia());
+		mag.setHorizontalAlignment(SwingConstants.CENTER);
+		rowPanel.add(mag);
+		columnpanel.add(rowPanel);
+		
+		tanto = FPD.retornaTantoFicha();
+		//configuraçao dos eventos que ocorrerao ao pressionar os botoes: proximo,anterior,abrir - josue
+		BTNanterior.addActionListener( new ActionListener() {
 
-		FichaProtagonistaDAO FPD = new FichaProtagonistaDAO();
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				
+					IndiceAtual--;
+					
+					miniFProtagonista = FPD.informaçoesbaseFP(IndiceAtual);
+					nome.setText("Nome: " + miniFProtagonista.getNome());
+					vida.setText("Vida: " + Integer.toString(miniFProtagonista.getVida()));
+					def.setText("Defesa: " + Integer.toString(miniFProtagonista.getDefesa()));
+					mag.setText("Magia: " + Integer.toString(miniFProtagonista.getMagia()));
+				
+				
+			}
+			
+		});
+		BTNproximo.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				
+					IndiceAtual++;
+					
+				
+						miniFProtagonista = FPD.informaçoesbaseFP(IndiceAtual);
+						nome.setText("Nome: " + miniFProtagonista.getNome());
+						vida.setText("Vida: " + Integer.toString(miniFProtagonista.getVida()));
+						def.setText("Defesa: " + Integer.toString(miniFProtagonista.getDefesa()));
+						mag.setText("Magia: " + Integer.toString(miniFProtagonista.getMagia()));
+					
+			
+			}
+		});
+		
+		
+		BTNAbrir.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+			
+				miniFProtagonista = FPD.informaçoesbaseFP(IndiceAtual);
+				FPD.retornainfotprota(miniFProtagonista.getNome(), miniFProtagonista.getVida(), miniFProtagonista.getDefesa(),miniFProtagonista.getMagia());
+				
+				FichaProtagonistaVIEW FPV = new FichaProtagonistaVIEW();
+				FPV.setVisible(true);
+			}
+		});
+	
+		/**FichaProtagonistaDAO FPD = new FichaProtagonistaDAO();
 		Timer time = new Timer();
 		TimerTask atualiza = new TimerTask() {
 
@@ -441,6 +532,7 @@ public class ControleSessaoVIEW extends JFrame {
 
 		};
 		time.schedule(atualiza, 1000, 2000);
+		*/
 		this.jpProtagonistas = new JPanel();
 		this.jpProtagonistas.setLayout(null);
 		this.jpProtagonistas.setBackground(new Color(235, 223, 255));

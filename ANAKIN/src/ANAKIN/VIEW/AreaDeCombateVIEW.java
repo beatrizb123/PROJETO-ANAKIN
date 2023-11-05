@@ -229,3 +229,4 @@ public static void abre() {
 	frame.setLocation((tela.width - frame.getSize().width)/2,(tela.height - frame.getSize().height)/2);
 
 }
+}
