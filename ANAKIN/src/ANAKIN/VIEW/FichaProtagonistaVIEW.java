@@ -488,7 +488,7 @@ public class FichaProtagonistaVIEW extends JFrame {
 		this.iconbtnSalvar = new ImageIcon(getClass().getResource("/Imagens/Salvar.png"));
 		this.lblbtnSalvar = new JLabel(iconbtnSalvar);
 		this.lblbtnSalvar.setToolTipText("Salvar");
-		this.lblbtnSalvar.setBounds(120, 295, 120, 120);
+		this.lblbtnSalvar.setBounds(120, 300, 120, 120);
 		this.lblbtnSalvar.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseEntered(MouseEvent e) {
@@ -567,13 +567,13 @@ public class FichaProtagonistaVIEW extends JFrame {
 		this.lblSalvar = new JLabel("Salvar");
 		this.lblSalvar.setForeground(new Color(90, 61, 171));
 		this.lblSalvar.setFont(new Font("Arial", Font.BOLD, 14));
-		this.lblSalvar.setBounds(155, 380, 100, 20);
+		this.lblSalvar.setBounds(155, 390, 100, 20);
 		this.add(lblSalvar);
 
-		this.iconbtnCancela = new ImageIcon(getClass().getResource("/Imagens/Salvar.png"));
+		this.iconbtnCancela = new ImageIcon(getClass().getResource("/Imagens/Cancelar.png"));
 		this.lblbtnCancela = new JLabel(iconbtnCancela);
 		this.lblbtnCancela.setToolTipText("Cancelar");
-		this.lblbtnCancela.setBounds(250, 295, 120, 120);
+		this.lblbtnCancela.setBounds(265, 320, 90, 90);
 		this.lblbtnCancela.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseEntered(MouseEvent e) {
@@ -592,7 +592,7 @@ public class FichaProtagonistaVIEW extends JFrame {
 		this.lblCancela = new JLabel("Cancelar");
 		this.lblCancela.setForeground(new Color(90, 61, 171));
 		this.lblCancela.setFont(new Font("Arial", Font.BOLD, 14));
-		this.lblCancela.setBounds(280, 380, 100, 20);
+		this.lblCancela.setBounds(280, 390, 100, 20);
 		this.add(lblCancela);
 
 		this.btnApagar = new JButton("Apagar");
@@ -602,7 +602,7 @@ public class FichaProtagonistaVIEW extends JFrame {
 		this.btnApagar.setForeground(Color.white);
 		this.add(btnApagar);
 
-		this.iconbtnAnterior = new ImageIcon(getClass().getResource("/Imagens/Salvar.png"));
+		this.iconbtnAnterior = new ImageIcon(getClass().getResource("/Imagens/Esquerda.png"));
 		this.lblbtnAnterior = new JLabel(iconbtnAnterior);
 		this.lblbtnAnterior.setToolTipText("Anterior");
 		this.lblbtnAnterior.setBounds(10, 370, 120, 120);
@@ -621,7 +621,7 @@ public class FichaProtagonistaVIEW extends JFrame {
 		});
 		this.add(lblbtnAnterior);
 
-		this.iconbtnProximo = new ImageIcon(getClass().getResource("/Imagens/Salvar.png"));
+		this.iconbtnProximo = new ImageIcon(getClass().getResource("/Imagens/Direita.png"));
 		this.lblbtnProximo = new JLabel(iconbtnProximo);
 		this.lblbtnProximo.setToolTipText("Proximo");
 		this.lblbtnProximo.setBounds(355, 370, 120, 120);

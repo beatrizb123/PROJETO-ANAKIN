@@ -36,7 +36,9 @@ public class ConfirmacaoCombateVIEW extends JFrame{
 		this.setBackground(new Color(250, 247, 255));
 		this.setVisible(true);
 		this.setResizable(false);
-		
+		Dimension tela = Toolkit.getDefaultToolkit().getScreenSize();
+		this.setLocation((tela.width - getSize().width) / 2, (tela.height - getSize().height) / 2);
+
 		this.imgIcon = new ImageIcon("jupiter.png");
 		this.setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\Beatriz\\Downloads\\jupiter.png"));
 

@@ -672,7 +672,7 @@ public class ControleSessaoVIEW extends JFrame {
 		this.add(lblDados);
 		
 		
-		this.iconbtnCombate = new ImageIcon(getClass().getResource("/Imagens/OpacaoCombate.png"));
+		this.iconbtnCombate = new ImageIcon(getClass().getResource("/Imagens/Combate.png"));
 		this.lblbtnCombate = new JLabel(iconbtnCombate);
 		this.lblbtnCombate.setToolTipText("Area de Combate");
 		this.lblbtnCombate.setBounds(140, 310, 140, 140);
@@ -733,16 +733,6 @@ public class ControleSessaoVIEW extends JFrame {
 		this.add(bckgMenu);
 		
 	}
-
-	
-	/*public static void abre() {
-		ControleSessaoVIEW frame = new ControleSessaoVIEW();
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.setResizable(false);
-		frame.setVisible(true);
-		Dimension tela = Toolkit.getDefaultToolkit().getScreenSize();
-		frame.setLocation((tela.width - frame.getSize().width)/2,(tela.height - frame.getSize().height)/2);
-	}*/
 	
 	
 }
