@@ -16,7 +16,7 @@ public class ManterSessaoDAO {
 	public void finalizaSessao() {
 		conn = new ConexaoDAO().conectabd();
 		try {
-			String SQL = "update Numero	Vereficador set numero = 0 where id = 1;";
+			String SQL = "update numerovereficador set numero = 0 where id = 1;";
 			PSTM = conn.prepareStatement(SQL);
 			PSTM.executeUpdate();
 			PSTM.close();

@@ -33,6 +33,7 @@ import javax.swing.SpinnerNumberModel;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
+import ANAKIN.MODEL.BO.FichaProtagonistaSelecionada;
 //import ANAKIN.MODEL.BO.FichaProtagonistaSelecionada;
 import ANAKIN.MODEL.BO.ImagemBO;
 import ANAKIN.MODEL.DAO.FichaProtagonistaDAO;
@@ -105,7 +106,7 @@ public class FichaProtagonistaVIEW extends JFrame {
 	}
 
 	public FichaProtagonistaVIEW() {
-/*		// instanciação dos objetos
+		// instanciação dos objetos
 		FichaProtagonistaVO FPV = new FichaProtagonistaVO();
 		FichaProtagonistaDAO FPD = new FichaProtagonistaDAO();
 		AuxiliarVO AV = new AuxiliarVO();
@@ -654,7 +655,7 @@ public class FichaProtagonistaVIEW extends JFrame {
 
 		this.imgIcon = new ImageIcon("jupiter.png");
 		this.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/Imagens/jupiter.png")));
-*/
+
 	}
 
 }

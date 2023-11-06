@@ -17,7 +17,7 @@ public class Main extends JFrame {
 		int valor;
 		ManterSessaoDAO MSD = new ManterSessaoDAO();
 		ResultSet result = MSD.VereficaManterSessao();
-		if (result != null) {
+		if (result != null) {		
 			try {
 				if (result.next()) {
 					valor = result.getInt("numero");
