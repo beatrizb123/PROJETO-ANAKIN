@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.Image;
 import java.awt.ScrollPane;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
@@ -59,6 +60,9 @@ public class MinhasSessoesVIEW extends JFrame {
 	private ResultSet resultSet;
 	JList<String> listasessoes;
 
+	private ImageIcon fichaWall;
+	private JLabel bckgTela;
+
 	public MinhasSessoesVIEW() {
 
 		this.setTitle("Projeto ANAKIN ★ ");
@@ -66,7 +70,8 @@ public class MinhasSessoesVIEW extends JFrame {
 		this.setBounds(0, 0, 300, 350);
 		this.setLayout(null);
 		this.setResizable(false);
-		this.setBackground(new Color(250, 247, 255));
+		this.setForeground(new Color(90, 61, 171));
+
 		this.setVisible(true);
 		Dimension tela = Toolkit.getDefaultToolkit().getScreenSize();
 		this.setLocation((tela.width - getSize().width) / 2, (tela.height - getSize().height) / 2);
@@ -183,6 +188,11 @@ public class MinhasSessoesVIEW extends JFrame {
 			}
 		});
 		this.add(btnCancelar);
+		this.fichaWall = new ImageIcon(getClass().getResource("/Imagens/Fichas.png"));
+		this.fichaWall = new ImageIcon(fichaWall.getImage().getScaledInstance(580, 500, Image.SCALE_DEFAULT));
+		this.bckgTela = new JLabel(fichaWall);
+		this.bckgTela.setBounds(-10, -10, 580, 500);
+		this.add(bckgTela);
 
 	}
 }

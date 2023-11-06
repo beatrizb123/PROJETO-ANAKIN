@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -25,6 +26,8 @@ public class EsqueceuSenhaVIEW extends JFrame {
 	private JTextField txtfUser, txtfFilme, txtfSenha;
 	private JButton btnConfirmar;
 	private ImageIcon imgIcon;
+	private ImageIcon fichaWall;
+	private JLabel bckgTela;
 	
 	public EsqueceuSenhaVIEW() {
 		this.setTitle("Alterar informacoes");
@@ -108,6 +111,12 @@ public class EsqueceuSenhaVIEW extends JFrame {
 			}
 		});
 		this.add(btnConfirmar);
+		
+		this.fichaWall = new ImageIcon(getClass().getResource("/Imagens/Fichas.png"));
+		this.fichaWall = new ImageIcon(fichaWall.getImage().getScaledInstance(580, 500, Image.SCALE_DEFAULT));
+		this.bckgTela = new JLabel(fichaWall);
+		this.bckgTela.setBounds(-10, -10, 580, 500);
+		this.add(bckgTela);
 
 	}
 }

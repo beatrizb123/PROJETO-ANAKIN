@@ -39,7 +39,7 @@ import javax.swing.SwingConstants;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
-import ANAKIN.MODEL.BO.MiniFichasProtaBO;
+//import ANAKIN.MODEL.BO.MiniFichasProtaBO;
 import ANAKIN.MODEL.DAO.AbrirSessaoDAO;
 import ANAKIN.MODEL.DAO.ControleSessaoDAO;
 import ANAKIN.MODEL.DAO.FichaNPCDAO;
@@ -49,12 +49,7 @@ import ANAKIN.MODEL.VO.AuxiliarVO;
 import ANAKIN.MODEL.VO.ControleSessaoVO;
 import ANAKIN.MODEL.VO.UsuarioVO;
 
-/*import ANAKIN.MODEL.DAO.ControleSessaoDAO;
-import ANAKIN.MODEL.DAO.DadosDAO;
-import ANAKIN.MODEL.DAO.ManterSessaoDAO;
-import ANAKIN.MODEL.VO.ControleSessaoVO;
-import ANAKIN.MODEL.VO.UsuarioVO;
-import DadosdeJogo.DadosdeJogoVIEW;*/
+
 
 
 public class ControleSessaoVIEW extends JFrame {
@@ -80,7 +75,7 @@ public class ControleSessaoVIEW extends JFrame {
 	private JLabel lblbtnCombate;
 	private JLabel lblCombate; 
 	int IndiceAtual = 0, tanto ;
-	private MiniFichasProtaBO miniFProtagonista ;
+//	private MiniFichasProtaBO miniFProtagonista ;
 	FichaProtagonistaDAO FPD = new FichaProtagonistaDAO();
 
 	
@@ -367,7 +362,7 @@ public class ControleSessaoVIEW extends JFrame {
 		rowPanel.setBorder(BorderFactory.createLineBorder(new Color(235, 223, 255), 4));
 		rowPanel.setBackground(new Color(250, 247, 255));
 		rowPanel.setLayout(new GridLayout(5, 1));
-		//descriçao da miniFicha - josue
+/*		//descriçao da miniFicha - josue
 		miniFProtagonista = FPD.informaçoesbaseFP(IndiceAtual);
 		
 		JLabel nome = new JLabel("Nome: " + miniFProtagonista.getNome() );
@@ -434,7 +429,7 @@ public class ControleSessaoVIEW extends JFrame {
 				FPV.setVisible(true);
 			}
 		});
-	
+*/	
 		/**FichaProtagonistaDAO FPD = new FichaProtagonistaDAO();
 		Timer time = new Timer();
 		TimerTask atualiza = new TimerTask() {
@@ -533,6 +528,7 @@ public class ControleSessaoVIEW extends JFrame {
 		};
 		time.schedule(atualiza, 1000, 2000);
 		*/
+
 		this.jpProtagonistas = new JPanel();
 		this.jpProtagonistas.setLayout(null);
 		this.jpProtagonistas.setBackground(new Color(235, 223, 255));
