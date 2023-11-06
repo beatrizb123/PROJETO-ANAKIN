@@ -282,18 +282,18 @@ public class FichaProtagonistaVIEW extends JFrame {
 		this.Niveis = new JLabel("Niveis!");
 		this.Niveis.setForeground(new Color(90, 61, 171));
 		this.Niveis.setFont(new Font("Arial", Font.BOLD, 16));
-		this.Niveis.setBounds(110, 200, 65, 20);
+		this.Niveis.setBounds(110, 190, 65, 20);
 		this.add(Niveis);
 
 		this.nivelVida = new JLabel("Vida:");
 		this.nivelVida.setForeground(new Color(90, 61, 171));
 		this.nivelVida.setFont(new Font("Arial", Font.BOLD, 14));
-		this.nivelVida.setBounds(35, 225, 50, 20);
+		this.nivelVida.setBounds(35, 215, 50, 20);
 		this.add(nivelVida);
 
 		this.pcVida = new JLabel("100" + "%");
 		this.pcVida.setFont(new Font("Arial", Font.BOLD, 14));
-		this.pcVida.setBounds(198, 225, 40, 18);
+		this.pcVida.setBounds(198, 215, 40, 18);
 		this.add(pcVida);
 
 		this.sldVida = new JSlider();
@@ -310,7 +310,7 @@ public class FichaProtagonistaVIEW extends JFrame {
 			this.sldVida.setValue(100);
 		}
 		this.sldVida.setValue(100);
-		this.sldVida.setBounds(87, 225, 105, 30);
+		this.sldVida.setBounds(87, 215, 105, 30);
 		this.sldVida.addChangeListener(new ChangeListener() {
 
 			public void stateChanged(ChangeEvent e) {
@@ -324,12 +324,12 @@ public class FichaProtagonistaVIEW extends JFrame {
 		this.nivelDefesa = new JLabel("Defesa:");
 		this.nivelDefesa.setForeground(new Color(90, 61, 171));
 		this.nivelDefesa.setFont(new Font("Arial", Font.BOLD, 14));
-		this.nivelDefesa.setBounds(35, 260, 75, 20);
+		this.nivelDefesa.setBounds(35, 250, 75, 20);
 		this.add(nivelDefesa);
 
 		this.pcDefesa = new JLabel("100" + "%");
 		this.pcDefesa.setFont(new Font("Arial", Font.BOLD, 14));
-		this.pcDefesa.setBounds(198, 260, 40, 18);
+		this.pcDefesa.setBounds(198, 250, 40, 18);
 		this.add(pcDefesa);
 
 		this.sldDefesa = new JSlider();
@@ -347,7 +347,7 @@ public class FichaProtagonistaVIEW extends JFrame {
 		}
 		this.sldDefesa.setValue(100);
 
-		this.sldDefesa.setBounds(87, 260, 105, 30);
+		this.sldDefesa.setBounds(87, 250, 105, 30);
 
 		this.sldDefesa.addChangeListener(new ChangeListener() {
 
@@ -363,12 +363,12 @@ public class FichaProtagonistaVIEW extends JFrame {
 
 		this.nivelMagia.setForeground(new Color(90, 61, 171));
 		this.nivelMagia.setFont(new Font("Arial", Font.BOLD, 14));
-		this.nivelMagia.setBounds(35, 290, 55, 20);
+		this.nivelMagia.setBounds(35, 280, 55, 20);
 		this.add(nivelMagia);
 
 		this.pcMagia = new JLabel("100" + "%");
 		this.pcMagia.setFont(new Font("Arial", Font.BOLD, 14));
-		this.pcMagia.setBounds(198, 290, 40, 18);
+		this.pcMagia.setBounds(198, 280, 40, 18);
 		this.add(pcMagia);
 
 		this.sldMagia = new JSlider();
@@ -386,7 +386,7 @@ public class FichaProtagonistaVIEW extends JFrame {
 		}
 
 		this.sldMagia.setValue(100);
-		this.sldMagia.setBounds(87, 290, 105, 30);
+		this.sldMagia.setBounds(87, 280, 105, 30);
 		this.sldMagia.addChangeListener(new ChangeListener() {
 
 			public void stateChanged(ChangeEvent e) {
@@ -408,7 +408,7 @@ public class FichaProtagonistaVIEW extends JFrame {
 		this.lblPoder = new JLabel("Poder:");
 		this.lblPoder.setForeground(new Color(90, 61, 171));
 		this.lblPoder.setFont(new Font("Arial", Font.BOLD, 15));
-		this.lblPoder.setBounds(258, 225, 65, 20);
+		this.lblPoder.setBounds(258, 215, 65, 20);
 		this.add(lblPoder);
 
 		SpinnerModel valuePoder = new SpinnerNumberModel(1, 0, 5, 1);
@@ -418,13 +418,13 @@ public class FichaProtagonistaVIEW extends JFrame {
 		}
 
 		this.spnPoder.setEditor(new JSpinner.DefaultEditor(spnPoder));
-		this.spnPoder.setBounds(258, 245, 50, 20);
+		this.spnPoder.setBounds(258, 235, 50, 20);
 		this.add(spnPoder);
 
 		this.lblForca = new JLabel("Forca:");
 		this.lblForca.setForeground(new Color(90, 61, 171));
 		this.lblForca.setFont(new Font("Arial", Font.BOLD, 15));
-		this.lblForca.setBounds(328, 225, 60, 20);
+		this.lblForca.setBounds(328, 215, 60, 20);
 		this.add(lblForca);
 
 		SpinnerModel valueForca = new SpinnerNumberModel(1, 0, 5, 1);
@@ -434,13 +434,13 @@ public class FichaProtagonistaVIEW extends JFrame {
 		}
 
 		this.spnForca.setEditor(new JSpinner.DefaultEditor(spnForca));
-		this.spnForca.setBounds(328, 245, 50, 20);
+		this.spnForca.setBounds(328, 235, 50, 20);
 		this.add(spnForca);
 
 		this.lblCarisma = new JLabel("Carisma:");
 		this.lblCarisma.setForeground(new Color(90, 61, 171));
 		this.lblCarisma.setFont(new Font("Arial", Font.BOLD, 14));
-		this.lblCarisma.setBounds(388, 225, 70, 20);
+		this.lblCarisma.setBounds(388, 215, 70, 20);
 		this.add(lblCarisma);
 
 		SpinnerModel valueCarisma = new SpinnerNumberModel(1, 0, 5, 1);
@@ -450,13 +450,13 @@ public class FichaProtagonistaVIEW extends JFrame {
 		}
 
 		this.spnCarisma.setEditor(new JSpinner.DefaultEditor(spnCarisma));
-		this.spnCarisma.setBounds(394, 245, 50, 20);
+		this.spnCarisma.setBounds(394, 235, 50, 20);
 		this.add(spnCarisma);
 
 		this.lblAgilidade = new JLabel("Agilidade:");
 		this.lblAgilidade.setForeground(new Color(90, 61, 171));
 		this.lblAgilidade.setFont(new Font("Arial", Font.BOLD, 14));
-		this.lblAgilidade.setBounds(280, 275, 80, 20);
+		this.lblAgilidade.setBounds(280, 265, 80, 20);
 		this.add(lblAgilidade);
 
 		SpinnerModel valueAgilidade = new SpinnerNumberModel(1, 0, 5, 1);
@@ -466,13 +466,13 @@ public class FichaProtagonistaVIEW extends JFrame {
 		}
 
 		this.spnAgilidade.setEditor(new JSpinner.DefaultEditor(spnAgilidade));
-		this.spnAgilidade.setBounds(285, 295, 55, 20);
+		this.spnAgilidade.setBounds(285, 285, 55, 20);
 		this.add(spnAgilidade);
 
 		this.lblIntelecto = new JLabel("Intelecto:");
 		this.lblIntelecto.setForeground(new Color(90, 61, 171));
 		this.lblIntelecto.setFont(new Font("Arial", Font.BOLD, 14));
-		this.lblIntelecto.setBounds(360, 275, 80, 20);
+		this.lblIntelecto.setBounds(360, 265, 80, 20);
 		this.add(lblIntelecto);
 
 		SpinnerModel valueIntelecto = new SpinnerNumberModel(1, 0, 5, 1);
@@ -482,7 +482,7 @@ public class FichaProtagonistaVIEW extends JFrame {
 		}
 
 		this.spnIntelecto.setEditor(new JSpinner.DefaultEditor(spnIntelecto));
-		this.spnIntelecto.setBounds(365, 295, 50, 20);
+		this.spnIntelecto.setBounds(365, 285, 50, 20);
 		this.add(spnIntelecto);
 
 		this.iconbtnSalvar = new ImageIcon(getClass().getResource("/Imagens/Salvar.png"));

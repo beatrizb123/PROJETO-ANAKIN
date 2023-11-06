@@ -40,7 +40,7 @@ public class ConfirmacaoCombateVIEW extends JFrame{
 		this.setLocation((tela.width - getSize().width) / 2, (tela.height - getSize().height) / 2);
 
 		this.imgIcon = new ImageIcon("jupiter.png");
-		this.setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\Beatriz\\Downloads\\jupiter.png"));
+		this.setIconImage(Toolkit.getDefaultToolkit().getImage("/Imagens/jupiter.png"));
 
 		this.panel = new JPanel(new GridLayout(0,1));
 		this.border = BorderFactory.createTitledBorder("Protagonistas");

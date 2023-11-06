@@ -108,7 +108,7 @@ public class FichaNpcVIEW extends JFrame {
 		this.setTitle("Ficha de Npc's");
 		this.setDefaultCloseOperation(HIDE_ON_CLOSE);
 		this.setResizable(false);
-		this.setBounds(0, 0, 495,590);
+		this.setBounds(0, 0, 495, 550);
 		this.setLayout(null);
 		this.setBackground(new Color(250, 247, 255));
 		this.container = getContentPane();
@@ -398,14 +398,14 @@ public class FichaNpcVIEW extends JFrame {
 		this.txtPersonalidade.setWrapStyleWord(true);
 
 		this.spPersonalidade = new JScrollPane(txtPersonalidade);
-		this.spPersonalidade.setBounds(35, 340, 220, 125);
+		this.spPersonalidade.setBounds(35, 325, 220, 110);
 		this.spPersonalidade.setBorder(javax.swing.BorderFactory.createLineBorder(new Color(90, 61, 171), 2));
 		this.add(spPersonalidade);
 
 		this.iconbtnSalvar = new ImageIcon(getClass().getResource("/Imagens/Salvar.png"));
 		this.lblbtnSalvar = new JLabel(iconbtnSalvar);
 		this.lblbtnSalvar.setToolTipText("Salvar");
-		this.lblbtnSalvar.setBounds(250, 330, 120, 120);
+		this.lblbtnSalvar.setBounds(250, 310, 120, 120);
 		this.lblbtnSalvar.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseEntered(MouseEvent e) {
@@ -488,13 +488,13 @@ public class FichaNpcVIEW extends JFrame {
 		this.lblSalvar = new JLabel("Salvar");
 		this.lblSalvar.setForeground(new Color(90, 61, 171));
 		this.lblSalvar.setFont(new Font("Arial", Font.BOLD, 15));
-		this.lblSalvar.setBounds(285,415,100, 20);
+		this.lblSalvar.setBounds(285,405,100, 20);
 		this.add(lblSalvar);
 
-		this.iconbtnCancela = new ImageIcon(getClass().getResource("/Imagens/Salvar.png"));
+		this.iconbtnCancela = new ImageIcon(getClass().getResource("/Imagens/Cancelar.png"));
 		this.lblbtnCancela = new JLabel(iconbtnCancela);
 		this.lblbtnCancela.setToolTipText("Cancelar");
-		this.lblbtnCancela.setBounds(340, 330, 120, 120);
+		this.lblbtnCancela.setBounds(340, 315, 120, 120);
 		this.lblbtnCancela.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseEntered(MouseEvent e) {
@@ -513,20 +513,20 @@ public class FichaNpcVIEW extends JFrame {
 		this.lblCancela = new JLabel("Cancelar");
 		this.lblCancela.setForeground(new Color(90,61,171));
 		this.lblCancela.setFont(new Font("Arial", Font.BOLD, 15));
-		this.lblCancela.setBounds(370,415,100, 20);
+		this.lblCancela.setBounds(370, 405,100, 20);
 		this.add(lblCancela);
 		
 		this.btnApagar = new JButton("Apagar");
-		this.btnApagar.setBounds(195, 480, 100, 25);
+		this.btnApagar.setBounds(195, 455, 100, 25);
 		this.btnApagar.setFont(new Font("Arial", Font.BOLD, 15));
 		this.btnApagar.setBackground(new Color(90, 61, 171));
 		this.btnApagar.setForeground(Color.white);
         	this.add(btnApagar);
 		
-		this.iconbtnAnterior = new ImageIcon(getClass().getResource("/Imagens/Salvar.png"));
+		this.iconbtnAnterior = new ImageIcon(getClass().getResource("/Imagens/Esquerda.png"));
 		this.lblbtnAnterior = new JLabel(iconbtnAnterior);
 		this.lblbtnAnterior.setToolTipText("Anterior");
-		this.lblbtnAnterior.setBounds(10, 435, 120, 120);
+		this.lblbtnAnterior.setBounds(10, 410, 120, 120);
 		this.lblbtnAnterior.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseEntered(MouseEvent e) {
@@ -542,10 +542,10 @@ public class FichaNpcVIEW extends JFrame {
 		});
 		this.add(lblbtnAnterior);
 		
-		this.iconbtnProximo = new ImageIcon(getClass().getResource("/Imagens/Salvar.png\""));
+		this.iconbtnProximo = new ImageIcon(getClass().getResource("/Imagens/Direita.png"));
 		this.lblbtnProximo = new JLabel(iconbtnProximo);
 		this.lblbtnProximo.setToolTipText("Proximo");
-		this.lblbtnProximo.setBounds(355, 435, 120, 120);
+		this.lblbtnProximo.setBounds(355, 410, 120, 120);
 		this.lblbtnProximo.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseEntered(MouseEvent e) {
