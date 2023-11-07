@@ -188,7 +188,7 @@ public class MinhasSessoesVIEW extends JFrame {
 			}
 		});
 		this.add(btnCancelar);
-		this.fichaWall = new ImageIcon(getClass().getResource("/Imagens/Fichas.png"));
+		this.fichaWall = new ImageIcon(getClass().getResource("/Imagens/Background/Fichas.png"));
 		this.fichaWall = new ImageIcon(fichaWall.getImage().getScaledInstance(580, 500, Image.SCALE_DEFAULT));
 		this.bckgTela = new JLabel(fichaWall);
 		this.bckgTela.setBounds(-10, -10, 580, 500);

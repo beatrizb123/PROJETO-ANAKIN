@@ -43,9 +43,10 @@ public class AreaDeCombateVIEW extends JFrame {
 		this.setBackground(new Color(250, 247, 255));
 		this.setVisible(true);
 		this.setLayout(null);
-
 		this.container = getContentPane();
-
+		Dimension tela = Toolkit.getDefaultToolkit().getScreenSize();
+		this.setLocation((tela.width - getSize().width) / 2, (tela.height - getSize().height) / 2);
+		
 		this.lblIniciativa = new JLabel("Iniciativa");
 		this.lblIniciativa.setFont(new Font("Arial", Font.BOLD, 18));
 		this.lblIniciativa.setForeground(new Color(90, 61, 171));
@@ -94,7 +95,7 @@ public class AreaDeCombateVIEW extends JFrame {
 		this.jpProtagonistas.setBorder(javax.swing.BorderFactory.createLineBorder(new Color(90, 61, 171), 3));
 		this.add(jpProtagonistas);
 
-		this.iconbtnCombate = new ImageIcon(getClass().getResource("/Imagens/Dados_Combate.png"));
+		this.iconbtnCombate = new ImageIcon(getClass().getResource("/Imagens/Botões/Dados_Combate.png"));
 		this.lblbtnCombate = new JLabel(iconbtnCombate);
 		this.lblbtnCombate.setToolTipText("Dados de Combate");
 		this.lblbtnCombate.setBounds(25, 225, 110, 110);
@@ -119,7 +120,7 @@ public class AreaDeCombateVIEW extends JFrame {
 		this.lblCombate.setBounds(50, 320, 100, 20);
 		this.add(lblCombate);
 
-		this.iconbtnAcao = new ImageIcon(getClass().getResource("/Imagens/Dados_Ação.png"));
+		this.iconbtnAcao = new ImageIcon(getClass().getResource("/Imagens/Botões/Dados_Ação.png"));
 		this.lblbtnAcao = new JLabel(iconbtnAcao);
 		this.lblbtnAcao.setToolTipText("Dados de Ação");
 		this.lblbtnAcao.setBounds(135, 225, 110, 110);
@@ -144,7 +145,7 @@ public class AreaDeCombateVIEW extends JFrame {
 		this.lblAcao.setBounds(175, 320, 100, 20);
 		this.add(lblAcao);
 
-		this.iconbtnSalvar = new ImageIcon(getClass().getResource("/Imagens/Salvar.png"));
+		this.iconbtnSalvar = new ImageIcon(getClass().getResource("/Imagens/Botões/Salvar.png"));
 		this.lblbtnSalvar = new JLabel(iconbtnSalvar);
 		this.lblbtnSalvar.setToolTipText("Salvar");
 		this.lblbtnSalvar.setBounds(25, 315, 120, 120);
@@ -169,7 +170,7 @@ public class AreaDeCombateVIEW extends JFrame {
 		this.lblSalvar.setBounds(60, 405, 100, 20);
 		this.add(lblSalvar);
 
-		this.iconbtnSair = new ImageIcon(getClass().getResource("/Imagens/icone_sair.png"));
+		this.iconbtnSair = new ImageIcon(getClass().getResource("/Imagens/Botões/icone_sair.png"));
 		this.lblbtnSair = new JLabel(iconbtnSair);
 		this.lblbtnSair.setToolTipText("Salvar");
 		this.lblbtnSair.setBounds(138, 320, 100, 100);
@@ -205,7 +206,7 @@ public class AreaDeCombateVIEW extends JFrame {
 		this.spResultados.setBorder(javax.swing.BorderFactory.createLineBorder(new Color(90, 61, 171), 3));
 		this.add(spResultados);
 
-		this.combateWall = new ImageIcon(getClass().getResource("/Imagens/Dados.png"));
+		this.combateWall = new ImageIcon(getClass().getResource("/Imagens/Background/Dados.png"));
 		this.combateWall = new ImageIcon(combateWall.getImage().getScaledInstance(580, 500, Image.SCALE_DEFAULT));
 		this.bckgCombate = new JLabel(combateWall);
 		this.bckgCombate.setBounds(-10, -10, 580, 500);

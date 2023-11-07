@@ -25,7 +25,7 @@ public class ConfirmacaoCombateVIEW extends JFrame{
 	private JCheckBox selecionaTudo;
 	private ImageIcon imgIcon;
 	private Border border;
-	private JButton btConfirmar;
+	private JButton btConfirmar, btnCancelar;
 	
 	
 	public ConfirmacaoCombateVIEW() {
@@ -76,9 +76,14 @@ public class ConfirmacaoCombateVIEW extends JFrame{
 		this.btConfirmar.setForeground(Color.white);
 		this.btConfirmar.setFont(new Font("Arial", Font.BOLD, 15));
 		
+		this.btnCancelar = new JButton("Cancelar");
+		this.btnCancelar.setBackground(new Color(90, 61, 171));
+		this.btnCancelar.setForeground(Color.white);
+		this.btnCancelar.setFont(new Font("Arial", Font.BOLD, 15));
 
 		this.add(panel,BorderLayout.CENTER);
 		this.add(btConfirmar, BorderLayout.SOUTH);
+		
 		
 		
 		

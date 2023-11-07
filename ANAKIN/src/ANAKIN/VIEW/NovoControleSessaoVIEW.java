@@ -39,7 +39,7 @@ public class NovoControleSessaoVIEW extends JFrame{
 		this.setLocation((tela.width - getSize().width) / 2, (tela.height - getSize().height) / 2);
 
 		this.imgIcon = new ImageIcon("jupiter.png");
-		this.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/Imagens/jupiter.png")));
+		this.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/Imagens/Icones/jupiter.png")));
 
 		this.lblMsg = new JLabel("Nome do novo controle de sessão:");
 		this.lblMsg.setBounds(35, 10, 200, 20);

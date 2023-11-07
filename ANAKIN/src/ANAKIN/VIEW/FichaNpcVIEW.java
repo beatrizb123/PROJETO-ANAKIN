@@ -108,7 +108,7 @@ public class FichaNpcVIEW extends JFrame {
 		this.setTitle("Ficha de Npc's");
 		this.setDefaultCloseOperation(HIDE_ON_CLOSE);
 		this.setResizable(false);
-		this.setBounds(0, 0, 495, 550);
+		this.setBounds(0, 0, 495, 510);
 		this.setLayout(null);
 		this.setBackground(new Color(250, 247, 255));
 		this.container = getContentPane();
@@ -402,7 +402,7 @@ public class FichaNpcVIEW extends JFrame {
 		this.spPersonalidade.setBorder(javax.swing.BorderFactory.createLineBorder(new Color(90, 61, 171), 2));
 		this.add(spPersonalidade);
 
-		this.iconbtnSalvar = new ImageIcon(getClass().getResource("/Imagens/Salvar.png"));
+		this.iconbtnSalvar = new ImageIcon(getClass().getResource("/Imagens/Botões/Salvar.png"));
 		this.lblbtnSalvar = new JLabel(iconbtnSalvar);
 		this.lblbtnSalvar.setToolTipText("Salvar");
 		this.lblbtnSalvar.setBounds(250, 310, 120, 120);
@@ -491,7 +491,7 @@ public class FichaNpcVIEW extends JFrame {
 		this.lblSalvar.setBounds(285,405,100, 20);
 		this.add(lblSalvar);
 
-		this.iconbtnCancela = new ImageIcon(getClass().getResource("/Imagens/Cancelar.png"));
+		this.iconbtnCancela = new ImageIcon(getClass().getResource("/Imagens/Botões/Cancelar.png"));
 		this.lblbtnCancela = new JLabel(iconbtnCancela);
 		this.lblbtnCancela.setToolTipText("Cancelar");
 		this.lblbtnCancela.setBounds(340, 315, 120, 120);
@@ -521,9 +521,9 @@ public class FichaNpcVIEW extends JFrame {
 		this.btnApagar.setFont(new Font("Arial", Font.BOLD, 15));
 		this.btnApagar.setBackground(new Color(90, 61, 171));
 		this.btnApagar.setForeground(Color.white);
-        	this.add(btnApagar);
+        //this.add(btnApagar);
 		
-		this.iconbtnAnterior = new ImageIcon(getClass().getResource("/Imagens/Esquerda.png"));
+		this.iconbtnAnterior = new ImageIcon(getClass().getResource("/Imagens/Botões/Esquerda.png"));
 		this.lblbtnAnterior = new JLabel(iconbtnAnterior);
 		this.lblbtnAnterior.setToolTipText("Anterior");
 		this.lblbtnAnterior.setBounds(10, 410, 120, 120);
@@ -540,9 +540,9 @@ public class FichaNpcVIEW extends JFrame {
 				lblbtnAnterior.setIcon(iconbtnAnterior);
 			}
 		});
-		this.add(lblbtnAnterior);
+		//this.add(lblbtnAnterior);
 		
-		this.iconbtnProximo = new ImageIcon(getClass().getResource("/Imagens/Direita.png"));
+		this.iconbtnProximo = new ImageIcon(getClass().getResource("/Imagens/Botões/Direita.png"));
 		this.lblbtnProximo = new JLabel(iconbtnProximo);
 		this.lblbtnProximo.setToolTipText("Proximo");
 		this.lblbtnProximo.setBounds(355, 410, 120, 120);
@@ -559,23 +559,23 @@ public class FichaNpcVIEW extends JFrame {
 				lblbtnProximo.setIcon(iconbtnProximo);
 			}
 		});
-		this.add(lblbtnProximo);
+		//this.add(lblbtnProximo);
 
 		this.jpFicha = new JPanel();
 		this.jpFicha.setLayout(null);
 		this.jpFicha.setBackground(new Color(235, 223, 255));
-		this.jpFicha.setBounds(15, 15, 450, 480);
+		this.jpFicha.setBounds(15, 15, 450, 440);
 		this.jpFicha.setBorder(javax.swing.BorderFactory.createLineBorder(new Color(90, 61, 171), 3));
 		this.add(jpFicha);
 
-		this.fichaWall = new ImageIcon(getClass().getResource("/Imagens/Fichas.png"));
+		this.fichaWall = new ImageIcon(getClass().getResource("/Imagens/Background/Fichas.png"));
 		this.fichaWall = new ImageIcon(fichaWall.getImage().getScaledInstance(495, 550, Image.SCALE_DEFAULT));
 		this.bckgFicha = new JLabel(fichaWall);
 		this.bckgFicha.setBounds(-10, -10, 495, 550);
 		this.add(bckgFicha);
 
 		this.imgIcon = new ImageIcon("jupiter.png");
-		this.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/Imagens/jupiter.png")));
+		this.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/Imagens/Icones/jupiter.png")));
 
 	}
 
