@@ -18,32 +18,40 @@ import ANAKIN.MODEL.VO.UsuarioVO;
 public class FichaProtagonistaDAO {
 	Connection conn = null;
 	PreparedStatement PSTM;
-
-	public int VereficaprotaAcessado() {
+	public boolean VereficaprotaOPEN() {
 		conn = new ConexaoDAO().conectabd();
-		String SQL = "SELECT id_protagonista,nomw_protagonista from fprotaacessada;";
+		String sql = "select vereficador from protaopen";
 		try {
-			PSTM = conn.prepareStatement(SQL);
-			ResultSet resultado = PSTM.executeQuery();
-			if (resultado != null) {
-				return 1;
-			} else {
-				return 0;
+			PSTM = conn.prepareStatement(sql);
+			ResultSet RESP = PSTM.executeQuery();
+			if(RESP.next()){
+				return true;
+			}else {
+				return false;
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
-			return 0;
+			return false;
 		}
 	}
-
-	public void AcessaprotaAcessado(String nome) {
+	public void AtivaprotaOPEN() {
 		conn = new ConexaoDAO().conectabd();
-		AuxiliarVO AV = new AuxiliarVO();
-		String SQL = "update fprotaacessada set id_protagonista = ? ,nomw_protagonista = ? where id_porta = 1;";
+		String sql = "insert into protaOPEN(ID_Porta,vereficador) value (1,'open');";
+		
 		try {
-			PSTM = conn.prepareStatement(SQL);
-			PSTM.setInt(1, AV.getIdprotagonista());
-			PSTM.setString(2, nome);
+			PSTM = conn.prepareStatement(sql);
+			PSTM.executeUpdate();
+			PSTM.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	public void DesativaprotaOPEN() {
+		conn = new ConexaoDAO().conectabd();
+		String sql = "delete protaopen from protaopen where id_Porta = 1 ;";
+		
+		try {
+			PSTM = conn.prepareStatement(sql);
 			PSTM.executeUpdate();
 			PSTM.close();
 		} catch (SQLException e) {

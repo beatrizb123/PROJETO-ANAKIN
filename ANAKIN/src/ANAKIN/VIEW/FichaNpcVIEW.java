@@ -543,6 +543,8 @@ public class FichaNpcVIEW extends JFrame {
 		//this.add(lblbtnAnterior);
 		
 		this.iconbtnProximo = new ImageIcon(getClass().getResource("/Imagens/Botões/Direita.png"));
+		this.iconbtnProximo = new ImageIcon(getClass().getResource("/Imagens/Direita.png"));
+
 		this.lblbtnProximo = new JLabel(iconbtnProximo);
 		this.lblbtnProximo.setToolTipText("Proximo");
 		this.lblbtnProximo.setBounds(355, 410, 120, 120);

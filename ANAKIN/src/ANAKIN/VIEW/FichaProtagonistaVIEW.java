@@ -15,6 +15,11 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 
+import java.sql.ResultSet;
+import java.util.Timer;
+import java.util.TimerTask;
+
+
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -104,7 +109,6 @@ public class FichaProtagonistaVIEW extends JFrame {
 	public JTextField getTxtAltura() {
 		return txtfAltura;
 	}
-
 	public FichaProtagonistaVIEW() {
 		// instanciação dos objetos
 		FichaProtagonistaVO FPV = new FichaProtagonistaVO();
@@ -112,7 +116,7 @@ public class FichaProtagonistaVIEW extends JFrame {
 		AuxiliarVO AV = new AuxiliarVO();
 		int idprota = AV.getIdprotagonista();
 		String nomeperso = AV.getNomeprotagonista();
-		// DADOS PESSOAIS
+	
 
 		// DADOS PESSOAIS
 		this.setTitle("Ficha de Protagonistas");
@@ -151,8 +155,7 @@ public class FichaProtagonistaVIEW extends JFrame {
 					icon = new ImageIcon(bfimg);
 
 					Image img = icon.getImage();
-					Image tamanhoImg = img.getScaledInstance(iconUsuario.getWidth(), iconUsuario.getHeight(),
-							Image.SCALE_SMOOTH);
+					Image tamanhoImg = img.getScaledInstance(iconUsuario.getWidth(), iconUsuario.getHeight(),Image.SCALE_SMOOTH);
 					ImageIcon iconRed = new ImageIcon(tamanhoImg);
 					iconUsuario.setIcon(iconRed);
 
@@ -171,10 +174,12 @@ public class FichaProtagonistaVIEW extends JFrame {
 		this.add(lblNome);
 
 		this.txtfNome = new JTextField(100);
-		if (FichaProtagonistaSelecionada.getNome() != null) {
+		if (FPD.VereficaprotaOPEN() != false) {
 			this.txtfNome.setText(FichaProtagonistaSelecionada.getNome());
 			int idprotagonista = FPD.retornaidprotagonista(FichaProtagonistaSelecionada.getNome());
 			AV.setIdprotagonista(idprotagonista);
+		}else {
+			this.txtfNome.setText("");
 		}
 
 		this.txtfNome.setBounds(235, 35, 199, 20);
@@ -188,9 +193,8 @@ public class FichaProtagonistaVIEW extends JFrame {
 
 		this.txtfOcupacao = new JTextField(100);
 
-		if (FichaProtagonistaSelecionada.getOcupacao() != null) {
-			this.txtfOcupacao.setText(FichaProtagonistaSelecionada.getOcupacao());
-		}
+		if (FPD.VereficaprotaOPEN() != false) {
+			this.txtfOcupacao.setText(FichaProtagonistaSelecionada.getOcupacao());}
 
 		this.txtfOcupacao.setBounds(265, 70, 170, 20);
 		this.add(txtfOcupacao);
@@ -202,7 +206,7 @@ public class FichaProtagonistaVIEW extends JFrame {
 		this.add(lblIdade);
 
 		this.txtfIdade = new JTextField(100);
-		if (FichaProtagonistaSelecionada.getIdade() != 0) {
+		if (FPD.VereficaprotaOPEN() != false) {
 			String idade = String.valueOf(FichaProtagonistaSelecionada.getIdade());
 			txtfIdade.setText(idade);
 		}
@@ -216,14 +220,14 @@ public class FichaProtagonistaVIEW extends JFrame {
 		this.lblAltura.setBounds(315, 78, 85, 70);
 		this.add(lblAltura);
 
-		this.txtfAltura = new JTextField(100);
-		if (FichaProtagonistaSelecionada.getAltura() != 0) {
+		
+		this.txtfAltura = new JTextField(100);		
+		if (FPD.VereficaprotaOPEN() != false) {
+
 			Float altura = FichaProtagonistaSelecionada.getAltura();
 			String alturatxt = String.valueOf(altura);
 			txtfAltura.setText(alturatxt);
 		}
-
-		this.txtfAltura = new JTextField(100);
 		this.txtfAltura.setBounds(365, 103, 70, 20);
 		this.add(txtfAltura);
 
@@ -234,10 +238,11 @@ public class FichaProtagonistaVIEW extends JFrame {
 		this.ComboClasses.setFont(new Font("Arial", Font.BOLD, 15));
 		this.ComboClasses.setBounds(185, 145, 115, 20);
 
-		if (FichaProtagonistaSelecionada.getClasse() != 0) {
+		if(FPD.VereficaprotaOPEN() != false) {
+		
+			switch(FichaProtagonistaSelecionada.getClasse()){
+			case 1 :
 
-			switch (FichaProtagonistaSelecionada.getClasse()) {
-			case 1:
 				this.ComboClasses.setSelectedItem("Combatente");
 				break;
 			case 2:
@@ -302,7 +307,7 @@ public class FichaProtagonistaVIEW extends JFrame {
 		this.sldVida.setMajorTickSpacing(20);
 		this.sldVida.setMinorTickSpacing(5);
 		this.sldVida.setPaintTicks(true);
-		if (FichaProtagonistaSelecionada.getVida() != 0) {
+		if (FPD.VereficaprotaOPEN() != false) {
 			this.sldVida.setValue(FichaProtagonistaSelecionada.getVida());
 			String vida = String.valueOf(FichaProtagonistaSelecionada.getVida());
 			pcVida.setText(vida + "%");
@@ -338,7 +343,7 @@ public class FichaProtagonistaVIEW extends JFrame {
 		this.sldDefesa.setMajorTickSpacing(20);
 		this.sldDefesa.setMinorTickSpacing(5);
 		this.sldDefesa.setPaintTicks(true);
-		if (FichaProtagonistaSelecionada.getDefesa() != 0) {
+		if (FPD.VereficaprotaOPEN() != false) {
 			this.sldDefesa.setValue(FichaProtagonistaSelecionada.getDefesa());
 			String defesa = String.valueOf(FichaProtagonistaSelecionada.getDefesa());
 			pcDefesa.setText(defesa + "%");
@@ -377,15 +382,15 @@ public class FichaProtagonistaVIEW extends JFrame {
 		this.sldMagia.setMajorTickSpacing(20);
 		this.sldMagia.setMinorTickSpacing(5);
 		this.sldMagia.setPaintTicks(true);
-		if (FichaProtagonistaSelecionada.getMagia() != 0) {
+
+		if(FPD.VereficaprotaOPEN() != false) {
+
 			this.sldMagia.setValue(FichaProtagonistaSelecionada.getMagia());
 			String magia = String.valueOf(FichaProtagonistaSelecionada.getMagia());
 			pcMagia.setText(magia + "%");
 		} else {
 			this.sldMagia.setValue(100);
 		}
-
-		this.sldMagia.setValue(100);
 		this.sldMagia.setBounds(87, 280, 105, 30);
 		this.sldMagia.addChangeListener(new ChangeListener() {
 
@@ -413,7 +418,9 @@ public class FichaProtagonistaVIEW extends JFrame {
 
 		SpinnerModel valuePoder = new SpinnerNumberModel(1, 0, 5, 1);
 		this.spnPoder = new JSpinner(valuePoder);
-		if (FichaProtagonistaSelecionada.getPoder() != 0) {
+
+		if(FPD.VereficaprotaOPEN() != false) {
+
 			this.spnPoder.setValue(FichaProtagonistaSelecionada.getPoder());
 		}
 
@@ -429,7 +436,10 @@ public class FichaProtagonistaVIEW extends JFrame {
 
 		SpinnerModel valueForca = new SpinnerNumberModel(1, 0, 5, 1);
 		this.spnForca = new JSpinner(valueForca);
-		if (FichaProtagonistaSelecionada.getForca() != 0) {
+
+		if(FPD.VereficaprotaOPEN() != false) {
+
+
 			this.spnForca.setValue(FichaProtagonistaSelecionada.getForca());
 		}
 
@@ -445,7 +455,9 @@ public class FichaProtagonistaVIEW extends JFrame {
 
 		SpinnerModel valueCarisma = new SpinnerNumberModel(1, 0, 5, 1);
 		this.spnCarisma = new JSpinner(valueCarisma);
-		if (FichaProtagonistaSelecionada.getCarisma() != 0) {
+
+		if(FPD.VereficaprotaOPEN() != false) {
+
 			this.spnCarisma.setValue(FichaProtagonistaSelecionada.getCarisma());
 		}
 
@@ -461,7 +473,7 @@ public class FichaProtagonistaVIEW extends JFrame {
 
 		SpinnerModel valueAgilidade = new SpinnerNumberModel(1, 0, 5, 1);
 		this.spnAgilidade = new JSpinner(valueAgilidade);
-		if (FichaProtagonistaSelecionada.getAgilidade() != 0) {
+		if (FPD.VereficaprotaOPEN() != false) {
 			spnAgilidade.setValue(FichaProtagonistaSelecionada.getAgilidade());
 		}
 
@@ -477,7 +489,9 @@ public class FichaProtagonistaVIEW extends JFrame {
 
 		SpinnerModel valueIntelecto = new SpinnerNumberModel(1, 0, 5, 1);
 		this.spnIntelecto = new JSpinner(valueIntelecto);
-		if (FichaProtagonistaSelecionada.getIntelecto() != 0) {
+
+		if(FPD.VereficaprotaOPEN() != false) {
+
 			this.spnIntelecto.setValue(FichaProtagonistaSelecionada.getIntelecto());
 		}
 
@@ -656,6 +670,9 @@ public class FichaProtagonistaVIEW extends JFrame {
 		this.imgIcon = new ImageIcon("jupiter.png");
 		this.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/Imagens/Icones/jupiter.png")));
 
+		
+		
+	               
+	     FPD.DesativaprotaOPEN();      
 	}
-
-}
+		}
