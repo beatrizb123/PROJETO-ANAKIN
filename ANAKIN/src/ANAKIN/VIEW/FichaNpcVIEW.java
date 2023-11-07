@@ -34,6 +34,8 @@ import javax.swing.SwingConstants;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
+import ANAKIN.MODEL.BO.FichaNPCSelecionada;
+import ANAKIN.MODEL.BO.FichaProtagonistaSelecionada;
 import ANAKIN.MODEL.DAO.FichaNPCDAO;
 import ANAKIN.MODEL.DAO.FichaProtagonistaDAO;
 import ANAKIN.MODEL.VO.AuxiliarVO;
@@ -84,6 +86,7 @@ public class FichaNpcVIEW extends JFrame {
 	JFileChooser jfArquivo;
 	BufferedImage bfimg;
 	File file;
+	FichaNPCDAO FND = new FichaNPCDAO();
 
 	public JTextField getTxtNome() {
 		return txtfNome;
@@ -159,6 +162,10 @@ public class FichaNpcVIEW extends JFrame {
 		this.add(lblNome);
 
 		this.txtfNome = new JTextField(100);
+		if(FND.VereficaNPC_OPEN() != false) {
+			this.txtfNome.setText(FichaNPCSelecionada.getNomeNPC());
+			//falta o codigo de retornar o id mano
+		}
 		this.txtfNome.setBounds(235, 35, 199, 20);
 		this.add(txtfNome);
 
@@ -169,6 +176,9 @@ public class FichaNpcVIEW extends JFrame {
 		this.add(lblOcupacao);
 
 		this.txtfOcupacao = new JTextField(100);
+		if(FND.VereficaNPC_OPEN() != false) {
+			this.txtfOcupacao.setText(FichaNPCSelecionada.getOcupaçaoNPC());
+		}
 		this.txtfOcupacao.setBounds(265, 70, 170, 20);
 		this.add(txtfOcupacao);
 
@@ -179,6 +189,9 @@ public class FichaNpcVIEW extends JFrame {
 		this.add(lblIdade);
 
 		this.txtfIdade = new JTextField(100);
+		if(FND.VereficaNPC_OPEN() != false) {
+			this.txtfIdade.setText(String.valueOf(FichaNPCSelecionada.getIdadeNPC()));
+		}
 		this.txtfIdade.setBounds(235, 108, 70, 20);
 		this.add(txtfIdade);
 
@@ -189,6 +202,9 @@ public class FichaNpcVIEW extends JFrame {
 		this.add(lblAltura);
 
 		this.txtfAltura = new JTextField(100);
+		if(FND.VereficaNPC_OPEN() != false) {
+			this.txtfAltura.setText(String.valueOf(FichaNPCSelecionada.getAlturaNPC()));
+		}
 		this.txtfAltura.setBounds(365, 103, 70, 20);
 		this.add(txtfAltura);
 
@@ -199,6 +215,21 @@ public class FichaNpcVIEW extends JFrame {
 		this.ComboAlinhamento.setFont(new Font("Arial", Font.BOLD, 15));
 		this.ComboAlinhamento.setBounds(185, 145, 115, 20);
 		this.add(ComboAlinhamento);
+		if(FND.VereficaNPC_OPEN() != false) {
+			switch(FichaNPCSelecionada.getFkIdALINHAMENTONPC()){
+			case 1 :
+
+				this.ComboAlinhamento.setSelectedItem("Bom");
+				break;
+			case 2:
+				this.ComboAlinhamento.setSelectedItem("Neutro");
+				break;
+			case 3:
+				this.ComboAlinhamento.setSelectedItem("Mal");
+				break;
+			
+			}
+		}
 
 		this.lblAtributos = new JLabel(Talentos[0]);
 		this.lblAtributos.setFont(new Font("Arial", Font.BOLD, 14));
@@ -253,6 +284,10 @@ public class FichaNpcVIEW extends JFrame {
 		this.sldVida.setPaintTicks(true);
 		this.sldVida.setValue(100);
 		this.sldVida.setBounds(87, 225, 105, 30);
+		if(FND.VereficaNPC_OPEN() != false) {
+			this.sldVida.setValue(FichaNPCSelecionada.getVidaNPC());
+			pcVida.setText(String.valueOf(FichaNPCSelecionada.getVidaNPC() + "%"));
+		}
 		this.sldVida.addChangeListener(new ChangeListener() {
 
 			@Override

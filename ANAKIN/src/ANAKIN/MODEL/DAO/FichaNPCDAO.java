@@ -5,6 +5,10 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import ANAKIN.MODEL.BO.FichaNPCSelecionada;
+import ANAKIN.MODEL.BO.FichaProtagonistaSelecionada;
+import ANAKIN.MODEL.BO.MiniFichasNPCBO;
+import ANAKIN.MODEL.BO.MiniFichasProtaBO;
 import ANAKIN.MODEL.VO.AuxiliarVO;
 import ANAKIN.MODEL.VO.FichaNPCVO;
 import ANAKIN.MODEL.VO.FichaProtagonistaVO;
@@ -13,6 +17,96 @@ public class FichaNPCDAO {
 	Connection conn = null;
 	PreparedStatement PSTM;
 	
+	public boolean VereficaNPC_OPEN() {
+		conn = new ConexaoDAO().conectabd();
+		String sql = "select vereficador from npc_open;";
+		try {
+			PSTM = conn.prepareStatement(sql);
+			ResultSet RESP = PSTM.executeQuery();
+			if(RESP.next()){
+				return true;
+			}else {
+				return false;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return false;
+		}
+	}
+	public void AtivaNPC_OPEN() {
+		conn = new ConexaoDAO().conectabd();
+		String sql = "insert into NPC_OPEN(ID_Porta,vereficador) value (1,'open');";
+		
+		try {
+			PSTM = conn.prepareStatement(sql);
+			PSTM.executeUpdate();
+			PSTM.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	public void DesativaNPC_OPEN() {
+		conn = new ConexaoDAO().conectabd();
+		String sql = "delete NPC_open from npc_open where id_Porta = 1 ;";
+		
+		try {
+			PSTM = conn.prepareStatement(sql);
+			PSTM.executeUpdate();
+			PSTM.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void retornaInforNPC(String nome, int vida, int def, int mag) {
+		
+		conn = new ConexaoDAO().conectabd();
+		FichaNPCSelecionada FNS = null;
+		String SQL = "select nome_NPC,Ocupação_NPC,descriçao,idade_NPC,altura_NPC,Vida_NPC,Defesa_NPC,Magia_NPC,poder,forca,carisma,intelecto,ID_Alinhamento from NPC where Nome_NPC = ? and vida_NPC = ? and defesa_NPC = ? and Magia_NPC = ?;";
+		try {
+			PSTM = conn.prepareStatement(SQL);
+			PSTM.setString(1, nome);
+			PSTM.setInt(2, vida);
+			PSTM.setInt(3, def);
+			PSTM.setInt(4, mag);
+			ResultSet infor = PSTM.executeQuery();
+			if(infor.next()) {
+				
+				FNS = new FichaNPCSelecionada(infor.getString(1),infor.getString(2), infor.getInt(4), infor.getInt(5), infor.getString(3), infor.getInt(6), infor.getInt(7),infor.getInt(8), infor.getInt(9), infor.getInt(10), infor.getInt(11), infor.getInt(12), infor.getInt(13),infor.getInt(14));
+				PSTM.close();
+			}else {
+			PSTM.close();
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+	}
+	public MiniFichasNPCBO RetornaInforBase(int posicao) {
+		conn = new ConexaoDAO().conectabd();
+		AuxiliarVO AV = new AuxiliarVO();
+		String SQL = "select nome_NPC,vida_NPC,defesa_NPC,Magia_NPC from npc where id_sessao = ? limit 1 offset ?;";
+		MiniFichasNPCBO MFNPC = null;
+		try {
+			PSTM = conn.prepareStatement(SQL);
+			PSTM.setInt(1,AV.getIdsessao() );
+			PSTM.setInt(2, posicao);
+			ResultSet resultado = PSTM.executeQuery();
+			while(resultado.next()) {
+				String nome = resultado.getString(1);
+				int vida =  resultado.getInt(2);
+				int def = resultado.getInt(3);
+				int mag = resultado.getInt(4);
+				MFNPC = new MiniFichasNPCBO(nome, vida, def, mag);
+			}
+			return MFNPC;
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
 	public void criandoRegistroNPC() {
 		conn = new ConexaoDAO().conectabd();
 		String sql = " insert into NPC(id_sessao) value (?);";
@@ -47,7 +141,7 @@ public class FichaNPCDAO {
 		conn = new ConexaoDAO().conectabd();
 		String sql1 = "update NPC "
 				+ "set nome_NPC = ?,"
-				+ "	ocupacao_NPC = ?,"
+				+ "	ocupação_NPC = ?,"
 				+ "	idade_NPC = ?,"
 				+ "    altura_NPC = ?,"
 				+ "    vida_NPC = ?,"

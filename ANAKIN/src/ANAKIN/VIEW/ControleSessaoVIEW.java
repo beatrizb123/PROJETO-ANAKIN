@@ -39,6 +39,7 @@ import javax.swing.SwingConstants;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
+import ANAKIN.MODEL.BO.MiniFichasNPCBO;
 import ANAKIN.MODEL.BO.MiniFichasProtaBO;
 //import ANAKIN.MODEL.BO.MiniFichasProtaBO;
 import ANAKIN.MODEL.DAO.AbrirSessaoDAO;
@@ -75,9 +76,11 @@ public class ControleSessaoVIEW extends JFrame {
 	private ImageIcon iconbtnCombate;
 	private JLabel lblbtnCombate;
 	private JLabel lblCombate; 
-	int IndiceAtual = 0, tanto ;
+	int IndiceAtual = 0, tanto,IndiceAtual2 = 0 ;
 	private MiniFichasProtaBO miniFProtagonista ;
+	private MiniFichasNPCBO miniFNPC;
 	FichaProtagonistaDAO FPD = new FichaProtagonistaDAO();
+	FichaNPCDAO FND = new FichaNPCDAO();
 
 	
 	
@@ -140,6 +143,7 @@ public class ControleSessaoVIEW extends JFrame {
 		
 		
 		IndiceAtual = 0;
+		IndiceAtual2 = 0;
 
 		this.setTitle("Controle de Sessão ★ ");
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -385,6 +389,7 @@ public class ControleSessaoVIEW extends JFrame {
 			}
 			
 		});
+		
 		BTNproximo.addActionListener(new ActionListener() {
 			
 			@Override
@@ -402,8 +407,7 @@ public class ControleSessaoVIEW extends JFrame {
 			
 			}
 		});
-		
-		
+
 		BTNAbrir.addActionListener(new ActionListener() {
 			
 			@Override
@@ -416,6 +420,7 @@ public class ControleSessaoVIEW extends JFrame {
 				FPV.setVisible(true);
 			}
 		});
+		
 		this.lblNPCs = new JLabel("NPC's");
 		this.lblNPCs.setBounds(660, 3, 155, 40);
 		this.lblNPCs.setForeground(new Color(90, 61, 171));
@@ -451,17 +456,17 @@ public class ControleSessaoVIEW extends JFrame {
 			rowPanel2.setBackground(new Color(250, 247, 255));
 			rowPanel2.setLayout(new GridLayout(5, 1));
 			//descriçao da miniFicha - josue
-			miniFProtagonista = FPD.informaçoesbaseFP(IndiceAtual);
-			JLabel nomeNPC = new JLabel("Nome:"+ miniFProtagonista.getNome());
+			miniFNPC = FND.RetornaInforBase(IndiceAtual2) ;
+			JLabel nomeNPC = new JLabel("Nome:"+ miniFNPC.getNomeNPC());
 			nomeNPC.setHorizontalAlignment(SwingConstants.CENTER);
 			rowPanel2.add(nomeNPC);
-			JLabel vidaNPC = new JLabel("Vida: "+ miniFProtagonista.getVida());
+			JLabel vidaNPC = new JLabel("Vida: "+ miniFNPC.getVidaNPC());
 			vidaNPC.setHorizontalAlignment(SwingConstants.CENTER);
 			rowPanel2.add(vidaNPC);
-			JLabel defNPC = new JLabel("Defesa: "+ miniFProtagonista.getDefesa());
+			JLabel defNPC = new JLabel("Defesa: "+ miniFNPC.getDefNPC());
 			defNPC.setHorizontalAlignment(SwingConstants.CENTER);
 			rowPanel2.add(defNPC);
-			JLabel magNPC = new JLabel("Magia: "+ miniFProtagonista.getMagia());
+			JLabel magNPC = new JLabel("Magia: "+ miniFNPC.getMagNPC());
 			magNPC.setHorizontalAlignment(SwingConstants.CENTER);
 			rowPanel2.add(magNPC);
 			painelNPC.add(rowPanel2);
@@ -473,13 +478,13 @@ public class ControleSessaoVIEW extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-				IndiceAtual--;
+				IndiceAtual2--;
 					
-					miniFProtagonista = FPD.informaçoesbaseFP(IndiceAtual);
-					nome.setText("Nome: " + miniFProtagonista.getNome());
-					vida.setText("Vida: " + Integer.toString(miniFProtagonista.getVida()));
-					def.setText("Defesa: " + Integer.toString(miniFProtagonista.getDefesa()));
-					mag.setText("Magia: " + Integer.toString(miniFProtagonista.getMagia()));
+					miniFNPC = FND.RetornaInforBase(IndiceAtual2);
+					nomeNPC.setText("Nome: " + miniFNPC.getNomeNPC());
+					vidaNPC.setText("Vida: " + Integer.toString(miniFNPC.getVidaNPC()));
+					defNPC.setText("Defesa: " + Integer.toString(miniFNPC.getDefNPC()));
+					magNPC.setText("Magia: " + Integer.toString(miniFNPC.getMagNPC()));
 			}
 			
 		});
@@ -488,14 +493,14 @@ public class ControleSessaoVIEW extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				
-					IndiceAtual++;
+					IndiceAtual2++;
 					
 				
-						miniFProtagonista = FPD.informaçoesbaseFP(IndiceAtual);
-						nome.setText("Nome: " + miniFProtagonista.getNome());
-						vida.setText("Vida: " + Integer.toString(miniFProtagonista.getVida()));
-						def.setText("Defesa: " + Integer.toString(miniFProtagonista.getDefesa()));
-						mag.setText("Magia: " + Integer.toString(miniFProtagonista.getMagia()));
+					miniFNPC = FND.RetornaInforBase(IndiceAtual2);
+					nomeNPC.setText("Nome: " + miniFNPC.getNomeNPC());
+					vidaNPC.setText("Vida: " + Integer.toString(miniFNPC.getVidaNPC()));
+					defNPC.setText("Defesa: " + Integer.toString(miniFNPC.getDefNPC()));
+					magNPC.setText("Magia: " + Integer.toString(miniFNPC.getMagNPC()));
 					
 			
 			}
@@ -507,11 +512,11 @@ public class ControleSessaoVIEW extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				FPD.AtivaprotaOPEN();
-				miniFProtagonista = FPD.informaçoesbaseFP(IndiceAtual);
-				FPD.retornainfotprota(miniFProtagonista.getNome(), miniFProtagonista.getVida(), miniFProtagonista.getDefesa(),miniFProtagonista.getMagia());
+				miniFNPC = FND.RetornaInforBase(IndiceAtual2);
+				FND.retornaInforNPC(miniFNPC.getNomeNPC(), miniFNPC.getVidaNPC(), miniFNPC.getDefNPC(), miniFNPC.getMagNPC());
 				
-				FichaProtagonistaVIEW FPV = new FichaProtagonistaVIEW();
-				FPV.setVisible(true);
+				FichaNpcVIEW FNV = new FichaNpcVIEW();
+				FNV.setVisible(true);
 			}
 		});
 
