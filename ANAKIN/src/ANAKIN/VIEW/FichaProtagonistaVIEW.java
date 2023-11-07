@@ -499,7 +499,7 @@ public class FichaProtagonistaVIEW extends JFrame {
 		this.spnIntelecto.setBounds(365, 285, 50, 20);
 		this.add(spnIntelecto);
 
-		this.iconbtnSalvar = new ImageIcon(getClass().getResource("/Imagens/Salvar.png"));
+		this.iconbtnSalvar = new ImageIcon(getClass().getResource("/Imagens/Botões/Salvar.png"));
 		this.lblbtnSalvar = new JLabel(iconbtnSalvar);
 		this.lblbtnSalvar.setToolTipText("Salvar");
 		this.lblbtnSalvar.setBounds(120, 300, 120, 120);
@@ -584,7 +584,7 @@ public class FichaProtagonistaVIEW extends JFrame {
 		this.lblSalvar.setBounds(155, 390, 100, 20);
 		this.add(lblSalvar);
 
-		this.iconbtnCancela = new ImageIcon(getClass().getResource("/Imagens/Cancelar.png"));
+		this.iconbtnCancela = new ImageIcon(getClass().getResource("/Imagens/Botões/Cancelar.png"));
 		this.lblbtnCancela = new JLabel(iconbtnCancela);
 		this.lblbtnCancela.setToolTipText("Cancelar");
 		this.lblbtnCancela.setBounds(265, 320, 90, 90);
@@ -614,9 +614,9 @@ public class FichaProtagonistaVIEW extends JFrame {
 		this.btnApagar.setFont(new Font("Arial", Font.BOLD, 14));
 		this.btnApagar.setBackground(new Color(90, 61, 171));
 		this.btnApagar.setForeground(Color.white);
-		this.add(btnApagar);
+		//this.add(btnApagar);
 
-		this.iconbtnAnterior = new ImageIcon(getClass().getResource("/Imagens/Esquerda.png"));
+		this.iconbtnAnterior = new ImageIcon(getClass().getResource("/Imagens/Botões/Esquerda.png"));
 		this.lblbtnAnterior = new JLabel(iconbtnAnterior);
 		this.lblbtnAnterior.setToolTipText("Anterior");
 		this.lblbtnAnterior.setBounds(10, 370, 120, 120);
@@ -633,9 +633,9 @@ public class FichaProtagonistaVIEW extends JFrame {
 				lblbtnAnterior.setIcon(iconbtnAnterior);
 			}
 		});
-		this.add(lblbtnAnterior);
+		//this.add(lblbtnAnterior);
 
-		this.iconbtnProximo = new ImageIcon(getClass().getResource("/Imagens/Direita.png"));
+		this.iconbtnProximo = new ImageIcon(getClass().getResource("/Imagens/Botões/Direita.png"));
 		this.lblbtnProximo = new JLabel(iconbtnProximo);
 		this.lblbtnProximo.setToolTipText("Proximo");
 		this.lblbtnProximo.setBounds(355, 370, 120, 120);
@@ -652,23 +652,23 @@ public class FichaProtagonistaVIEW extends JFrame {
 				lblbtnProximo.setIcon(iconbtnProximo);
 			}
 		});
-		this.add(lblbtnProximo);
+		//this.add(lblbtnProximo);
 
 		this.jpHabilidades = new JPanel();
 		this.jpHabilidades.setLayout(null);
-		this.jpHabilidades.setBackground(new Color(235, 223, 255));
+		this.jpHabilidades.setBackground(new Color(235, 223, 235));
 		this.jpHabilidades.setBounds(15, 15, 450, 440);
 		this.jpHabilidades.setBorder(javax.swing.BorderFactory.createLineBorder(new Color(90, 61, 171), 3));
 		this.add(jpHabilidades);
 
-		this.fichaWall = new ImageIcon(getClass().getResource("/Imagens/Fichas.png"));
+		this.fichaWall = new ImageIcon(getClass().getResource("/Imagens/Background/Fichas.png"));
 		this.fichaWall = new ImageIcon(fichaWall.getImage().getScaledInstance(580, 500, Image.SCALE_DEFAULT));
 		this.bckgFicha = new JLabel(fichaWall);
 		this.bckgFicha.setBounds(-10, -10, 580, 500);
 		this.add(bckgFicha);
 
 		this.imgIcon = new ImageIcon("jupiter.png");
-		this.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/Imagens/jupiter.png")));
+		this.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/Imagens/Icones/jupiter.png")));
 
 		
 		

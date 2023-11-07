@@ -158,7 +158,7 @@ public class ControleSessaoVIEW extends JFrame {
 		this.setLocation((tela.width - getSize().width) / 2, (tela.height - getSize().height) / 2);
 
 		this.imgIcon = new ImageIcon("jupiter.png");
-		this.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/Imagens/jupiter.png")));
+		this.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/Imagens/Icones/jupiter.png")));
 
 
 		this.lblInventario = new JLabel("Inventário");
@@ -230,8 +230,8 @@ public class ControleSessaoVIEW extends JFrame {
 		});
 		this.add(btnLimpar);
 		
-		iconVoltar = new ImageIcon(getClass().getResource("/Imagens/voltar1.png"));
-		iconVoltar2 = new ImageIcon(getClass().getResource("/Imagens/voltar2.png"));
+		iconVoltar = new ImageIcon(getClass().getResource("/Imagens/Botões/voltar1.png"));
+		iconVoltar2 = new ImageIcon(getClass().getResource("/Imagens/Botões/voltar2.png"));
 		this.lblvolta = new JLabel(iconVoltar);
 		this.lblvolta.setBackground(Color.black);
 		this.lblvolta.setBounds(10, 3, 30, 30);
@@ -533,7 +533,7 @@ public class ControleSessaoVIEW extends JFrame {
 
 	
 				
-		this.iconProtagonista = new ImageIcon(getClass().getResource("/Imagens/Ficha_Protagonista.png"));
+		this.iconProtagonista = new ImageIcon(getClass().getResource("/Imagens/Botões/Ficha_Protagonista.png"));
 		this.lblbtnProtagonista= new JLabel(iconProtagonista);
 		this.lblbtnProtagonista.setToolTipText("Adicionar Protagonista");
 		this.lblbtnProtagonista.setBounds(-15, 60, 180, 180);
@@ -567,7 +567,7 @@ public class ControleSessaoVIEW extends JFrame {
 		this.lblProtagonista.setBounds(125,100,190,100);
 		this.add(lblProtagonista);
 			
-		this.iconNPC = new ImageIcon(getClass().getResource("/Imagens/Ficha_NPC.png"));
+		this.iconNPC = new ImageIcon(getClass().getResource("/Imagens/Botões/Ficha_NPC.png"));
 		this.lblbtnNPC= new JLabel(iconNPC);
 		this.lblbtnNPC.setToolTipText("Adicionar NPC");
 		this.lblbtnNPC.setBounds(-15, 160, 180, 180);
@@ -602,7 +602,7 @@ public class ControleSessaoVIEW extends JFrame {
 		this.add(lblNPC);
 			
 
-		this.iconbtnDados = new ImageIcon(getClass().getResource("/Imagens/Botao_Dados.png"));
+		this.iconbtnDados = new ImageIcon(getClass().getResource("/Imagens/Botões/Botao_Dados.png"));
 		this.lblbtnDados = new JLabel(iconbtnDados);
 		this.lblbtnDados.setToolTipText("Dados de Jogo");
 		this.lblbtnDados.setBounds(-10, 300, 180, 180);
@@ -657,7 +657,7 @@ public class ControleSessaoVIEW extends JFrame {
 		this.add(lblDados);
 		
 		
-		this.iconbtnCombate = new ImageIcon(getClass().getResource("/Imagens/Combate.png"));
+		this.iconbtnCombate = new ImageIcon(getClass().getResource("/Imagens/Botões/Combate.png"));
 		this.lblbtnCombate = new JLabel(iconbtnCombate);
 		this.lblbtnCombate.setToolTipText("Area de Combate");
 		this.lblbtnCombate.setBounds(140, 310, 140, 140);
@@ -678,7 +678,7 @@ public class ControleSessaoVIEW extends JFrame {
 			public void mouseClicked(MouseEvent e) {
 				setVisible(false);
 				
-				AreaDeCombateVIEW tela = new AreaDeCombateVIEW();
+				ConfirmacaoCombateVIEW tela = new ConfirmacaoCombateVIEW();
 				tela.setVisible(true);
 				
 			}
@@ -711,7 +711,7 @@ public class ControleSessaoVIEW extends JFrame {
 		
 
 		
-		this.menuWall = new ImageIcon(getClass().getResource("/Imagens/Background.png"));
+		this.menuWall = new ImageIcon(getClass().getResource("/Imagens/Background/Background.png"));
 		this.menuWall = new ImageIcon(menuWall.getImage().getScaledInstance(940, 550, Image.SCALE_DEFAULT));
 		this.bckgMenu = new JLabel(menuWall);
 		this.bckgMenu.setBounds(-230,-110, 1366, 768);
