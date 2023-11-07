@@ -40,6 +40,7 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
 import ANAKIN.MODEL.BO.MiniFichasProtaBO;
+//import ANAKIN.MODEL.BO.MiniFichasProtaBO;
 import ANAKIN.MODEL.DAO.AbrirSessaoDAO;
 import ANAKIN.MODEL.DAO.ControleSessaoDAO;
 import ANAKIN.MODEL.DAO.FichaNPCDAO;
@@ -49,12 +50,7 @@ import ANAKIN.MODEL.VO.AuxiliarVO;
 import ANAKIN.MODEL.VO.ControleSessaoVO;
 import ANAKIN.MODEL.VO.UsuarioVO;
 
-/*import ANAKIN.MODEL.DAO.ControleSessaoDAO;
-import ANAKIN.MODEL.DAO.DadosDAO;
-import ANAKIN.MODEL.DAO.ManterSessaoDAO;
-import ANAKIN.MODEL.VO.ControleSessaoVO;
-import ANAKIN.MODEL.VO.UsuarioVO;
-import DadosdeJogo.DadosdeJogoVIEW;*/
+
 
 
 public class ControleSessaoVIEW extends JFrame {
@@ -420,8 +416,6 @@ public class ControleSessaoVIEW extends JFrame {
 				FPV.setVisible(true);
 			}
 		});
-	
-		
 		this.lblNPCs = new JLabel("NPC's");
 		this.lblNPCs.setBounds(660, 3, 155, 40);
 		this.lblNPCs.setForeground(new Color(90, 61, 171));
@@ -478,16 +472,14 @@ public class ControleSessaoVIEW extends JFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				
-					IndiceAtual--;
+				// TODO Auto-generated method stub
+				IndiceAtual--;
 					
 					miniFProtagonista = FPD.informaçoesbaseFP(IndiceAtual);
 					nome.setText("Nome: " + miniFProtagonista.getNome());
 					vida.setText("Vida: " + Integer.toString(miniFProtagonista.getVida()));
 					def.setText("Defesa: " + Integer.toString(miniFProtagonista.getDefesa()));
 					mag.setText("Magia: " + Integer.toString(miniFProtagonista.getMagia()));
-				
-				
 			}
 			
 		});
@@ -522,6 +514,7 @@ public class ControleSessaoVIEW extends JFrame {
 				FPV.setVisible(true);
 			}
 		});
+
 		
 		this.jpProtagonistas = new JPanel();
 		this.jpProtagonistas.setLayout(null);
@@ -676,11 +669,14 @@ public class ControleSessaoVIEW extends JFrame {
 				lblbtnCombate.setIcon(iconbtnCombate);
 			}
 
-			/*@Override
+			@Override
 			public void mouseClicked(MouseEvent e) {
-				tela de area de Combate
+				setVisible(false);
 				
-			}*/
+				AreaDeCombateVIEW tela = new AreaDeCombateVIEW();
+				tela.setVisible(true);
+				
+			}
 		});
 		this.add(lblbtnCombate);
 
@@ -717,16 +713,6 @@ public class ControleSessaoVIEW extends JFrame {
 		this.add(bckgMenu);
 		
 	}
-
-	
-	/*public static void abre() {
-		ControleSessaoVIEW frame = new ControleSessaoVIEW();
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.setResizable(false);
-		frame.setVisible(true);
-		Dimension tela = Toolkit.getDefaultToolkit().getScreenSize();
-		frame.setLocation((tela.width - frame.getSize().width)/2,(tela.height - frame.getSize().height)/2);
-	}*/
 	
 	
 }
