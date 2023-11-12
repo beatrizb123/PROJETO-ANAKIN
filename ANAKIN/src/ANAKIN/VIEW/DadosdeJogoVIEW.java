@@ -49,7 +49,7 @@ public class DadosdeJogoVIEW extends JFrame {
 	
 	private ImageIcon dadosWall;
 	private JLabel bckgDados;
-	private ImageIcon iconCartas;
+	private ImageIcon iconCartas, destaqueCartas;
 	private JLabel lbliconCartas, lblCartas; 
 	
 	JLabel a;
@@ -385,7 +385,8 @@ public class DadosdeJogoVIEW extends JFrame {
 			}
 		});
 		this.add(a);
-		
+
+		this.destaqueCartas = new ImageIcon(getClass().getResource("destaque_cartas.png"));
 		this.iconCartas = new ImageIcon(getClass().getResource("/Imagens/Cartas de Vantagem.png"));
 		this.lbliconCartas = new JLabel(iconCartas);
 		this.lbliconCartas.setToolTipText("Cartas de Vantagem");
@@ -394,7 +395,7 @@ public class DadosdeJogoVIEW extends JFrame {
 			@Override
 			public void mouseEntered(MouseEvent e) {
 
-				lbliconCartas.setIcon(iconCartas);
+				lbliconCartas.setIcon(destaqueCartas);
 
 			}
 
