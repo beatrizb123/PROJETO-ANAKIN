@@ -44,7 +44,7 @@ public class MenuPrincipalVIEW extends JFrame {
 	private JLabel bckgMenu; 
 	
 	private JLabel lblIconControle, lblCriar;
-	private ImageIcon iconControleSessao;
+	private ImageIcon iconControleSessao, destaqueControle;
 
 
 	public MenuPrincipalVIEW() {
@@ -91,7 +91,8 @@ public class MenuPrincipalVIEW extends JFrame {
 		this.sombraAnakin.setHorizontalAlignment(SwingConstants.CENTER);
 		this.sombraAnakin.setFont(new Font("Arial", Font.BOLD, 85));
 		this.add(sombraAnakin);
-		
+
+		this.destaqueControle = new ImageIcon(getClass().getResource("destaque_controle.png"));
 		this.iconControleSessao = new ImageIcon(getClass().getResource("/Imagens/Botões/Controle_Sessao.png"));
 		this.lblIconControle = new JLabel(iconControleSessao);
 		this.lblIconControle.setToolTipText("Controle de Sessão");
@@ -100,7 +101,7 @@ public class MenuPrincipalVIEW extends JFrame {
 			@Override
 			public void mouseEntered(MouseEvent e) {
 
-				lblIconControle.setIcon(iconControleSessao);
+				lblIconControle.setIcon(destaqueControle);
 
 			}
 
