@@ -74,6 +74,7 @@ public class ControleSessaoVIEW extends JFrame {
 	private JLabel lblbtnNPC;
 	private JLabel lblNPC;
 	private ImageIcon iconbtnCombate;
+	private ImageIcon destaqueCombate, destaqueNpc, destaqueProtagonista,destaqueDados; 
 	private JLabel lblbtnCombate;
 	private JLabel lblCombate; 
 	int IndiceAtual = 0, tanto,IndiceAtual2 = 0 ;
@@ -532,7 +533,7 @@ public class ControleSessaoVIEW extends JFrame {
 	
 
 	
-				
+		this.destaqueProtagonista = new ImageIcon(getClass().getResource("destaque_protagonista.png"));
 		this.iconProtagonista = new ImageIcon(getClass().getResource("/Imagens/Botões/Ficha_Protagonista.png"));
 		this.lblbtnProtagonista= new JLabel(iconProtagonista);
 		this.lblbtnProtagonista.setToolTipText("Adicionar Protagonista");
@@ -541,7 +542,7 @@ public class ControleSessaoVIEW extends JFrame {
 			@Override
 			public void mouseEntered(MouseEvent e) {
 
-				lblbtnProtagonista.setIcon(iconProtagonista);
+				lblbtnProtagonista.setIcon(destaqueProtagonista);
 
 			}
 
@@ -565,8 +566,27 @@ public class ControleSessaoVIEW extends JFrame {
 		this.lblProtagonista.setForeground(new Color(90,61,171));
 		this.lblProtagonista.setFont(new Font("Arial", Font.BOLD, 16));
 		this.lblProtagonista.setBounds(125,100,190,100);
-		this.add(lblProtagonista);
-			
+		this.lblProtagonista.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseEntered(MouseEvent e) {
+
+				lblProtagonista.setForeground(Color.gray);
+
+			}
+
+			@Override
+			public void mouseExited(MouseEvent e) {
+				lblProtagonista.setForeground(new Color(90,61,171));
+			}
+
+			/*@Override
+			public void mouseClicked(MouseEvent e) {
+				abre a ficha 
+				}*/
+			});
+			this.add(lblProtagonista);
+
+		this.destaqueNpc = new ImageIcon(getClass().getResource("destaque_npc.png"));
 		this.iconNPC = new ImageIcon(getClass().getResource("/Imagens/Botões/Ficha_NPC.png"));
 		this.lblbtnNPC= new JLabel(iconNPC);
 		this.lblbtnNPC.setToolTipText("Adicionar NPC");
@@ -575,7 +595,7 @@ public class ControleSessaoVIEW extends JFrame {
 			@Override
 			public void mouseEntered(MouseEvent e) {
 
-				lblbtnNPC.setIcon(iconNPC);
+				lblbtnNPC.setIcon(destaqueNpc);
 
 			}
 
@@ -599,9 +619,28 @@ public class ControleSessaoVIEW extends JFrame {
 		this.lblNPC.setForeground(new Color(90,61,171));
 		this.lblNPC.setFont(new Font("Arial", Font.BOLD, 16));
 		this.lblNPC.setBounds(150,195,190,100);
-		this.add(lblNPC);
-			
+		this.lblNPC.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseEntered(MouseEvent e) {
 
+				lblNPC.setForeground(Color.gray);
+
+			}
+
+			@Override
+			public void mouseExited(MouseEvent e) {
+				lblNPC.setForeground(new Color(90,61,171));
+			}
+
+			/*@Override
+			public void mouseClicked(MouseEvent e) {
+				Tela de npc
+				}*/
+			});
+			this.add(lblNPC);			
+
+		
+		this.destaqueDados = new ImageIcon(getClass().getResource("destaque_dados.png"));
 		this.iconbtnDados = new ImageIcon(getClass().getResource("/Imagens/Botões/Botao_Dados.png"));
 		this.lblbtnDados = new JLabel(iconbtnDados);
 		this.lblbtnDados.setToolTipText("Dados de Jogo");
@@ -610,7 +649,7 @@ public class ControleSessaoVIEW extends JFrame {
 			@Override
 			public void mouseEntered(MouseEvent e) {
 
-				lblbtnDados.setIcon(iconbtnDados);
+				lblbtnDados.setIcon(destaqueDados);
 
 			}
 
@@ -656,7 +695,7 @@ public class ControleSessaoVIEW extends JFrame {
 		});
 		this.add(lblDados);
 		
-		
+		this.destaqueCombate = new ImageIcon(getClass().getResource("destaque_combate.png"));
 		this.iconbtnCombate = new ImageIcon(getClass().getResource("/Imagens/Botões/Combate.png"));
 		this.lblbtnCombate = new JLabel(iconbtnCombate);
 		this.lblbtnCombate.setToolTipText("Area de Combate");
@@ -665,7 +704,7 @@ public class ControleSessaoVIEW extends JFrame {
 			@Override
 			public void mouseEntered(MouseEvent e) {
 
-				lblbtnCombate.setIcon(iconbtnCombate);
+				lblbtnCombate.setIcon(destaqueCombate);
 
 			}
 
