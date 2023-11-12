@@ -31,6 +31,7 @@ public class AreaDeCombateVIEW extends JFrame {
 	private JTextArea txtaResultados;
 	private JScrollPane spResultados;
 	private ImageIcon iconbtnCombate, iconbtnAcao, iconbtnSalvar, iconbtnSair;
+	private JImageIcon destaqueCombate, destaqueAcao, destaqueSalvar, destaqueSair;
 
 	private JLabel lblbtnCombate, lblbtnAcao, lblCombate, lblAcao, lblbtnSalvar, lblSalvar, lblbtnSair, lblSair;
 	private JScrollPane spIniciativa;
@@ -95,6 +96,7 @@ public class AreaDeCombateVIEW extends JFrame {
 		this.jpProtagonistas.setBorder(javax.swing.BorderFactory.createLineBorder(new Color(90, 61, 171), 3));
 		this.add(jpProtagonistas);
 
+		this.destaqueCombate = new ImageIcon(getClass().getResource("destaque_dados_combate.png"));
 		this.iconbtnCombate = new ImageIcon(getClass().getResource("/Imagens/Botões/Dados_Combate.png"));
 		this.lblbtnCombate = new JLabel(iconbtnCombate);
 		this.lblbtnCombate.setToolTipText("Dados de Combate");
@@ -103,7 +105,7 @@ public class AreaDeCombateVIEW extends JFrame {
 			@Override
 			public void mouseEntered(MouseEvent e) {
 
-				lblbtnCombate.setIcon(iconbtnCombate);
+				lblbtnCombate.setIcon(destaqueCombate);
 
 			}
 
@@ -120,6 +122,7 @@ public class AreaDeCombateVIEW extends JFrame {
 		this.lblCombate.setBounds(50, 320, 100, 20);
 		this.add(lblCombate);
 
+		this.destaqueAcao = new ImageIcon(getClass().getResource("destaque_dados_ação.png"));
 		this.iconbtnAcao = new ImageIcon(getClass().getResource("/Imagens/Botões/Dados_Ação.png"));
 		this.lblbtnAcao = new JLabel(iconbtnAcao);
 		this.lblbtnAcao.setToolTipText("Dados de Ação");
@@ -128,7 +131,7 @@ public class AreaDeCombateVIEW extends JFrame {
 			@Override
 			public void mouseEntered(MouseEvent e) {
 
-				lblbtnAcao.setIcon(iconbtnAcao);
+				lblbtnAcao.setIcon(destaqueAcao);
 
 			}
 
@@ -145,6 +148,7 @@ public class AreaDeCombateVIEW extends JFrame {
 		this.lblAcao.setBounds(175, 320, 100, 20);
 		this.add(lblAcao);
 
+		this.destaqueSalvar = new ImageIcon(getClass().getResource("destaque_salvar.png"));
 		this.iconbtnSalvar = new ImageIcon(getClass().getResource("/Imagens/Botões/Salvar.png"));
 		this.lblbtnSalvar = new JLabel(iconbtnSalvar);
 		this.lblbtnSalvar.setToolTipText("Salvar");
@@ -153,7 +157,7 @@ public class AreaDeCombateVIEW extends JFrame {
 			@Override
 			public void mouseEntered(MouseEvent e) {
 
-				lblbtnSalvar.setIcon(iconbtnSalvar);
+				lblbtnSalvar.setIcon(destaqueSalvar);
 
 			}
 
@@ -170,6 +174,7 @@ public class AreaDeCombateVIEW extends JFrame {
 		this.lblSalvar.setBounds(60, 405, 100, 20);
 		this.add(lblSalvar);
 
+		this.destaqueSair = new ImageIcon(getClass().getResource("destaque_sair.png"));
 		this.iconbtnSair = new ImageIcon(getClass().getResource("/Imagens/Botões/icone_sair.png"));
 		this.lblbtnSair = new JLabel(iconbtnSair);
 		this.lblbtnSair.setToolTipText("Salvar");
@@ -178,7 +183,7 @@ public class AreaDeCombateVIEW extends JFrame {
 			@Override
 			public void mouseEntered(MouseEvent e) {
 
-				lblbtnSair.setIcon(iconbtnSair);
+				lblbtnSair.setIcon(destaqueSair);
 
 			}
 
