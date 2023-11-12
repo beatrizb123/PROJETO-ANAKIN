@@ -80,6 +80,7 @@ public class FichaProtagonistaVIEW extends JFrame {
 	private JButton btSalvar;
 	private JButton btnApagar;
 	private ImageIcon iconbtnCancela, iconbtnAnterior, iconbtnProximo;
+	private ImageIcon destaqueCancelar, destaqueSalvar;
 	private JLabel lblbtnCancela, lblbtnAnterior, lblbtnProximo;
 	private JLabel lblCancela;
 
@@ -499,6 +500,7 @@ public class FichaProtagonistaVIEW extends JFrame {
 		this.spnIntelecto.setBounds(365, 285, 50, 20);
 		this.add(spnIntelecto);
 
+		this.destaqueSalvar = new ImageIcon(getClass().getResource("destaque_salvar.png"));
 		this.iconbtnSalvar = new ImageIcon(getClass().getResource("/Imagens/Botões/Salvar.png"));
 		this.lblbtnSalvar = new JLabel(iconbtnSalvar);
 		this.lblbtnSalvar.setToolTipText("Salvar");
@@ -507,7 +509,7 @@ public class FichaProtagonistaVIEW extends JFrame {
 			@Override
 			public void mouseEntered(MouseEvent e) {
 
-				lblbtnSalvar.setIcon(iconbtnSalvar);
+				lblbtnSalvar.setIcon(destaqueSalvar);
 
 			}
 
@@ -584,6 +586,7 @@ public class FichaProtagonistaVIEW extends JFrame {
 		this.lblSalvar.setBounds(155, 390, 100, 20);
 		this.add(lblSalvar);
 
+		this.destaqueCancelar = new ImageIcon(getClass().getResource("destaque_cancelar.png"));
 		this.iconbtnCancela = new ImageIcon(getClass().getResource("/Imagens/Botões/Cancelar.png"));
 		this.lblbtnCancela = new JLabel(iconbtnCancela);
 		this.lblbtnCancela.setToolTipText("Cancelar");
@@ -592,7 +595,7 @@ public class FichaProtagonistaVIEW extends JFrame {
 			@Override
 			public void mouseEntered(MouseEvent e) {
 
-				lblbtnCancela.setIcon(iconbtnCancela);
+				lblbtnCancela.setIcon(destaqueCancelar);
 
 			}
 
