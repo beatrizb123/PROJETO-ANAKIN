@@ -79,6 +79,7 @@ public class FichaNpcVIEW extends JFrame {
 	private JLabel lblSalvar;
 
 	private ImageIcon iconbtnCancela,iconbtnAnterior,iconbtnProximo;
+	private ImageIcon destaqueCancelar, destaqueSalvar;
 	private JLabel  lblbtnCancela,lblbtnAnterior,lblbtnProximo;
 	private JLabel  lblCancela;
 	private JButton btnApagar;
@@ -437,6 +438,7 @@ public class FichaNpcVIEW extends JFrame {
 		this.spPersonalidade.setBorder(javax.swing.BorderFactory.createLineBorder(new Color(90, 61, 171), 2));
 		this.add(spPersonalidade);
 
+		this.destaqueSalvar = new ImageIcon(getClass().getResource("destaque_salvar.png"));
 		this.iconbtnSalvar = new ImageIcon(getClass().getResource("/Imagens/Botões/Salvar.png"));
 		this.lblbtnSalvar = new JLabel(iconbtnSalvar);
 		this.lblbtnSalvar.setToolTipText("Salvar");
@@ -445,7 +447,7 @@ public class FichaNpcVIEW extends JFrame {
 			@Override
 			public void mouseEntered(MouseEvent e) {
 
-				lblbtnSalvar.setIcon(iconbtnSalvar);
+				lblbtnSalvar.setIcon(destaqueSalvar);
 
 			}
 
@@ -526,6 +528,7 @@ public class FichaNpcVIEW extends JFrame {
 		this.lblSalvar.setBounds(285,405,100, 20);
 		this.add(lblSalvar);
 
+		this.destaqueCancelar = new ImageIcon(getClass().getResource("destaque_cancelar.png"));
 		this.iconbtnCancela = new ImageIcon(getClass().getResource("/Imagens/Botões/Cancelar.png"));
 		this.lblbtnCancela = new JLabel(iconbtnCancela);
 		this.lblbtnCancela.setToolTipText("Cancelar");
@@ -540,7 +543,7 @@ public class FichaNpcVIEW extends JFrame {
 
 			@Override
 			public void mouseExited(MouseEvent e) {
-				lblbtnCancela.setIcon(iconbtnCancela);
+				lblbtnCancela.setIcon(destaqueCancelar);
 			}
 		});
 		this.add(lblbtnCancela);
