@@ -31,7 +31,7 @@ public class AreaDeCombateVIEW extends JFrame {
 	private JTextArea txtaResultados;
 	private JScrollPane spResultados;
 	private ImageIcon iconbtnCombate, iconbtnAcao, iconbtnSalvar, iconbtnSair;
-	private JImageIcon destaqueCombate, destaqueAcao, destaqueSalvar, destaqueSair;
+	private ImageIcon destaqueCombate, destaqueAcao, destaqueSalvar, destaqueSair;
 
 	private JLabel lblbtnCombate, lblbtnAcao, lblCombate, lblAcao, lblbtnSalvar, lblSalvar, lblbtnSair, lblSair;
 	private JScrollPane spIniciativa;
