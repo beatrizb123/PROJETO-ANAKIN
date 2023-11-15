@@ -255,6 +255,19 @@ public class FichaProtagonistaVIEW extends JFrame {
 			case 4:
 				this.ComboClasses.setSelectedItem("Suporte");
 				break;
+				
+				
+			}
+			
+			int i = ComboClasses.getSelectedIndex();
+
+			if (file == null) {
+
+				ImageIcon icon = new ImageIcon(getClass().getResource(Imagens[i]));
+				iconUsuario.setText("");
+				iconUsuario.setHorizontalAlignment((int) CENTER_ALIGNMENT);
+				iconUsuario.setIcon(icon);
+
 			}
 		}
 
@@ -500,7 +513,7 @@ public class FichaProtagonistaVIEW extends JFrame {
 		this.spnIntelecto.setBounds(365, 285, 50, 20);
 		this.add(spnIntelecto);
 
-		this.destaqueSalvar = new ImageIcon(getClass().getResource("destaque_salvar.png"));
+		this.destaqueSalvar = new ImageIcon(getClass().getResource("/Imagens/Botões/destaque_salvar.png"));
 		this.iconbtnSalvar = new ImageIcon(getClass().getResource("/Imagens/Botões/Salvar.png"));
 		this.lblbtnSalvar = new JLabel(iconbtnSalvar);
 		this.lblbtnSalvar.setToolTipText("Salvar");
@@ -586,7 +599,7 @@ public class FichaProtagonistaVIEW extends JFrame {
 		this.lblSalvar.setBounds(155, 390, 100, 20);
 		this.add(lblSalvar);
 
-		this.destaqueCancelar = new ImageIcon(getClass().getResource("destaque_cancelar.png"));
+		this.destaqueCancelar = new ImageIcon(getClass().getResource("/Imagens/Botões/destaque_cancelar.png"));
 		this.iconbtnCancela = new ImageIcon(getClass().getResource("/Imagens/Botões/Cancelar.png"));
 		this.lblbtnCancela = new JLabel(iconbtnCancela);
 		this.lblbtnCancela.setToolTipText("Cancelar");

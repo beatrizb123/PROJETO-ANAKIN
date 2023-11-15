@@ -533,7 +533,7 @@ public class ControleSessaoVIEW extends JFrame {
 	
 
 	
-		this.destaqueProtagonista = new ImageIcon(getClass().getResource("destaque_protagonista.png"));
+		this.destaqueProtagonista = new ImageIcon(getClass().getResource("/Imagens/Botões/destaque_protagonista.png"));
 		this.iconProtagonista = new ImageIcon(getClass().getResource("/Imagens/Botões/Ficha_Protagonista.png"));
 		this.lblbtnProtagonista= new JLabel(iconProtagonista);
 		this.lblbtnProtagonista.setToolTipText("Adicionar Protagonista");
@@ -586,7 +586,7 @@ public class ControleSessaoVIEW extends JFrame {
 			});
 			this.add(lblProtagonista);
 
-		this.destaqueNpc = new ImageIcon(getClass().getResource("destaque_npc.png"));
+		this.destaqueNpc = new ImageIcon(getClass().getResource("/Imagens/Botões/destaque_npc.png"));
 		this.iconNPC = new ImageIcon(getClass().getResource("/Imagens/Botões/Ficha_NPC.png"));
 		this.lblbtnNPC= new JLabel(iconNPC);
 		this.lblbtnNPC.setToolTipText("Adicionar NPC");
@@ -640,7 +640,7 @@ public class ControleSessaoVIEW extends JFrame {
 			this.add(lblNPC);			
 
 		
-		this.destaqueDados = new ImageIcon(getClass().getResource("destaque_dados.png"));
+		this.destaqueDados = new ImageIcon(getClass().getResource("/Imagens/Botões/destaque_dados.png"));
 		this.iconbtnDados = new ImageIcon(getClass().getResource("/Imagens/Botões/Botao_Dados.png"));
 		this.lblbtnDados = new JLabel(iconbtnDados);
 		this.lblbtnDados.setToolTipText("Dados de Jogo");
@@ -695,7 +695,7 @@ public class ControleSessaoVIEW extends JFrame {
 		});
 		this.add(lblDados);
 		
-		this.destaqueCombate = new ImageIcon(getClass().getResource("destaque_combate.png"));
+		this.destaqueCombate = new ImageIcon(getClass().getResource("/Imagens/Botões/destaque_combate.png"));
 		this.iconbtnCombate = new ImageIcon(getClass().getResource("/Imagens/Botões/Combate.png"));
 		this.lblbtnCombate = new JLabel(iconbtnCombate);
 		this.lblbtnCombate.setToolTipText("Area de Combate");

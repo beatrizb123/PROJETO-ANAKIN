@@ -92,7 +92,7 @@ public class MenuPrincipalVIEW extends JFrame {
 		this.sombraAnakin.setFont(new Font("Arial", Font.BOLD, 85));
 		this.add(sombraAnakin);
 
-		this.destaqueControle = new ImageIcon(getClass().getResource("destaque_controle.png"));
+		this.destaqueControle = new ImageIcon(getClass().getResource("/Imagens/Botões/destaque_controle.png"));
 		this.iconControleSessao = new ImageIcon(getClass().getResource("/Imagens/Botões/Controle_Sessao.png"));
 		this.lblIconControle = new JLabel(iconControleSessao);
 		this.lblIconControle.setToolTipText("Controle de Sessão");

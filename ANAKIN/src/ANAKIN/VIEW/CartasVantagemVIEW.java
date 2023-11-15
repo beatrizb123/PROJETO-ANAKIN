@@ -77,7 +77,7 @@ public class CartasVantagemVIEW extends JFrame {
 		this.setLocation((tela.width - getSize().width) / 2, (tela.height - getSize().height) / 2);
 
 		this.imgIcon = new ImageIcon("jupiter.png");
-		this.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/Imagens/jupiter.png")));
+		this.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/Imagens/Icones/jupiter.png")));
 
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBorder(javax.swing.BorderFactory.createLineBorder(new Color(90, 61, 171), 2));
