@@ -1,5 +1,4 @@
- package ANAKIN.VIEW;
-
+package ANAKIN.VIEW;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -51,9 +50,6 @@ import ANAKIN.MODEL.VO.AuxiliarVO;
 import ANAKIN.MODEL.VO.ControleSessaoVO;
 import ANAKIN.MODEL.VO.UsuarioVO;
 
-
-
-
 public class ControleSessaoVIEW extends JFrame {
 
 	private Container container;
@@ -65,7 +61,7 @@ public class ControleSessaoVIEW extends JFrame {
 	private JTextArea txtAnotacao, txtInventario;
 	private JTextField tfNome;
 	private JPanel jpProtagonistas, jpNPCs;
-	private ImageIcon menuWall; 
+	private ImageIcon menuWall;
 	private JLabel bckgMenu;
 	private JLabel lblProtagonista;
 	private ImageIcon iconProtagonista;
@@ -74,59 +70,45 @@ public class ControleSessaoVIEW extends JFrame {
 	private JLabel lblbtnNPC;
 	private JLabel lblNPC;
 	private ImageIcon iconbtnCombate;
-	private ImageIcon destaqueCombate, destaqueNpc, destaqueProtagonista,destaqueDados; 
+	private ImageIcon destaqueCombate, destaqueNpc, destaqueProtagonista, destaqueDados;
 	private JLabel lblbtnCombate;
-	private JLabel lblCombate; 
-	int IndiceAtual = 0, tanto,IndiceAtual2 = 0 ;
-	private MiniFichasProtaBO miniFProtagonista ;
+	private JLabel lblCombate;
+	int IndiceAtual = 0, tanto, IndiceAtual2 = 0;
+	private MiniFichasProtaBO miniFProtagonista;
 	private MiniFichasNPCBO miniFNPC;
 	FichaProtagonistaDAO FPD = new FichaProtagonistaDAO();
 	FichaNPCDAO FND = new FichaNPCDAO();
 
-	
-	
 	public JTextArea getTxtAnotacao() {
 		return txtAnotacao;
 	}
-
-
 
 	public void setTxtAnotacao(JTextArea txtAnotacao) {
 		this.txtAnotacao = txtAnotacao;
 	}
 
-
-
 	public JTextArea getTxtInventario() {
 		return txtInventario;
 	}
-
-
 
 	public void setTxtInventario(JTextArea txtInventario) {
 		this.txtInventario = txtInventario;
 	}
 
-
-
 	public JTextField getTfNome() {
 		return tfNome;
 	}
 
-
-
 	public void setTfNome(String nome) {
 		this.tfNome.setText("aa");
 	}
-
-
 
 	public ControleSessaoVIEW() {
 		// instanciação dos objetos
 		AbrirSessaoDAO ASD = new AbrirSessaoDAO();
 		ControleSessaoVO CSV = new ControleSessaoVO();
 		int i = ASD.VereficaSessaoAcessada();
-		if(i > 0) {
+		if (i > 0) {
 			try {
 				ResultSet informaçoes = ASD.retornaInforSessao();
 				while (informaçoes.next()) {
@@ -141,8 +123,7 @@ public class ControleSessaoVIEW extends JFrame {
 				System.out.println(e);
 			}
 		}
-		
-		
+
 		IndiceAtual = 0;
 		IndiceAtual2 = 0;
 
@@ -153,7 +134,7 @@ public class ControleSessaoVIEW extends JFrame {
 		this.setBackground(new Color(250, 247, 255));
 		this.setVisible(true);
 		this.setResizable(false);
-		
+
 		this.container = getContentPane();
 		Dimension tela = Toolkit.getDefaultToolkit().getScreenSize();
 		this.setLocation((tela.width - getSize().width) / 2, (tela.height - getSize().height) / 2);
@@ -161,17 +142,16 @@ public class ControleSessaoVIEW extends JFrame {
 		this.imgIcon = new ImageIcon("jupiter.png");
 		this.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/Imagens/Icones/jupiter.png")));
 
-
 		this.lblInventario = new JLabel("Inventário");
 		this.lblInventario.setBounds(320, 240, 155, 40);
 		this.lblInventario.setForeground(new Color(90, 61, 171));
 		this.lblInventario.setHorizontalAlignment(SwingConstants.CENTER);
 		this.lblInventario.setFont(new Font("Arial", Font.BOLD, 18));
 		this.add(lblInventario);
-		
-		if(CSV.getAnotacoes_sessao() != null) {
+
+		if (CSV.getAnotacoes_sessao() != null) {
 			this.txtInventario = new JTextArea(CSV.getInventario_sessao());
-		}else {
+		} else {
 			this.txtInventario = new JTextArea();
 		}
 		this.txtInventario.setFont(new Font("Helvetica", Font.BOLD, 14));
@@ -183,16 +163,15 @@ public class ControleSessaoVIEW extends JFrame {
 		this.spInventario.setBorder(javax.swing.BorderFactory.createLineBorder(new Color(90, 61, 171), 2));
 		this.container.add(spInventario);
 
-
 		this.lblAnotacoes = new JLabel("Anotações");
 		this.lblAnotacoes.setBounds(635, 240, 155, 40);
 		this.lblAnotacoes.setForeground(new Color(90, 61, 171));
 		this.lblAnotacoes.setHorizontalAlignment(SwingConstants.CENTER);
 		this.lblAnotacoes.setFont(new Font("Arial", Font.BOLD, 18));
 		this.add(lblAnotacoes);
-		if(CSV.getAnotacoes_sessao() != null) {
+		if (CSV.getAnotacoes_sessao() != null) {
 			this.txtAnotacao = new JTextArea(CSV.getAnotacoes_sessao());
-		}else {
+		} else {
 			this.txtAnotacao = new JTextArea();
 		}
 		this.txtAnotacao.setFont(new Font("Helvetica", Font.PLAIN, 13));
@@ -221,7 +200,7 @@ public class ControleSessaoVIEW extends JFrame {
 		this.btnLimpar.setBackground(new Color(90, 61, 171));
 		this.btnLimpar.setForeground(Color.white);
 		this.btnLimpar.setToolTipText("Apaga anotações");
-		this.btnLimpar.setToolTipText("Apaga anotações"); 	
+		this.btnLimpar.setToolTipText("Apaga anotações");
 		this.btnLimpar.addActionListener(new ActionListener() {
 
 			@Override
@@ -230,7 +209,7 @@ public class ControleSessaoVIEW extends JFrame {
 			}
 		});
 		this.add(btnLimpar);
-		
+
 		iconVoltar = new ImageIcon(getClass().getResource("/Imagens/Botões/voltar1.png"));
 		iconVoltar2 = new ImageIcon(getClass().getResource("/Imagens/Botões/voltar2.png"));
 		this.lblvolta = new JLabel(iconVoltar);
@@ -259,23 +238,21 @@ public class ControleSessaoVIEW extends JFrame {
 		});
 		this.add(lblvolta);
 
-
 		this.lblNome = new JLabel("Nome da sessão:");
 		this.lblNome.setFont(new Font("Arial", Font.BOLD, 16));
 		this.lblNome.setBounds(50, 15, 150, 20);
 		this.lblNome.setForeground(new Color(90, 61, 171));
 		this.add(lblNome);
 
-		
-		if(CSV.getNome_sessao() != null) {
+		if (CSV.getNome_sessao() != null) {
 			this.tfNome = new JTextField(CSV.getNome_sessao());
-		}else {
+		} else {
 			this.tfNome = new JTextField();
 		}
 		this.tfNome.setBounds(50, 40, 160, 25);
 		this.tfNome.setBorder(javax.swing.BorderFactory.createLineBorder(new Color(90, 61, 171), 2));
 		this.add(tfNome);
-		
+
 		this.btnSalva = new JButton("Salvar");
 		this.btnSalva.setBounds(80, 72, 100, 25);
 		this.btnSalva.setFont(new Font("Arial", Font.BOLD, 15));
@@ -298,7 +275,7 @@ public class ControleSessaoVIEW extends JFrame {
 				anotacoes = txtAnotacao.getText();
 				usuario = user.getNome_Usuario();
 				usuario = teste.chamar();
-				
+
 				if (teste.chamar() == null) {
 					usuario = user.getNome_Usuario();
 					System.out.println(usuario);
@@ -320,208 +297,220 @@ public class ControleSessaoVIEW extends JFrame {
 		});
 		this.add(btnSalva);
 
-
 		this.lblProtagonistas = new JLabel("Protagonistas");
 		this.lblProtagonistas.setBounds(318, 3, 155, 40);
 		this.lblProtagonistas.setForeground(new Color(90, 61, 171));
 		this.lblProtagonistas.setHorizontalAlignment(SwingConstants.CENTER);
 		this.lblProtagonistas.setFont(new Font("Arial", Font.BOLD, 18));
 		this.add(lblProtagonistas);
-		
+
 		JPanel painelprota = new JPanel();
-	       painelprota.setBounds(250, 40, 300, 180);
-	       painelprota.setBorder(javax.swing.BorderFactory.createLineBorder(new Color(90, 61, 171), 2));
-	       painelprota.setBackground(new Color(235, 223, 255));
-	       painelprota.setLayout(null);
-	       add(painelprota);
-	       
-	       JButton BTNproximo = new JButton(">");
-			BTNproximo.setVisible(true);
-			BTNproximo.setBounds(242,80,49,27);
-			painelprota.add(BTNproximo);
-			
-			JButton BTNAbrir = new JButton("abrir");
-			BTNAbrir.setVisible(true);
-			BTNAbrir.setBounds(110,149,70,27);
-			painelprota.add(BTNAbrir);
-			JButton BTNanterior = new JButton("<");
-			BTNanterior.setVisible(true);
-			BTNanterior.setBounds(10,80,49,27);
-			painelprota.add(BTNanterior);
-			
-			
-			JPanel rowPanel = new JPanel();
-			rowPanel.setBounds(90,20,120,130);
-			rowPanel.setBorder(BorderFactory.createLineBorder(new Color(235, 223, 255), 4));
-			rowPanel.setBackground(new Color(250, 247, 255));
-			rowPanel.setLayout(new GridLayout(5, 1));
-			//descriçao da miniFicha - josue
-			miniFProtagonista = FPD.informaçoesbaseFP(IndiceAtual);
-			JLabel nome = new JLabel("Nome:"+ miniFProtagonista.getNome());
-			nome.setHorizontalAlignment(SwingConstants.CENTER);
-			rowPanel.add(nome);
-			JLabel vida = new JLabel("Vida: "+ miniFProtagonista.getVida());
-			vida.setHorizontalAlignment(SwingConstants.CENTER);
-			rowPanel.add(vida);
-			JLabel def = new JLabel("Defesa: "+ miniFProtagonista.getDefesa());
-			def.setHorizontalAlignment(SwingConstants.CENTER);
-			rowPanel.add(def);
-			JLabel mag = new JLabel("Magia: "+ miniFProtagonista.getMagia());
-			mag.setHorizontalAlignment(SwingConstants.CENTER);
-			rowPanel.add(mag);
-			painelprota.add(rowPanel);
-		
+		painelprota.setBounds(250, 40, 300, 180);
+		painelprota.setBorder(javax.swing.BorderFactory.createLineBorder(new Color(90, 61, 171), 2));
+		painelprota.setBackground(new Color(235, 223, 255));
+		painelprota.setLayout(null);
+		add(painelprota);
+
+		JButton BTNproximo = new JButton(">");
+		BTNproximo.setVisible(true);
+		BTNproximo.setBounds(242, 80, 49, 27);
+		painelprota.add(BTNproximo);
+
+		JButton BTNAbrir = new JButton("abrir");
+		BTNAbrir.setVisible(true);
+		BTNAbrir.setBounds(110, 149, 70, 27);
+		painelprota.add(BTNAbrir);
+		JButton BTNanterior = new JButton("<");
+		BTNanterior.setVisible(true);
+		BTNanterior.setBounds(10, 80, 49, 27);
+		painelprota.add(BTNanterior);
+
+		JPanel rowPanel = new JPanel();
+		rowPanel.setBounds(90, 20, 120, 130);
+		rowPanel.setBorder(BorderFactory.createLineBorder(new Color(235, 223, 255), 4));
+		rowPanel.setBackground(new Color(250, 247, 255));
+		rowPanel.setLayout(new GridLayout(5, 1));
+		// descriçao da miniFicha - josue
+		miniFProtagonista = FPD.informaçoesbaseFP(IndiceAtual);
+		JLabel nome = new JLabel("Nome:" + miniFProtagonista.getNome());
+		nome.setHorizontalAlignment(SwingConstants.CENTER);
+		rowPanel.add(nome);
+		JLabel vida = new JLabel("Vida: " + miniFProtagonista.getVida());
+		vida.setHorizontalAlignment(SwingConstants.CENTER);
+		rowPanel.add(vida);
+		JLabel def = new JLabel("Defesa: " + miniFProtagonista.getDefesa());
+		def.setHorizontalAlignment(SwingConstants.CENTER);
+		rowPanel.add(def);
+		JLabel mag = new JLabel("Magia: " + miniFProtagonista.getMagia());
+		mag.setHorizontalAlignment(SwingConstants.CENTER);
+		rowPanel.add(mag);
+		painelprota.add(rowPanel);
+
 		tanto = FPD.retornaTantoFicha();
-		//configuraçao dos eventos que ocorrerao ao pressionar os botoes: proximo,anterior,abrir - josue
-		BTNanterior.addActionListener( new ActionListener() {
+
+		// configuraçao dos eventos que ocorrerao ao pressionar os botoes:
+		// proximo,anterior,abrir - josue
+		BTNanterior.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				
-					IndiceAtual--;
-					
-					miniFProtagonista = FPD.informaçoesbaseFP(IndiceAtual);
-					nome.setText("Nome: " + miniFProtagonista.getNome());
-					vida.setText("Vida: " + Integer.toString(miniFProtagonista.getVida()));
-					def.setText("Defesa: " + Integer.toString(miniFProtagonista.getDefesa()));
-					mag.setText("Magia: " + Integer.toString(miniFProtagonista.getMagia()));
-				
-				
+				tanto = FPD.retornaTantoFicha();
+				IndiceAtual--;
+
+				if (IndiceAtual == tanto - 2) {
+
+					BTNproximo.setEnabled(true);
+
+				}
+				if (IndiceAtual < 1) {
+					BTNanterior.setEnabled(false);
+				}
+				miniFProtagonista = FPD.informaçoesbaseFP(IndiceAtual);
+				nome.setText("Nome: " + miniFProtagonista.getNome());
+				vida.setText("Vida: " + Integer.toString(miniFProtagonista.getVida()));
+				def.setText("Defesa: " + Integer.toString(miniFProtagonista.getDefesa()));
+				mag.setText("Magia: " + Integer.toString(miniFProtagonista.getMagia()));
+
 			}
-			
+
 		});
-		
+
 		BTNproximo.addActionListener(new ActionListener() {
-			
+
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				tanto = FPD.retornaTantoFicha();
+				IndiceAtual++;
+
+				if (IndiceAtual == tanto - 1) {
+
+					BTNproximo.setEnabled(false);
+
+				}
+				if(IndiceAtual > 0) {
+					BTNanterior.setEnabled(true);
+				}
 				
-					IndiceAtual++;
-					
-				
-						miniFProtagonista = FPD.informaçoesbaseFP(IndiceAtual);
-						nome.setText("Nome: " + miniFProtagonista.getNome());
-						vida.setText("Vida: " + Integer.toString(miniFProtagonista.getVida()));
-						def.setText("Defesa: " + Integer.toString(miniFProtagonista.getDefesa()));
-						mag.setText("Magia: " + Integer.toString(miniFProtagonista.getMagia()));
-					
-			
+
+				miniFProtagonista = FPD.informaçoesbaseFP(IndiceAtual);
+				nome.setText("Nome: " + miniFProtagonista.getNome());
+				vida.setText("Vida: " + Integer.toString(miniFProtagonista.getVida()));
+				def.setText("Defesa: " + Integer.toString(miniFProtagonista.getDefesa()));
+				mag.setText("Magia: " + Integer.toString(miniFProtagonista.getMagia()));
+
 			}
 		});
 
 		BTNAbrir.addActionListener(new ActionListener() {
-			
+
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				FPD.AtivaprotaOPEN();
 				miniFProtagonista = FPD.informaçoesbaseFP(IndiceAtual);
-				FPD.retornainfotprota(miniFProtagonista.getNome(), miniFProtagonista.getVida(), miniFProtagonista.getDefesa(),miniFProtagonista.getMagia());
-				
+				FPD.retornainfotprota(miniFProtagonista.getNome(), miniFProtagonista.getVida(),
+						miniFProtagonista.getDefesa(), miniFProtagonista.getMagia());
+
 				FichaProtagonistaVIEW FPV = new FichaProtagonistaVIEW();
 				FPV.setVisible(true);
 			}
 		});
-		
+
 		this.lblNPCs = new JLabel("NPC's");
 		this.lblNPCs.setBounds(660, 3, 155, 40);
 		this.lblNPCs.setForeground(new Color(90, 61, 171));
 		this.lblNPCs.setHorizontalAlignment(SwingConstants.CENTER);
 		this.lblNPCs.setFont(new Font("Arial", Font.BOLD, 18));
 		this.add(lblNPCs);
-		
+
 		JPanel painelNPC = new JPanel();
-	       painelNPC.setBounds(590, 40, 300, 180);
-	       painelNPC.setBorder(javax.swing.BorderFactory.createLineBorder(new Color(90, 61, 171), 2));
-	       painelNPC.setBackground(new Color(235, 223, 255));
-	       painelNPC.setLayout(null);
-	       add(painelNPC);
-	       
-	       JButton BTNproximo2 = new JButton(">");
-			BTNproximo2.setVisible(true);
-			BTNproximo2.setBounds(242,80,49,27);
-			painelNPC.add(BTNproximo2);
-			
-			JButton BTNAbrir2 = new JButton("abrir");
-			BTNAbrir2.setVisible(true);
-			BTNAbrir2.setBounds(110,149,70,27);
-			painelNPC.add(BTNAbrir2);
-			JButton BTNanterior2 = new JButton("<");
-			BTNanterior2.setVisible(true);
-			BTNanterior2.setBounds(10,80,49,27);
-			painelNPC.add(BTNanterior2);
-			
-			
-			JPanel rowPanel2 = new JPanel();
-			rowPanel2.setBounds(90,20,120,130);
-			rowPanel2.setBorder(BorderFactory.createLineBorder(new Color(235, 223, 255), 4));
-			rowPanel2.setBackground(new Color(250, 247, 255));
-			rowPanel2.setLayout(new GridLayout(5, 1));
-			//descriçao da miniFicha - josue
-			miniFNPC = FND.RetornaInforBase(IndiceAtual2) ;
-			JLabel nomeNPC = new JLabel("Nome:"+ miniFNPC.getNomeNPC());
-			nomeNPC.setHorizontalAlignment(SwingConstants.CENTER);
-			rowPanel2.add(nomeNPC);
-			JLabel vidaNPC = new JLabel("Vida: "+ miniFNPC.getVidaNPC());
-			vidaNPC.setHorizontalAlignment(SwingConstants.CENTER);
-			rowPanel2.add(vidaNPC);
-			JLabel defNPC = new JLabel("Defesa: "+ miniFNPC.getDefNPC());
-			defNPC.setHorizontalAlignment(SwingConstants.CENTER);
-			rowPanel2.add(defNPC);
-			JLabel magNPC = new JLabel("Magia: "+ miniFNPC.getMagNPC());
-			magNPC.setHorizontalAlignment(SwingConstants.CENTER);
-			rowPanel2.add(magNPC);
-			painelNPC.add(rowPanel2);
-		
-		
-		//configuraçao dos eventos que ocorrerao ao pressionar os botoes: proximo,anterior,abrir - josue
-		BTNanterior2.addActionListener( new ActionListener() {
+		painelNPC.setBounds(590, 40, 300, 180);
+		painelNPC.setBorder(javax.swing.BorderFactory.createLineBorder(new Color(90, 61, 171), 2));
+		painelNPC.setBackground(new Color(235, 223, 255));
+		painelNPC.setLayout(null);
+		add(painelNPC);
+
+		JButton BTNproximo2 = new JButton(">");
+		BTNproximo2.setVisible(true);
+		BTNproximo2.setBounds(242, 80, 49, 27);
+		painelNPC.add(BTNproximo2);
+
+		JButton BTNAbrir2 = new JButton("abrir");
+		BTNAbrir2.setVisible(true);
+		BTNAbrir2.setBounds(110, 149, 70, 27);
+		painelNPC.add(BTNAbrir2);
+		JButton BTNanterior2 = new JButton("<");
+		BTNanterior2.setVisible(true);
+		BTNanterior2.setBounds(10, 80, 49, 27);
+		painelNPC.add(BTNanterior2);
+
+		JPanel rowPanel2 = new JPanel();
+		rowPanel2.setBounds(90, 20, 120, 130);
+		rowPanel2.setBorder(BorderFactory.createLineBorder(new Color(235, 223, 255), 4));
+		rowPanel2.setBackground(new Color(250, 247, 255));
+		rowPanel2.setLayout(new GridLayout(5, 1));
+		// descriçao da miniFicha - josue
+		miniFNPC = FND.RetornaInforBase(IndiceAtual2);
+		JLabel nomeNPC = new JLabel("Nome:" + miniFNPC.getNomeNPC());
+		nomeNPC.setHorizontalAlignment(SwingConstants.CENTER);
+		rowPanel2.add(nomeNPC);
+		JLabel vidaNPC = new JLabel("Vida: " + miniFNPC.getVidaNPC());
+		vidaNPC.setHorizontalAlignment(SwingConstants.CENTER);
+		rowPanel2.add(vidaNPC);
+		JLabel defNPC = new JLabel("Defesa: " + miniFNPC.getDefNPC());
+		defNPC.setHorizontalAlignment(SwingConstants.CENTER);
+		rowPanel2.add(defNPC);
+		JLabel magNPC = new JLabel("Magia: " + miniFNPC.getMagNPC());
+		magNPC.setHorizontalAlignment(SwingConstants.CENTER);
+		rowPanel2.add(magNPC);
+		painelNPC.add(rowPanel2);
+
+		// configuraçao dos eventos que ocorrerao ao pressionar os botoes:
+		// proximo,anterior,abrir - josue
+		BTNanterior2.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
 				IndiceAtual2--;
-					
-					miniFNPC = FND.RetornaInforBase(IndiceAtual2);
-					nomeNPC.setText("Nome: " + miniFNPC.getNomeNPC());
-					vidaNPC.setText("Vida: " + Integer.toString(miniFNPC.getVidaNPC()));
-					defNPC.setText("Defesa: " + Integer.toString(miniFNPC.getDefNPC()));
-					magNPC.setText("Magia: " + Integer.toString(miniFNPC.getMagNPC()));
+
+				miniFNPC = FND.RetornaInforBase(IndiceAtual2);
+				nomeNPC.setText("Nome: " + miniFNPC.getNomeNPC());
+				vidaNPC.setText("Vida: " + Integer.toString(miniFNPC.getVidaNPC()));
+				defNPC.setText("Defesa: " + Integer.toString(miniFNPC.getDefNPC()));
+				magNPC.setText("Magia: " + Integer.toString(miniFNPC.getMagNPC()));
 			}
-			
+
 		});
 		BTNproximo2.addActionListener(new ActionListener() {
-			
+
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				
-					IndiceAtual2++;
-					
-				
-					miniFNPC = FND.RetornaInforBase(IndiceAtual2);
-					nomeNPC.setText("Nome: " + miniFNPC.getNomeNPC());
-					vidaNPC.setText("Vida: " + Integer.toString(miniFNPC.getVidaNPC()));
-					defNPC.setText("Defesa: " + Integer.toString(miniFNPC.getDefNPC()));
-					magNPC.setText("Magia: " + Integer.toString(miniFNPC.getMagNPC()));
-					
-			
+
+				IndiceAtual2++;
+
+				miniFNPC = FND.RetornaInforBase(IndiceAtual2);
+				nomeNPC.setText("Nome: " + miniFNPC.getNomeNPC());
+				vidaNPC.setText("Vida: " + Integer.toString(miniFNPC.getVidaNPC()));
+				defNPC.setText("Defesa: " + Integer.toString(miniFNPC.getDefNPC()));
+				magNPC.setText("Magia: " + Integer.toString(miniFNPC.getMagNPC()));
+
 			}
 		});
-		
-		
+
 		BTNAbrir2.addActionListener(new ActionListener() {
-			
+
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				FPD.AtivaprotaOPEN();
 				miniFNPC = FND.RetornaInforBase(IndiceAtual2);
-				FND.retornaInforNPC(miniFNPC.getNomeNPC(), miniFNPC.getVidaNPC(), miniFNPC.getDefNPC(), miniFNPC.getMagNPC());
-				
+				FND.retornaInforNPC(miniFNPC.getNomeNPC(), miniFNPC.getVidaNPC(), miniFNPC.getDefNPC(),
+						miniFNPC.getMagNPC());
+
 				FichaNpcVIEW FNV = new FichaNpcVIEW();
 				FNV.setVisible(true);
 			}
 		});
 
-		
 		this.jpProtagonistas = new JPanel();
 		this.jpProtagonistas.setLayout(null);
 		this.jpProtagonistas.setBackground(new Color(235, 223, 255));
@@ -529,13 +518,9 @@ public class ControleSessaoVIEW extends JFrame {
 		this.jpProtagonistas.setBorder(javax.swing.BorderFactory.createLineBorder(new Color(90, 61, 171), 2));
 		this.add(jpProtagonistas);
 
-		
-	
-
-	
 		this.destaqueProtagonista = new ImageIcon(getClass().getResource("/Imagens/Botões/destaque_protagonista.png"));
 		this.iconProtagonista = new ImageIcon(getClass().getResource("/Imagens/Botões/Ficha_Protagonista.png"));
-		this.lblbtnProtagonista= new JLabel(iconProtagonista);
+		this.lblbtnProtagonista = new JLabel(iconProtagonista);
 		this.lblbtnProtagonista.setToolTipText("Adicionar Protagonista");
 		this.lblbtnProtagonista.setBounds(-15, 60, 180, 180);
 		this.lblbtnProtagonista.addMouseListener(new MouseAdapter() {
@@ -553,19 +538,19 @@ public class ControleSessaoVIEW extends JFrame {
 
 			@Override
 			public void mouseClicked(MouseEvent e) {
-			FichaProtagonistaDAO FPD = new FichaProtagonistaDAO();
-			FPD.criarRegistroProta();
-			FichaProtagonistaVIEW FPV = new FichaProtagonistaVIEW();
-			FPV.setVisible(true);
-				
+				FichaProtagonistaDAO FPD = new FichaProtagonistaDAO();
+				FPD.criarRegistroProta();
+				FichaProtagonistaVIEW FPV = new FichaProtagonistaVIEW();
+				FPV.setVisible(true);
+
 			}
 		});
 		this.add(lblbtnProtagonista);
 
-		this.lblProtagonista =  new JLabel("Protagonistas");
-		this.lblProtagonista.setForeground(new Color(90,61,171));
+		this.lblProtagonista = new JLabel("Protagonistas");
+		this.lblProtagonista.setForeground(new Color(90, 61, 171));
 		this.lblProtagonista.setFont(new Font("Arial", Font.BOLD, 16));
-		this.lblProtagonista.setBounds(125,100,190,100);
+		this.lblProtagonista.setBounds(125, 100, 190, 100);
 		this.lblProtagonista.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseEntered(MouseEvent e) {
@@ -576,19 +561,18 @@ public class ControleSessaoVIEW extends JFrame {
 
 			@Override
 			public void mouseExited(MouseEvent e) {
-				lblProtagonista.setForeground(new Color(90,61,171));
+				lblProtagonista.setForeground(new Color(90, 61, 171));
 			}
 
-			/*@Override
-			public void mouseClicked(MouseEvent e) {
-				abre a ficha 
-				}*/
-			});
-			this.add(lblProtagonista);
+			/*
+			 * @Override public void mouseClicked(MouseEvent e) { abre a ficha }
+			 */
+		});
+		this.add(lblProtagonista);
 
 		this.destaqueNpc = new ImageIcon(getClass().getResource("/Imagens/Botões/destaque_npc.png"));
 		this.iconNPC = new ImageIcon(getClass().getResource("/Imagens/Botões/Ficha_NPC.png"));
-		this.lblbtnNPC= new JLabel(iconNPC);
+		this.lblbtnNPC = new JLabel(iconNPC);
 		this.lblbtnNPC.setToolTipText("Adicionar NPC");
 		this.lblbtnNPC.setBounds(-15, 160, 180, 180);
 		this.lblbtnNPC.addMouseListener(new MouseAdapter() {
@@ -610,15 +594,15 @@ public class ControleSessaoVIEW extends JFrame {
 				FND.criandoRegistroNPC();
 				FichaNpcVIEW tela = new FichaNpcVIEW();
 				tela.setVisible(true);
-				
+
 			}
 		});
 		this.add(lblbtnNPC);
 
-		this.lblNPC =  new JLabel("NPCs");
-		this.lblNPC.setForeground(new Color(90,61,171));
+		this.lblNPC = new JLabel("NPCs");
+		this.lblNPC.setForeground(new Color(90, 61, 171));
 		this.lblNPC.setFont(new Font("Arial", Font.BOLD, 16));
-		this.lblNPC.setBounds(150,195,190,100);
+		this.lblNPC.setBounds(150, 195, 190, 100);
 		this.lblNPC.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseEntered(MouseEvent e) {
@@ -629,17 +613,15 @@ public class ControleSessaoVIEW extends JFrame {
 
 			@Override
 			public void mouseExited(MouseEvent e) {
-				lblNPC.setForeground(new Color(90,61,171));
+				lblNPC.setForeground(new Color(90, 61, 171));
 			}
 
-			/*@Override
-			public void mouseClicked(MouseEvent e) {
-				Tela de npc
-				}*/
-			});
-			this.add(lblNPC);			
+			/*
+			 * @Override public void mouseClicked(MouseEvent e) { Tela de npc }
+			 */
+		});
+		this.add(lblNPC);
 
-		
 		this.destaqueDados = new ImageIcon(getClass().getResource("/Imagens/Botões/destaque_dados.png"));
 		this.iconbtnDados = new ImageIcon(getClass().getResource("/Imagens/Botões/Botao_Dados.png"));
 		this.lblbtnDados = new JLabel(iconbtnDados);
@@ -662,39 +644,38 @@ public class ControleSessaoVIEW extends JFrame {
 			public void mouseClicked(MouseEvent e) {
 				DadosdeJogoVIEW dados = new DadosdeJogoVIEW();
 				dados.setVisible(true);
-				//DadosdeJogoVIEW dadosV = new DadosdeJogoVIEW();
-				//dadosV.setVisible(true);
-				
+				// DadosdeJogoVIEW dadosV = new DadosdeJogoVIEW();
+				// dadosV.setVisible(true);
+
 			}
 		});
 		this.add(lblbtnDados);
 
-		
-		this.lblDados =  new JLabel("Dados");
-		this.lblDados.setForeground(new Color(90,61,171));
+		this.lblDados = new JLabel("Dados");
+		this.lblDados.setForeground(new Color(90, 61, 171));
 		this.lblDados.setFont(new Font("Arial", Font.BOLD, 16));
-		this.lblDados.setBounds(55,405,100,100);
+		this.lblDados.setBounds(55, 405, 100, 100);
 		this.lblDados.addMouseListener(new MouseAdapter() {
-		@Override
-		public void mouseEntered(MouseEvent e) {
+			@Override
+			public void mouseEntered(MouseEvent e) {
 
-			lblDados.setForeground(Color.gray);
+				lblDados.setForeground(Color.gray);
 
-		}
+			}
 
-		@Override
-		public void mouseExited(MouseEvent e) {
-			lblDados.setForeground(new Color(90,61,171));
-		}
+			@Override
+			public void mouseExited(MouseEvent e) {
+				lblDados.setForeground(new Color(90, 61, 171));
+			}
 
-		@Override
-		public void mouseClicked(MouseEvent e) {
-			DadosdeJogoVIEW tela = new DadosdeJogoVIEW();
-			tela.setVisible(true);
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				DadosdeJogoVIEW tela = new DadosdeJogoVIEW();
+				tela.setVisible(true);
 			}
 		});
 		this.add(lblDados);
-		
+
 		this.destaqueCombate = new ImageIcon(getClass().getResource("/Imagens/Botões/destaque_combate.png"));
 		this.iconbtnCombate = new ImageIcon(getClass().getResource("/Imagens/Botões/Combate.png"));
 		this.lblbtnCombate = new JLabel(iconbtnCombate);
@@ -716,47 +697,43 @@ public class ControleSessaoVIEW extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				setVisible(false);
-				
+
 				ConfirmacaoCombateVIEW tela = new ConfirmacaoCombateVIEW();
 				tela.setVisible(true);
-				
+
 			}
 		});
 		this.add(lblbtnCombate);
 
-		this.lblCombate =  new JLabel("Combate");
-		this.lblCombate.setForeground(new Color(90,61,171));
+		this.lblCombate = new JLabel("Combate");
+		this.lblCombate.setForeground(new Color(90, 61, 171));
 		this.lblCombate.setFont(new Font("Arial", Font.BOLD, 16));
-		this.lblCombate.setBounds(180,405,100,100);
+		this.lblCombate.setBounds(180, 405, 100, 100);
 		this.lblCombate.addMouseListener(new MouseAdapter() {
-		@Override
-		public void mouseEntered(MouseEvent e) {
+			@Override
+			public void mouseEntered(MouseEvent e) {
 
-			lblCombate.setForeground(Color.gray);
+				lblCombate.setForeground(Color.gray);
 
-		}
+			}
 
-		@Override
-		public void mouseExited(MouseEvent e) {
-			lblCombate.setForeground(new Color(90,61,171));
-		}
+			@Override
+			public void mouseExited(MouseEvent e) {
+				lblCombate.setForeground(new Color(90, 61, 171));
+			}
 
-		/*@Override
-		public void mouseClicked(MouseEvent e) {
-			Tela de Combate 
-			}*/
+			/*
+			 * @Override public void mouseClicked(MouseEvent e) { Tela de Combate }
+			 */
 		});
 		this.add(lblCombate);
-		
 
-		
 		this.menuWall = new ImageIcon(getClass().getResource("/Imagens/Background/Background.png"));
 		this.menuWall = new ImageIcon(menuWall.getImage().getScaledInstance(940, 550, Image.SCALE_DEFAULT));
 		this.bckgMenu = new JLabel(menuWall);
-		this.bckgMenu.setBounds(-230,-110, 1366, 768);
+		this.bckgMenu.setBounds(-230, -110, 1366, 768);
 		this.add(bckgMenu);
-		
+
 	}
-	
-	
+
 }
