@@ -39,7 +39,7 @@ public class MenuPrincipalVIEW extends JFrame {
 	private ImageIcon imgIcon;
 	private JMenuBar mnbBarra;
 	private JMenu mnConfig, mnSessoes;
-	private JMenuItem miAlterarConta, miLogout, miSair, miSessoes, miBuscar;
+	private JMenuItem miAlterarConta, miLogout, miSair, miSessoes, miBuscar, miExcluirConta;
 	private ImageIcon menuWall; 
 	private JLabel bckgMenu; 
 	
@@ -194,6 +194,20 @@ public class MenuPrincipalVIEW extends JFrame {
 			}
 		});
 		this.mnConfig.add(miSair);
+
+		this.miExcluirConta = new JMenuItem("Excluir Conta");
+		this.miExcluirConta.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				setVisible(false);
+				ExcluirContaVIEW tela = new ExcluirContaVIEW();
+				tela.setVisible(true);	
+			}
+			
+		});
+		this.mnConfig.add(miExcluirConta);
+		
 		
 		this.menuWall = new ImageIcon(getClass().getResource("/Imagens/Background/Background.png"));
 		this.menuWall = new ImageIcon(menuWall.getImage().getScaledInstance(940, 550, Image.SCALE_DEFAULT));
