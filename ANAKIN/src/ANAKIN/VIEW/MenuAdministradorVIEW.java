@@ -39,7 +39,9 @@ public class MenuAdministradorVIEW extends JFrame {
 	private ImageIcon iconLupa;
 	private JLabel lblbtnLupa;
 	private JButton btnCancelar;
-	
+	private JMenuBar menuBar;
+	private JMenu mnConfig;
+	private JMenuItem miAlterarConta, miLogout, miSair, miExcluirConta;
 	
 	public MenuAdministradorVIEW() {
 		this.setTitle("Administrador ★ ");
@@ -119,7 +121,67 @@ public class MenuAdministradorVIEW extends JFrame {
 		this.btnCancelar.setFont(new Font("Arial", Font.BOLD,12));
 		this.btnCancelar.setForeground(Color.WHITE);
 		this.add(btnCancelar);
+
+		this.menuBar = new JMenuBar();
+		this.setJMenuBar(menuBar);
 		
+		this.mnConfig = new JMenu("Configurações");
+		this.mnConfig.setMnemonic('C');
+		this.menuBar.add(mnConfig);
+		
+		this.miLogout = new JMenuItem("Logout");
+		this.miLogout.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+
+				setVisible(false);
+				TelaInicialVIEW telaInicial = new TelaInicialVIEW();
+				telaInicial.setVisible(true);
+				//ManterSessaoDAO MSD = new ManterSessaoDAO();
+				//MSD.finalizaSessao();
+
+			}	
+		});
+		this.mnConfig.add(miLogout);
+		
+		this.miAlterarConta = new JMenuItem("Alterar Senha");
+		this.miAlterarConta.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				EsqueceuSenhaVIEW tela = new EsqueceuSenhaVIEW();
+				tela.setVisible(true);
+			}
+		});
+		this.mnConfig.add(miAlterarConta);
+		
+		this.miSair = new JMenuItem("Sair");
+		this.miSair.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				System.exit(0);
+
+			}
+		});
+		this.mnConfig.add(miSair);
+		
+		this.miExcluirConta = new JMenuItem("Excluir Conta");
+		this.miExcluirConta.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				//setVisible(false);
+				ExcluirContaVIEW tela = new ExcluirContaVIEW();
+				tela.setVisible(true);	
+			}
+			
+		});
+		this.mnConfig.add(miExcluirConta);
+		
+		this.menuBar.setBackground(new Color(90,61,171)); 
+		this.mnConfig.setForeground(new Color(250,247,255));
 		
 		
 		this.menuWall = new ImageIcon(getClass().getResource("Dados e Combate.png"));
