@@ -1,9 +1,13 @@
 package ANAKIN.MODEL.DAO;
 
+import java.sql.Timestamp;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Date;
+
+import javax.swing.JOptionPane;
 
 import ANAKIN.MODEL.BO.FichaProtagonistaSelecionada;
 import ANAKIN.MODEL.BO.MiniFichasProtaBO;
@@ -14,6 +18,32 @@ import ANAKIN.MODEL.VO.UsuarioVO;
 public class FichaProtagonistaDAO {
 	Connection conn = null;
 	PreparedStatement PSTM;
+	public void ApagarProtagonistaEspecifico(String nome,int sessao) {
+		
+		conn = new ConexaoDAO().conectabd();
+		String SQL = "call apagarprotagonistaEspecifico(?,?);";
+		try {
+			PSTM = conn.prepareStatement(SQL);
+			PSTM.setString(1, nome);
+			PSTM.setInt(2, sessao);
+			PSTM.execute();
+			PSTM.close();
+		} catch (SQLException e) {
+			// TODO: handle exception
+		}
+		
+	}
+	public void ApagarProtagonistaRecente() {
+		conn = new ConexaoDAO().conectabd();
+		String SQL = "call apagarprotagonistaRecente();";
+		try {
+			PSTM = conn.prepareStatement(SQL);
+			PSTM.execute();
+			PSTM.close();
+		} catch (SQLException e) {
+			JOptionPane.showMessageDialog(null, "erro ao apagar Protagonista Recemcriado: " + e);
+		}
+	}
 	public boolean VereficaprotaOPEN() {
 		conn = new ConexaoDAO().conectabd();
 		String sql = "select vereficador from protaopen";
@@ -158,11 +188,15 @@ public void retornainfotprota(String nome, int vida, int def, int mag) {
 
 	public void criarRegistroProta() {
 		conn = new ConexaoDAO().conectabd();
-		String sql = ("insert into protagonista(id_SESSAO) value (?);");
+		String sql = ("insert into protagonista(id_SESSAO,DataEHoraDeCriacao) value (?,?);");
 		AuxiliarVO AV = new AuxiliarVO();
+		
 		try {
+			Date agora = new Date();
+			Timestamp Ttp = new Timestamp(agora.getTime());
 			PSTM = conn.prepareStatement(sql);
 			PSTM.setInt(1, AV.getIdsessao());
+			PSTM.setTimestamp(2, Ttp);
 			int i = PSTM.executeUpdate();
 			PSTM.close();
 			if (i > 0) {

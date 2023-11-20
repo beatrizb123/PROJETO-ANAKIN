@@ -201,8 +201,8 @@ public class MenuPrincipalVIEW extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				setVisible(false);
-				ExcluirContaVIEW tela = new ExcluirContaVIEW();
-				tela.setVisible(true);	
+				//ExcluirContaVIEW tela = new ExcluirContaVIEW();
+				//tela.setVisible(true);	
 			}
 			
 		});

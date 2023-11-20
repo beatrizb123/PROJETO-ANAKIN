@@ -602,7 +602,7 @@ public class FichaProtagonistaVIEW extends JFrame {
 		this.destaqueCancelar = new ImageIcon(getClass().getResource("/Imagens/Botões/destaque_cancelar.png"));
 		this.iconbtnCancela = new ImageIcon(getClass().getResource("/Imagens/Botões/Cancelar.png"));
 		this.lblbtnCancela = new JLabel(iconbtnCancela);
-		this.lblbtnCancela.setToolTipText("Cancelar");
+		this.lblbtnCancela.setToolTipText("Excluir");
 		this.lblbtnCancela.setBounds(265, 320, 90, 90);
 		this.lblbtnCancela.addMouseListener(new MouseAdapter() {
 			@Override
@@ -616,13 +616,27 @@ public class FichaProtagonistaVIEW extends JFrame {
 			public void mouseExited(MouseEvent e) {
 				lblbtnCancela.setIcon(iconbtnCancela);
 			}
+			
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				if(FPD.VereficaprotaOPEN() != false) {
+					AuxiliarVO AV = new AuxiliarVO();
+					String nome = txtfNome.getText();
+					
+				FPD.ApagarProtagonistaEspecifico(nome, AV.getIdsessao());
+				dispose();
+				}else {
+				FPD.ApagarProtagonistaRecente();
+				dispose();
+				}
+			}
 		});
 		this.add(lblbtnCancela);
 
-		this.lblCancela = new JLabel("Cancelar");
+		this.lblCancela = new JLabel("Excluir");
 		this.lblCancela.setForeground(new Color(90, 61, 171));
 		this.lblCancela.setFont(new Font("Arial", Font.BOLD, 14));
-		this.lblCancela.setBounds(280, 390, 100, 20);
+		this.lblCancela.setBounds(287, 390, 100, 20);
 		this.add(lblCancela);
 
 		this.btnApagar = new JButton("Apagar");
