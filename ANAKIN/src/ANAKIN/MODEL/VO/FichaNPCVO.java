@@ -1,5 +1,7 @@
 package ANAKIN.MODEL.VO;
 
+import ANAKIN.MODEL.DAO.FichaNPCDAO;
+
 public class FichaNPCVO {
 	
 	private static  String Nome_NPC;
@@ -18,6 +20,7 @@ public class FichaNPCVO {
 	private static int Intelecto_NPC;
 	private static int FkIdALINHAMENTO_NPC;
 	private static int FKIdSessao_NPC;
+	
 	public static String getNome_NPC() {
 		return Nome_NPC;
 	}

@@ -118,7 +118,8 @@ public class DadosdeJogoVIEW extends JFrame {
 
 		this.btnMaisD4 = new JButton("+");
 		this.btnMaisD4.setFont(new Font("Arial", Font.BOLD, 9));
-		this.btnMaisD4.setForeground(Color.black);
+		this.btnMaisD4.setForeground(Color.white);
+		this.btnMaisD4.setBackground(new Color(90, 61, 171));
 		this.btnMaisD4.setBounds(125, 110, 39, 18);
 		this.btnMaisD4.addActionListener(new ActionListener() {
 
@@ -133,7 +134,8 @@ public class DadosdeJogoVIEW extends JFrame {
 
 		this.btnMenosD4 = new JButton("-");
 		this.btnMenosD4.setFont(new Font("Arial", Font.BOLD, 9));
-		this.btnMenosD4.setForeground(Color.black);
+		this.btnMenosD4.setForeground(Color.white);
+		this.btnMenosD4.setBackground(new Color(90, 61, 171));
 		this.btnMenosD4.setBounds(30, 110, 39, 18);
 		this.btnMenosD4.addActionListener(new ActionListener() {
 
@@ -159,7 +161,8 @@ public class DadosdeJogoVIEW extends JFrame {
 
 		this.btnMaisD6 = new JButton("+");
 		this.btnMaisD6.setFont(new Font("Arial", Font.BOLD, 9));
-		this.btnMaisD6.setForeground(Color.black);
+		this.btnMaisD6.setForeground(Color.white);
+		this.btnMaisD6.setBackground(new Color(90, 61, 171));
 		this.btnMaisD6.setBounds(295, 110, 39, 18);
 		this.btnMaisD6.addActionListener(new ActionListener() {
 
@@ -174,7 +177,8 @@ public class DadosdeJogoVIEW extends JFrame {
 
 		this.btnMenosD6 = new JButton("-");
 		this.btnMenosD6.setFont(new Font("Arial", Font.BOLD, 9));
-		this.btnMenosD6.setForeground(Color.black);
+		this.btnMenosD6.setForeground(Color.white);
+		this.btnMenosD6.setBackground(new Color(90, 61, 171));
 		this.btnMenosD6.setBounds(200, 110, 39, 18);
 		this.btnMenosD6.addActionListener(new ActionListener() {
 
@@ -200,7 +204,8 @@ public class DadosdeJogoVIEW extends JFrame {
 
 		this.btnMaisD8 = new JButton("+");
 		this.btnMaisD8.setFont(new Font("Arial", Font.BOLD, 9));
-		this.btnMaisD8.setForeground(Color.black);
+		this.btnMaisD8.setForeground(Color.white);
+		this.btnMaisD8.setBackground(new Color(90, 61, 171));
 		this.btnMaisD8.setBounds(465, 110, 39, 18);
 		this.btnMaisD8.addActionListener(new ActionListener() {
 
@@ -215,7 +220,8 @@ public class DadosdeJogoVIEW extends JFrame {
 
 		this.btnMenosD8 = new JButton("-");
 		this.btnMenosD8.setFont(new Font("Arial", Font.BOLD, 9));
-		this.btnMenosD8.setForeground(Color.black);
+		this.btnMenosD8.setForeground(Color.white);
+		this.btnMenosD8.setBackground(new Color(90, 61, 171));
 		this.btnMenosD8.setBounds(370, 110, 39, 18);
 		this.btnMenosD8.addActionListener(new ActionListener() {
 
@@ -241,7 +247,8 @@ public class DadosdeJogoVIEW extends JFrame {
 
 		this.btnMaisD12 = new JButton("+");
 		this.btnMaisD12.setFont(new Font("Arial", Font.BOLD, 9));
-		this.btnMaisD12.setForeground(Color.black);
+		this.btnMaisD12.setForeground(Color.white);
+		this.btnMaisD12.setBackground(new Color(90, 61, 171));
 		this.btnMaisD12.setBounds(220, 250, 39, 18);
 		this.btnMaisD12.addActionListener(new ActionListener() {
 
@@ -256,7 +263,8 @@ public class DadosdeJogoVIEW extends JFrame {
 
 		this.btnMenosD12 = new JButton("-");
 		this.btnMenosD12.setFont(new Font("Arial", Font.BOLD, 9));
-		this.btnMenosD12.setForeground(Color.black);
+		this.btnMenosD12.setForeground(Color.white);
+		this.btnMenosD12.setBackground(new Color(90, 61, 171));
 		this.btnMenosD12.setBounds(125, 250, 39, 18);
 		this.btnMenosD12.addActionListener(new ActionListener() {
 
@@ -282,7 +290,8 @@ public class DadosdeJogoVIEW extends JFrame {
 
 		this.btnMaisD20 = new JButton("+");
 		this.btnMaisD20.setFont(new Font("Arial", Font.BOLD, 9));
-		this.btnMaisD20.setForeground(Color.black);
+		this.btnMaisD20.setForeground(Color.white);
+		this.btnMaisD20.setBackground(new Color(90, 61, 171));
 		this.btnMaisD20.setBounds(385, 250, 39, 18);
 		this.btnMaisD20.addActionListener(new ActionListener() {
 
@@ -297,7 +306,8 @@ public class DadosdeJogoVIEW extends JFrame {
 
 		this.btnMenosD20 = new JButton("-");
 		this.btnMenosD20.setFont(new Font("Arial", Font.BOLD, 9));
-		this.btnMenosD20.setForeground(Color.black);
+		this.btnMenosD20.setForeground(Color.white);
+		this.btnMenosD20.setBackground(new Color(90, 61, 171));
 		this.btnMenosD20.setBounds(290, 250, 39, 18);
 		this.btnMenosD20.addActionListener(new ActionListener() {
 

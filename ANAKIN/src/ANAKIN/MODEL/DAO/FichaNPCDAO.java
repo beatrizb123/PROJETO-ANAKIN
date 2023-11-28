@@ -62,7 +62,7 @@ public class FichaNPCDAO {
 		
 		conn = new ConexaoDAO().conectabd();
 		FichaNPCSelecionada FNS = null;
-		String SQL = "select nome_NPC,Ocupação_NPC,descriçao,idade_NPC,altura_NPC,Vida_NPC,Defesa_NPC,Magia_NPC,poder,forca,carisma,intelecto,ID_Alinhamento from NPC where Nome_NPC = ? and vida_NPC = ? and defesa_NPC = ? and Magia_NPC = ?;";
+		String SQL = "select nome_NPC, ocupacao_NPC, descricao,idade_NPC,altura_NPC,Vida_NPC,Defesa_NPC,Magia_NPC,poder,forca,carisma,intelecto,ID_Alinhamento from NPC where Nome_NPC = ? and vida_NPC = ? and defesa_NPC = ? and Magia_NPC = ?;";
 		try {
 			PSTM = conn.prepareStatement(SQL);
 			PSTM.setString(1, nome);
@@ -141,7 +141,7 @@ public class FichaNPCDAO {
 		conn = new ConexaoDAO().conectabd();
 		String sql1 = "update NPC "
 				+ "set nome_NPC = ?,"
-				+ "	ocupação_NPC = ?,"
+				+ "	ocupacao_NPC = ?,"
 				+ "	idade_NPC = ?,"
 				+ "    altura_NPC = ?,"
 				+ "    vida_NPC = ?,"
@@ -152,7 +152,8 @@ public class FichaNPCDAO {
 				+ "    Carisma = ?,"
 				+ "	Agilidade = ?,"
 				+ "	Intelecto = ?,"
-				+ "	id_ALINHAMENTO = ?"
+				+ "	id_ALINHAMENTO = ?,"
+				+ " descriçao = ?"
 				+ "    where id_NPCS = ?;";
 		try {
 			PSTM = conn.prepareStatement(sql1);
@@ -169,7 +170,8 @@ public class FichaNPCDAO {
 			PSTM.setInt(11, NPC.getAgilidade_NPC());
 			PSTM.setInt(12, NPC.getIntelecto_NPC());
 			PSTM.setInt(13, NPC.getFkIdALINHAMENTO_NPC());
-			PSTM.setInt(14, AV.getIdNPC());
+			PSTM.setString(14, NPC.getPersonalidade());
+			PSTM.setInt(15, AV.getIdNPC());
 			PSTM.executeUpdate();
 			PSTM.close();
 		} catch (SQLException erro) {

@@ -314,15 +314,21 @@ public class ControleSessaoVIEW extends JFrame {
 		JButton BTNproximo = new JButton(">");
 		BTNproximo.setVisible(true);
 		BTNproximo.setBounds(242, 80, 49, 27);
+		BTNproximo.setBackground(new Color(90,61,171));
+		BTNproximo.setForeground(Color.white);
 		painelprota.add(BTNproximo);
 
 		JButton BTNAbrir = new JButton("abrir");
 		BTNAbrir.setVisible(true);
 		BTNAbrir.setBounds(110, 149, 70, 27);
+		BTNAbrir.setBackground(new Color(90,61,171));
+		BTNAbrir.setForeground(Color.white);
 		painelprota.add(BTNAbrir);
 		JButton BTNanterior = new JButton("<");
 		BTNanterior.setVisible(true);
 		BTNanterior.setBounds(10, 80, 49, 27);
+		BTNanterior.setBackground(new Color(90,61,171));
+		BTNanterior.setForeground(Color.white);
 		painelprota.add(BTNanterior);
 
 		JPanel rowPanel = new JPanel();
@@ -432,15 +438,21 @@ public class ControleSessaoVIEW extends JFrame {
 		JButton BTNproximo2 = new JButton(">");
 		BTNproximo2.setVisible(true);
 		BTNproximo2.setBounds(242, 80, 49, 27);
+		BTNproximo2.setBackground(new Color(90,61,171));
+		BTNproximo2.setForeground(Color.white);
 		painelNPC.add(BTNproximo2);
 
 		JButton BTNAbrir2 = new JButton("abrir");
 		BTNAbrir2.setVisible(true);
 		BTNAbrir2.setBounds(110, 149, 70, 27);
+		BTNAbrir2.setBackground(new Color(90,61,171));
+		BTNAbrir2.setForeground(Color.white);
 		painelNPC.add(BTNAbrir2);
 		JButton BTNanterior2 = new JButton("<");
 		BTNanterior2.setVisible(true);
 		BTNanterior2.setBounds(10, 80, 49, 27);
+		BTNanterior2.setBackground(new Color(90,61,171));
+		BTNanterior2.setForeground(Color.white);
 		painelNPC.add(BTNanterior2);
 
 		JPanel rowPanel2 = new JPanel();
@@ -626,7 +638,7 @@ public class ControleSessaoVIEW extends JFrame {
 		this.iconbtnDados = new ImageIcon(getClass().getResource("/Imagens/Botões/Botao_Dados.png"));
 		this.lblbtnDados = new JLabel(iconbtnDados);
 		this.lblbtnDados.setToolTipText("Dados de Jogo");
-		this.lblbtnDados.setBounds(-10, 300, 180, 180);
+		this.lblbtnDados.setBounds(-10, 290, 180, 180);
 		this.lblbtnDados.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseEntered(MouseEvent e) {
@@ -696,8 +708,6 @@ public class ControleSessaoVIEW extends JFrame {
 
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				setVisible(false);
-
 				ConfirmacaoCombateVIEW tela = new ConfirmacaoCombateVIEW();
 				tela.setVisible(true);
 

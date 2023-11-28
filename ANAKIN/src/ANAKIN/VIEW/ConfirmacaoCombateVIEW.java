@@ -7,6 +7,8 @@ import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
@@ -20,7 +22,7 @@ import javax.swing.border.TitledBorder;
 
 
 public class ConfirmacaoCombateVIEW extends JFrame{
-	private JPanel panel;
+	private JPanel panel, p2;
 	private JCheckBox check;
 	private JCheckBox selecionaTudo;
 	private ImageIcon imgIcon;
@@ -31,7 +33,7 @@ public class ConfirmacaoCombateVIEW extends JFrame{
 	public ConfirmacaoCombateVIEW() {
 		//Instanciação de Objetos
 		this.setTitle("Combate");
-		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
+		this.setDefaultCloseOperation(HIDE_ON_CLOSE);
 		this.setBounds(0, 0, 280, 250);
 		this.setBackground(new Color(250, 247, 255));
 		this.setVisible(true);
@@ -40,8 +42,9 @@ public class ConfirmacaoCombateVIEW extends JFrame{
 		this.setLocation((tela.width - getSize().width) / 2, (tela.height - getSize().height) / 2);
 
 		this.imgIcon = new ImageIcon("jupiter.png");
-		this.setIconImage(Toolkit.getDefaultToolkit().getImage("/Imagens/jupiter.png"));
+		this.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/Imagens/Icones/jupiter.png")));
 
+		 		
 		this.panel = new JPanel(new GridLayout(0,1));
 		this.border = BorderFactory.createTitledBorder("Protagonistas");
 		((TitledBorder) this.border).setTitleColor((new Color(90, 61, 171)));
@@ -50,40 +53,41 @@ public class ConfirmacaoCombateVIEW extends JFrame{
 		this.panel.setBorder(border);
 		this.add(panel);
 		
-		//Exemplo de como os nomes vão ficar 
-		this.check = new JCheckBox("Anakin Skywalker");
-		this.panel.add(check);
-		this.check = new JCheckBox("Obi Wan Kenobi");
-		this.panel.add(check);
-		this.check = new JCheckBox("Scherlock Holmes ");
-		this.panel.add(check);
-		this.panel.add(check);
-		this.check = new JCheckBox("Kaz Brekker");
-		this.panel.add(check);
-		this.check = new JCheckBox("Inej Ghafa");
-		this.panel.add(check);
-		this.check = new JCheckBox("Jesper Fahey");
-		this.panel.add(check);
-		this.check = new JCheckBox("Wylan Van eck");
-		this.panel.add(check);
-		this.check = new JCheckBox("Nina Zenik");
-		this.panel.add(check);
-		this.check = new JCheckBox("Matthias Helvar");
+		this.check = new JCheckBox("");
 		this.panel.add(check);
 		
 		this.btConfirmar = new JButton("Confirmar");
 		this.btConfirmar.setBackground(new Color(90, 61, 171));
 		this.btConfirmar.setForeground(Color.white);
 		this.btConfirmar.setFont(new Font("Arial", Font.BOLD, 15));
-		
-		this.btnCancelar = new JButton("Cancelar");
-		this.btnCancelar.setBackground(new Color(90, 61, 171));
-		this.btnCancelar.setForeground(Color.white);
-		this.btnCancelar.setFont(new Font("Arial", Font.BOLD, 15));
+		this.btConfirmar.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				setVisible(false);
+				
+				AreaDeCombateVIEW tela = new AreaDeCombateVIEW();
+				tela.setVisible(true);
+				
+			}
+		});
+		this.panel.add(btConfirmar);
 
-		this.add(panel,BorderLayout.CENTER);
-		this.add(btConfirmar, BorderLayout.SOUTH);
+		this.btnCancelar = new JButton("Cancelar");
+		this.btnCancelar.setForeground(new Color(90, 61, 171));
+		this.btnCancelar.setBackground(Color.white);
+		this.btnCancelar.setFont(new Font("Arial", Font.BOLD, 15));
+		this.btnCancelar.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				setVisible(false);
 		
+			}
+		});
+		this.add(panel,BorderLayout.CENTER);
+		this.add(btnCancelar, BorderLayout.SOUTH);
+
 		
 		
 		

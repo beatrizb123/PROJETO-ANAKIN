@@ -438,7 +438,7 @@ public class FichaNpcVIEW extends JFrame {
 		this.spPersonalidade.setBorder(javax.swing.BorderFactory.createLineBorder(new Color(90, 61, 171), 2));
 		this.add(spPersonalidade);
 
-		this.destaqueSalvar = new ImageIcon(getClass().getResource("destaque_salvar.png"));
+		this.destaqueSalvar = new ImageIcon(getClass().getResource("/Imagens/Botões/destaque_salvar.png"));
 		this.iconbtnSalvar = new ImageIcon(getClass().getResource("/Imagens/Botões/Salvar.png"));
 		this.lblbtnSalvar = new JLabel(iconbtnSalvar);
 		this.lblbtnSalvar.setToolTipText("Salvar");
@@ -508,6 +508,7 @@ public class FichaNpcVIEW extends JFrame {
 					FNV.setCarisma_NPC(Carisma);
 					FNV.setAgilidade_NPC(agilidade);
 					FNV.setIntelecto_NPC(intelecto);
+	
 					FNV.setFkIdALINHAMENTO_NPC(alinhamento);
 					FNV.setFKIdSessao_NPC(sessao);
 					
@@ -528,7 +529,7 @@ public class FichaNpcVIEW extends JFrame {
 		this.lblSalvar.setBounds(285,405,100, 20);
 		this.add(lblSalvar);
 
-		this.destaqueCancelar = new ImageIcon(getClass().getResource("destaque_cancelar.png"));
+		this.destaqueCancelar = new ImageIcon(getClass().getResource("/Imagens/Botões/destaque_cancelar.png"));
 		this.iconbtnCancela = new ImageIcon(getClass().getResource("/Imagens/Botões/Cancelar.png"));
 		this.lblbtnCancela = new JLabel(iconbtnCancela);
 		this.lblbtnCancela.setToolTipText("Cancelar");
@@ -581,7 +582,7 @@ public class FichaNpcVIEW extends JFrame {
 		//this.add(lblbtnAnterior);
 		
 		this.iconbtnProximo = new ImageIcon(getClass().getResource("/Imagens/Botões/Direita.png"));
-		this.iconbtnProximo = new ImageIcon(getClass().getResource("/Imagens/Direita.png"));
+		this.iconbtnProximo = new ImageIcon(getClass().getResource("/Imagens/Botões/Direita.png"));
 
 		this.lblbtnProximo = new JLabel(iconbtnProximo);
 		this.lblbtnProximo.setToolTipText("Proximo");
