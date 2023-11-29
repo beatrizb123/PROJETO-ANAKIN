@@ -14,9 +14,11 @@ import javax.swing.JLabel;
 import javax.swing.JTextField;
 
 import ANAKIN.MODEL.DAO.AbrirSessaoDAO;
+import ANAKIN.MODEL.DAO.CombateDAO;
 import ANAKIN.MODEL.DAO.DadosDAO;
 import ANAKIN.MODEL.DAO.NovoControleDAO;
 import ANAKIN.MODEL.VO.AuxiliarVO;
+import ANAKIN.MODEL.VO.CombateVO;
 import ANAKIN.MODEL.VO.ControleSessaoVO;
 
 public class NovoControleSessaoVIEW extends JFrame{
@@ -91,6 +93,9 @@ public class NovoControleSessaoVIEW extends JFrame{
 				
 				DadosDAO criarDados = new DadosDAO();
 				criarDados.criarRegistro();
+				
+				CombateDAO criaCombateDAO = new CombateDAO();
+				criaCombateDAO.criarCombate();
 				
 				ControleSessaoVIEW sessao = new ControleSessaoVIEW();
 				sessao.setVisible(true);

@@ -13,6 +13,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -25,13 +26,19 @@ import javax.swing.JTextArea;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
+import ANAKIN.MODEL.BO.DadosBO;
+import ANAKIN.MODEL.DAO.DadosDAO;
+import ANAKIN.MODEL.DAO.IniciativaDAO;
+import ANAKIN.MODEL.VO.CombateVO;
+import ANAKIN.MODEL.VO.DadosVO;
+
 
 public class AreaDeCombateVIEW extends JFrame {
 //Declaração de Variaveis 
 	private Container container;
 	private ImageIcon combateWall;
 	private JLabel bckgCombate;
-	private JLabel lblIniciativa, lblProtagonistas;
+	private JLabel lblIniciativa, lblProtagonistas, lblNomes;
 	private JPanel jpIniciativa, jpColumn, jpRow, jpProtagonistas;
 
 	private JTextArea txtaResultados;
@@ -50,11 +57,13 @@ public class AreaDeCombateVIEW extends JFrame {
 	private JButton btprox;
 	
 	private JLabel nome, classe, talento;
-
+	
+	String resultados;
+	
 	public AreaDeCombateVIEW() {
 		// Instanciação
 		this.setTitle("Área de Combate");
-		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
+		this.setDefaultCloseOperation(HIDE_ON_CLOSE);
 		this.setBounds(0, 0, 580, 500);
 		this.setBackground(new Color(250, 247, 255));
 		this.setVisible(true);
@@ -89,27 +98,27 @@ public class AreaDeCombateVIEW extends JFrame {
 		this.jpColumn.setLayout(new GridLayout(0, 1, 0, 1));
 		this.jpColumn.setBackground(new Color(235, 223, 255));
 
-		for (int i = 0; i < 3; i++) {
+		IniciativaDAO iniciDAO = new IniciativaDAO();
+		iniciDAO = new IniciativaDAO();
+		ArrayList<String> nomesPerso = new ArrayList<>();
+		nomesPerso.addAll(iniciDAO.listaGeral());
+		ArrayList<Integer> idPerso = new ArrayList<>();
+		idPerso.addAll(iniciDAO.listaIdGeral());
+		int max = idPerso.size();
+		
+		for (int i = 0; i < max; i++) {
 
 			this.jpRow = new JPanel();
 			this.jpRow.setPreferredSize(new Dimension(150, 30));
 			this.jpColumn.add(jpRow);
 			this.jpRow.setLayout(null);
-
+			this.lblNomes = new JLabel(nomesPerso.get(i));
+			this.add(lblNomes);
 			if (i % 2 != 0)
 				   this.jpRow.setBackground(new Color(250, 247, 255));
 
-		}	for (int i = 0; i < 3; i++) {
+		}	
 
-			this.jpRow = new JPanel();
-			this.jpRow.setPreferredSize(new Dimension(150, 30));
-			this.jpColumn.add(jpRow);
-			this.jpRow.setLayout(null);
-
-			if (i % 2 != 0)
-				   this.jpRow.setBackground(new Color(250, 247, 255));
-
-		}
 
 		this.jpProtagonistas = new JPanel();
 		this.jpProtagonistas.setBounds(260, 40, 270, 190);
@@ -134,6 +143,12 @@ public class AreaDeCombateVIEW extends JFrame {
 			public void mouseExited(MouseEvent e) {
 				lblbtnCombate.setIcon(iconbtnCombate);
 			}
+
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				DadosdeJogoVIEW tela = new DadosdeJogoVIEW();
+				tela.setVisible(true);
+			}
 		});
 		this.add(lblbtnCombate);
 
@@ -148,20 +163,6 @@ public class AreaDeCombateVIEW extends JFrame {
 		this.lblbtnAcao = new JLabel(iconbtnAcao);
 		this.lblbtnAcao.setToolTipText("Dados de Ação");
 		this.lblbtnAcao.setBounds(135, 225, 110, 110);
-		this.lblbtnAcao.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseEntered(MouseEvent e) {
-
-				lblbtnAcao.setIcon(destaqueAcao);
-
-			}
-
-			@Override
-			public void mouseExited(MouseEvent e) {
-				lblbtnAcao.setIcon(iconbtnAcao);
-			}
-		});
-		this.add(lblbtnAcao);
 
 		this.lblAcao = new JLabel("Ação");
 		this.lblAcao.setForeground(new Color(90, 61, 171));
@@ -225,12 +226,41 @@ public class AreaDeCombateVIEW extends JFrame {
 		this.txtaResultados.setLineWrap(true);
 		this.txtaResultados.setWrapStyleWord(true);
 		this.txtaResultados.setEditable(false);
-		this.txtaResultados.setFont(new Font("Arial", Font.PLAIN, 8));
+		this.txtaResultados.setFont(new Font("Arial", Font.BOLD, 14));
 
 		this.spResultados = new JScrollPane(txtaResultados);
 		this.spResultados.setBounds(260, 260, 270, 150);
 		this.spResultados.setBorder(javax.swing.BorderFactory.createLineBorder(new Color(90, 61, 171), 3));
 		this.add(spResultados);
+		this.lblbtnAcao.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				
+				lblbtnAcao.setIcon(destaqueAcao);
+				
+			}
+			
+			@Override
+			public void mouseExited(MouseEvent e) {
+				lblbtnAcao.setIcon(iconbtnAcao);
+			}
+			
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				DadosdeJogoVIEW tela = new DadosdeJogoVIEW();
+				tela.setVisible(true);
+				
+				CombateVO consulta = new CombateVO();
+				String reg = consulta.getDados();
+				
+				resultados = "TESTE DE AÇÃO\n";
+				txtaResultados.setText(resultados+ "" + reg);
+				
+			}
+		});
+		this.add(lblbtnAcao);
+		
+		
 		this.jpProtagonistas = new JPanel();
 		this.jpProtagonistas.setBounds(260, 40, 270, 190);
 		this.jpProtagonistas.setBackground(new Color(235, 223, 255));
@@ -327,12 +357,12 @@ public class AreaDeCombateVIEW extends JFrame {
 
 		});
 		this.jpProtagonistas.add(sldMagia);
-
+		
 		this.nome = new JLabel("Nome: ");
 		this.nome.setBounds(30, 10, 200, 20);
 		this.nome.setFont(new Font("Helvatica", Font.BOLD, 18));
 		
-		this.classe = new JLabel("Classe");
+		this.classe = new JLabel("Classe: ");
 		this.classe.setBounds(40, 45, 120, 20);
 		this.classe.setForeground(new Color(90, 61, 171));
 
@@ -371,9 +401,5 @@ public class AreaDeCombateVIEW extends JFrame {
 	}
 
 
-	public static void main(String[] args) {
-		AreaDeCombateVIEW tela = new AreaDeCombateVIEW();
-		tela.setVisible(true);
-
-	}
+	
 }

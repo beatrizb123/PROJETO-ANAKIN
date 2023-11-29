@@ -14,68 +14,133 @@ public class IniciativaDAO {
 	Connection conn;
 	PreparedStatement PSTM;
 	
-	public ArrayList<String> selecionaProtag (){
+	public ArrayList<String> nomeProtag (){
 		conn = new ConexaoDAO().conectabd();
 		AuxiliarVO AV = new AuxiliarVO();
-		IniciativaBO iniciativa = new IniciativaBO();
-		ArrayList<String> nomesProtagonistas = new ArrayList<>();
-		ArrayList<String> idProtagonistas = new ArrayList<>();
-		ArrayList<Integer> indiciesProtagonista = new ArrayList<>();
+		ArrayList<String> nomeProtagonistas = new ArrayList<>();
 
-
-		
-		String SQL = "select nome_protagonista, id_protagonista from protagonista where id_sessao = ?;";
+		String SQL = "select nome_protagonista from protagonista where id_sessao = ?;";
 		try {
 			PSTM = conn.prepareStatement(SQL);
 			PSTM.setInt(1, AV.getIdsessao());
 			ResultSet rs = PSTM.executeQuery();
-			while(rs.next()){
+			while (rs.next()) {
 				String nome = rs.getString(1);
-				nomesProtagonistas.add(nome);
-				
-				int id = rs.getInt(2);
-				idProtagonistas = new ArrayList<>();
-				
-				int indicie = 0;
-				indicie += 1;
-				
+				nomeProtagonistas.add(nome);
+
 			}
-			
-			
-			iniciativa.iniciativaPerso(nomesProtagonistas);
 			PSTM.close();
 		} catch (Exception e1) {
-			System.err.println("selecionaProtag: "+ e1);
-			return null;			
+			System.err.println("nomeProtag: " + e1);
+			return null;
 		}
-		return nomesProtagonistas;
-	}	
+		return nomeProtagonistas;
+	}
 	
-	public ArrayList<String> selecionaNPC (){
+	public ArrayList<String> nomeNPC (){
 		conn = new ConexaoDAO().conectabd();
 		AuxiliarVO AV = new AuxiliarVO();
-		IniciativaBO iniciativa = new IniciativaBO();
-		ArrayList<String> nomesPersonagens = new ArrayList<>();
+		ArrayList<String> nomeNPC = new ArrayList<>();
 
-	
 		String SQL = "select nome_NPC from NPC where id_sessao = ?;";
 		try {
 			PSTM = conn.prepareStatement(SQL);
 			PSTM.setInt(1, AV.getIdsessao());
 			ResultSet rs = PSTM.executeQuery();
-			while(rs.next()){
+			while (rs.next()) {
 				String nome = rs.getString(1);
-				nomesPersonagens.add(nome);
+				nomeNPC.add(nome);
+
 			}
-			
-			
-			iniciativa.iniciativaPerso(nomesPersonagens);
 			PSTM.close();
 		} catch (Exception e1) {
-			System.err.println("selecionaProtag: "+ e1);
-			return null;			
+			System.err.println("nomeNPC: " + e1);
+			return null;
 		}
-		return nomesPersonagens;
+		return nomeNPC;
 	}
 	
+	public ArrayList<String> listaGeral (){
+		AuxiliarVO AV = new AuxiliarVO();
+		IniciativaDAO inicDAO = new IniciativaDAO();
+		IniciativaBO iniBO = new IniciativaBO();
+		ArrayList<String> listaGeral = new ArrayList<>();
+		ArrayList<String> listaProtag = new ArrayList<>();
+		ArrayList<String> listaNPC = new ArrayList<>();
+
+		listaProtag.addAll(inicDAO.nomeProtag());
+		listaNPC.addAll(inicDAO.nomeNPC());
+		
+		listaGeral.addAll(listaProtag);
+		listaGeral.addAll(listaNPC);
+		iniBO.iniciativaGeral(listaGeral);
+		return listaGeral;
 	}
+ 	
+	public ArrayList<Integer> selecionaProtag() {
+		conn = new ConexaoDAO().conectabd();
+		IniciativaBO iniciativa = new IniciativaBO();
+		AuxiliarVO AV = new AuxiliarVO();
+		ArrayList<Integer> idProtagonistas = new ArrayList<>();
+
+		String SQL = "select id_protagonista from protagonista where id_sessao = ?;";
+		try {
+			PSTM = conn.prepareStatement(SQL);
+			PSTM.setInt(1, AV.getIdsessao());
+			ResultSet rs = PSTM.executeQuery();
+			while (rs.next()) {
+				int id = rs.getInt(1);
+				idProtagonistas.add(id);
+
+			}
+			iniciativa.iniciativaProtag(idProtagonistas);
+			PSTM.close();
+		} catch (Exception e1) {
+			System.err.println("selecionaProtag: " + e1);
+			return null;
+		}
+		return idProtagonistas;
+	}
+
+	public ArrayList<Integer> selecionaNPC() {
+		conn = new ConexaoDAO().conectabd();
+		IniciativaBO iniciativa = new IniciativaBO();
+		AuxiliarVO AV = new AuxiliarVO();
+		ArrayList<Integer> idNPC = new ArrayList<>();
+
+		String SQL = "select id_npcs from npc where id_sessao = ?;";
+		try {
+			PSTM = conn.prepareStatement(SQL);
+			PSTM.setInt(1, AV.getIdsessao());
+			ResultSet rs = PSTM.executeQuery();
+			while (rs.next()) {
+				int id = rs.getInt(1);
+				idNPC.add(id);
+
+			}
+			iniciativa.iniciativaNPC(idNPC);
+			PSTM.close();
+		} catch (Exception e1) {
+			System.err.println("selecionaNPC: " + e1);
+			return null;
+		}
+		return idNPC;
+	}
+	
+	public ArrayList<Integer> listaIdGeral (){
+		AuxiliarVO AV = new AuxiliarVO();
+		IniciativaDAO inicDAO = new IniciativaDAO();
+		ArrayList<Integer> listaGeral = new ArrayList<>();
+		ArrayList<Integer> listaProtag = new ArrayList<>();
+		ArrayList<Integer> listaNPC = new ArrayList<>();
+
+		listaProtag.addAll(inicDAO.selecionaProtag());
+		listaNPC.addAll(inicDAO.selecionaNPC());
+		
+		listaGeral.addAll(listaProtag);
+		listaGeral.addAll(listaNPC);
+		
+		return listaGeral;
+	}
+
+}

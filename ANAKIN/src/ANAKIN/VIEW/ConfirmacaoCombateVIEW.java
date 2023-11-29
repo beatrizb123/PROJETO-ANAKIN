@@ -1,4 +1,5 @@
 package ANAKIN.VIEW;
+
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Container;
@@ -9,6 +10,7 @@ import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
@@ -20,18 +22,24 @@ import javax.swing.JPanel;
 import javax.swing.border.Border;
 import javax.swing.border.TitledBorder;
 
+import com.mysql.cj.x.protobuf.MysqlxDatatypes.Array;
 
-public class ConfirmacaoCombateVIEW extends JFrame{
+import ANAKIN.MODEL.DAO.IniciativaDAO;
+
+public class ConfirmacaoCombateVIEW extends JFrame {
 	private JPanel panel, p2;
 	private JCheckBox check;
 	private JCheckBox selecionaTudo;
 	private ImageIcon imgIcon;
 	private Border border;
 	private JButton btConfirmar, btnCancelar;
-	
-	
+
+	IniciativaDAO iniciDAO;
+	ArrayList<String> nomesPerso;
+	ArrayList<String> persoSelecionado;
+
 	public ConfirmacaoCombateVIEW() {
-		//Instanciação de Objetos
+		// Instanciação de Objetos
 		this.setTitle("Combate");
 		this.setDefaultCloseOperation(HIDE_ON_CLOSE);
 		this.setBounds(0, 0, 280, 250);
@@ -44,8 +52,7 @@ public class ConfirmacaoCombateVIEW extends JFrame{
 		this.imgIcon = new ImageIcon("jupiter.png");
 		this.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/Imagens/Icones/jupiter.png")));
 
-		 		
-		this.panel = new JPanel(new GridLayout(0,1));
+		this.panel = new JPanel(new GridLayout(0, 1));
 		this.border = BorderFactory.createTitledBorder("Protagonistas");
 		((TitledBorder) this.border).setTitleColor((new Color(90, 61, 171)));
 		((TitledBorder) this.border).setTitleFont(new Font("Arial", Font.BOLD, 16));
@@ -53,22 +60,29 @@ public class ConfirmacaoCombateVIEW extends JFrame{
 		this.panel.setBorder(border);
 		this.add(panel);
 		
-		this.check = new JCheckBox("");
-		this.panel.add(check);
-		
+		iniciDAO = new IniciativaDAO();
+		nomesPerso = new ArrayList<>();
+		nomesPerso.addAll(iniciDAO.listaGeral());
+		for (int i = 0; i < nomesPerso.size(); i++) {
+			String nome = nomesPerso.get(i);
+			this.check = new JCheckBox(nome);
+			this.panel.add(check);
+			
+		}
+
 		this.btConfirmar = new JButton("Confirmar");
 		this.btConfirmar.setBackground(new Color(90, 61, 171));
 		this.btConfirmar.setForeground(Color.white);
 		this.btConfirmar.setFont(new Font("Arial", Font.BOLD, 15));
 		this.btConfirmar.addActionListener(new ActionListener() {
-			
+
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				setVisible(false);
-				
+
 				AreaDeCombateVIEW tela = new AreaDeCombateVIEW();
 				tela.setVisible(true);
-				
+				System.out.println(persoSelecionado);
 			}
 		});
 		this.panel.add(btConfirmar);
@@ -78,26 +92,21 @@ public class ConfirmacaoCombateVIEW extends JFrame{
 		this.btnCancelar.setBackground(Color.white);
 		this.btnCancelar.setFont(new Font("Arial", Font.BOLD, 15));
 		this.btnCancelar.addActionListener(new ActionListener() {
-			
+
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				setVisible(false);
-		
+
 			}
 		});
-		this.add(panel,BorderLayout.CENTER);
+		this.add(panel, BorderLayout.CENTER);
 		this.add(btnCancelar, BorderLayout.SOUTH);
 
-		
-		
-		
 	}
-	
-	
-	
+
 	public static void main(String[] args) {
 		ConfirmacaoCombateVIEW tela = new ConfirmacaoCombateVIEW();
 		tela.setVisible(true);
 	}
-	
+
 }

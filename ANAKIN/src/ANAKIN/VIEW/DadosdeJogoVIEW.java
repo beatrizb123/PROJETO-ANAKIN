@@ -24,6 +24,7 @@ import javax.swing.JTextField;
 import ANAKIN.MODEL.BO.DadosBO;
 import ANAKIN.MODEL.DAO.ControleSessaoDAO;
 import ANAKIN.MODEL.DAO.DadosDAO;
+import ANAKIN.MODEL.VO.CombateVO;
 import ANAKIN.MODEL.VO.ControleSessaoVO;
 import ANAKIN.MODEL.VO.DadosVO;
 import ANAKIN.MODEL.VO.UsuarioVO;
@@ -372,11 +373,12 @@ public class DadosdeJogoVIEW extends JFrame {
 				
 				DadosVO DV = new DadosVO();
 				DadosDAO salvar = new DadosDAO();
-
+				CombateVO comb = new CombateVO();
 				String resgistrar = resultados;
-
+				
 				DV.setRegistro(resgistrar);
-
+				comb.setDados(resgistrar);
+				
 				salvar.salvarRegistro(DV);
 
 			}
