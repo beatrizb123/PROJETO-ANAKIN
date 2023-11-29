@@ -25,7 +25,6 @@ import javax.swing.JTextArea;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
-import ANAKIN.MODEL.VO.CombateVO;
 
 public class AreaDeCombateVIEW extends JFrame {
 //Declaração de Variaveis 
